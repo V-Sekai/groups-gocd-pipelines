@@ -1,0 +1,388 @@
+{
+   "environment_variables": [
+      {
+         "name": "GODOT_STATUS",
+         "value": "master.groups"
+      }
+   ],
+   "group": "beta",
+   "label_template": "master.groups.${godot_sandbox[:8]}.${COUNT}",
+   "materials": [
+      {
+         "branch": "groups",
+         "destination": "g",
+         "name": "godot_sandbox",
+         "type": "git",
+         "url": "https://github.com/SaracenOne/godot.git"
+      }
+   ],
+   "name": "godot-template-groups",
+   "stages": [
+      {
+         "clean_workspace": false,
+         "jobs": [
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "g/bin/godot.windows.opt.tools.64.exe",
+                     "type": "build"
+                  }
+               ],
+               "name": "defaultJob",
+               "resources": [
+                  "mingw5",
+                  "linux"
+               ],
+               "tasks": [
+                  {
+                     "arguments": [
+                        "-c",
+                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "scons werror=no platform=windows use_llvm=no use_lld=yes target=release_debug -j`nproc` use_lto=no deprecated=no"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  }
+               ]
+            },
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "g/bin/godot.x11.opt.tools.64.llvm",
+                     "type": "build"
+                  }
+               ],
+               "name": "linuxJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "arguments": [
+                        "-c",
+                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no use_llvm=yes builtin_freetype=yes deprecated=no"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  }
+               ]
+            },
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "g/bin/godot_server.x11.opt.tools.64",
+                     "type": "build"
+                  }
+               ],
+               "name": "serverJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "arguments": [
+                        "-c",
+                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  }
+               ]
+            }
+         ],
+         "name": "defaultStage"
+      },
+      {
+         "jobs": [
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "g/bin/windows_64_debug.exe",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "g/bin/windows_64_release.exe",
+                     "type": "build"
+                  }
+               ],
+               "name": "windowsJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "arguments": [
+                        "-c",
+                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "scons werror=no platform=windows use_llvm=no use_lld=yes target=release_debug -j`nproc` use_lto=no deprecated=no tools=no"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp bin/godot.windows.opt.debug.64.exe bin/windows_64_debug.exe && cp bin/godot.windows.opt.debug.64.exe bin/windows_64_release.exe"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  }
+               ]
+            },
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "g/bin/linux_x11_64_release",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "g/bin/linux_x11_64_debug",
+                     "type": "build"
+                  }
+               ],
+               "name": "linuxJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "arguments": [
+                        "-c",
+                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no use_llvm=yes deprecated=no builtin_freetype=yes tools=no "
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp bin/godot.x11.opt.debug.64.llvm bin/linux_x11_64_debug && cp bin/godot.x11.opt.debug.64.llvm bin/linux_x11_64_release"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  }
+               ]
+            },
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "g/bin/server_64_release",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "g/bin/server_64_debug",
+                     "type": "build"
+                  }
+               ],
+               "name": "serverJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "arguments": [
+                        "-c",
+                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no tools=no"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp bin/godot_server.x11.opt.debug.64 bin/server_64_debug && cp bin/godot_server.x11.opt.debug.64 bin/server_64_release"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  }
+               ]
+            }
+         ],
+         "name": "templateStage"
+      },
+      {
+         "jobs": [
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "godot.templates.tpz",
+                     "type": "build"
+                  }
+               ],
+               "name": "defaultJob",
+               "tasks": [
+                  {
+                     "arguments": [
+                        "-c",
+                        "rm -rf templates"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "templates",
+                     "is_source_a_file": true,
+                     "job": "windowsJob",
+                     "pipeline": "godot-template-groups",
+                     "source": "windows_64_release.exe",
+                     "stage": "templateStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "templates",
+                     "is_source_a_file": true,
+                     "job": "serverJob",
+                     "pipeline": "godot-template-groups",
+                     "source": "server_64_release",
+                     "stage": "templateStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "templates",
+                     "is_source_a_file": true,
+                     "job": "linuxJob",
+                     "pipeline": "godot-template-groups",
+                     "source": "linux_x11_64_release",
+                     "stage": "templateStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "templates",
+                     "is_source_a_file": true,
+                     "job": "windowsJob",
+                     "pipeline": "godot-template-groups",
+                     "source": "windows_64_debug.exe",
+                     "stage": "templateStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "templates",
+                     "is_source_a_file": true,
+                     "job": "linuxJob",
+                     "pipeline": "godot-template-groups",
+                     "source": "linux_x11_64_debug",
+                     "stage": "templateStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "templates",
+                     "is_source_a_file": true,
+                     "job": "serverJob",
+                     "pipeline": "godot-template-groups",
+                     "source": "server_64_debug",
+                     "stage": "templateStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "eval `sed -e \"s/ = /=/\" version.py` && echo $major.$minor.$patch.$GODOT_STATUS.$GO_PIPELINE_COUNTER > templates/version.txt"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "rm -rf godot.templates.tpz"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "zip -9 godot.templates.tpz templates/*"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec"
+                  }
+               ]
+            }
+         ],
+         "name": "templateZipStage"
+      }
+   ]
+}

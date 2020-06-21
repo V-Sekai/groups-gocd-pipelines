@@ -1,0 +1,1 @@
+jsonnetfmt -i godot.jsonnet
