@@ -1203,16 +1203,13 @@ local godot_tools_pipeline_export(pipeline_name='',
 local godot_template_sandbox = 'godot-template-sandbox';
 local godot_template_groups_editor = 'godot-template-groups';
 local godot_template_groups_export = 'production-groups-release-export';
-local godot_template = [godot_template_sandbox, godot_template_groups_editor, godot_template_groups_export];
+local godot_template = [godot_template_groups_editor, godot_template_groups_export];
 {
   'env.goenvironment.json': {
     name: 'development',
     pipelines: godot_template,
     environment_variables:
-      [{
-        name: 'PYTHONPATH',
-        value: '/usr/lib/python3.4/site-packages/scons-3.0.1',
-      }],
+      [],
   },
   'godot_groups_editor.gopipeline.json'
   : std.prune(godot_pipeline(
