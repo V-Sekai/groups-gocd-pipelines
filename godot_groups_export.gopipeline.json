@@ -27,6 +27,39 @@
    "stages": [
       {
          "clean_workspace": false,
+         "fetch_materials": false,
+         "jobs": [
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "export_windows",
+                     "type": "build"
+                  }
+               ],
+               "name": "windowsJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "arguments": [
+                        "-c",
+                        "git config --global url.git@github.com:SaracenOne.insteadOf https://gitlab.com/SaracenOne"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  }
+               ]
+            }
+         ],
+         "name": "gitConfigurationStage"
+      },
+      {
+         "clean_workspace": false,
+         "fetch_materials": true,
          "jobs": [
             {
                "artifacts": [

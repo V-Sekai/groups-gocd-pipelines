@@ -999,8 +999,43 @@ local godot_tools_pipeline_export(pipeline_name='',
     ],
     stages: [
       {
+        name: 'gitConfigurationStage',
+        clean_workspace: false,
+        fetch_materials: false,
+        jobs: [
+          {
+            name: 'windowsJob',
+            resources: [
+              'linux',
+              'mingw5',
+            ],
+            artifacts: [
+              {
+                type: 'build',
+                source: 'export_windows',
+                destination: '',
+              },
+            ],
+            environment_variables:
+              [],
+            tasks: [
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'git config --global url.git@github.com:SaracenOne.insteadOf https://gitlab.com/SaracenOne',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+            ],
+          },
+        ],
+      },
+      {
         name: 'exportStage',
         clean_workspace: false,
+        fetch_materials: true,
         jobs: [
           {
             name: 'windowsJob',
