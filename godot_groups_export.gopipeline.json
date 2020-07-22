@@ -30,14 +30,7 @@
          "fetch_materials": false,
          "jobs": [
             {
-               "artifacts": [
-                  {
-                     "destination": "",
-                     "source": "export_windows",
-                     "type": "build"
-                  }
-               ],
-               "name": "windowsJob",
+               "name": "gitConfigurationJob",
                "resources": [
                   "linux",
                   "mingw5"

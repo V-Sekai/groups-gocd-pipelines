@@ -1004,18 +1004,12 @@ local godot_tools_pipeline_export(pipeline_name='',
         fetch_materials: false,
         jobs: [
           {
-            name: 'windowsJob',
+            name: 'gitConfigurationJob',
             resources: [
               'linux',
               'mingw5',
             ],
-            artifacts: [
-              {
-                type: 'build',
-                source: 'export_windows',
-                destination: '',
-              },
-            ],
+            artifacts: [],
             environment_variables:
               [],
             tasks: [
