@@ -696,7 +696,7 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                'eval `sed -e "s/ = /=/" version.py` && echo $major.$minor.$patch.$GODOT_STATUS.$GO_PIPELINE_COUNTER > templates/version.txt',
+                'eval `sed -e "s/ = /=/" version.py` && echo \\$major.\\$minor.\\$patch.$GODOT_STATUS.$GO_PIPELINE_COUNTER > templates/version.txt',
               ],
               command: '/bin/bash',
             },
