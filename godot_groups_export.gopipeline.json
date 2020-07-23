@@ -188,6 +188,15 @@
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "rm -f export_linux_server/*.so export_linux_server/actions.json"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
                   }
                ]
             }
