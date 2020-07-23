@@ -139,6 +139,11 @@
                      "destination": "",
                      "source": "g/bin/windows_64_release.exe",
                      "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "g/bin/version.txt",
+                     "type": "build"
                   }
                ],
                "name": "windowsJob",
@@ -159,7 +164,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=windows use_llvm=no use_lld=yes target=release_debug -j`nproc` use_lto=no deprecated=no tools=no"
+                        "scons werror=no platform=windows use_llvm=no use_lld=yes target=release_debug -j`nproc` use_lto=no deprecated=no tools=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -168,7 +173,16 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.windows.opt.debug.64.exe bin/windows_64_debug.exe && cp bin/godot.windows.opt.debug.64.exe bin/windows_64_release.exe"
+                        "cp bin/godot.windows.opt.tools.64.exe bin/windows_64_debug.exe && cp bin/godot.windows.opt.tools.64.exe bin/windows_64_release.exe && mingw-strip --strip-debug bin/windows_64_release.exe"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "eval `sed -e \"s/ = /=/\" version.py` && echo $major.$minor.$patch.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -186,6 +200,11 @@
                   {
                      "destination": "",
                      "source": "g/bin/linux_x11_64_debug",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "g/bin/version.txt",
                      "type": "build"
                   }
                ],
@@ -207,7 +226,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no use_llvm=yes deprecated=no builtin_freetype=yes tools=no "
+                        "scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no use_llvm=yes deprecated=no builtin_freetype=yes tools=yes "
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -216,7 +235,16 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.x11.opt.debug.64.llvm bin/linux_x11_64_debug && cp bin/godot.x11.opt.debug.64.llvm bin/linux_x11_64_release"
+                        "cp bin/godot.x11.opt.tools.64.llvm bin/linux_x11_64_debug && cp bin/godot.x11.opt.tools.64.llvm bin/linux_x11_64_release && strip --strip-debug bin/linux_x11_64_release"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "eval `sed -e \"s/ = /=/\" version.py` && echo $major.$minor.$patch.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -234,6 +262,11 @@
                   {
                      "destination": "",
                      "source": "g/bin/server_64_debug",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "g/bin/version.txt",
                      "type": "build"
                   }
                ],
@@ -264,7 +297,16 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot_server.x11.opt.debug.64 bin/server_64_debug && cp bin/godot_server.x11.opt.debug.64 bin/server_64_release"
+                        "cp bin/godot_server.x11.opt.debug.64 bin/server_64_debug && cp bin/godot_server.x11.opt.debug.64 bin/server_64_release && strip --strip-debug bin/server_64_release"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "eval `sed -e \"s/ = /=/\" version.py` && echo $major.$minor.$patch.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -309,9 +351,39 @@
                      "artifact_origin": "gocd",
                      "destination": "templates",
                      "is_source_a_file": true,
+                     "job": "windowsJob",
+                     "pipeline": "godot-template-groups",
+                     "source": "windows_64_debug.exe",
+                     "stage": "templateStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "templates",
+                     "is_source_a_file": true,
+                     "job": "windowsJob",
+                     "pipeline": "godot-template-groups",
+                     "source": "version.txt",
+                     "stage": "templateStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "templates",
+                     "is_source_a_file": true,
                      "job": "serverJob",
                      "pipeline": "godot-template-groups",
                      "source": "server_64_release",
+                     "stage": "templateStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "templates",
+                     "is_source_a_file": true,
+                     "job": "serverJob",
+                     "pipeline": "godot-template-groups",
+                     "source": "server_64_debug",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
@@ -329,39 +401,11 @@
                      "artifact_origin": "gocd",
                      "destination": "templates",
                      "is_source_a_file": true,
-                     "job": "windowsJob",
-                     "pipeline": "godot-template-groups",
-                     "source": "windows_64_debug.exe",
-                     "stage": "templateStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "templates",
-                     "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "godot-template-groups",
                      "source": "linux_x11_64_debug",
                      "stage": "templateStage",
                      "type": "fetch"
-                  },
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "templates",
-                     "is_source_a_file": true,
-                     "job": "serverJob",
-                     "pipeline": "godot-template-groups",
-                     "source": "server_64_debug",
-                     "stage": "templateStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "eval `sed -e \"s/ = /=/\" version.py` && echo \\$major.\\$minor.\\$patch.$GODOT_STATUS.$GO_PIPELINE_COUNTER > templates/version.txt"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec"
                   },
                   {
                      "arguments": [
