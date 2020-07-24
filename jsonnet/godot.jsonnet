@@ -1,10 +1,7 @@
 local godot_pipeline(pipeline_name='',
-                     itchio_login='',
                      godot_status='',
                      godot_git='',
                      godot_branch='',
-                     gocd_build_git='',
-                     gocd_build_branch='',
                      gocd_group='',
                      linux_app_description='',
                      linux_app_server_description='',
@@ -853,7 +850,7 @@ local godot_pipeline(pipeline_name='',
 #              type: 'exec',
 #              arguments: [
 #                '-c',
-#                'chmod +x ./b/butler && source <(python b/crudini.py --format=sh --get g/version.py DEFAULT) && ./b/butler push godot ' + itchio_login + ':linux-master --userversion $major.$minor.$patch.$GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+#                'chmod +x ./b/butler && source <(python b/crudini.py --format=sh --get g/version.py DEFAULT) && ./b/butler push godot $ITCHIO_LOGIN:linux-master --userversion $major.$minor.$patch.$GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
 #              ],
 #              command: '/bin/bash',
 #            },
@@ -910,7 +907,7 @@ local godot_pipeline(pipeline_name='',
 #                type: 'exec',
 #                arguments: [
 #                  '-c',
-#                  'chmod +x ./b/butler && source <(python b/crudini.py --format=sh --get g/version.py DEFAULT) && ./b/butler push godot ' + itchio_login + ':linux-server-master --userversion $major.$minor.$patch.$GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+#                  'chmod +x ./b/butler && source <(python b/crudini.py --format=sh --get g/version.py DEFAULT) && ./b/butler push godot $ITCHIO_LOGIN:linux-server-master --userversion $major.$minor.$patch.$GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
 #                ],
 #                command: '/bin/bash',
 #              },
@@ -1012,7 +1009,7 @@ local godot_pipeline(pipeline_name='',
 #                type: 'exec',
 #                arguments: [
 #                  '-c',
-#                  'chmod +x ./b/butler && source <(python b/crudini.py --format=sh --get g/version.py DEFAULT) && ./b/butler push godot ' + itchio_login + ':osx-master --userversion $major.$minor.$patch.$GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+#                  'chmod +x ./b/butler && source <(python b/crudini.py --format=sh --get g/version.py DEFAULT) && ./b/butler push godot $ITCHIO_LOGIN:osx-master --userversion $major.$minor.$patch.$GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
 #                ],
 #                command: '/bin/bash',
 #              },
@@ -1032,8 +1029,6 @@ local godot_tools_pipeline_export(pipeline_name='',
                                   gocd_project_folder='',
                                   groups_git='',
                                   groups_branch='',
-                                  gocd_build_git='',
-                                  gocd_build_branch='',
                                   gocd_build_project_material=[],
                                   gocd_material_dependencies=[]) =
   {
@@ -1260,7 +1255,7 @@ local godot_tools_pipeline_export(pipeline_name='',
 #              [{
 #                name: 'BUTLER_API_KEY',
 #                encrypted_value: butler_api_key,
-#              }],
+#              },{name: 'ITCHIO_LOGIN', value: ....}],
             tasks: [
               {
                 type: 'fetch',
@@ -1276,7 +1271,7 @@ local godot_tools_pipeline_export(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'butler push export_windows ' + itchio_login + ':windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+                  'butler push export_windows $ITCHIO_LOGIN:windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1293,7 +1288,7 @@ local godot_tools_pipeline_export(pipeline_name='',
 #              [{
 #                name: 'BUTLER_API_KEY',
 #                encrypted_value: butler_api_key,
-#              }],
+#              },{name: 'ITCHIO_LOGIN', value: ....}],
             tasks: [
               {
                 type: 'fetch',
@@ -1309,7 +1304,7 @@ local godot_tools_pipeline_export(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'butler push export_linux_x11 ' + itchio_login + ':x11-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+                  'butler push export_linux_x11 $ITCHIO_LOGIN:x11-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1326,7 +1321,7 @@ local godot_tools_pipeline_export(pipeline_name='',
 #              [{
 #                name: 'BUTLER_API_KEY',
 #                encrypted_value: butler_api_key,
-#              }],
+#              },{name: 'ITCHIO_LOGIN', value: ....}],
             tasks: [
               {
                 type: 'fetch',
@@ -1342,7 +1337,7 @@ local godot_tools_pipeline_export(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'butler push export_linux_server ' + itchio_login + ':server-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+                  'butler push export_linux_server $ITCHIO_LOGIN:server-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1368,12 +1363,9 @@ local godot_template = [godot_template_groups_editor, godot_template_groups_expo
   'godot_groups_editor.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_groups_editor,
-#    itchio_login=''
     godot_status='master.groups',
     godot_git='https://github.com/SaracenOne/godot.git',
     godot_branch='groups',
-#    gocd_build_git='',
-#    gocd_build_branch='master',
     gocd_group='beta',
     linux_app_description='Godot Game Engine by Groups',
     linux_app_server_description='Godot Game Engine Server by Groups',
@@ -1388,13 +1380,10 @@ local godot_template = [godot_template_groups_editor, godot_template_groups_expo
     godot_tools_pipeline_export(
       pipeline_name=godot_template_groups_export,
       pipeline_dependency=godot_template_groups_editor,
-#      itchio_login='',
       groups_git='git@gitlab.com:SaracenOne/groups.git',
       groups_branch='master',
       gocd_group='beta',
       godot_status='master.groups.release',
-#      gocd_build_git='',
-#      gocd_build_branch='master',
       gocd_project_folder='groups',
       gocd_build_project_material=[
         {
