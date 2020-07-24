@@ -80,6 +80,15 @@
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a g/addons/vr_manager/openvr/actions export_windows/"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
                   }
                ]
             },
@@ -130,6 +139,15 @@
                      "arguments": [
                         "-c",
                         "rm -rf export_linux_x11 && mkdir export_linux_x11 && chmod +x godot_server.x11.opt.tools.64 && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64 --export \"Linux/X11\" \"`pwd`\"/export_linux_x11/v_sekai_linux_x11 --path g -v"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a g/addons/vr_manager/openvr/actions export_linux_x11/"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -192,7 +210,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -f export_linux_server/*.so export_linux_server/actions.json"
+                        "rm -f export_linux_server/*.so"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
