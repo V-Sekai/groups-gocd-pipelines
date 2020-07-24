@@ -202,6 +202,96 @@
             }
          ],
          "name": "exportStage"
+      },
+      {
+         "clean_workspace": false,
+         "jobs": [
+            {
+               "name": "windowsJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "is_source_a_file": false,
+                     "job": "windowsJob",
+                     "pipeline": "production-groups-release-export",
+                     "source": "export_windows",
+                     "stage": "exportStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "butler push export_windows :windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  }
+               ]
+            },
+            {
+               "name": "linuxDesktopJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "is_source_a_file": false,
+                     "job": "linuxDesktopJob",
+                     "pipeline": "production-groups-release-export",
+                     "source": "export_linux_x11",
+                     "stage": "exportStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "butler push export_linux_x11 :x11-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  }
+               ]
+            },
+            {
+               "name": "linuxServerJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "is_source_a_file": false,
+                     "job": "linuxServerJob",
+                     "pipeline": "production-groups-release-export",
+                     "source": "export_linux_server",
+                     "stage": "exportStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "butler push export_linux_server :server-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  }
+               ]
+            }
+         ],
+         "name": "uploadStage"
       }
    ]
 }

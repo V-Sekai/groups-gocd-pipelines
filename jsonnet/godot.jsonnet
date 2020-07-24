@@ -1046,13 +1046,6 @@ local godot_tools_pipeline_export(pipeline_name='',
         value: godot_status,
       }],
     materials: [
-#      {
-#        name: 'butler_git_sandbox',
-#        url: gocd_build_git,
-#        type: 'git',
-#        branch: gocd_build_branch,
-#        destination: 'b',
-#      },
       {
         name: 'groups_git_sandbox',
         url: groups_git,
@@ -1253,78 +1246,111 @@ local godot_tools_pipeline_export(pipeline_name='',
           },
         ],
       },
-#      {
-#        name: 'uploadStage',
-#        clean_workspace: false,
-#        jobs: [
-#          {
-#            name: 'windowsJob',
-#            resources: [
-#              'linux',
-#              'mingw5',
-#            ],
-##            environment_variables:
-##              [{
-##                name: 'BUTLER_API_KEY',
-##                encrypted_value: butler_api_key,
-##              }],
-#            tasks: [
-#              {
-#                type: 'fetch',
-#                artifact_origin: 'gocd',
-#                pipeline: pipeline_name,
-#                stage: 'exportStage',
-#                job: 'windowsJob',
-#                is_source_a_file: false,
-#                source: 'export_windows',
-#                destination: '',
-#              },
-#              {
-#                type: 'exec',
-#                arguments: [
-#                  '-c',
-#                  'chmod +x ./b/butler && ./b/butler push export_windows ' + itchio_login + ':windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
-#                ],
-#                command: '/bin/bash',
-#                working_directory: '',
-#              },
-#            ],
-#          },
-#          {
-#            name: 'linuxServerJob',
-#            resources: [
-#              'linux',
-#              'mingw5',
-#            ],
-##            environment_variables:
-##              [{
-##                name: 'BUTLER_API_KEY',
-##                encrypted_value: butler_api_key,
-##              }],
-#            tasks: [
-#              {
-#                type: 'fetch',
-#                artifact_origin: 'gocd',
-#                pipeline: pipeline_name,
-#                stage: 'exportStage',
-#                job: 'linuxServerJob',
-#                is_source_a_file: false,
-#                source: 'export_linux_server',
-#                destination: '',
-#              },
-#              {
-#                type: 'exec',
-#                arguments: [
-#                  '-c',
-#                  'chmod +x ./b/butler && ./b/butler push export_linux_server ' + itchio_login + ':server-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
-#                ],
-#                command: '/bin/bash',
-#                working_directory: '',
-#              },
-#            ],
-#          },
-#        ],
-#      },
+      {
+        name: 'uploadStage',
+        clean_workspace: false,
+        jobs: [
+          {
+            name: 'windowsJob',
+            resources: [
+              'linux',
+              'mingw5',
+            ],
+#            environment_variables:
+#              [{
+#                name: 'BUTLER_API_KEY',
+#                encrypted_value: butler_api_key,
+#              }],
+            tasks: [
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_name,
+                stage: 'exportStage',
+                job: 'windowsJob',
+                is_source_a_file: false,
+                source: 'export_windows',
+                destination: '',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'butler push export_windows ' + itchio_login + ':windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+            ],
+          },
+          {
+            name: 'linuxDesktopJob',
+            resources: [
+              'linux',
+              'mingw5',
+            ],
+#            environment_variables:
+#              [{
+#                name: 'BUTLER_API_KEY',
+#                encrypted_value: butler_api_key,
+#              }],
+            tasks: [
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_name,
+                stage: 'exportStage',
+                job: 'linuxDesktopJob',
+                is_source_a_file: false,
+                source: 'export_linux_x11',
+                destination: '',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'butler push export_linux_x11 ' + itchio_login + ':x11-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+            ],
+          },
+          {
+            name: 'linuxServerJob',
+            resources: [
+              'linux',
+              'mingw5',
+            ],
+#            environment_variables:
+#              [{
+#                name: 'BUTLER_API_KEY',
+#                encrypted_value: butler_api_key,
+#              }],
+            tasks: [
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_name,
+                stage: 'exportStage',
+                job: 'linuxServerJob',
+                is_source_a_file: false,
+                source: 'export_linux_server',
+                destination: '',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'butler push export_linux_server ' + itchio_login + ':server-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+            ],
+          },
+        ],
+      },
     ],
   };
 
