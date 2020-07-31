@@ -1,14 +1,279 @@
+
+local osx_template_extra_commands = [
+      {
+        type: 'exec',
+        arguments: [
+          '-c',
+          'rm -rf ./bin/osx_template.app',
+        ],
+        command: '/bin/bash',
+        working_directory: 'g',
+      },
+      {
+        type: 'exec',
+        arguments: [
+          '-c',
+          'cp -r ./misc/dist/osx_template.app ./bin/',
+        ],
+        command: '/bin/bash',
+        working_directory: 'g',
+      },
+      {
+        type: 'exec',
+        arguments: [
+          '-c',
+          'mkdir -p ./bin/osx_template.app/Contents/MacOS',
+        ],
+        command: '/bin/bash',
+        working_directory: 'g',
+      },
+      {
+        type: 'exec',
+        arguments: [
+          '-c',
+          'cp ./bin/godot.osx.opt.debug.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_debug.64',
+        ],
+        command: '/bin/bash',
+        working_directory: 'g',
+      },
+      {
+        type: 'exec',
+        arguments: [
+          '-c',
+          'chmod +x ./bin/osx_template.app/Contents/MacOS/godot_osx_debug.64',
+        ],
+        command: '/bin/bash',
+        working_directory: 'g',
+      },
+      {
+        type: 'exec',
+        arguments: [
+          '-c',
+          'cp ./bin/godot.osx.opt.debug.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_release.64',
+        ],
+        command: '/bin/bash',
+        working_directory: 'g',
+      },
+      {
+        type: 'exec',
+        arguments: [
+          '-c',
+          'chmod +x ./bin/osx_template.app/Contents/MacOS/godot_osx_release.64',
+        ],
+        command: '/bin/bash',
+        working_directory: 'g',
+      },
+      {
+        type: 'exec',
+        arguments: [
+          '-c',
+          'rm -rf osx.zip',
+        ],
+        command: '/bin/bash',
+        working_directory: 'g/bin',
+      },
+      {
+        type: 'exec',
+        arguments: [
+          '-c',
+          'zip -9 -r osx.zip osx_template.app/',
+        ],
+        command: '/bin/bash',
+        working_directory: 'g/bin',
+      },
+      {
+        type: 'exec',
+        arguments: [
+          '-c',
+          'rm -rf Godot.app && cp -r ./g/misc/dist/osx_template.app Godot.app',
+        ],
+        command: '/bin/bash',
+      },
+    ];
+
+
+local platform_info_dict = {
+  "windows": {
+    platform_name: "windows",
+    scons_env: "",
+    intermediate_godot_binary: "godot.windows.opt.tools.64.exe",
+    editor_godot_binary: "godot.windows.opt.tools.64.exe",
+    template_debug_binary: "windows_64_debug.exe",
+    template_release_binary: "windows_64_release.exe",
+    export_directory: "export_windows",
+    scons_platform: "windows",
+    strip_command: "mingw-strip --strip-debug",
+    godot_scons_arguments: "use_llvm=no use_lld=yes",
+    extra_tasks: [],
+    environment_variables: [],
+    template_artifacts_override: null,
+    template_output_artifacts: null,
+    template_extra_commands: null,
+  },
+  "linux": {
+    platform_name: "linux",
+    scons_env: "",
+    intermediate_godot_binary: "godot.x11.opt.tools.64.llvm",
+    editor_godot_binary: "godot.x11.opt.tools.64.llvm",
+    template_debug_binary: "linux_x11_64_debug",
+    template_release_binary: "linux_x11_64_release",
+    export_directory: "export_linux_x11",
+    scons_platform: "x11",
+    strip_command: "strip --strip-debug",
+    godot_scons_arguments: "use_llvm=yes builtin_freetype=yes",
+    extra_tasks: [],
+    environment_variables: [],
+    template_artifacts_override: null,
+    template_output_artifacts: null,
+    template_extra_commands: null,
+  },
+  "server": {
+    platform_name: "server",
+    scons_env: "",
+    intermediate_godot_binary: "godot_server.x11.opt.tools.64",
+    editor_godot_binary: "godot_server.x11.opt.tools.64",
+    template_debug_binary: "server_64_debug",
+    template_release_binary: "server_64_release",
+    export_directory: "export_linux_server",
+    scons_platform: "server",
+    strip_command: "strip --strip-debug",
+    godot_scons_arguments: "", # FIXME: use_llvm=yes????
+    extra_tasks: [],
+    environment_variables: [],
+    template_artifacts_override: null,
+    template_output_artifacts: null,
+    template_extra_commands: null,
+  },
+  "web": {
+    platform_name: "web",
+    scons_env: "",
+    intermediate_godot_binary: "godot.javascript.opt.debug.zip",
+    editor_godot_binary: null,
+    template_debug_binary: "webassembly_debug.zip",
+    template_release_binary: "webassembly_release.zip",
+    strip_command: null, # unknown if release should be built separately.
+    scons_platform: "javascript",
+    godot_scons_arguments: "use_llvm=yes builtin_freetype=yes",
+    extra_tasks: ["/opt/emsdk/emsdk activate latest"],
+    environment_variables: [],
+    template_artifacts_override: null,
+    template_output_artifacts: null,
+    template_extra_commands: null,
+  },
+  "osx": {
+    platform_name: "osx",
+    scons_env: "OSXCROSS_ROOT=/opt/osxcross",
+    intermediate_godot_binary: "godot.osx.opt.tools.64",
+    editor_godot_binary: "Godot",
+    template_debug_binary: "godot.osx.opt.debug.64", # FIXME
+    template_release_binary: "godot.osx.opt.debug.64", # FIXME
+    scons_platform: "osx",
+    strip_command: null,
+    # FIXME: We should look into using osx_tools.app instead of osx_template.app, because we build with tools=yes
+    godot_scons_arguments: "osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes",
+    extra_tasks: [],
+    environment_variables: [
+      {
+        name: 'PATH',
+        value: '/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+      },
+    ],
+    template_artifacts_override: [
+      {
+        type: 'build',
+        source: 'g/bin/osx.zip',
+        destination: '',
+      },
+      {
+        type: 'build',
+        source: 'Godot.app',
+        destination: '',
+      },
+      {
+        type: 'build',
+        source: 'g/bin/version.txt',
+        destination: '',
+      },
+    ],
+    template_output_artifacts: ['osx.zip'],
+    template_extra_commands: osx_template_extra_commands,
+  },
+};
+
+local enabled_engine_platforms = [platform_info_dict[x] for x in ["windows", "linux", "server"]];
+
+local enabled_template_platforms = [platform_info_dict[x] for x in ["windows", "linux", "server"]];
+
+
+# TODO: Use std.escapeStringBash in case export configurations wish to output executables with spaces.
+local groups_export_configurations = {
+  "windows": {
+    export_name: "windows",
+    platform_name: "windows",
+    export_configuration: "Windows Desktop",
+    export_directory: "export_windows",
+    export_executable: "v_sekai_windows.exe",
+    itchio_out: "windows-master",
+    extra_commands: [
+      {
+        type: 'exec',
+        arguments: [
+          '-c',
+          'cp -a g/addons/vr_manager/openvr/actions export_windows/',
+        ],
+        command: '/bin/bash',
+        working_directory: '',
+      },
+    ],
+  },
+  "linuxDesktop": {
+    export_name: "linuxDesktop",
+    platform_name: "linux",
+    export_configuration: "Linux/X11",
+    export_directory: "export_linux_x11",
+    export_executable: "v_sekai_linux_x11",
+    itchio_out: "x11-master",
+    extra_commands: [
+      {
+        type: 'exec',
+        arguments: [
+          '-c',
+          'cp -a g/addons/vr_manager/openvr/actions export_linux_x11/',
+        ],
+        command: '/bin/bash',
+        working_directory: '',
+      },
+    ],
+  },
+  "linuxServer": {
+    export_name: "linuxServer",
+    platform_name: "server",
+    export_configuration: "Linux/Server",
+    export_directory: "export_linux_server",
+    export_executable: "v_sekai_linux_server",
+    itchio_out: "server-master",
+    extra_commands: [
+      {
+        type: 'exec',
+        arguments: [
+          '-c',
+          'rm -f export_linux_server/*.so',
+        ],
+        command: '/bin/bash',
+        working_directory: '',
+      }
+    ],
+  },
+};
+
+local enabled_groups_export_platforms = [groups_export_configurations[x] for x in ["windows", "linuxDesktop", "linuxServer"]];
+
+
 local godot_pipeline(pipeline_name='',
                      godot_status='',
                      godot_git='',
                      godot_branch='',
                      gocd_group='',
-                     linux_app_description='',
-                     linux_app_server_description='',
-                     disable_server=false,
-                     disable_web=false,
-                     disable_osx=false,
-                     linux_platform_name='x11',
                      godot_modules_git='',
                      godot_modules_branch='') = {
   name: pipeline_name,
@@ -51,18 +316,19 @@ local godot_pipeline(pipeline_name='',
       clean_workspace: false,
       jobs: [
         {
-          name: 'windowsJob',
+          name: platform_info["platform_name"] + 'Job',
           resources: [
             'mingw5',
             'linux',
           ],
           artifacts: [
             {
-              source: 'g/bin/godot.windows.opt.tools.64.exe',
+              source: 'g/bin/' + platform_info['editor_godot_binary'],
               destination: '',
               type: 'build',
             },
           ],
+          environment_variables: platform_info["environment_variables"],
           tasks: [
             {
               type: 'exec',
@@ -77,156 +343,44 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                'scons werror=no platform=windows target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=no use_lld=yes' +
+                platform_info["scons_env"] + 'scons werror=no platform=' + platform_info["scons_platform"] + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + platform_info["godot_scons_arguments"] +
                 if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
               ],
               command: '/bin/bash',
               working_directory: 'g',
             },
+            if platform_info['editor_godot_binary'] != platform_info['intermediate_godot_binary'] then
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'cp g/bin/' + platform_info['intermediate_godot_binary'] + 'g/bin/' + platform_info['editor_godot_binary'],
+                ],
+                command: '/bin/bash',
+              }
+            else null,
           ],
-        },
-        {
-          name: 'linuxJob',
-          resources: [
-            'mingw5',
-            'linux',
-          ],
-          artifacts: [
-            {
-              type: 'build',
-              source: 'g/bin/godot.' + linux_platform_name + '.opt.tools.64.llvm',
-              destination: '',
-            },
-          ],
-          tasks: [
-            {
-              type: 'exec',
-              arguments: [
-                '-c',
-                'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
-              ],
-              command: '/bin/bash',
-              working_directory: 'g',
-            },
-            {
-              type: 'exec',
-              arguments: [
-                '-c',
-                'scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
-              ],
-              command: '/bin/bash',
-              working_directory: 'g',
-            },
-          ],
-        },
-
-
-        if disable_server == false then
-          {
-            name: 'serverJob',
-            artifacts: [
-              {
-                type: 'build',
-                source: 'g/bin/godot_server.' + linux_platform_name + '.opt.tools.64',
-                destination: '',
-              },
-            ],
-            resources: [
-              'mingw5',
-              'linux',
-            ],
-            tasks: [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else ' ',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-            ],
-          }
-        else null
-        ,
-        if disable_osx == false then
-          {
-            name: 'osxJob',
-            resources: [
-              'mingw5',
-              'linux',
-            ],
-            artifacts: [
-              {
-                type: 'build',
-                source: 'Godot',
-              },
-            ],
-            environment_variables: [
-              {
-                name: 'PATH',
-                value: '/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
-              },
-            ],
-            tasks: [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'OSXCROSS_ROOT=/opt/osxcross scons werror=no platform=osx target=release_debug -j`nproc` use_lto=no deprecated=no osxcross_sdk=darwin19 CXXFLAGS="-Wno-deprecated-declarations -Wno-error " builtin_freetype=yes' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'cp g/bin/godot.osx.opt.tools.64 Godot',
-                ],
-                command: '/bin/bash',
-              },
-            ],
-          }
-        else null,
+        } for platform_info in enabled_engine_platforms
       ],
     },
     {
       name: 'templateStage',
       jobs: [
         {
-          name: 'windowsJob',
+          name: platform_info["platform_name"] + 'Job',
           resources: [
             'linux',
             'mingw5',
           ],
-          artifacts: [
+          artifacts: if platform_info["template_artifacts_override"] != null then platform_info["template_artifacts_override"] else [
             {
               type: 'build',
-              source: 'g/bin/windows_64_debug.exe',
+              source: 'g/bin/' + platform_info["template_debug_binary"],
               destination: '',
             },
             {
               type: 'build',
-              source: 'g/bin/windows_64_release.exe',
+              source: 'g/bin/' + platform_info["template_release_binary"],
               destination: '',
             },
             {
@@ -235,7 +389,18 @@ local godot_pipeline(pipeline_name='',
               destination: '',
             },
           ],
+          environment_variables: platform_info["environment_variables"],
           tasks: [
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  extra_task,
+                ],
+                command: '/bin/bash',
+                working_directory: 'g',
+              } for extra_task in platform_info["extra_tasks"]
+            ] + [
             {
               type: 'exec',
               arguments: [
@@ -249,7 +414,7 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                'scons werror=no platform=windows target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=no use_lld=yes' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+                platform_info["scons_env"] + 'scons werror=no platform=' + platform_info["scons_platform"] + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + platform_info["godot_scons_arguments"] + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
               ],
               command: '/bin/bash',
               working_directory: 'g',
@@ -258,7 +423,7 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                'cp bin/godot.windows.opt.tools.64.exe bin/windows_64_debug.exe && cp bin/godot.windows.opt.tools.64.exe bin/windows_64_release.exe && mingw-strip --strip-debug bin/windows_64_release.exe',
+                'cp bin/' + platform_info["intermediate_godot_binary"] + ' bin/' + platform_info["template_debug_binary"] + ' && cp bin/' + platform_info["intermediate_godot_binary"] + ' bin/' + platform_info["template_release_binary"] + if platform_info["strip_command"] != null then ' && ' + platform_info["strip_command"] + ' bin/' + platform_info["template_release_binary"] else '',
               ],
               command: '/bin/bash',
               working_directory: 'g',
@@ -273,373 +438,7 @@ local godot_pipeline(pipeline_name='',
               working_directory: 'g',
             },
           ],
-        },
-        {
-          name: 'linuxJob',
-          artifacts: [
-            {
-              type: 'build',
-              source: 'g/bin/linux_x11_64_debug',
-              destination: '',
-            },
-            {
-              type: 'build',
-              source: 'g/bin/linux_x11_64_release',
-              destination: '',
-            },
-            {
-              type: 'build',
-              source: 'g/bin/version.txt',
-              destination: '',
-            },
-          ],
-          resources: [
-            'linux',
-            'mingw5',
-          ],
-          tasks: [
-            {
-              type: 'exec',
-              arguments: [
-                '-c',
-                'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
-              ],
-              command: '/bin/bash',
-              working_directory: 'g',
-            },
-            {
-              type: 'exec',
-              arguments: [
-                '-c',
-                'scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
-              ],
-              command: '/bin/bash',
-              working_directory: 'g',
-            },
-            {
-              type: 'exec',
-              arguments: [
-                '-c',
-                'cp bin/godot.' + linux_platform_name + '.opt.tools.64.llvm bin/linux_x11_64_debug && cp bin/godot.' + linux_platform_name + '.opt.tools.64.llvm bin/linux_x11_64_release && strip --strip-debug bin/linux_x11_64_release',
-              ],
-              command: '/bin/bash',
-              working_directory: 'g',
-            },
-            {
-              type: 'exec',
-              arguments: [
-                '-c',
-                'eval `sed -e "s/ = /=/" version.py` && echo $major.$minor.$patch.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt',
-              ],
-              command: '/bin/bash',
-              working_directory: 'g',
-            },
-          ],
-        },
-        if disable_web == false then
-          {
-            name: 'webJob',
-            artifacts: [
-              {
-                type: 'build',
-                source: 'g/bin/webassembly_release.zip',
-                destination: '',
-              },
-              {
-                type: 'build',
-                source: 'g/bin/webassembly_debug.zip',
-                destination: '',
-              },
-              {
-                type: 'build',
-                source: 'g/bin/version.txt',
-                destination: '',
-              },
-            ],
-            resources: [
-              'linux',
-              'mingw5',
-            ],
-            tasks: [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  '/opt/emsdk/emsdk activate latest',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'scons werror=no platform=javascript target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'cp bin/godot.javascript.opt.debug.zip bin/webassembly_debug.zip',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'scons werror=no platform=javascript target=release -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'cp bin/godot.javascript.opt.zip bin/webassembly_release.zip',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'eval `sed -e "s/ = /=/" version.py` && echo $major.$minor.$patch.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-            ],
-          },
-        if disable_server == false then
-          {
-            name: 'serverJob',
-            resources: [
-              'linux',
-              'mingw5',
-            ],
-            artifacts: [
-              {
-                type: 'build',
-                source: 'g/bin/server_64_debug',
-                destination: '',
-              },
-              {
-                type: 'build',
-                source: 'g/bin/server_64_release',
-                destination: '',
-              },
-              {
-                type: 'build',
-                source: 'g/bin/version.txt',
-                destination: '',
-              },
-            ],
-            tasks: [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else ' ',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'cp bin/godot_server.' + linux_platform_name + '.opt.tools.64 bin/server_64_debug && cp bin/godot_server.' + linux_platform_name + '.opt.tools.64 bin/server_64_release && strip --strip-debug bin/server_64_release',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'eval `sed -e "s/ = /=/" version.py` && echo $major.$minor.$patch.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-            ],
-          },
-
-        if disable_osx == false then
-          {
-            name: 'osxJob',
-            resources: [
-              'linux',
-              'mingw5',
-            ],
-            artifacts: [
-              {
-                type: 'build',
-                source: 'g/bin/osx.zip',
-                destination: '',
-              },
-              {
-                type: 'build',
-                source: 'Godot.app',
-                destination: '',
-              },
-              {
-                type: 'build',
-                source: 'g/bin/version.txt',
-                destination: '',
-              },
-            ],
-            environment_variables: [
-              {
-                name: 'PATH',
-                value: '/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
-              },
-            ],
-            tasks: [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'OSXCROSS_ROOT=/opt/osxcross scons werror=no platform=osx target=release_debug -j`nproc` use_lto=no deprecated=no osxcross_sdk=darwin19 CXXFLAGS=" -Wno-error -Wno-deprecated-declarations "' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'rm -rf ./bin/osx_template.app',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'cp -r ./misc/dist/osx_template.app ./bin/',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'mkdir -p ./bin/osx_template.app/Contents/MacOS',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'cp ./bin/godot.osx.opt.debug.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_debug.64',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'chmod +x ./bin/osx_template.app/Contents/MacOS/godot_osx_debug.64',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'cp ./bin/godot.osx.opt.debug.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_release.64',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'chmod +x ./bin/osx_template.app/Contents/MacOS/godot_osx_release.64',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'rm -rf osx.zip',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g/bin',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'zip -9 -r osx.zip osx_template.app/',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g/bin',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'rm -rf Godot.app && cp -r ./g/misc/dist/osx_template.app Godot.app',
-                ],
-                command: '/bin/bash',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'eval `sed -e "s/ = /=/" version.py` && echo $major.$minor.$patch.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt',
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              },
-            ],
-          }
-        else null,
+        } for platform_info in enabled_template_platforms
       ],
     },
     {
@@ -671,103 +470,21 @@ local godot_pipeline(pipeline_name='',
               destination: 'templates',
               pipeline: pipeline_name,
               stage: 'templateStage',
-              job: 'windowsJob',
+              job: enabled_template_platforms[0]["platform_name"] + 'Job',
             },
+          ] + std.flatMap(function(platform_info) [
             {
               type: 'fetch',
               artifact_origin: 'gocd',
               is_source_a_file: true,
-              source: 'windows_64_debug.exe',
+              source: output_artifact,
               destination: 'templates',
               pipeline: pipeline_name,
               stage: 'templateStage',
-              job: 'windowsJob',
-            },
-            {
-              type: 'fetch',
-              artifact_origin: 'gocd',
-              is_source_a_file: true,
-              source: 'windows_64_release.exe',
-              destination: 'templates',
-              pipeline: pipeline_name,
-              stage: 'templateStage',
-              job: 'windowsJob',
-            },
-            {
-              type: 'fetch',
-              artifact_origin: 'gocd',
-              is_source_a_file: true,
-              source: 'linux_x11_64_debug',
-              destination: 'templates',
-              pipeline: pipeline_name,
-              stage: 'templateStage',
-              job: 'linuxJob',
-            },
-            {
-              type: 'fetch',
-              artifact_origin: 'gocd',
-              is_source_a_file: true,
-              source: 'linux_x11_64_release',
-              destination: 'templates',
-              pipeline: pipeline_name,
-              stage: 'templateStage',
-              job: 'linuxJob',
-            },
-            if disable_server == false then
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                is_source_a_file: true,
-                source: 'server_64_debug',
-                destination: 'templates',
-                pipeline: pipeline_name,
-                stage: 'templateStage',
-                job: 'serverJob',
-              } else null,
-            if disable_server == false then
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                is_source_a_file: true,
-                source: 'server_64_release',
-                destination: 'templates',
-                pipeline: pipeline_name,
-                stage: 'templateStage',
-                job: 'serverJob',
-              } else null,
-            if disable_web == false then
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                is_source_a_file: true,
-                source: 'webassembly_debug.zip',
-                destination: 'templates',
-                pipeline: pipeline_name,
-                stage: 'templateStage',
-                job: 'webJob',
-              },
-            if disable_web == false then
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                is_source_a_file: true,
-                source: 'webassembly_release.zip',
-                destination: 'templates',
-                pipeline: pipeline_name,
-                stage: 'templateStage',
-                job: 'webJob',
-              },
-            if disable_osx == false then
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                is_source_a_file: true,
-                source: 'osx.zip',
-                destination: 'templates',
-                pipeline: pipeline_name,
-                stage: 'templateStage',
-                job: 'osxJob',
-              } else null,
+              job: platform_info["platform_name"] + 'Job',
+            } for output_artifact in if platform_info["template_output_artifacts"] != null then platform_info["template_output_artifacts"] else [platform_info["template_debug_binary"],
+              platform_info["template_release_binary"]]
+          ], enabled_template_platforms) + [
             {
               type: 'exec',
               arguments: [
@@ -800,7 +517,9 @@ local godot_tools_pipeline_export(pipeline_name='',
                                   groups_git='',
                                   groups_branch='',
                                   gocd_build_project_material=[],
-                                  gocd_material_dependencies=[]) =
+                                  gocd_material_dependencies=[],
+                                  enabled_export_platforms=[],
+                                  ) =
   {
     name: pipeline_name,
     group: gocd_group,
@@ -833,7 +552,7 @@ local godot_tools_pipeline_export(pipeline_name='',
         fetch_materials: true,
         jobs: [
           {
-            name: 'windowsJob',
+            name: export_info["export_name"] + 'Job',
             resources: [
               'linux',
               'mingw5',
@@ -841,7 +560,7 @@ local godot_tools_pipeline_export(pipeline_name='',
             artifacts: [
               {
                 type: 'build',
-                source: 'export_windows',
+                source: export_info["export_directory"],
                 destination: '',
               },
             ],
@@ -881,152 +600,13 @@ local godot_tools_pipeline_export(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'rm -rf export_windows && mkdir export_windows && chmod +x godot_server.x11.opt.tools.64 && HOME="`pwd`" ./godot_server.x11.opt.tools.64 --export "Windows Desktop" "`pwd`"/export_windows/v_sekai_windows.exe --path g -v',
+                  'rm -rf ' + export_info["export_directory"] + ' && mkdir ' + export_info["export_directory"] + ' && chmod +x godot_server.x11.opt.tools.64 && HOME="`pwd`" ./godot_server.x11.opt.tools.64 --export "' + export_info["export_configuration"] + '" "`pwd`"/' + export_info["export_directory"] + '/' + export_info["export_executable"] + ' --path g -v',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
               },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'cp -a g/addons/vr_manager/openvr/actions export_windows/',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-            ],
-          },
-          {
-            name: 'linuxDesktopJob',
-            resources: [
-              'linux',
-              'mingw5',
-            ],
-            artifacts: [
-              {
-                type: 'build',
-                source: 'export_linux_x11',
-                destination: '',
-              },
-            ],
-            environment_variables:
-              [],
-            tasks: [
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                pipeline: pipeline_dependency,
-                stage: 'templateZipStage',
-                job: 'defaultJob',
-                is_source_a_file: true,
-                source: 'godot.templates.tpz',
-                destination: '',
-              },
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                pipeline: pipeline_dependency,
-                stage: 'defaultStage',
-                job: 'serverJob',
-                is_source_a_file: true,
-                source: 'godot_server.x11.opt.tools.64',
-                destination: '',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'rm -rf templates && unzip "godot.templates.tpz" && export VERSION="`cat templates/version.txt`" && export TEMPLATEDIR=".local/share/godot/templates/$VERSION" && export BASEDIR="`pwd`" && rm -rf "$TEMPLATEDIR" && mkdir -p "$TEMPLATEDIR" && cd "$TEMPLATEDIR" && mv "$BASEDIR"/templates/* . && ln server_* "$BASEDIR/templates/"',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'rm -rf export_linux_x11 && mkdir export_linux_x11 && chmod +x godot_server.x11.opt.tools.64 && HOME="`pwd`" ./godot_server.x11.opt.tools.64 --export "Linux/X11" "`pwd`"/export_linux_x11/v_sekai_linux_x11 --path g -v',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'cp -a g/addons/vr_manager/openvr/actions export_linux_x11/',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-            ],
-          },
-          {
-            name: 'linuxServerJob',
-            resources: [
-              'linux',
-              'mingw5',
-            ],
-            artifacts: [
-              {
-                type: 'build',
-                source: 'export_linux_server',
-                destination: '',
-              },
-            ],
-            environment_variables:
-              [],
-            tasks: [
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                pipeline: pipeline_dependency,
-                stage: 'templateZipStage',
-                job: 'defaultJob',
-                is_source_a_file: true,
-                source: 'godot.templates.tpz',
-                destination: '',
-              },
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                pipeline: pipeline_dependency,
-                stage: 'defaultStage',
-                job: 'serverJob',
-                is_source_a_file: true,
-                source: 'godot_server.x11.opt.tools.64',
-                destination: '',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'rm -rf templates && unzip "godot.templates.tpz" && export VERSION="`cat templates/version.txt`" && export TEMPLATEDIR=".local/share/godot/templates/$VERSION" && export BASEDIR="`pwd`" && rm -rf "$TEMPLATEDIR" && mkdir -p "$TEMPLATEDIR" && cd "$TEMPLATEDIR" && mv "$BASEDIR"/templates/* . && ln server_* "$BASEDIR/templates/"',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'rm -rf export_linux_server && mkdir export_linux_server && chmod +x godot_server.x11.opt.tools.64 && HOME="`pwd`" ./godot_server.x11.opt.tools.64 --export "Linux/Server" "`pwd`"/export_linux_server/v_sekai_linux_server --path g -v',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'rm -f export_linux_server/*.so',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-            ],
-          },
+            ] + export_info["extra_commands"],
+          } for export_info in enabled_export_platforms
         ],
       },
       {
@@ -1034,7 +614,7 @@ local godot_tools_pipeline_export(pipeline_name='',
         clean_workspace: false,
         jobs: [
           {
-            name: 'windowsJob',
+            name: export_info["export_name"] + 'Job',
             resources: [
               'linux',
               'mingw5',
@@ -1050,94 +630,27 @@ local godot_tools_pipeline_export(pipeline_name='',
                 artifact_origin: 'gocd',
                 pipeline: pipeline_name,
                 stage: 'exportStage',
-                job: 'windowsJob',
+                job: export_info["export_name"] + 'Job',
                 is_source_a_file: false,
-                source: 'export_windows',
+                source: export_info["export_directory"],
                 destination: '',
               },
               {
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'butler push export_windows $ITCHIO_LOGIN:windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+                  'butler push ' + export_info["export_directory"] + ' $ITCHIO_LOGIN:' + export_info["itchio_out"] + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
               },
             ],
-          },
-          {
-            name: 'linuxDesktopJob',
-            resources: [
-              'linux',
-              'mingw5',
-            ],
-#            environment_variables:
-#              [{
-#                name: 'BUTLER_API_KEY',
-#                encrypted_value: butler_api_key,
-#              },{name: 'ITCHIO_LOGIN', value: ....}],
-            tasks: [
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                pipeline: pipeline_name,
-                stage: 'exportStage',
-                job: 'linuxDesktopJob',
-                is_source_a_file: false,
-                source: 'export_linux_x11',
-                destination: '',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'butler push export_linux_x11 $ITCHIO_LOGIN:x11-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-            ],
-          },
-          {
-            name: 'linuxServerJob',
-            resources: [
-              'linux',
-              'mingw5',
-            ],
-#            environment_variables:
-#              [{
-#                name: 'BUTLER_API_KEY',
-#                encrypted_value: butler_api_key,
-#              },{name: 'ITCHIO_LOGIN', value: ....}],
-            tasks: [
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                pipeline: pipeline_name,
-                stage: 'exportStage',
-                job: 'linuxServerJob',
-                is_source_a_file: false,
-                source: 'export_linux_server',
-                destination: '',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'butler push export_linux_server $ITCHIO_LOGIN:server-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-            ],
-          },
+          } for export_info in enabled_export_platforms
         ],
       },
     ],
   };
 
-local godot_template_sandbox = 'godot-template-sandbox';
 local godot_template_groups_editor = 'godot-template-groups';
 local godot_template_groups_export = 'production-groups-release-export';
 local godot_template = [godot_template_groups_editor, godot_template_groups_export];
@@ -1155,11 +668,6 @@ local godot_template = [godot_template_groups_editor, godot_template_groups_expo
     godot_git='https://github.com/SaracenOne/godot.git',
     godot_branch='groups',
     gocd_group='beta',
-    linux_app_description='Godot Game Engine by Groups',
-    linux_app_server_description='Godot Game Engine Server by Groups',
-    disable_server=false,
-    disable_web=true,
-    disable_osx=true,
 #    godot_modules_git='https://github.com/godot-extended-libraries/godot-modules-fire.git',
 #    godot_modules_branch='master',
   )),
@@ -1184,7 +692,8 @@ local godot_template = [godot_template_groups_editor, godot_template_groups_expo
       ],
       gocd_material_dependencies=[
         // Todo add all the submodules
-      ]
+      ],
+      enabled_export_platforms=enabled_groups_export_platforms,
     )
   ),
 }
