@@ -47,7 +47,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=windows use_llvm=no use_lld=yes target=release_debug -j`nproc` use_lto=no deprecated=no"
+                        "scons werror=no platform=windows target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=no use_lld=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -81,7 +81,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no use_llvm=yes builtin_freetype=yes deprecated=no"
+                        "scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -164,7 +164,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=windows use_llvm=no use_lld=yes target=release_debug -j`nproc` use_lto=no deprecated=no tools=yes"
+                        "scons werror=no platform=windows target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=no use_lld=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -226,7 +226,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no use_llvm=yes deprecated=no builtin_freetype=yes tools=yes "
+                        "scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -288,7 +288,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no tools=no"
+                        "scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

@@ -77,7 +77,7 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                'scons werror=no platform=windows use_llvm=no use_lld=yes target=release_debug -j`nproc` use_lto=no deprecated=no' +
+                'scons werror=no platform=windows target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=no use_lld=yes' +
                 if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
               ],
               command: '/bin/bash',
@@ -112,7 +112,7 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                'scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no use_llvm=yes builtin_freetype=yes deprecated=no' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+                'scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
               ],
               command: '/bin/bash',
               working_directory: 'g',
@@ -191,7 +191,7 @@ local godot_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'OSXCROSS_ROOT=/opt/osxcross scons werror=no platform=osx osxcross_sdk=darwin19 CXXFLAGS="-Wno-deprecated-declarations -Wno-error " target=release_debug -j`nproc` use_lto=no builtin_freetype=yes deprecated=no' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+                  'OSXCROSS_ROOT=/opt/osxcross scons werror=no platform=osx target=release_debug -j`nproc` use_lto=no deprecated=no osxcross_sdk=darwin19 CXXFLAGS="-Wno-deprecated-declarations -Wno-error " builtin_freetype=yes' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
                 ],
                 command: '/bin/bash',
                 working_directory: 'g',
@@ -249,7 +249,7 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                'scons werror=no platform=windows use_llvm=no use_lld=yes target=release_debug -j`nproc` use_lto=no deprecated=no tools=yes' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+                'scons werror=no platform=windows target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=no use_lld=yes' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
               ],
               command: '/bin/bash',
               working_directory: 'g',
@@ -311,7 +311,7 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                'scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no use_llvm=yes deprecated=no builtin_freetype=yes tools=yes ' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+                'scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
               ],
               command: '/bin/bash',
               working_directory: 'g',
@@ -383,7 +383,7 @@ local godot_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'scons werror=no platform=javascript target=release_debug -j`nproc` use_lto=no use_llvm=yes deprecated=no builtin_freetype=yes tools=no' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+                  'scons werror=no platform=javascript target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
                 ],
                 command: '/bin/bash',
                 working_directory: 'g',
@@ -401,7 +401,7 @@ local godot_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'scons werror=no platform=javascript target=release -j`nproc` use_lto=no use_llvm=yes deprecated=no builtin_freetype=yes tools=no' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+                  'scons werror=no platform=javascript target=release -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
                 ],
                 command: '/bin/bash',
                 working_directory: 'g',
@@ -464,7 +464,7 @@ local godot_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no tools=no' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+                  'scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
                 ],
                 command: '/bin/bash',
                 working_directory: 'g',
@@ -534,7 +534,7 @@ local godot_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'OSXCROSS_ROOT=/opt/osxcross scons werror=no platform=osx osxcross_sdk=darwin19 CXXFLAGS=" -Wno-error -Wno-deprecated-declarations " target=release_debug -j`nproc` use_lto=no deprecated=no tools=no' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+                  'OSXCROSS_ROOT=/opt/osxcross scons werror=no platform=osx target=release_debug -j`nproc` use_lto=no deprecated=no osxcross_sdk=darwin19 CXXFLAGS=" -Wno-error -Wno-deprecated-declarations "' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
                 ],
                 command: '/bin/bash',
                 working_directory: 'g',
@@ -788,236 +788,6 @@ local godot_pipeline(pipeline_name='',
         },
       ],
     },
-#    {
-#      name: 'uploadStage',
-#      jobs: [
-#        {
-#          name: 'linuxJob',
-##          environment_variables:
-##            [{
-##              name: 'BUTLER_API_KEY',
-##              encrypted_value: butler_api_key,
-##            }],
-#          resources: [
-#            'linux',
-#          ],
-#          tasks: [
-#            {
-#              type: 'fetch',
-#              artifact_origin: 'gocd',
-#              is_source_a_file: true,
-#              source: 'godot.' + linux_platform_name + '.opt.tools.64.llvm',
-#              destination: 'godot',
-#              pipeline: pipeline_name,
-#              stage: 'defaultStage',
-#              job: 'linuxJob',
-#            },
-#            {
-#              type: 'fetch',
-#              artifact_origin: 'gocd',
-#              is_source_a_file: true,
-#              source: 'godot.templates.tpz',
-#              destination: 'godot',
-#              pipeline: pipeline_name,
-#              stage: 'templateZipStage',
-#              job: 'defaultJob',
-#            },
-#            {
-#              type: 'exec',
-#              arguments: [
-#                '-c',
-#                'echo -e "[Desktop Entry]\\nName=Godot Game Engine\\nComment=' + linux_app_description + '\\nExec=godot.' + linux_platform_name + '.opt.tools.64.llvm\\nTerminal=false\\nType=Application\\nCategories=Utility;Application;" > godot/godot_engine.desktop',
-#              ],
-#              command: '/bin/bash',
-#            },
-#            {
-#              type: 'exec',
-#              arguments: [
-#                '-c',
-#                'chmod +x ./b/linuxdeployqt-continuous-x86_64.AppImage && ./b/linuxdeployqt-continuous-x86_64.AppImage --appimage-extract',
-#              ],
-#              command: '/bin/bash',
-#            },
-#            {
-#              type: 'exec',
-#              arguments: [
-#                '-c',
-#                'chmod +x ./godot/godot.' + linux_platform_name + '.opt.tools.64.llvm && cd godot && ../squashfs-root/AppRun ./godot_engine.desktop -no-strip -bundle-non-qt-libs',
-#              ],
-#              command: '/bin/bash',
-#            },
-#            {
-#              type: 'exec',
-#              arguments: [
-#                '-c',
-#                'chmod +x ./b/butler && source <(python b/crudini.py --format=sh --get g/version.py DEFAULT) && ./b/butler push godot $ITCHIO_LOGIN:linux-master --userversion $major.$minor.$patch.$GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
-#              ],
-#              command: '/bin/bash',
-#            },
-#          ],
-#        },
-#        if disable_server == false then
-#          {
-#            name: 'linuxServerJob',
-##            environment_variables:
-##              [{
-##                name: 'BUTLER_API_KEY',
-##                encrypted_value: butler_api_key,
-##              }],
-#            resources: [
-#              'linux',
-#            ],
-#            tasks: [
-#              {
-#                type: 'fetch',
-#                artifact_origin: 'gocd',
-#                is_source_a_file: true,
-#                source: 'godot_server.' + linux_platform_name + '.opt.tools.64',
-#                destination: 'godot',
-#                pipeline: pipeline_name,
-#                stage: 'defaultStage',
-#                job: 'serverJob',
-#              },
-#              {
-#                type: 'exec',
-#                arguments: [
-#                  '-c',
-#                  'chmod +x ./b/linuxdeployqt-continuous-x86_64.AppImage && ./b/linuxdeployqt-continuous-x86_64.AppImage --appimage-extract',
-#                ],
-#                command: '/bin/bash',
-#              },
-#              {
-#                type: 'exec',
-#                arguments: [
-#                  '-c',
-#                  'echo -e "[Desktop Entry]\\nName=Godot Game Engine Server\\nComment=' + linux_app_server_description +
-#                  '\\nExec=godot_server.' + linux_platform_name + '.opt.tools.64\\nTerminal=false\\nType=Application\\nCategories=Utility;Application;" > ./godot/godot_engine_server.desktop',
-#                ],
-#                command: '/bin/bash',
-#              },
-#              {
-#                type: 'exec',
-#                arguments: [
-#                  '-c',
-#                  'chmod +x ./godot/godot_server.' + linux_platform_name + '.opt.tools.64 && ./squashfs-root/AppRun ./godot/godot_engine_server.desktop -no-strip -bundle-non-qt-libs',
-#                ],
-#                command: '/bin/bash',
-#              },
-#              {
-#                type: 'exec',
-#                arguments: [
-#                  '-c',
-#                  'chmod +x ./b/butler && source <(python b/crudini.py --format=sh --get g/version.py DEFAULT) && ./b/butler push godot $ITCHIO_LOGIN:linux-server-master --userversion $major.$minor.$patch.$GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
-#                ],
-#                command: '/bin/bash',
-#              },
-#            ],
-#          } else null,
-#        {
-#          name: 'windowsJob',
-#          resources: [
-#            'linux',
-#          ],
-##          environment_variables:
-##            [{
-##              name: 'BUTLER_API_KEY',
-##              encrypted_value: butler_api_key,
-##            }],
-#          tasks: [
-#            {
-#              type: 'fetch',
-#              artifact_origin: 'gocd',
-#              is_source_a_file: true,
-#              source: 'godot.windows.opt.tools.64.exe',
-#              destination: 'godot',
-#              pipeline: pipeline_name,
-#              stage: 'defaultStage',
-#              job: 'defaultJob',
-#            },
-#            {
-#              type: 'fetch',
-#              artifact_origin: 'gocd',
-#              is_source_a_file: true,
-#              source: 'godot.templates.tpz',
-#              destination: 'godot',
-#              pipeline: pipeline_name,
-#              stage: 'templateZipStage',
-#              job: 'defaultJob',
-#            },
-#            {
-#              type: 'exec',
-#              arguments: [
-#                '-c',
-#                'chmod +x ./b/butler && source <(python b/crudini.py --format=sh --get g/version.py DEFAULT) && ./b/butler push godot ' + itchio_login + ":windows-master --userversion \"$(echo `awk -F '=' '{if (! ($0 ~ /^;[ \t]+/) && $0 ~ /major/) print $2}' g/version.py` | awk '{$1=$1};1').$(echo `awk -F '=' '{if (! ($0 ~ /^;[ \t]+/) && $0 ~ /minor/) print $2}' g/version.py` | awk '{$1=$1};1').$GO_PIPELINE_LABEL-`date --iso=seconds --utc`\"",
-#              ],
-#              command: '/bin/bash',
-#            },
-#          ],
-#        },
-#
-#        if disable_osx == false then
-#          {
-#            name: 'osxJob',
-##            environment_variables:
-##              [{
-##                name: 'BUTLER_API_KEY',
-##                encrypted_value: butler_api_key,
-##              }],
-#            resources: [
-#              'linux',
-#            ],
-#            tasks: [
-#              {
-#                type: 'fetch',
-#                artifact_origin: 'gocd',
-#                is_source_a_file: true,
-#                source: 'godot.templates.tpz',
-#                destination: 'godot',
-#                pipeline: pipeline_name,
-#                stage: 'templateZipStage',
-#                job: 'defaultJob',
-#              },
-#              {
-#
-#                type: 'fetch',
-#                artifact_origin: 'gocd',
-#                source: 'Godot.app',
-#                destination: 'godot',
-#                pipeline: pipeline_name,
-#                stage: 'templateStage',
-#                job: 'osxJob',
-#              },
-#              {
-#                type: 'fetch',
-#                artifact_origin: 'gocd',
-#                is_source_a_file: true,
-#                source: 'Godot',
-#                destination: 'godot/Godot.app/Contents/MacOS',
-#                pipeline: pipeline_name,
-#                stage: 'defaultStage',
-#                job: 'osxJob',
-#              },
-#              {
-#                type: 'exec',
-#                arguments: [
-#                  '-c',
-#                  'chmod +x godot/Godot.app/Contents/MacOS',
-#                ],
-#                command: '/bin/bash',
-#              },
-#              {
-#                type: 'exec',
-#                arguments: [
-#                  '-c',
-#                  'chmod +x ./b/butler && source <(python b/crudini.py --format=sh --get g/version.py DEFAULT) && ./b/butler push godot $ITCHIO_LOGIN:osx-master --userversion $major.$minor.$patch.$GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
-#                ],
-#                command: '/bin/bash',
-#              },
-#            ],
-#          }
-#        else null,
-#      ],
-#    },
   ],
 };
 
