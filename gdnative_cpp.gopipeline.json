@@ -2,11 +2,11 @@
    "environment_variables": [
       {
          "name": "GODOT_STATUS",
-         "value": "master.groups.release"
+         "value": "gdnative.godot-cpp"
       }
    ],
    "group": "beta",
-   "label_template": "master.groups.release.${godot-template-groups_pipeline_dependency}.${COUNT}",
+   "label_template": "gdnative.godot-cpp.${godot-template-groups_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "name": "godot-template-groups_pipeline_dependency",
@@ -24,7 +24,7 @@
          "url": "https://github.com/V-Sekai/godot-cpp.git"
       }
    ],
-   "name": "godot-gdnative-groups",
+   "name": "gdnative-cpp",
    "stages": [
       {
          "jobs": [
@@ -93,7 +93,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "generateApiJsonJob",
-                     "pipeline": "godot-gdnative-groups",
+                     "pipeline": "gdnative-cpp",
                      "source": "api.json",
                      "stage": "generateApiJsonStage",
                      "type": "fetch"
@@ -138,7 +138,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "generateApiJsonJob",
-                     "pipeline": "godot-gdnative-groups",
+                     "pipeline": "gdnative-cpp",
                      "source": "api.json",
                      "stage": "generateApiJsonStage",
                      "type": "fetch"

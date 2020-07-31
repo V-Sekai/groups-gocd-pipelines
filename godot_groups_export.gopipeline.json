@@ -21,6 +21,20 @@
          "pipeline": "godot-template-groups",
          "stage": "templateZipStage",
          "type": "dependency"
+      },
+      {
+         "ignore_for_scheduling": false,
+         "name": "gdnative-godot-speech_pipeline_dependency",
+         "pipeline": "gdnative-godot-speech",
+         "stage": "gdnativeBuildStage",
+         "type": "dependency"
+      },
+      {
+         "ignore_for_scheduling": false,
+         "name": "gdnative-godot-openvr_pipeline_dependency",
+         "pipeline": "gdnative-godot-openvr",
+         "stage": "gdnativeBuildStage",
+         "type": "dependency"
       }
    ],
    "name": "production-groups-release-export",
@@ -64,9 +78,57 @@
                      "type": "fetch"
                   },
                   {
+                     "artifact_origin": "gocd",
+                     "destination": "godot_speech",
+                     "is_source_a_file": true,
+                     "job": "serverJob",
+                     "pipeline": "gdnative-godot-speech",
+                     "source": "bin/release_debug/libGodotSpeech.dll",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "godot_openvr",
+                     "is_source_a_file": true,
+                     "job": "serverJob",
+                     "pipeline": "gdnative-godot-openvr",
+                     "source": "demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "godot_openvr",
+                     "is_source_a_file": true,
+                     "job": "serverJob",
+                     "pipeline": "gdnative-godot-openvr",
+                     "source": "demo/addons/godot-openvr/bin/win64/openvr_api.dll",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
                      "arguments": [
                         "-c",
                         "rm -rf templates && unzip \"godot.templates.tpz\" && export VERSION=\"`cat templates/version.txt`\" && export TEMPLATEDIR=\".local/share/godot/templates/$VERSION\" && export BASEDIR=\"`pwd`\" && rm -rf \"$TEMPLATEDIR\" && mkdir -p \"$TEMPLATEDIR\" && cd \"$TEMPLATEDIR\" && mv \"$BASEDIR\"/templates/* . && ln server_* \"$BASEDIR/templates/\""
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -p godot_speech/libGodotSpeech.dll g/addons/godot_speech/bin/"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -p godot_openvr/libgodot_openvr.dll godot_openvr/openvr_api.dll g/addons/godot-openvr/bin/win64/"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -127,9 +189,57 @@
                      "type": "fetch"
                   },
                   {
+                     "artifact_origin": "gocd",
+                     "destination": "godot_speech",
+                     "is_source_a_file": true,
+                     "job": "serverJob",
+                     "pipeline": "gdnative-godot-speech",
+                     "source": "bin/release_debug/libGodotSpeech.so",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "godot_openvr",
+                     "is_source_a_file": true,
+                     "job": "serverJob",
+                     "pipeline": "gdnative-godot-openvr",
+                     "source": "demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "godot_openvr",
+                     "is_source_a_file": true,
+                     "job": "serverJob",
+                     "pipeline": "gdnative-godot-openvr",
+                     "source": "demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
                      "arguments": [
                         "-c",
                         "rm -rf templates && unzip \"godot.templates.tpz\" && export VERSION=\"`cat templates/version.txt`\" && export TEMPLATEDIR=\".local/share/godot/templates/$VERSION\" && export BASEDIR=\"`pwd`\" && rm -rf \"$TEMPLATEDIR\" && mkdir -p \"$TEMPLATEDIR\" && cd \"$TEMPLATEDIR\" && mv \"$BASEDIR\"/templates/* . && ln server_* \"$BASEDIR/templates/\""
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -p godot_speech/libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -p godot_openvr/libgodot_openvr.so godot_openvr/libopenvr_api.so g/addons/godot-openvr/bin/x11/"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -190,9 +300,48 @@
                      "type": "fetch"
                   },
                   {
+                     "artifact_origin": "gocd",
+                     "destination": "godot_speech",
+                     "is_source_a_file": true,
+                     "job": "serverJob",
+                     "pipeline": "gdnative-godot-speech",
+                     "source": "bin/release_debug/libGodotSpeech.so",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "godot_openvr",
+                     "is_source_a_file": true,
+                     "job": "serverJob",
+                     "pipeline": "gdnative-godot-openvr",
+                     "source": "demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "godot_openvr",
+                     "is_source_a_file": true,
+                     "job": "serverJob",
+                     "pipeline": "gdnative-godot-openvr",
+                     "source": "demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
                      "arguments": [
                         "-c",
                         "rm -rf templates && unzip \"godot.templates.tpz\" && export VERSION=\"`cat templates/version.txt`\" && export TEMPLATEDIR=\".local/share/godot/templates/$VERSION\" && export BASEDIR=\"`pwd`\" && rm -rf \"$TEMPLATEDIR\" && mkdir -p \"$TEMPLATEDIR\" && cd \"$TEMPLATEDIR\" && mv \"$BASEDIR\"/templates/* . && ln server_* \"$BASEDIR/templates/\""
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -p godot_speech/libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

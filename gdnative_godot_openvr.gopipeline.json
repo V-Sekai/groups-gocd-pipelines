@@ -1,0 +1,117 @@
+{
+   "environment_variables": [
+      {
+         "name": "GODOT_STATUS",
+         "value": "gdnative.godot_openvr"
+      }
+   ],
+   "group": "beta",
+   "label_template": "gdnative.godot_openvr.${gdnative-cpp_pipeline_dependency}.${COUNT}",
+   "materials": [
+      {
+         "name": "gdnative-cpp_pipeline_dependency",
+         "pipeline": "gdnative-cpp",
+         "stage": "defaultStage",
+         "type": "dependency"
+      },
+      {
+         "branch": "groups",
+         "destination": "p",
+         "ignore_for_scheduling": false,
+         "name": "p",
+         "shallow_clone": false,
+         "type": "git",
+         "url": "https://github.com/SaracenOne/godot_openvr.git"
+      }
+   ],
+   "name": "gdnative-godot-openvr",
+   "stages": [
+      {
+         "jobs": [
+            {
+               "artifacts": [
+                  "demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll",
+                  "demo/addons/godot-openvr/bin/win64/openvr_api.dll"
+               ],
+               "environment_variables": [ ],
+               "name": "windowsJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "job": "windowsJob",
+                     "pipeline": "gdnative-cpp",
+                     "source": "godot-cpp",
+                     "stage": "godotCppStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "rm -rf p/godot-cpp && mv godot-cpp p/"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "scons werror=no platform=windows target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=no use_lld=yes"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  }
+               ]
+            },
+            {
+               "artifacts": [
+                  "demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
+                  "demo/addons/godot-openvr/bin/x11/libopenvr_api.so"
+               ],
+               "environment_variables": [ ],
+               "name": "linuxJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "job": "linuxJob",
+                     "pipeline": "gdnative-cpp",
+                     "source": "godot-cpp",
+                     "stage": "godotCppStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "rm -rf p/godot-cpp && mv godot-cpp p/"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  }
+               ]
+            }
+         ],
+         "name": "gdnativeBuildStage"
+      }
+   ]
+}
