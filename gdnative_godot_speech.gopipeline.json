@@ -11,7 +11,7 @@
       {
          "name": "gdnative-cpp_pipeline_dependency",
          "pipeline": "gdnative-cpp",
-         "stage": "defaultStage",
+         "stage": "godotCppStage",
          "type": "dependency"
       },
       {
