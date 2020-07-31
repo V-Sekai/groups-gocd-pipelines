@@ -66,7 +66,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf templates && unzip \"godot.templates.tpz\" && export VERSION=\"`cat templates/version.txt`\" && export TEMPLATEDIR=\".local/share/godot/templates/$VERSION\" && export BASEDIR=\"`pwd`\" && rm -rf \"$TEMPLATEDIR\" && mkdir -p \"$TEMPLATEDIR\" && cd \"$TEMPLATEDIR\" && mv $BASEDIR/templates/* . && ln server_* \"$BASEDIR/templates/\""
+                        "rm -rf templates && unzip \"godot.templates.tpz\" && export VERSION=\"`cat templates/version.txt`\" && export TEMPLATEDIR=\".local/share/godot/templates/$VERSION\" && export BASEDIR=\"`pwd`\" && rm -rf \"$TEMPLATEDIR\" && mkdir -p \"$TEMPLATEDIR\" && cd \"$TEMPLATEDIR\" && mv \"$BASEDIR\"/templates/* . && ln server_* \"$BASEDIR/templates/\""
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

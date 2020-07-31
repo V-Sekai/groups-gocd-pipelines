@@ -51,7 +51,7 @@ local godot_pipeline(pipeline_name='',
       clean_workspace: false,
       jobs: [
         {
-          name: 'defaultJob',
+          name: 'windowsJob',
           resources: [
             'mingw5',
             'linux',
@@ -88,8 +88,8 @@ local godot_pipeline(pipeline_name='',
         {
           name: 'linuxJob',
           resources: [
-            'linux',
             'mingw5',
+            'linux',
           ],
           artifacts: [
             {
@@ -132,8 +132,8 @@ local godot_pipeline(pipeline_name='',
               },
             ],
             resources: [
-              'linux',
               'mingw5',
+              'linux',
             ],
             tasks: [
               {
@@ -149,7 +149,7 @@ local godot_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+                  'scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else ' ',
                 ],
                 command: '/bin/bash',
                 working_directory: 'g',
@@ -162,8 +162,8 @@ local godot_pipeline(pipeline_name='',
           {
             name: 'osxJob',
             resources: [
-              'linux',
               'mingw5',
+              'linux',
             ],
             artifacts: [
               {
@@ -279,12 +279,12 @@ local godot_pipeline(pipeline_name='',
           artifacts: [
             {
               type: 'build',
-              source: 'g/bin/linux_x11_64_release',
+              source: 'g/bin/linux_x11_64_debug',
               destination: '',
             },
             {
               type: 'build',
-              source: 'g/bin/linux_x11_64_debug',
+              source: 'g/bin/linux_x11_64_release',
               destination: '',
             },
             {
@@ -436,12 +436,12 @@ local godot_pipeline(pipeline_name='',
             artifacts: [
               {
                 type: 'build',
-                source: 'g/bin/server_64_release',
+                source: 'g/bin/server_64_debug',
                 destination: '',
               },
               {
                 type: 'build',
-                source: 'g/bin/server_64_debug',
+                source: 'g/bin/server_64_release',
                 destination: '',
               },
               {
@@ -464,7 +464,7 @@ local godot_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+                  'scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no' + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else ' ',
                 ],
                 command: '/bin/bash',
                 working_directory: 'g',
@@ -473,7 +473,7 @@ local godot_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'cp bin/godot_server.' + linux_platform_name + '.opt.debug.64 bin/server_64_debug && cp bin/godot_server.' + linux_platform_name + '.opt.debug.64 bin/server_64_release && strip --strip-debug bin/server_64_release',
+                  'cp bin/godot_server.' + linux_platform_name + '.opt.tools.64 bin/server_64_debug && cp bin/godot_server.' + linux_platform_name + '.opt.tools.64 bin/server_64_release && strip --strip-debug bin/server_64_release',
                 ],
                 command: '/bin/bash',
                 working_directory: 'g',
@@ -667,7 +667,7 @@ local godot_pipeline(pipeline_name='',
               type: 'fetch',
               artifact_origin: 'gocd',
               is_source_a_file: true,
-              source: 'windows_64_release.exe',
+              source: 'version.txt',
               destination: 'templates',
               pipeline: pipeline_name,
               stage: 'templateStage',
@@ -687,43 +687,11 @@ local godot_pipeline(pipeline_name='',
               type: 'fetch',
               artifact_origin: 'gocd',
               is_source_a_file: true,
-              source: 'version.txt',
+              source: 'windows_64_release.exe',
               destination: 'templates',
               pipeline: pipeline_name,
               stage: 'templateStage',
               job: 'windowsJob',
-            },
-            if disable_server == false then
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                is_source_a_file: true,
-                source: 'server_64_release',
-                destination: 'templates',
-                pipeline: pipeline_name,
-                stage: 'templateStage',
-                job: 'serverJob',
-              } else null,
-            if disable_server == false then
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                is_source_a_file: true,
-                source: 'server_64_debug',
-                destination: 'templates',
-                pipeline: pipeline_name,
-                stage: 'templateStage',
-                job: 'serverJob',
-              } else null,
-            {
-              type: 'fetch',
-              artifact_origin: 'gocd',
-              is_source_a_file: true,
-              source: 'linux_x11_64_release',
-              destination: 'templates',
-              pipeline: pipeline_name,
-              stage: 'templateStage',
-              job: 'linuxJob',
             },
             {
               type: 'fetch',
@@ -735,6 +703,38 @@ local godot_pipeline(pipeline_name='',
               stage: 'templateStage',
               job: 'linuxJob',
             },
+            {
+              type: 'fetch',
+              artifact_origin: 'gocd',
+              is_source_a_file: true,
+              source: 'linux_x11_64_release',
+              destination: 'templates',
+              pipeline: pipeline_name,
+              stage: 'templateStage',
+              job: 'linuxJob',
+            },
+            if disable_server == false then
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                is_source_a_file: true,
+                source: 'server_64_debug',
+                destination: 'templates',
+                pipeline: pipeline_name,
+                stage: 'templateStage',
+                job: 'serverJob',
+              } else null,
+            if disable_server == false then
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                is_source_a_file: true,
+                source: 'server_64_release',
+                destination: 'templates',
+                pipeline: pipeline_name,
+                stage: 'templateStage',
+                job: 'serverJob',
+              } else null,
             if disable_web == false then
               {
                 type: 'fetch',
@@ -872,7 +872,7 @@ local godot_tools_pipeline_export(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'rm -rf templates && unzip "godot.templates.tpz" && export VERSION="`cat templates/version.txt`" && export TEMPLATEDIR=".local/share/godot/templates/$VERSION" && export BASEDIR="`pwd`" && rm -rf "$TEMPLATEDIR" && mkdir -p "$TEMPLATEDIR" && cd "$TEMPLATEDIR" && mv $BASEDIR/templates/* . && ln server_* "$BASEDIR/templates/"',
+                  'rm -rf templates && unzip "godot.templates.tpz" && export VERSION="`cat templates/version.txt`" && export TEMPLATEDIR=".local/share/godot/templates/$VERSION" && export BASEDIR="`pwd`" && rm -rf "$TEMPLATEDIR" && mkdir -p "$TEMPLATEDIR" && cd "$TEMPLATEDIR" && mv "$BASEDIR"/templates/* . && ln server_* "$BASEDIR/templates/"',
                 ],
                 command: '/bin/bash',
                 working_directory: '',

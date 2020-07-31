@@ -29,7 +29,7 @@
                      "type": "build"
                   }
                ],
-               "name": "defaultJob",
+               "name": "windowsJob",
                "resources": [
                   "mingw5",
                   "linux"
@@ -65,8 +65,8 @@
                ],
                "name": "linuxJob",
                "resources": [
-                  "linux",
-                  "mingw5"
+                  "mingw5",
+                  "linux"
                ],
                "tasks": [
                   {
@@ -99,8 +99,8 @@
                ],
                "name": "serverJob",
                "resources": [
-                  "linux",
-                  "mingw5"
+                  "mingw5",
+                  "linux"
                ],
                "tasks": [
                   {
@@ -115,7 +115,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no"
+                        "scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no "
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -194,12 +194,12 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/linux_x11_64_release",
+                     "source": "g/bin/linux_x11_64_debug",
                      "type": "build"
                   },
                   {
                      "destination": "",
-                     "source": "g/bin/linux_x11_64_debug",
+                     "source": "g/bin/linux_x11_64_release",
                      "type": "build"
                   },
                   {
@@ -256,12 +256,12 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/server_64_release",
+                     "source": "g/bin/server_64_debug",
                      "type": "build"
                   },
                   {
                      "destination": "",
-                     "source": "g/bin/server_64_debug",
+                     "source": "g/bin/server_64_release",
                      "type": "build"
                   },
                   {
@@ -288,7 +288,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no"
+                        "scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no "
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -297,7 +297,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot_server.x11.opt.debug.64 bin/server_64_debug && cp bin/godot_server.x11.opt.debug.64 bin/server_64_release && strip --strip-debug bin/server_64_release"
+                        "cp bin/godot_server.x11.opt.tools.64 bin/server_64_debug && cp bin/godot_server.x11.opt.tools.64 bin/server_64_release && strip --strip-debug bin/server_64_release"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -343,7 +343,7 @@
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "godot-template-groups",
-                     "source": "windows_64_release.exe",
+                     "source": "version.txt",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
@@ -363,7 +363,7 @@
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "godot-template-groups",
-                     "source": "version.txt",
+                     "source": "windows_64_release.exe",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
@@ -371,19 +371,9 @@
                      "artifact_origin": "gocd",
                      "destination": "templates",
                      "is_source_a_file": true,
-                     "job": "serverJob",
+                     "job": "linuxJob",
                      "pipeline": "godot-template-groups",
-                     "source": "server_64_release",
-                     "stage": "templateStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "templates",
-                     "is_source_a_file": true,
-                     "job": "serverJob",
-                     "pipeline": "godot-template-groups",
-                     "source": "server_64_debug",
+                     "source": "linux_x11_64_debug",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
@@ -401,9 +391,19 @@
                      "artifact_origin": "gocd",
                      "destination": "templates",
                      "is_source_a_file": true,
-                     "job": "linuxJob",
+                     "job": "serverJob",
                      "pipeline": "godot-template-groups",
-                     "source": "linux_x11_64_debug",
+                     "source": "server_64_debug",
+                     "stage": "templateStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "templates",
+                     "is_source_a_file": true,
+                     "job": "serverJob",
+                     "pipeline": "godot-template-groups",
+                     "source": "server_64_release",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
