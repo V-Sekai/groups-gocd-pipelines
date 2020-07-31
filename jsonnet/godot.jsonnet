@@ -661,7 +661,12 @@ local generate_godot_gdnative_pipeline(pipeline_name='',
             'linux',
             'mingw5',
           ],
-          artifacts: library_info["platforms"][platform_info["platform_name"]]["artifacts"],
+          artifacts: [{
+              type: 'build',
+              source: artifact_path,
+              destination: '',
+            } for artifact_path in library_info["platforms"][platform_info["platform_name"]]["artifacts"]
+          ],
           environment_variables: platform_info["environment_variables"] + library_info["platforms"][platform_info["platform_name"]]["environment_variables"],
           tasks: [
             {

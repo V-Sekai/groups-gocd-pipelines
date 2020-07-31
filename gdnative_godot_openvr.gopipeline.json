@@ -30,8 +30,16 @@
          "jobs": [
             {
                "artifacts": [
-                  "demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll",
-                  "demo/addons/godot-openvr/bin/win64/openvr_api.dll"
+                  {
+                     "destination": "",
+                     "source": "demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "demo/addons/godot-openvr/bin/win64/openvr_api.dll",
+                     "type": "build"
+                  }
                ],
                "environment_variables": [ ],
                "name": "windowsJob",
@@ -71,8 +79,16 @@
             },
             {
                "artifacts": [
-                  "demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
-                  "demo/addons/godot-openvr/bin/x11/libopenvr_api.so"
+                  {
+                     "destination": "",
+                     "source": "demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
+                     "type": "build"
+                  }
                ],
                "environment_variables": [ ],
                "name": "linuxJob",

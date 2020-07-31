@@ -30,7 +30,11 @@
          "jobs": [
             {
                "artifacts": [
-                  "bin/release_debug/libGodotSpeech.dll"
+                  {
+                     "destination": "",
+                     "source": "bin/release_debug/libGodotSpeech.dll",
+                     "type": "build"
+                  }
                ],
                "environment_variables": [ ],
                "name": "windowsJob",
@@ -70,7 +74,11 @@
             },
             {
                "artifacts": [
-                  "bin/release_debug/libGodotSpeech.so"
+                  {
+                     "destination": "",
+                     "source": "bin/release_debug/libGodotSpeech.so",
+                     "type": "build"
+                  }
                ],
                "environment_variables": [ ],
                "name": "linuxJob",
