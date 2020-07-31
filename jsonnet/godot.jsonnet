@@ -508,6 +508,179 @@ local godot_pipeline(pipeline_name='',
   ],
 };
 
+local generate_godot_gdnative_pipeline(pipeline_name='',
+                                  pipeline_dependency='',
+                                  gocd_group='',
+                                  godot_status='') =
+{
+  name: pipeline_name,
+  group: gocd_group,
+  label_template: godot_status + '.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
+  environment_variables:
+    [{
+      name: 'GODOT_STATUS',
+      value: godot_status,
+    }],
+  materials: [
+    {
+      name: pipeline_dependency + '_pipeline_dependency',
+      type: 'dependency',
+      pipeline: pipeline_dependency,
+      stage: 'defaultStage',
+    },
+    {
+      name: 'godot-cpp',
+      url: 'https://github.com/godotengine/godot-cpp.git',
+      type: 'git',
+      branch: '9eceb16f0553884094d0f659461649be5d333866',
+      destination: 'godot-cpp',
+      shallow_clone: false,
+      ignore_for_scheduling: false,
+    },
+  ],
+  stages: [
+    {
+      name: 'generateApiJsonStage',
+      jobs: [
+        {
+          name: 'generateApiJsonJob',
+          artifacts: [
+            {
+              type: 'build',
+              source: 'api.json',
+              destination: '',
+            },
+          ],
+          tasks: [
+            {
+              type: 'fetch',
+              artifact_origin: 'gocd',
+              pipeline: pipeline_dependency,
+              stage: 'defaultStage',
+              job: 'serverJob',
+              is_source_a_file: true,
+              source: 'godot_server.x11.opt.tools.64',
+              destination: '',
+            },
+            {
+              type: 'exec',
+              arguments: [
+                '-c',
+                # Due to a godot bug, the server crashes with "pure virtual function called"
+                'chmod +x godot_server.x11.opt.tools.64 && HOME="`pwd`" ./godot_server.x11.opt.tools.64 --gdnative-generate-json-api api.json || [[ "$(cat api.json | tail -1)" = "]" ]]',
+              ],
+              command: '/bin/bash',
+              working_directory: '',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'godotCppStage',
+      jobs: [
+        {
+          name: platform_info["platform_name"] + 'Job',
+          resources: [
+            'linux',
+            'mingw5',
+          ],
+          artifacts: if platform_info["template_artifacts_override"] != null then platform_info["template_artifacts_override"] else [
+            {
+              type: 'build',
+              source: 'godot-cpp/include',
+              destination: 'godot-cpp',
+            },
+            {
+              type: 'build',
+              source: 'godot-cpp/godot_headers',
+              destination: 'godot-cpp',
+            },
+            {
+              type: 'build',
+              source: 'godot-cpp/bin',
+              destination: 'godot-cpp',
+            },
+          ],
+          environment_variables: platform_info["environment_variables"],
+          tasks: [
+            {
+              type: 'fetch',
+              artifact_origin: 'gocd',
+              pipeline: pipeline_name,
+              stage: 'generateApiJsonStage',
+              job: 'generateApiJsonJob',
+              is_source_a_file: true,
+              source: 'api.json',
+              destination: '',
+            },
+            {
+              type: 'exec',
+              arguments: [
+                '-c',
+                platform_info["scons_env"] + 'scons werror=no platform=' + platform_info["scons_platform"] + ' target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json ' + platform_info["godot_scons_arguments"],
+              ],
+              command: '/bin/bash',
+              working_directory: 'godot-cpp',
+            },
+          ],
+        } for platform_info in enabled_template_platforms
+      ],
+    },
+    // {
+    //   name: 'gdnativeBuildStage',
+    //   jobs: std.flatMap(function(platform_info) [
+    //     {
+    //       name: platform_info["platform_name"] + 'Job',
+    //       resources: [
+    //         'linux',
+    //         'mingw5',
+    //       ],
+    //       artifacts: if platform_info["template_artifacts_override"] != null then platform_info["template_artifacts_override"] else [
+    //         {
+    //           type: 'build',
+    //           source: 'godot-cpp/include',
+    //           destination: 'godot-cpp',
+    //         },
+    //         {
+    //           type: 'build',
+    //           source: 'godot-cpp/godot_headers',
+    //           destination: 'godot-cpp',
+    //         },
+    //         {
+    //           type: 'build',
+    //           source: 'godot-cpp/bin',
+    //           destination: 'godot-cpp',
+    //         },
+    //       ],
+    //       environment_variables: platform_info["environment_variables"],
+    //       tasks: [
+    //         {
+    //           type: 'fetch',
+    //           artifact_origin: 'gocd',
+    //           pipeline: pipeline_name,
+    //           stage: 'generateApiJsonStage',
+    //           job: 'generateApiJsonJob',
+    //           is_source_a_file: true,
+    //           source: 'api.json',
+    //           destination: '',
+    //         },https://github.com/godotengine/godot-cpp/
+    //         {
+    //           type: 'exec',
+    //           arguments: [
+    //             '-c',
+    //             platform_info["scons_env"] + 'scons werror=no platform=' + platform_info["scons_platform"] + ' target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json ' + platform_info["godot_scons_arguments"] + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+    //           ],
+    //           command: '/bin/bash',
+    //           working_directory: 'godot-cpp',
+    //         },
+    //       ],
+    //     } for platform_info in enabled_template_platforms
+    //   ],
+    // },
+  ],
+};
+
 local godot_tools_pipeline_export(pipeline_name='',
                                   pipeline_dependency='',
                                   itchio_login='',
@@ -652,8 +825,9 @@ local godot_tools_pipeline_export(pipeline_name='',
   };
 
 local godot_template_groups_editor = 'godot-template-groups';
+local godot_gdnative_pipeline = 'godot-gdnative-groups';
 local godot_template_groups_export = 'production-groups-release-export';
-local godot_template = [godot_template_groups_editor, godot_template_groups_export];
+local godot_template = [godot_template_groups_editor, godot_gdnative_pipeline, godot_template_groups_export];
 {
   'env.goenvironment.json': {
     name: 'development',
@@ -671,6 +845,15 @@ local godot_template = [godot_template_groups_editor, godot_template_groups_expo
 #    godot_modules_git='https://github.com/godot-extended-libraries/godot-modules-fire.git',
 #    godot_modules_branch='master',
   )),
+  'godot_groups_gdnative.gopipeline.json'
+  : std.prune(
+    generate_godot_gdnative_pipeline(
+      pipeline_name=godot_gdnative_pipeline,
+      pipeline_dependency=godot_template_groups_editor,
+      gocd_group='beta',
+      godot_status='master.groups.release'
+    )
+  ),
   'godot_groups_export.gopipeline.json'
   : std.prune(
     godot_tools_pipeline_export(

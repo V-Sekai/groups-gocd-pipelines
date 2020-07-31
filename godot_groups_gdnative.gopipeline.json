@@ -1,0 +1,206 @@
+{
+   "environment_variables": [
+      {
+         "name": "GODOT_STATUS",
+         "value": "master.groups.release"
+      }
+   ],
+   "group": "beta",
+   "label_template": "master.groups.release.${godot-template-groups_pipeline_dependency}.${COUNT}",
+   "materials": [
+      {
+         "name": "godot-template-groups_pipeline_dependency",
+         "pipeline": "godot-template-groups",
+         "stage": "defaultStage",
+         "type": "dependency"
+      },
+      {
+         "branch": "9eceb16f0553884094d0f659461649be5d333866",
+         "destination": "godot-cpp",
+         "ignore_for_scheduling": false,
+         "name": "godot-cpp",
+         "shallow_clone": false,
+         "type": "git",
+         "url": "https://github.com/godotengine/godot-cpp.git"
+      }
+   ],
+   "name": "godot-gdnative-groups",
+   "stages": [
+      {
+         "jobs": [
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "api.json",
+                     "type": "build"
+                  }
+               ],
+               "name": "generateApiJsonJob",
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "is_source_a_file": true,
+                     "job": "serverJob",
+                     "pipeline": "godot-template-groups",
+                     "source": "godot_server.x11.opt.tools.64",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "chmod +x godot_server.x11.opt.tools.64 && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64 --gdnative-generate-json-api api.json || [[ \"$(cat api.json | tail -1)\" = \"]\" ]]"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  }
+               ]
+            }
+         ],
+         "name": "generateApiJsonStage"
+      },
+      {
+         "jobs": [
+            {
+               "artifacts": [
+                  {
+                     "destination": "godot-cpp",
+                     "source": "godot-cpp/include",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "godot-cpp",
+                     "source": "godot-cpp/godot_headers",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "godot-cpp",
+                     "source": "godot-cpp/bin",
+                     "type": "build"
+                  }
+               ],
+               "name": "windowsJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "is_source_a_file": true,
+                     "job": "generateApiJsonJob",
+                     "pipeline": "godot-gdnative-groups",
+                     "source": "api.json",
+                     "stage": "generateApiJsonStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "scons werror=no platform=windows target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json use_llvm=no use_lld=yes"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "godot-cpp"
+                  }
+               ]
+            },
+            {
+               "artifacts": [
+                  {
+                     "destination": "godot-cpp",
+                     "source": "godot-cpp/include",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "godot-cpp",
+                     "source": "godot-cpp/godot_headers",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "godot-cpp",
+                     "source": "godot-cpp/bin",
+                     "type": "build"
+                  }
+               ],
+               "name": "linuxJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "is_source_a_file": true,
+                     "job": "generateApiJsonJob",
+                     "pipeline": "godot-gdnative-groups",
+                     "source": "api.json",
+                     "stage": "generateApiJsonStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "scons werror=no platform=x11 target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json use_llvm=yes builtin_freetype=yes"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "godot-cpp"
+                  }
+               ]
+            },
+            {
+               "artifacts": [
+                  {
+                     "destination": "godot-cpp",
+                     "source": "godot-cpp/include",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "godot-cpp",
+                     "source": "godot-cpp/godot_headers",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "godot-cpp",
+                     "source": "godot-cpp/bin",
+                     "type": "build"
+                  }
+               ],
+               "name": "serverJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "is_source_a_file": true,
+                     "job": "generateApiJsonJob",
+                     "pipeline": "godot-gdnative-groups",
+                     "source": "api.json",
+                     "stage": "generateApiJsonStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "scons werror=no platform=server target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json "
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "godot-cpp"
+                  }
+               ]
+            }
+         ],
+         "name": "godotCppStage"
+      }
+   ]
+}
