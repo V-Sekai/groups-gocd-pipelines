@@ -146,52 +146,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=x11 target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json use_llvm=yes builtin_freetype=yes"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "godot-cpp"
-                  }
-               ]
-            },
-            {
-               "artifacts": [
-                  {
-                     "destination": "godot-cpp",
-                     "source": "godot-cpp/include",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "godot-cpp",
-                     "source": "godot-cpp/godot_headers",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "godot-cpp",
-                     "source": "godot-cpp/bin",
-                     "type": "build"
-                  }
-               ],
-               "name": "serverJob",
-               "resources": [
-                  "linux",
-                  "mingw5"
-               ],
-               "tasks": [
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "",
-                     "is_source_a_file": true,
-                     "job": "generateApiJsonJob",
-                     "pipeline": "godot-gdnative-groups",
-                     "source": "api.json",
-                     "stage": "generateApiJsonStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "scons werror=no platform=server target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json "
+                        "scons werror=no platform=linux target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json use_llvm=yes builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

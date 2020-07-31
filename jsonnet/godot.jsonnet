@@ -102,6 +102,7 @@ local platform_info_dict = {
     template_release_binary: "windows_64_release.exe",
     export_directory: "export_windows",
     scons_platform: "windows",
+    gdnative_platform: "windows",
     strip_command: "mingw-strip --strip-debug",
     godot_scons_arguments: "use_llvm=no use_lld=yes",
     extra_tasks: [],
@@ -119,6 +120,7 @@ local platform_info_dict = {
     template_release_binary: "linux_x11_64_release",
     export_directory: "export_linux_x11",
     scons_platform: "x11",
+    gdnative_platform: "linux",
     strip_command: "strip --strip-debug",
     godot_scons_arguments: "use_llvm=yes builtin_freetype=yes",
     extra_tasks: [],
@@ -136,6 +138,7 @@ local platform_info_dict = {
     template_release_binary: "server_64_release",
     export_directory: "export_linux_server",
     scons_platform: "server",
+    gdnative_platform: "linux",
     strip_command: "strip --strip-debug",
     godot_scons_arguments: "", # FIXME: use_llvm=yes????
     extra_tasks: [],
@@ -618,13 +621,13 @@ local generate_godot_gdnative_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                platform_info["scons_env"] + 'scons werror=no platform=' + platform_info["scons_platform"] + ' target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json ' + platform_info["godot_scons_arguments"],
+                platform_info["scons_env"] + 'scons werror=no platform=' + platform_info["gdnative_platform"] + ' target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json ' + platform_info["godot_scons_arguments"],
               ],
               command: '/bin/bash',
               working_directory: 'godot-cpp',
             },
           ],
-        } for platform_info in enabled_template_platforms
+        } for platform_info in enabled_template_platforms if platform_info["platform_name"] != "server"
       ],
     },
     // {
