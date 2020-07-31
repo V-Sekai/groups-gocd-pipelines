@@ -15,13 +15,13 @@
          "type": "dependency"
       },
       {
-         "branch": "9eceb16f0553884094d0f659461649be5d333866",
+         "branch": "groups",
          "destination": "godot-cpp",
          "ignore_for_scheduling": false,
          "name": "godot-cpp",
          "shallow_clone": false,
          "type": "git",
-         "url": "https://github.com/godotengine/godot-cpp.git"
+         "url": "https://github.com/V-Sekai/godot-cpp.git"
       }
    ],
    "name": "godot-gdnative-groups",
