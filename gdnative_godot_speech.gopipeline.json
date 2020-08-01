@@ -32,7 +32,7 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "bin/release_debug/libGodotSpeech.dll",
+                     "source": "p/bin/release/libGodotSpeech.dll",
                      "type": "build"
                   }
                ],
@@ -64,7 +64,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=windows target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=no use_lld=yes"
+                        "scons werror=no platform=windows target=release -j`nproc` use_lto=no deprecated=no use_llvm=no use_lld=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -76,7 +76,7 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "bin/release_debug/libGodotSpeech.so",
+                     "source": "p/bin/release/libGodotSpeech.so",
                      "type": "build"
                   }
                ],
@@ -108,25 +108,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cd external/libsamplerate && ./autogen.sh && make -j`nproc`"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "p"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cd external/opus && ./autogen.sh && make -j`nproc`"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "p"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes"
+                        "scons werror=no platform=x11 target=release -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

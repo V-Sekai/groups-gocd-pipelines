@@ -135,7 +135,7 @@ local groups_gdnative_plugins = {
     git_branch: "master",
     platforms: {
       "windows": {
-        artifacts: ["bin/release_debug/libGodotSpeech.dll"],
+        artifacts: ["p/bin/release/libGodotSpeech.dll"],
         scons_arguments: "",
         environment_variables: [],
         prepare_commands: [],
@@ -143,13 +143,10 @@ local groups_gdnative_plugins = {
         #install_task: ["mv libGodotSpeech.dll g/addons/godot_speech/bin/libGodotSpeech.dll"],
       },
       "linux": {
-        artifacts: ["bin/release_debug/libGodotSpeech.so"],
+        artifacts: ["p/bin/release/libGodotSpeech.so"],
         scons_arguments: "",
         environment_variables: [],
-        prepare_commands: [
-          "cd external/libsamplerate && ./autogen.sh && make -j`nproc`",
-          "cd external/opus && ./autogen.sh && make -j`nproc`",
-        ],
+        prepare_commands: [],
         extra_commands: [],
         #install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
       },
@@ -158,13 +155,13 @@ local groups_gdnative_plugins = {
   "godot_openvr": {
     name: "godot_openvr",
     pipeline_name: "gdnative-godot-openvr",
-    git_url: "https://github.com/SaracenOne/godot_openvr.git",
+    git_url: "https://github.com/lyuma/godot_openvr.git",
     git_branch: "groups",
     platforms: {
       "windows": {
         artifacts: [
-          "demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll",
-          "demo/addons/godot-openvr/bin/win64/openvr_api.dll",
+          "p/demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll",
+          "p/demo/addons/godot-openvr/bin/win64/openvr_api.dll",
         ],
         scons_arguments: "",
         environment_variables: [],
@@ -175,8 +172,8 @@ local groups_gdnative_plugins = {
       },
       "linux": {
         artifacts: [
-          "demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
-          "demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
+          "p/demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
+          "p/demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
         ],
         scons_arguments: "",
         environment_variables: [],
@@ -701,7 +698,7 @@ local generate_godot_gdnative_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                platform_info["scons_env"] + 'scons werror=no platform=' + platform_info["scons_platform"] + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + platform_info["godot_scons_arguments"] + library_info["platforms"][platform_info["platform_name"]]["scons_arguments"],
+                platform_info["scons_env"] + 'scons werror=no platform=' + platform_info["scons_platform"] + ' target=release -j`nproc` use_lto=no deprecated=no ' + platform_info["godot_scons_arguments"] + library_info["platforms"][platform_info["platform_name"]]["scons_arguments"],
               ],
               command: '/bin/bash',
               working_directory: 'p',

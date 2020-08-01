@@ -21,7 +21,7 @@
          "name": "p",
          "shallow_clone": false,
          "type": "git",
-         "url": "https://github.com/SaracenOne/godot_openvr.git"
+         "url": "https://github.com/lyuma/godot_openvr.git"
       }
    ],
    "name": "gdnative-godot-openvr",
@@ -32,12 +32,12 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll",
+                     "source": "p/demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll",
                      "type": "build"
                   },
                   {
                      "destination": "",
-                     "source": "demo/addons/godot-openvr/bin/win64/openvr_api.dll",
+                     "source": "p/demo/addons/godot-openvr/bin/win64/openvr_api.dll",
                      "type": "build"
                   }
                ],
@@ -69,7 +69,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=windows target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=no use_lld=yes"
+                        "scons werror=no platform=windows target=release -j`nproc` use_lto=no deprecated=no use_llvm=no use_lld=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -81,12 +81,12 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
+                     "source": "p/demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
                      "type": "build"
                   },
                   {
                      "destination": "",
-                     "source": "demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
+                     "source": "p/demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
                      "type": "build"
                   }
                ],
@@ -118,7 +118,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes"
+                        "scons werror=no platform=x11 target=release -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
