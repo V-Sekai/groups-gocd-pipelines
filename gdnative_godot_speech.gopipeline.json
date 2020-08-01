@@ -78,7 +78,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cd p/bin/release && mv libGodotSpeech.so libGodotSpeech.dbg.dll && mingw-strip --strip-debug -o libGodotSpeech.dll libGodotSpeech.dbg.dll"
+                        "cd bin/release && mv libGodotSpeech.so libGodotSpeech.dbg.dll && mingw-strip --strip-debug -o libGodotSpeech.dll libGodotSpeech.dbg.dll"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -136,7 +136,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cd p/bin/release && mv libGodotSpeech.so libGodotSpeech.dbg.so && strip --strip-debug -o libGodotSpeech.so libGodotSpeech.dbg.so"
+                        "cd bin/release && mv libGodotSpeech.so libGodotSpeech.dbg.so && strip --strip-debug -o libGodotSpeech.so libGodotSpeech.dbg.so"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

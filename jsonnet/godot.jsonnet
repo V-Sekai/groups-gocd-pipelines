@@ -136,31 +136,31 @@ local groups_gdnative_plugins = {
     platforms: {
       "windows": {
         artifacts: [
-          "p/bin/release/libGodotSpeech.dll"
+          "bin/release/libGodotSpeech.dll"
         ],
         debug_artifacts: [
-          "p/bin/release/libGodotSpeech.dbg.dll"
+          "bin/release/libGodotSpeech.dbg.dll"
         ],
         scons_arguments: "",
         environment_variables: [],
         prepare_commands: [],
         extra_commands: [
-          "cd p/bin/release && mv libGodotSpeech.so libGodotSpeech.dbg.dll && mingw-strip --strip-debug -o libGodotSpeech.dll libGodotSpeech.dbg.dll"
+          "cd bin/release && mv libGodotSpeech.so libGodotSpeech.dbg.dll && mingw-strip --strip-debug -o libGodotSpeech.dll libGodotSpeech.dbg.dll"
         ],
         #install_task: ["mv libGodotSpeech.dll g/addons/godot_speech/bin/libGodotSpeech.dll"],
       },
       "linux": {
         artifacts: [
-          "p/bin/release/libGodotSpeech.so"
+          "bin/release/libGodotSpeech.so"
         ],
         debug_artifacts: [
-          "p/bin/release/libGodotSpeech.dbg.so"
+          "bin/release/libGodotSpeech.dbg.so"
         ],
         scons_arguments: "",
         environment_variables: [],
         prepare_commands: [],
         extra_commands: [
-          "cd p/bin/release && mv libGodotSpeech.so libGodotSpeech.dbg.so && strip --strip-debug -o libGodotSpeech.so libGodotSpeech.dbg.so"
+          "cd bin/release && mv libGodotSpeech.so libGodotSpeech.dbg.so && strip --strip-debug -o libGodotSpeech.so libGodotSpeech.dbg.so"
         ],
         #install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
       },
@@ -174,39 +174,39 @@ local groups_gdnative_plugins = {
     platforms: {
       "windows": {
         artifacts: [
-          "p/demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll",
-          "p/demo/addons/godot-openvr/bin/win64/openvr_api.dll",
+          "demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll",
+          "demo/addons/godot-openvr/bin/win64/openvr_api.dll",
         ],
         debug_artifacts: [
-          "p/demo/addons/godot-openvr/bin/win64/libgodot_openvr.dbg.dll",
+          "demo/addons/godot-openvr/bin/win64/libgodot_openvr.dbg.dll",
         ],
         scons_arguments: "",
         environment_variables: [],
         # NOTE: We will use prebuilt openvr_api.dll
         prepare_commands: [
-          "rm -f p/demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll"
+          "rm -f demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll"
         ],
         extra_commands: [
-          "cd p/demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.so libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll"
+          "cd demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.so libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll"
         ],
         #install_task: ["mv libGodotSpeech.dll g/addons/godot_speech/bin/libGodotSpeech.dll"],
       },
       "linux": {
         artifacts: [
-          "p/demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
-          "p/demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
+          "demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
+          "demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
         ],
         debug_artifacts: [
-          "p/demo/addons/godot-openvr/bin/x11/libgodot_openvr.dbg.so",
+          "demo/addons/godot-openvr/bin/x11/libgodot_openvr.dbg.so",
         ],
         scons_arguments: "",
         environment_variables: [],
         # NOTE: We will use prebuilt libopenvr_api.so
         prepare_commands: [
-          "rm -f p/demo/addons/godot-openvr/bin/x11/libopenvr_api.so"
+          "rm -f demo/addons/godot-openvr/bin/x11/libopenvr_api.so"
         ],
         extra_commands: [
-          "cd p/demo/addons/godot-openvr/bin/x11 && mv libgodot_openvr.so libgodot_openvr.dbg.so && strip --strip-debug -o libgodot_openvr.so libgodot_openvr.dbg.so"
+          "cd demo/addons/godot-openvr/bin/x11 && mv libgodot_openvr.so libgodot_openvr.dbg.so && strip --strip-debug -o libgodot_openvr.so libgodot_openvr.dbg.so"
         ],
         #install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
       },
@@ -688,12 +688,12 @@ local generate_godot_gdnative_pipeline(pipeline_name='',
           ],
           artifacts: [{
               type: 'build',
-              source: artifact_path,
+              source: "p/" + artifact_path,
               destination: '',
             } for artifact_path in library_info["platforms"][platform_info["platform_name"]]["artifacts"]
           ] + [{
               type: 'build',
-              source: artifact_path,
+              source: "p/" + artifact_path,
               destination: 'debug',
             } for artifact_path in library_info["platforms"][platform_info["platform_name"]]["debug_artifacts"]
           ],

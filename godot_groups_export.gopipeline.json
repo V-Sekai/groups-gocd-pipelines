@@ -83,7 +83,7 @@
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "gdnative-godot-speech",
-                     "source": "p/bin/release/libGodotSpeech.dll",
+                     "source": "bin/release/libGodotSpeech.dll",
                      "stage": "gdnativeBuildStage",
                      "type": "fetch"
                   },
@@ -93,7 +93,7 @@
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "gdnative-godot-openvr",
-                     "source": "p/demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll",
+                     "source": "demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll",
                      "stage": "gdnativeBuildStage",
                      "type": "fetch"
                   },
@@ -103,7 +103,7 @@
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "gdnative-godot-openvr",
-                     "source": "p/demo/addons/godot-openvr/bin/win64/openvr_api.dll",
+                     "source": "demo/addons/godot-openvr/bin/win64/openvr_api.dll",
                      "stage": "gdnativeBuildStage",
                      "type": "fetch"
                   },
@@ -194,7 +194,7 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "gdnative-godot-speech",
-                     "source": "p/bin/release/libGodotSpeech.so",
+                     "source": "bin/release/libGodotSpeech.so",
                      "stage": "gdnativeBuildStage",
                      "type": "fetch"
                   },
@@ -204,7 +204,7 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "gdnative-godot-openvr",
-                     "source": "p/demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
+                     "source": "demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
                      "stage": "gdnativeBuildStage",
                      "type": "fetch"
                   },
@@ -214,7 +214,7 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "gdnative-godot-openvr",
-                     "source": "p/demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
+                     "source": "demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
                      "stage": "gdnativeBuildStage",
                      "type": "fetch"
                   },
@@ -305,7 +305,7 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "gdnative-godot-speech",
-                     "source": "p/bin/release/libGodotSpeech.so",
+                     "source": "bin/release/libGodotSpeech.so",
                      "stage": "gdnativeBuildStage",
                      "type": "fetch"
                   },
@@ -315,7 +315,7 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "gdnative-godot-openvr",
-                     "source": "p/demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
+                     "source": "demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
                      "stage": "gdnativeBuildStage",
                      "type": "fetch"
                   },
@@ -325,7 +325,7 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "gdnative-godot-openvr",
-                     "source": "p/demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
+                     "source": "demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
                      "stage": "gdnativeBuildStage",
                      "type": "fetch"
                   },
