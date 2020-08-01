@@ -138,6 +138,9 @@ local groups_gdnative_plugins = {
         artifacts: [
           "bin/release/libGodotSpeech.dll"
         ],
+        output_artifacts: [
+          "libGodotSpeech.dll"
+        ],
         debug_artifacts: [
           "bin/release/libGodotSpeech.dbg.dll"
         ],
@@ -152,6 +155,9 @@ local groups_gdnative_plugins = {
       "linux": {
         artifacts: [
           "bin/release/libGodotSpeech.so"
+        ],
+        output_artifacts: [
+          "libGodotSpeech.so"
         ],
         debug_artifacts: [
           "bin/release/libGodotSpeech.dbg.so"
@@ -177,6 +183,10 @@ local groups_gdnative_plugins = {
           "demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll",
           "demo/addons/godot-openvr/bin/win64/openvr_api.dll",
         ],
+        output_artifacts: [
+          "libgodot_openvr.dll",
+          "openvr_api.dll",
+        ],
         debug_artifacts: [
           "demo/addons/godot-openvr/bin/win64/libgodot_openvr.dbg.dll",
         ],
@@ -195,6 +205,10 @@ local groups_gdnative_plugins = {
         artifacts: [
           "demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
           "demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
+        ],
+        output_artifacts: [
+          "libgodot_openvr.so",
+          "libopenvr_api.so",
         ],
         debug_artifacts: [
           "demo/addons/godot-openvr/bin/x11/libgodot_openvr.dbg.so",
@@ -850,7 +864,7 @@ local godot_tools_pipeline_export(pipeline_name='',
                   is_source_a_file: true,
                   source: artifact,
                   destination: library_info["name"],
-                } for artifact in library_info["platforms"][export_info["gdnative_platform"]]["artifacts"]],
+                } for artifact in library_info["platforms"][export_info["gdnative_platform"]]["output_artifacts"]],
               gdnative_plugins) + [{
                 type: 'exec',
                 arguments: [
