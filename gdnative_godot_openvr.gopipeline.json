@@ -60,7 +60,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf p/godot-cpp && mv godot-cpp p/"
+                        "cp -a godot-cpp p"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -109,7 +109,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf p/godot-cpp && mv godot-cpp p/"
+                        "cp -a godot-cpp p"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

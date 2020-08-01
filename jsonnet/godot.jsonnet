@@ -679,7 +679,7 @@ local generate_godot_gdnative_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                "rm -rf p/godot-cpp && mv godot-cpp p/",
+                "cp -a godot-cpp p",
               ],
               command: '/bin/bash',
               working_directory: '',
