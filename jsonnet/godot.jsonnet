@@ -698,7 +698,7 @@ local generate_godot_gdnative_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                platform_info["scons_env"] + 'scons werror=no platform=' + platform_info["scons_platform"] + ' target=release -j`nproc` use_lto=no deprecated=no ' + platform_info["godot_scons_arguments"] + library_info["platforms"][platform_info["platform_name"]]["scons_arguments"],
+                platform_info["scons_env"] + 'scons werror=no platform=' + platform_info["gdnative_platform"] + ' target=release -j`nproc` use_lto=no deprecated=no ' + platform_info["godot_scons_arguments"] + library_info["platforms"][platform_info["platform_name"]]["scons_arguments"],
               ],
               command: '/bin/bash',
               working_directory: 'p',
