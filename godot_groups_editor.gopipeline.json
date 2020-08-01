@@ -163,7 +163,7 @@
                   },
                   {
                      "artifact_origin": "gocd",
-                     "destination": "bin/",
+                     "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "godot-template-groups",
@@ -226,7 +226,7 @@
                   },
                   {
                      "artifact_origin": "gocd",
-                     "destination": "bin/",
+                     "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "godot-template-groups",
@@ -289,7 +289,7 @@
                   },
                   {
                      "artifact_origin": "gocd",
-                     "destination": "bin/",
+                     "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "serverJob",
                      "pipeline": "godot-template-groups",

@@ -438,7 +438,7 @@ local godot_pipeline(pipeline_name='',
               job: platform_info["platform_name"] + 'Job',
               is_source_a_file: true,
               source: platform_info["intermediate_godot_binary"],
-              destination: 'bin/',
+              destination: 'g/bin/',
             } else {
               type: 'exec',
               arguments: [
