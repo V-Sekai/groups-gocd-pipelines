@@ -34,6 +34,11 @@
                      "destination": "",
                      "source": "p/bin/release/libGodotSpeech.dll",
                      "type": "build"
+                  },
+                  {
+                     "destination": "debug",
+                     "source": "p/bin/release/libGodotSpeech.dbg.dll",
+                     "type": "build"
                   }
                ],
                "environment_variables": [ ],
@@ -69,6 +74,15 @@
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cd p/bin/release && mv libGodotSpeech.so libGodotSpeech.dbg.dll && mingw-strip --strip-debug -o libGodotSpeech.dll libGodotSpeech.dbg.dll"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
                   }
                ]
             },
@@ -77,6 +91,11 @@
                   {
                      "destination": "",
                      "source": "p/bin/release/libGodotSpeech.so",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "debug",
+                     "source": "p/bin/release/libGodotSpeech.dbg.so",
                      "type": "build"
                   }
                ],
@@ -109,6 +128,15 @@
                      "arguments": [
                         "-c",
                         "scons werror=no platform=linux target=release -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cd p/bin/release && mv libGodotSpeech.so libGodotSpeech.dbg.so && strip --strip-debug -o libGodotSpeech.so libGodotSpeech.dbg.so"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

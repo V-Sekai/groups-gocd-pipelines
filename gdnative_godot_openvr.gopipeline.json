@@ -39,6 +39,11 @@
                      "destination": "",
                      "source": "p/demo/addons/godot-openvr/bin/win64/openvr_api.dll",
                      "type": "build"
+                  },
+                  {
+                     "destination": "debug",
+                     "source": "p/demo/addons/godot-openvr/bin/win64/libgodot_openvr.dbg.dll",
+                     "type": "build"
                   }
                ],
                "environment_variables": [ ],
@@ -69,7 +74,25 @@
                   {
                      "arguments": [
                         "-c",
+                        "rm -f p/demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
                         "scons werror=no platform=windows target=release -j`nproc` use_lto=no deprecated=no use_llvm=no use_lld=yes"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cd p/demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.so libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -87,6 +110,11 @@
                   {
                      "destination": "",
                      "source": "p/demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "debug",
+                     "source": "p/demo/addons/godot-openvr/bin/x11/libgodot_openvr.dbg.so",
                      "type": "build"
                   }
                ],
@@ -118,7 +146,25 @@
                   {
                      "arguments": [
                         "-c",
+                        "rm -f p/demo/addons/godot-openvr/bin/x11/libopenvr_api.so"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
                         "scons werror=no platform=linux target=release -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cd p/demo/addons/godot-openvr/bin/x11 && mv libgodot_openvr.so libgodot_openvr.dbg.so && strip --strip-debug -o libgodot_openvr.so libgodot_openvr.dbg.so"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
