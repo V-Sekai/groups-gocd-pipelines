@@ -203,7 +203,7 @@ local groups_gdnative_plugins = {
         environment_variables: [],
         # NOTE: We will use prebuilt libopenvr_api.so
         prepare_commands: [
-          "rm -f demo/addons/godot-openvr/bin/x11/libopenvr_api.so"
+          "rm -f demo/addons/godot-openvr/bin/x11/libgodot_openvr.so"
         ],
         extra_commands: [
           "cd demo/addons/godot-openvr/bin/x11 && mv libgodot_openvr.so libgodot_openvr.dbg.so && strip --strip-debug -o libgodot_openvr.so libgodot_openvr.dbg.so"

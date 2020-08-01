@@ -146,7 +146,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -f demo/addons/godot-openvr/bin/x11/libopenvr_api.so"
+                        "rm -f demo/addons/godot-openvr/bin/x11/libgodot_openvr.so"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
