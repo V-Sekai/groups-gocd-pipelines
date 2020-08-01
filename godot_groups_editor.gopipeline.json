@@ -162,13 +162,14 @@
                      "working_directory": "g"
                   },
                   {
-                     "arguments": [
-                        "-c",
-                        "scons werror=no platform=windows target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=no use_lld=yes"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
+                     "artifact_origin": "gocd",
+                     "destination": "bin/",
+                     "is_source_a_file": true,
+                     "job": "windowsJob",
+                     "pipeline": "godot-template-groups",
+                     "source": "godot.windows.opt.tools.64.exe",
+                     "stage": "defaultStage",
+                     "type": "fetch"
                   },
                   {
                      "arguments": [
@@ -224,13 +225,14 @@
                      "working_directory": "g"
                   },
                   {
-                     "arguments": [
-                        "-c",
-                        "scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
+                     "artifact_origin": "gocd",
+                     "destination": "bin/",
+                     "is_source_a_file": true,
+                     "job": "linuxJob",
+                     "pipeline": "godot-template-groups",
+                     "source": "godot.x11.opt.tools.64.llvm",
+                     "stage": "defaultStage",
+                     "type": "fetch"
                   },
                   {
                      "arguments": [
@@ -286,13 +288,14 @@
                      "working_directory": "g"
                   },
                   {
-                     "arguments": [
-                        "-c",
-                        "scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no "
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
+                     "artifact_origin": "gocd",
+                     "destination": "bin/",
+                     "is_source_a_file": true,
+                     "job": "serverJob",
+                     "pipeline": "godot-template-groups",
+                     "source": "godot_server.x11.opt.tools.64",
+                     "stage": "defaultStage",
+                     "type": "fetch"
                   },
                   {
                      "arguments": [

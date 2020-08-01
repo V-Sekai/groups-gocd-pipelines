@@ -430,7 +430,16 @@ local godot_pipeline(pipeline_name='',
               command: '/bin/bash',
               working_directory: 'g',
             },
-            {
+            if platform_info["editor_godot_binary"] == platform_info["intermediate_godot_binary"] then {
+              type: 'fetch',
+              artifact_origin: 'gocd',
+              pipeline: pipeline_name,
+              stage: 'defaultStage',
+              job: platform_info["platform_name"] + 'Job',
+              is_source_a_file: true,
+              source: platform_info["intermediate_godot_binary"],
+              destination: 'bin/',
+            } else {
               type: 'exec',
               arguments: [
                 '-c',
