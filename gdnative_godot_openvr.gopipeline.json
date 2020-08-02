@@ -92,7 +92,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cd demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.so libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll"
+                        "cd demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.dll libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

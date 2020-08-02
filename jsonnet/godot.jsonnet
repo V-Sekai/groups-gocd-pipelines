@@ -148,7 +148,7 @@ local groups_gdnative_plugins = {
         environment_variables: [],
         prepare_commands: [],
         extra_commands: [
-          "cd bin/release && mv libGodotSpeech.so libGodotSpeech.dbg.dll && mingw-strip --strip-debug -o libGodotSpeech.dll libGodotSpeech.dbg.dll"
+          "cd bin/release && mv libGodotSpeech.dll libGodotSpeech.dbg.dll && mingw-strip --strip-debug -o libGodotSpeech.dll libGodotSpeech.dbg.dll"
         ],
         #install_task: ["mv libGodotSpeech.dll g/addons/godot_speech/bin/libGodotSpeech.dll"],
       },
@@ -197,7 +197,7 @@ local groups_gdnative_plugins = {
           "rm -f demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll"
         ],
         extra_commands: [
-          "cd demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.so libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll"
+          "cd demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.dll libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll"
         ],
         #install_task: ["mv libGodotSpeech.dll g/addons/godot_speech/bin/libGodotSpeech.dll"],
       },

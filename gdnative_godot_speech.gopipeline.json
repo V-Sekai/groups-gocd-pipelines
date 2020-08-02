@@ -78,7 +78,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cd bin/release && mv libGodotSpeech.so libGodotSpeech.dbg.dll && mingw-strip --strip-debug -o libGodotSpeech.dll libGodotSpeech.dbg.dll"
+                        "cd bin/release && mv libGodotSpeech.dll libGodotSpeech.dbg.dll && mingw-strip --strip-debug -o libGodotSpeech.dll libGodotSpeech.dbg.dll"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
