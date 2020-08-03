@@ -2,7 +2,7 @@
 local platform_info_dict = {
   "windows": {
     platform_name: "windows",
-    scons_env: "",
+    scons_env: "PATH=/opt/llvm-mingw/bin:$PATH ",
     intermediate_godot_binary: "godot.windows.opt.tools.64.exe",
     editor_godot_binary: "godot.windows.opt.tools.64.exe",
     template_debug_binary: "windows_64_debug.exe",
@@ -11,7 +11,7 @@ local platform_info_dict = {
     scons_platform: "windows",
     gdnative_platform: "windows",
     strip_command: "mingw-strip --strip-debug",
-    godot_scons_arguments: "use_llvm=no use_lld=yes",
+    godot_scons_arguments: "use_mingw=yes use_llvm=yes use_lld=yes use_thinlto=yes LINKFLAGS=-Wl,-pdb= CCFLAGS=-gcodeview",
     extra_commands: [],
     environment_variables: [],
     template_artifacts_override: null,
@@ -72,7 +72,7 @@ local platform_info_dict = {
   },
   "osx": {
     platform_name: "osx",
-    scons_env: "OSXCROSS_ROOT=/opt/osxcross",
+    scons_env: "OSXCROSS_ROOT=/opt/osxcross ",
     intermediate_godot_binary: "godot.osx.opt.tools.64",
     editor_godot_binary: "Godot",
     template_debug_binary: "godot.osx.opt.debug.64", # FIXME

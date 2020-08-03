@@ -101,7 +101,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=windows target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json use_llvm=no use_lld=yes"
+                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json use_mingw=yes use_llvm=yes use_lld=yes use_thinlto=yes LINKFLAGS=-Wl,-pdb= CCFLAGS=-gcodeview"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
