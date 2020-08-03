@@ -196,7 +196,8 @@ local groups_gdnative_plugins = {
         environment_variables: [],
         # NOTE: We will use prebuilt openvr_api.dll
         prepare_commands: [
-          "rm -f demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll"
+          "python wrap_openvr.py",
+          "rm -f demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll",
         ],
         extra_commands: [
           "cd demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.dll libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll"
