@@ -39,6 +39,11 @@
                      "destination": "debug",
                      "source": "p/bin/release/libGodotSpeech.dbg.dll",
                      "type": "build"
+                  },
+                  {
+                     "destination": "debug",
+                     "source": "p/bin/release/libGodotSpeech.pdb",
+                     "type": "build"
                   }
                ],
                "environment_variables": [ ],

@@ -142,7 +142,8 @@ local groups_gdnative_plugins = {
           "libGodotSpeech.dll"
         ],
         debug_artifacts: [
-          "bin/release/libGodotSpeech.dbg.dll"
+          "bin/release/libGodotSpeech.dbg.dll",
+          "bin/release/libGodotSpeech.pdb",
         ],
         scons_arguments: "",
         environment_variables: [],
@@ -189,6 +190,7 @@ local groups_gdnative_plugins = {
         ],
         debug_artifacts: [
           "demo/addons/godot-openvr/bin/win64/libgodot_openvr.dbg.dll",
+          "demo/addons/godot-openvr/bin/win64/libgodot_openvr.pdb",
         ],
         scons_arguments: "",
         environment_variables: [],
@@ -347,6 +349,11 @@ local godot_pipeline(pipeline_name='',
               destination: '',
               type: 'build',
             },
+            if std.endsWith(platform_info['editor_godot_binary'], ".exe") then {
+              source: 'g/bin/' + std.substr(platform_info['editor_godot_binary'], 0, std.length(platform_info['editor_godot_binary'])-4) + ".pdb",
+              destination: '',
+              type: 'build',
+            } else null,
           ],
           environment_variables: platform_info["environment_variables"],
           tasks: [
