@@ -2,11 +2,11 @@
    "environment_variables": [
       {
          "name": "GODOT_STATUS",
-         "value": "master.groups.release"
+         "value": "v_sekai"
       }
    ],
    "group": "beta",
-   "label_template": "master.groups.release.${godot-template-groups_pipeline_dependency}.${COUNT}",
+   "label_template": "v_sekai.${groups_git_sandbox[:8]}.${godot-template-groups_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "branch": "master",

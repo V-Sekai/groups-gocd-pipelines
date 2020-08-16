@@ -793,14 +793,12 @@ local godot_tools_pipeline_export(pipeline_name='',
                                   gocd_project_folder='',
                                   groups_git='',
                                   groups_branch='',
-                                  gocd_build_project_material=[],
-                                  gocd_material_dependencies=[],
                                   enabled_export_platforms=[],
                                   ) =
   {
     name: pipeline_name,
     group: gocd_group,
-    label_template: godot_status + '.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
+    label_template: godot_status + '.${groups_git_sandbox[:8]}.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
     environment_variables:
       [{
         name: 'GODOT_STATUS',
@@ -964,15 +962,137 @@ local godot_tools_pipeline_export(pipeline_name='',
     ],
   };
 
+local build_docker_server(pipeline_name='',
+                                  pipeline_dependency='',
+                                  gocd_group='',
+                                  godot_status='',
+                                  docker_groups_git='',
+                                  docker_groups_branch='',
+                                  docker_groups_dir='',
+                                  server_export_info={},
+                                  ) =
+  {
+    name: pipeline_name,
+    group: gocd_group,
+    label_template: godot_status + '.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
+    environment_variables:
+      [{
+        name: 'FOO',
+        value: 'BAR',
+      }],
+    materials: [
+      {
+        name: 'docker_groups_git',
+        url: docker_groups_git,
+        type: 'git',
+        branch: docker_groups_branch,
+        destination: 'g',
+      },
+      {
+        name: pipeline_dependency + '_pipeline_dependency',
+        type: 'dependency',
+        pipeline: pipeline_dependency,
+        stage: 'exportStage',
+        ignore_for_scheduling: false,
+      },
+    ],
+    stages: [
+      {
+        name: 'buildPushStage',
+        clean_workspace: false,
+        fetch_materials: true,
+        jobs: [
+          {
+            name: 'dockerJob',
+            resources: [
+              'kaniko',
+            ],
+            artifacts: [
+              {
+                type: 'build',
+                source: 'docker_image.txt',
+                destination: '',
+              },
+            ],
+            environment_variables:
+              [],
+            tasks: [
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_dependency,
+                stage: 'exportStage',
+                job: server_export_info["export_name"] + 'Job',
+                is_source_a_file: false,
+                source: server_export_info["export_directory"],
+                destination: '',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  '/kaniko/executor --build-arg SERVER_EXPORT=' + server_export_info["export_directory"] + ' --build-arg GODOT_REVISION="master" --build-arg GROUPS_REVISION="${' + pipeline_dependency + '_pipeline_dependency' + '}" --dockerfile ' + docker_groups_dir + '/Dockerfile' +
+                  ' --destination "$DOCKER_REPO" --context "$PWD" && echo ',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+            ],
+          }
+        ],
+      },
+//       {
+//         name: 'uploadStage',
+//         clean_workspace: false,
+//         jobs: [
+//           {
+//             name: export_info["export_name"] + 'Job',
+//             resources: [
+//               'linux',
+//               'mingw5',
+//             ],
+// #            environment_variables:
+// #              [{
+// #                name: 'BUTLER_API_KEY',
+// #                encrypted_value: butler_api_key,
+// #              },{name: 'ITCHIO_LOGIN', value: ....}],
+//             tasks: [
+//               {
+//                 type: 'fetch',
+//                 artifact_origin: 'gocd',
+//                 pipeline: pipeline_name,
+//                 stage: 'exportStage',
+//                 job: export_info["export_name"] + 'Job',
+//                 is_source_a_file: false,
+//                 source: export_info["export_directory"],
+//                 destination: '',
+//               },
+//               {
+//                 type: 'exec',
+//                 arguments: [
+//                   '-c',
+//                   'butler push ' + export_info["export_directory"] + ' $ITCHIO_LOGIN:' + export_info["itchio_out"] + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+//                 ],
+//                 command: '/bin/bash',
+//                 working_directory: '',
+//               },
+//             ],
+//           } for export_info in enabled_export_platforms
+//         ],
+//       },
+    ],
+  };
+
 local godot_template_groups_editor = 'godot-template-groups';
 local godot_cpp_pipeline = 'gdnative-cpp';
 local godot_template_groups_export = 'production-groups-release-export';
+local docker_pipeline = 'docker-groups';
 
 local godot_gdnative_pipelines =
   [plugin_info["pipeline_name"] for plugin_info in enabled_groups_gdnative_plugins];
 
 
-local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export];
+local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline];
 
 
 {
@@ -1018,21 +1138,22 @@ local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godo
       groups_git='git@gitlab.com:SaracenOne/groups.git',
       groups_branch='master',
       gocd_group='beta',
-      godot_status='master.groups.release',
+      godot_status='v_sekai',
       gocd_project_folder='groups',
-      gocd_build_project_material=[
-        {
-          name: 'godot_groups_groups',
-          url: 'git@gitlab.com:SaracenOne/groups.git',
-          type: 'git',
-          branch: 'master',
-          destination: 'groups',
-        },
-      ],
-      gocd_material_dependencies=[
-        // Todo add all the submodules
-      ],
       enabled_export_platforms=enabled_groups_export_platforms,
+    )
+  ),
+  'docker_groups.gopipeline.json'
+  : std.prune(
+    build_docker_server(
+      pipeline_name=docker_pipeline,
+      pipeline_dependency=godot_template_groups_export,
+      docker_groups_git='https://github.com/V-Sekai/docker_groups.git',
+      docker_groups_branch='master',
+      docker_groups_dir='groups_server',
+      gocd_group='beta',
+      godot_status='docker',
+      server_export_info=groups_export_configurations["linuxServer"],
     )
   ),
 }

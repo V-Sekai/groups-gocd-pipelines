@@ -1,0 +1,70 @@
+{
+   "environment_variables": [
+      {
+         "name": "FOO",
+         "value": "BAR"
+      }
+   ],
+   "group": "beta",
+   "label_template": "docker.${production-groups-release-export_pipeline_dependency}.${COUNT}",
+   "materials": [
+      {
+         "branch": "master",
+         "destination": "g",
+         "name": "docker_groups_git",
+         "type": "git",
+         "url": "https://github.com/V-Sekai/docker_groups.git"
+      },
+      {
+         "ignore_for_scheduling": false,
+         "name": "production-groups-release-export_pipeline_dependency",
+         "pipeline": "production-groups-release-export",
+         "stage": "exportStage",
+         "type": "dependency"
+      }
+   ],
+   "name": "docker-groups",
+   "stages": [
+      {
+         "clean_workspace": false,
+         "fetch_materials": true,
+         "jobs": [
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "docker_image.txt",
+                     "type": "build"
+                  }
+               ],
+               "name": "dockerJob",
+               "resources": [
+                  "kaniko"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "is_source_a_file": false,
+                     "job": "linuxServerJob",
+                     "pipeline": "production-groups-release-export",
+                     "source": "export_linux_server",
+                     "stage": "exportStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "/kaniko/executor --build-arg SERVER_EXPORT=export_linux_server --build-arg GODOT_REVISION=\"master\" --build-arg GROUPS_REVISION=\"${production-groups-release-export_pipeline_dependency}\" --dockerfile groups_server/Dockerfile --destination \"$DOCKER_REPO\" --context \"$PWD\" && echo "
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  }
+               ]
+            }
+         ],
+         "name": "buildPushStage"
+      }
+   ]
+}
