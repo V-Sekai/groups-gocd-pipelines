@@ -13,7 +13,7 @@
          "destination": "g",
          "name": "docker_groups_git",
          "type": "git",
-         "url": "https://github.com/V-Sekai/docker_groups.git"
+         "url": "https://github.com/V-Sekai/docker-groups.git"
       },
       {
          "ignore_for_scheduling": false,
