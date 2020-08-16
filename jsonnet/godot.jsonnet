@@ -1148,7 +1148,7 @@ local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godo
     build_docker_server(
       pipeline_name=docker_pipeline,
       pipeline_dependency=godot_template_groups_export,
-      docker_groups_git='https://github.com/V-Sekai/docker_groups.git',
+      docker_groups_git='https://github.com/V-Sekai/docker-groups.git',
       docker_groups_branch='master',
       docker_groups_dir='groups_server',
       gocd_group='beta',
