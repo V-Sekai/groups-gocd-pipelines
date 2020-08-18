@@ -1031,8 +1031,14 @@ local build_docker_server(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  '/kaniko/executor --build-arg SERVER_EXPORT=' + server_export_info["export_directory"] + ' --build-arg GODOT_REVISION="master" --build-arg GROUPS_REVISION="${' + pipeline_dependency + '_pipeline_dependency' + '}" --dockerfile ' + docker_groups_dir + '/Dockerfile' +
-                  ' --destination "$DOCKER_REPO" --context "$PWD" && echo ',
+                  'DOCKER_IMAGE="$DOCKER_REPO:${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}" ' +
+                  '; /kaniko/executor --build-arg SERVER_EXPORT=' + server_export_info["export_directory"] +
+                  ' --build-arg GODOT_REVISION="master"' +
+                  ' --build-arg GROUPS_REVISION="${' + pipeline_dependency + '_pipeline_dependency' + '}"' +
+                  ' --dockerfile "`pwd`/' + docker_groups_dir + '/Dockerfile"' +
+                  ' --destination "$DOCKER_IMAGE"' +
+                  ' --context "`pwd`"' +
+                  ' && echo "$DOCKER_IMAGE" > docker_image.txt',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
