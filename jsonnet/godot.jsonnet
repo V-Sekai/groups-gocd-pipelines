@@ -1025,7 +1025,7 @@ local build_docker_server(pipeline_name='',
                 job: server_export_info["export_name"] + 'Job',
                 is_source_a_file: false,
                 source: server_export_info["export_directory"],
-                destination: '',
+                destination: 'g/' + docker_groups_dir,
               },
               {
                 type: 'exec',
@@ -1033,7 +1033,7 @@ local build_docker_server(pipeline_name='',
                   '-c',
                   'set -x; DOCKER_IMAGE="$DOCKER_REPO_GROUPS_SERVER:${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}" ' +
                   '; docker build -t "$DOCKER_IMAGE"' +
-                  ' --build-arg SERVER_EXPORT="`pwd`/' + server_export_info["export_directory"] + '"' +
+                  ' --build-arg SERVER_EXPORT="' + server_export_info["export_directory"] + '"' +
                   ' --build-arg GODOT_REVISION="master"' +
                   ' --build-arg GROUPS_REVISION="${' + pipeline_dependency + '_pipeline_dependency' + '}"' +
                   ' g/"' + docker_groups_dir + '" && docker push "$DOCKER_IMAGE"' +
