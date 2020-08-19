@@ -1036,7 +1036,7 @@ local build_docker_server(pipeline_name='',
                   ' --build-arg SERVER_EXPORT=' + server_export_info["export_directory"] +
                   ' --build-arg GODOT_REVISION="master"' +
                   ' --build-arg GROUPS_REVISION="${' + pipeline_dependency + '_pipeline_dependency' + '}"' +
-                  ' g/"' + docker_groups_dir + ' && docker push "$DOCKER_IMAGE"' +
+                  ' g/"' + docker_groups_dir + '" && docker push "$DOCKER_IMAGE"' +
                   ' && echo "$DOCKER_IMAGE" > docker_image.txt',
                 ],
                 command: '/bin/bash',

@@ -55,7 +55,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "set -x; DOCKER_IMAGE=\"$DOCKER_REPO_GROUPS_SERVER:${production-groups-release-export_pipeline_dependency}.${COUNT}\" ; docker build -t \"$DOCKER_IMAGE\" --build-arg SERVER_EXPORT=export_linux_server --build-arg GODOT_REVISION=\"master\" --build-arg GROUPS_REVISION=\"${production-groups-release-export_pipeline_dependency}\" g/\"groups_server && docker push \"$DOCKER_IMAGE\" && echo \"$DOCKER_IMAGE\" > docker_image.txt"
+                        "set -x; DOCKER_IMAGE=\"$DOCKER_REPO_GROUPS_SERVER:${production-groups-release-export_pipeline_dependency}.${COUNT}\" ; docker build -t \"$DOCKER_IMAGE\" --build-arg SERVER_EXPORT=export_linux_server --build-arg GODOT_REVISION=\"master\" --build-arg GROUPS_REVISION=\"${production-groups-release-export_pipeline_dependency}\" g/\"groups_server\" && docker push \"$DOCKER_IMAGE\" && echo \"$DOCKER_IMAGE\" > docker_image.txt"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
