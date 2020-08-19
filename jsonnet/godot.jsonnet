@@ -974,7 +974,7 @@ local build_docker_server(pipeline_name='',
   {
     name: pipeline_name,
     group: gocd_group,
-    label_template: godot_status + '.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
+    label_template: '${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
     environment_variables:
       [],
     materials: [
@@ -1029,11 +1029,15 @@ local build_docker_server(pipeline_name='',
                 arguments: [
                   '-c',
                   'set -x; DOCKER_IMAGE="$DOCKER_REPO_GROUPS_SERVER:$GO_PIPELINE_LABEL" ' +
-                  '; docker build -t "$DOCKER_IMAGE"' +
+                  '; chmod 01777 g/"' + docker_groups_dir + '"' +
+                  '; chmod a+x g/"' + docker_groups_dir + '"/*linux_server' +
+                  '; docker build -t "$DOCKER_REPO_GROUPS_SERVER" -t "$DOCKER_IMAGE"' +
                   ' --build-arg SERVER_EXPORT="' + server_export_info["export_directory"] + '"' +
                   ' --build-arg GODOT_REVISION="master"' +
+                  ' --build-arg USER=1234' +
+                  ' --build-arg HOME=/server' +
                   ' --build-arg GROUPS_REVISION="$GO_PIPELINE_LABEL"' +
-                  ' g/"' + docker_groups_dir + '" && docker push "$DOCKER_IMAGE"' +
+                  ' g/"' + docker_groups_dir + '" && docker push "$DOCKER_IMAGE" && docker push "$DOCKER_REPO_GROUPS_SERVER"' +
                   ' && echo "$DOCKER_IMAGE" > docker_image.txt',
                 ],
                 command: '/bin/bash',
