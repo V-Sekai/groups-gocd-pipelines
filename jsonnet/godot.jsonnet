@@ -1005,7 +1005,7 @@ local build_docker_server(pipeline_name='',
           {
             name: 'dockerJob',
             resources: [
-              'kaniko',
+              'dind',
             ],
             artifacts: [
               {
@@ -1032,12 +1032,11 @@ local build_docker_server(pipeline_name='',
                 arguments: [
                   '-c',
                   'set -x; DOCKER_IMAGE="$DOCKER_REPO_GROUPS_SERVER:${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}" ' +
-                  '; /kaniko/executor --build-arg SERVER_EXPORT=' + server_export_info["export_directory"] +
+                  '; docker build -t "$DOCKER_IMAGE"' +
+                  ' --build-arg SERVER_EXPORT=' + server_export_info["export_directory"] +
                   ' --build-arg GODOT_REVISION="master"' +
                   ' --build-arg GROUPS_REVISION="${' + pipeline_dependency + '_pipeline_dependency' + '}"' +
-                  ' --context "`pwd`"' +
-                  ' --dockerfile g/"' + docker_groups_dir + '/Dockerfile"' +
-                  ' --destination "$DOCKER_IMAGE"' +
+                  ' g/"' + docker_groups_dir + ' && docker push "$DOCKER_IMAGE"' +
                   ' && echo "$DOCKER_IMAGE" > docker_image.txt',
                 ],
                 command: '/bin/bash',
