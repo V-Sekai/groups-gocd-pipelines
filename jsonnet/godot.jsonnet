@@ -977,8 +977,12 @@ local build_docker_server(pipeline_name='',
     label_template: godot_status + '.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
     environment_variables:
       [{
-        name: 'FOO',
-        value: 'BAR',
+        name: 'DOCKER_IMAGE_TAG',
+        value: '${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
+      },
+      {
+        name: 'GROUPS_VERSION',
+        value: '${' + pipeline_dependency + '_pipeline_dependency' + '}',
       }],
     materials: [
       {
@@ -1031,11 +1035,11 @@ local build_docker_server(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'set -x; DOCKER_IMAGE="$DOCKER_REPO_GROUPS_SERVER:${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}" ' +
+                  'set -x; DOCKER_IMAGE="$DOCKER_REPO_GROUPS_SERVER:$DOCKER_IMAGE_TAG" ' +
                   '; docker build -t "$DOCKER_IMAGE"' +
                   ' --build-arg SERVER_EXPORT="' + server_export_info["export_directory"] + '"' +
                   ' --build-arg GODOT_REVISION="master"' +
-                  ' --build-arg GROUPS_REVISION="${' + pipeline_dependency + '_pipeline_dependency' + '}"' +
+                  ' --build-arg GROUPS_REVISION="$GROUPS_VERSION"' +
                   ' g/"' + docker_groups_dir + '" && docker push "$DOCKER_IMAGE"' +
                   ' && echo "$DOCKER_IMAGE" > docker_image.txt',
                 ],
