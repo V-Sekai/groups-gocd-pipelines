@@ -1029,8 +1029,8 @@ local build_docker_server(pipeline_name='',
                 arguments: [
                   '-c',
                   'set -x; DOCKER_IMAGE="$DOCKER_REPO_GROUPS_SERVER:$GO_PIPELINE_LABEL" ' +
-                  '; chmod 01777 g/"' + docker_groups_dir + '"' +
-                  '; chmod a+x g/"' + docker_groups_dir + '"/*linux_server' +
+                  '; chmod 01777 g/"' + docker_groups_dir + '"/' + groups_export_configurations["linuxServer"]["export_directory"] +
+                  '; chmod a+x g/"' + docker_groups_dir + '"/' + groups_export_configurations["linuxServer"]["export_directory"] + "/" + groups_export_configurations["linuxServer"]["export_executable"] +
                   '; docker build -t "$DOCKER_REPO_GROUPS_SERVER" -t "$DOCKER_IMAGE"' +
                   ' --build-arg SERVER_EXPORT="' + server_export_info["export_directory"] + '"' +
                   ' --build-arg GODOT_REVISION="master"' +
