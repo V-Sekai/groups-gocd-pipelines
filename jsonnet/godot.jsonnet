@@ -1044,7 +1044,7 @@ local build_docker_server(pipeline_name='',
                 working_directory: '',
               },
             ],
-          }
+          },
         ],
       },
 //       {
@@ -1089,16 +1089,78 @@ local build_docker_server(pipeline_name='',
     ],
   };
 
+local simple_docker_job(pipeline_name='',
+                        gocd_group='',
+                        docker_repo_variable='',
+                        docker_git='',
+                        docker_branch='',
+                        docker_dir='') =
+  {
+    name: pipeline_name,
+    group: gocd_group,
+    label_template: '${' + pipeline_name + '_git[:8]}.${COUNT}',
+    environment_variables:
+      [],
+    materials: [
+      {
+        name: pipeline_name + '_git',
+        url: docker_git,
+        type: 'git',
+        branch: docker_branch,
+        destination: 'g',
+      },
+    ],
+    stages: [
+      {
+        name: 'buildPushStage',
+        clean_workspace: false,
+        fetch_materials: true,
+        jobs: [
+          {
+            name: 'dockerJob',
+            resources: [
+              'dind',
+            ],
+            artifacts: [
+              {
+                type: 'build',
+                source: 'docker_image.txt',
+                destination: '',
+              },
+            ],
+            environment_variables:
+              [],
+            tasks: [
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'set -x; DOCKER_IMAGE="$' + docker_repo_variable + ':$GO_PIPELINE_LABEL" ' +
+                  '; docker build -t "$' + docker_repo_variable + '" -t "$DOCKER_IMAGE"' +
+                  ' g/"' + docker_dir + '" && docker push "$DOCKER_IMAGE" && docker push "$' + docker_repo_variable + '"' +
+                  ' && echo "$DOCKER_IMAGE" > docker_image.txt',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+            ],
+          }
+        ],
+      },
+    ],
+  };
+
 local godot_template_groups_editor = 'godot-template-groups';
 local godot_cpp_pipeline = 'gdnative-cpp';
 local godot_template_groups_export = 'production-groups-release-export';
 local docker_pipeline = 'docker-groups';
+local docker_uro_pipeline = 'docker-uro';
 
 local godot_gdnative_pipelines =
   [plugin_info["pipeline_name"] for plugin_info in enabled_groups_gdnative_plugins];
 
 
-local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline];
+local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline];
 
 
 {
@@ -1160,6 +1222,17 @@ local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godo
       gocd_group='beta',
       godot_status='docker',
       server_export_info=groups_export_configurations["linuxServer"],
+    )
+  ),
+  'docker_uro.gopipeline.json'
+  : std.prune(
+    simple_docker_job(
+      pipeline_name=docker_uro_pipeline,
+      gocd_group='beta',
+      docker_repo_variable='DOCKER_URO_REPO',
+      docker_git='https://github.com/V-Sekai/uro.git',
+      docker_branch='master',
+      docker_dir='.',
     )
   ),
 }
