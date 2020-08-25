@@ -86,7 +86,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes"
+                        "scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no deprecated=no use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -120,7 +120,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no "
+                        "scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no use_static_cpp=yes use_llvm=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

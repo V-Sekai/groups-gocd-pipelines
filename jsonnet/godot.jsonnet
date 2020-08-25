@@ -29,7 +29,7 @@ local platform_info_dict = {
     scons_platform: "x11",
     gdnative_platform: "linux",
     strip_command: "strip --strip-debug",
-    godot_scons_arguments: "use_llvm=yes builtin_freetype=yes",
+    godot_scons_arguments: "use_static_cpp=yes use_llvm=yes builtin_freetype=yes",
     extra_commands: [],
     environment_variables: [],
     template_artifacts_override: null,
@@ -47,7 +47,7 @@ local platform_info_dict = {
     scons_platform: "server",
     gdnative_platform: "linux",
     strip_command: "strip --strip-debug",
-    godot_scons_arguments: "", # FIXME: use_llvm=yes????
+    godot_scons_arguments: "use_static_cpp=yes use_llvm=yes", # FIXME: use_llvm=yes????
     extra_commands: [],
     environment_variables: [],
     template_artifacts_override: null,
