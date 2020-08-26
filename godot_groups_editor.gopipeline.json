@@ -366,7 +366,7 @@
                      "job": "windowsJob",
                      "pipeline": "godot-template-groups",
                      "source": "godot.windows.opt.tools.64.pdb",
-                     "stage": "templateStage",
+                     "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {

@@ -532,7 +532,7 @@ local godot_pipeline(pipeline_name='',
               source: exe_to_pdb_path(platform_info_dict['windows']['editor_godot_binary']),
               destination: 'templates',
               pipeline: pipeline_name,
-              stage: 'templateStage',
+              stage: 'defaultStage',
               job: 'windowsJob',
             },
           ] + std.flatMap(function(platform_info) [
