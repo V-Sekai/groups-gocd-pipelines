@@ -37,6 +37,10 @@
                   }
                ],
                "name": "generateApiJsonJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
                "tasks": [
                   {
                      "artifact_origin": "gocd",

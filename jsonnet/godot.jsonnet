@@ -249,6 +249,7 @@ local groups_export_configurations = {
     ],
     extra_commands: [
       'cp -a g/addons/vr_manager/openvr/actions export_windows/',
+      'cp -p pdbs/*.pdb export_windows/'
     ],
   },
   "linuxDesktop": {
@@ -290,6 +291,8 @@ local groups_export_configurations = {
 local enabled_groups_gdnative_plugins = [groups_gdnative_plugins[x] for x in ["godot_speech", "godot_openvr"]];
 
 local enabled_groups_export_platforms = [groups_export_configurations[x] for x in ["windows", "linuxDesktop", "linuxServer"]];
+
+local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary)-4) + ".pdb");
 
 
 local godot_pipeline(pipeline_name='',
@@ -351,7 +354,7 @@ local godot_pipeline(pipeline_name='',
               type: 'build',
             },
             if std.endsWith(platform_info['editor_godot_binary'], ".exe") then {
-              source: 'g/bin/' + std.substr(platform_info['editor_godot_binary'], 0, std.length(platform_info['editor_godot_binary'])-4) + ".pdb",
+              source: 'g/bin/' + exe_to_pdb_path(platform_info['editor_godot_binary']),
               destination: '',
               type: 'build',
             } else null,
@@ -492,6 +495,10 @@ local godot_pipeline(pipeline_name='',
       jobs: [
         {
           name: 'defaultJob',
+	  resources: [
+            'linux',
+            'mingw5',
+          ],
           artifacts: [
             {
               type: 'build',
@@ -517,6 +524,16 @@ local godot_pipeline(pipeline_name='',
               pipeline: pipeline_name,
               stage: 'templateStage',
               job: enabled_template_platforms[0]["platform_name"] + 'Job',
+            },
+            {
+              type: 'fetch',
+              artifact_origin: 'gocd',
+              is_source_a_file: true,
+              source: exe_to_pdb_path(platform_info_dict['windows']['editor_godot_binary']),
+              destination: 'templates',
+              pipeline: pipeline_name,
+              stage: 'templateStage',
+              job: 'windowsJob',
             },
           ] + std.flatMap(function(platform_info) [
             {
@@ -590,6 +607,10 @@ local generate_godot_cpp_pipeline(pipeline_name='',
       jobs: [
         {
           name: 'generateApiJsonJob',
+          resources: [
+            'linux',
+            'mingw5',
+          ],
           artifacts: [
             {
               type: 'build',
@@ -880,11 +901,22 @@ local godot_tools_pipeline_export(pipeline_name='',
                   source: artifact,
                   destination: library_info["name"],
                 } for artifact in library_info["platforms"][export_info["gdnative_platform"]]["output_artifacts"]],
+              gdnative_plugins) + std.flatMap(function(library_info) [
+                 if std.endsWith(artifact,".dll") && artifact != 'openvr_api.dll' then {
+                  type: 'fetch',
+                  artifact_origin: 'gocd',
+                  pipeline: library_info["pipeline_name"],
+                  stage: 'gdnativeBuildStage',
+                  job: export_info["gdnative_platform"] + 'Job',
+                  is_source_a_file: true,
+                  source: exe_to_pdb_path(artifact),
+                  destination: library_info["name"],
+                } else null for artifact in library_info["platforms"][export_info["gdnative_platform"]]["output_artifacts"]],
               gdnative_plugins) + [{
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'rm -rf templates && unzip "godot.templates.tpz" && export VERSION="`cat templates/version.txt`" && export TEMPLATEDIR=".local/share/godot/templates/$VERSION" && export BASEDIR="`pwd`" && rm -rf "$TEMPLATEDIR" && mkdir -p "$TEMPLATEDIR" && cd "$TEMPLATEDIR" && mv "$BASEDIR"/templates/* . && ln server_* "$BASEDIR/templates/"',
+                  'rm -rf templates && unzip "godot.templates.tpz" && mkdir pdbs && mv templates/*.pdb pdbs && export VERSION="`cat templates/version.txt`" && export TEMPLATEDIR=".local/share/godot/templates/$VERSION" && export BASEDIR="`pwd`" && rm -rf "$TEMPLATEDIR" && mkdir -p "$TEMPLATEDIR" && cd "$TEMPLATEDIR" && mv "$BASEDIR"/templates/* . && ln server_* "$BASEDIR/templates/"',
                 ],
                 command: '/bin/bash',
                 working_directory: '',

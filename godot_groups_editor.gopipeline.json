@@ -336,6 +336,10 @@
                   }
                ],
                "name": "defaultJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
                "tasks": [
                   {
                      "arguments": [
@@ -352,6 +356,16 @@
                      "job": "windowsJob",
                      "pipeline": "godot-template-groups",
                      "source": "version.txt",
+                     "stage": "templateStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "templates",
+                     "is_source_a_file": true,
+                     "job": "windowsJob",
+                     "pipeline": "godot-template-groups",
+                     "source": "godot.windows.opt.tools.64.pdb",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
