@@ -909,7 +909,7 @@ local godot_tools_pipeline_export(pipeline_name='',
                   stage: 'gdnativeBuildStage',
                   job: export_info["gdnative_platform"] + 'Job',
                   is_source_a_file: true,
-                  source: exe_to_pdb_path(artifact),
+                  source: 'debug/' + exe_to_pdb_path(artifact),
                   destination: library_info["name"],
                 } else null for artifact in library_info["platforms"][export_info["gdnative_platform"]]["output_artifacts"]],
               gdnative_plugins) + [{
