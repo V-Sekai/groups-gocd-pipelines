@@ -249,7 +249,7 @@ local groups_export_configurations = {
     ],
     extra_commands: [
       'cp -a g/addons/vr_manager/openvr/actions export_windows/',
-      'cp -p pdbs/*.pdb export_windows/'
+      'cp -p pdbs/*.pdb godot_speech/*.pdb godot_openvr/*.pdb export_windows/'
     ],
   },
   "linuxDesktop": {

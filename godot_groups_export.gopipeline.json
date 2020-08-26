@@ -175,7 +175,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -p pdbs/*.pdb export_windows/"
+                        "cp -p pdbs/*.pdb godot_speech/*.pdb godot_openvr/*.pdb export_windows/"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
