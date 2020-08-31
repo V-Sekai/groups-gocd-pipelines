@@ -98,7 +98,7 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/godot_server.x11.opt.tools.64",
+                     "source": "g/bin/godot_server.x11.opt.tools.64.llvm",
                      "type": "build"
                   }
                ],
@@ -298,14 +298,14 @@
                      "is_source_a_file": true,
                      "job": "serverJob",
                      "pipeline": "godot-template-groups",
-                     "source": "godot_server.x11.opt.tools.64",
+                     "source": "godot_server.x11.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot_server.x11.opt.tools.64 bin/server_64_debug && cp bin/godot_server.x11.opt.tools.64 bin/server_64_release && strip --strip-debug bin/server_64_release"
+                        "cp bin/godot_server.x11.opt.tools.64.llvm bin/server_64_debug && cp bin/godot_server.x11.opt.tools.64.llvm bin/server_64_release && strip --strip-debug bin/server_64_release"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
