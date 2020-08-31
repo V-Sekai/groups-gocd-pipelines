@@ -1,3 +1,4 @@
+local HEADLESS_SERVER_EDITOR = "godot_server.x11.opt.tools.64.llvm";
 
 local platform_info_dict = {
   "windows": {
@@ -39,8 +40,8 @@ local platform_info_dict = {
   "server": {
     platform_name: "server",
     scons_env: "",
-    intermediate_godot_binary: "godot_server.x11.opt.tools.64",
-    editor_godot_binary: "godot_server.x11.opt.tools.64",
+    intermediate_godot_binary: HEADLESS_SERVER_EDITOR,
+    editor_godot_binary: HEADLESS_SERVER_EDITOR,
     template_debug_binary: "server_64_debug",
     template_release_binary: "server_64_release",
     export_directory: "export_linux_server",
@@ -626,7 +627,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
               stage: 'defaultStage',
               job: 'serverJob',
               is_source_a_file: true,
-              source: 'godot_server.x11.opt.tools.64',
+              source: HEADLESS_SERVER_EDITOR,
               destination: '',
             },
             {
@@ -634,7 +635,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
               arguments: [
                 '-c',
                 # Due to a godot bug, the server crashes with "pure virtual function called"
-                'chmod +x godot_server.x11.opt.tools.64 && HOME="`pwd`" ./godot_server.x11.opt.tools.64 --gdnative-generate-json-api api.json || [[ "$(cat api.json | tail -1)" = "]" ]]',
+                'chmod +x ' + HEADLESS_SERVER_EDITOR + ' && HOME="`pwd`" ./' + HEADLESS_SERVER_EDITOR + ' --gdnative-generate-json-api api.json || [[ "$(cat api.json | tail -1)" = "]" ]]',
               ],
               command: '/bin/bash',
               working_directory: '',
@@ -888,7 +889,7 @@ local godot_tools_pipeline_export(pipeline_name='',
                 stage: 'defaultStage',
                 job: 'serverJob',
                 is_source_a_file: true,
-                source: 'godot_server.x11.opt.tools.64',
+                source: HEADLESS_SERVER_EDITOR,
                 destination: '',
               }] + std.flatMap(function(library_info) [
                 {
@@ -934,7 +935,7 @@ local godot_tools_pipeline_export(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'rm -rf ' + export_info["export_directory"] + ' && mkdir ' + export_info["export_directory"] + ' && chmod +x godot_server.x11.opt.tools.64 && HOME="`pwd`" ./godot_server.x11.opt.tools.64 --export "' + export_info["export_configuration"] + '" "`pwd`"/' + export_info["export_directory"] + '/' + export_info["export_executable"] + ' --path g -v',
+                  'rm -rf ' + export_info["export_directory"] + ' && mkdir ' + export_info["export_directory"] + ' && chmod +x ' + HEADLESS_SERVER_EDITOR + ' && HOME="`pwd`" ./' + HEADLESS_SERVER_EDITOR + ' --export "' + export_info["export_configuration"] + '" "`pwd`"/' + export_info["export_directory"] + '/' + export_info["export_executable"] + ' --path g -v',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
