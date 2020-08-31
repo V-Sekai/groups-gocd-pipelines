@@ -1079,45 +1079,6 @@ local build_docker_server(pipeline_name='',
           },
         ],
       },
-//       {
-//         name: 'uploadStage',
-//         clean_workspace: false,
-//         jobs: [
-//           {
-//             name: export_info["export_name"] + 'Job',
-//             resources: [
-//               'linux',
-//               'mingw5',
-//             ],
-// #            environment_variables:
-// #              [{
-// #                name: 'BUTLER_API_KEY',
-// #                encrypted_value: butler_api_key,
-// #              },{name: 'ITCHIO_LOGIN', value: ....}],
-//             tasks: [
-//               {
-//                 type: 'fetch',
-//                 artifact_origin: 'gocd',
-//                 pipeline: pipeline_name,
-//                 stage: 'exportStage',
-//                 job: export_info["export_name"] + 'Job',
-//                 is_source_a_file: false,
-//                 source: export_info["export_directory"],
-//                 destination: '',
-//               },
-//               {
-//                 type: 'exec',
-//                 arguments: [
-//                   '-c',
-//                   'butler push ' + export_info["export_directory"] + ' $ITCHIO_LOGIN:' + export_info["itchio_out"] + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
-//                 ],
-//                 command: '/bin/bash',
-//                 working_directory: '',
-//               },
-//             ],
-//           } for export_info in enabled_export_platforms
-//         ],
-//       },
     ],
   };
 
@@ -1205,7 +1166,7 @@ local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godo
   'godot_groups_editor.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_groups_editor,
-    godot_status='master.groups',
+    godot_status='groups',
     godot_git='https://github.com/SaracenOne/godot.git',
     godot_branch='groups',
     gocd_group='beta',

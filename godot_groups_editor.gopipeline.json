@@ -2,11 +2,11 @@
    "environment_variables": [
       {
          "name": "GODOT_STATUS",
-         "value": "master.groups"
+         "value": "groups"
       }
    ],
    "group": "beta",
-   "label_template": "master.groups.${godot_sandbox[:8]}.${COUNT}",
+   "label_template": "groups.${godot_sandbox[:8]}.${COUNT}",
    "materials": [
       {
          "branch": "groups",
