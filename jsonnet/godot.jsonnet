@@ -1177,7 +1177,7 @@ local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godo
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_groups_editor,
     godot_status='groups',
-    godot_git='https://github.com/SaracenOne/godot.git',
+    godot_git='https://github.com/V-Sekai/godot.git',
     godot_branch='groups',
     gocd_group='beta',
 #    godot_modules_git='https://github.com/godot-extended-libraries/godot-modules-fire.git',
