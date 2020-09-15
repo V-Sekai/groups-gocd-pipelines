@@ -13,7 +13,7 @@
          "destination": "g",
          "name": "godot_sandbox",
          "type": "git",
-         "url": "https://github.com/SaracenOne/godot.git"
+         "url": "https://github.com/V-Sekai/godot.git"
       }
    ],
    "name": "godot-template-groups",
