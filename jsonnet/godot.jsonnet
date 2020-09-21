@@ -1092,6 +1092,64 @@ local build_docker_server(pipeline_name='',
     ],
   };
 
+local video_decoder_docker_job(pipeline_name='',
+                        gocd_group='',
+                        docker_repo_variable='',
+                        docker_git='',
+                        docker_branch='',
+                        docker_dir='') =
+  {
+    name: pipeline_name,
+    group: gocd_group,
+    label_template: '${' + pipeline_name + '_git[:8]}.${COUNT}',
+    environment_variables:
+      [],
+    materials: [
+      {
+        name: pipeline_name + '_git',
+        url: docker_git,
+        type: 'git',
+        branch: docker_branch,
+        destination: 'g',
+      },
+    ],
+    stages: [
+      {
+        name: 'buildPushStage',
+        clean_workspace: false,
+        fetch_materials: true,
+        jobs: [
+          {
+            name: 'dockerJob',
+            resources: [
+              'dind',
+            ],
+            artifacts: [
+              {
+                type: 'build',
+                source: 'docker_image.txt',
+                destination: '',
+              },
+            ],
+            environment_variables:
+              [],
+            tasks: [
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'chmod +x ./build_gdnative.sh && ./build_gdnative.sh',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+            ],
+          }
+        ],
+      },
+    ],
+  };
+
 local simple_docker_job(pipeline_name='',
                         gocd_group='',
                         docker_repo_variable='',
@@ -1158,6 +1216,7 @@ local godot_cpp_pipeline = 'gdnative-cpp';
 local godot_template_groups_export = 'production-groups-release-export';
 local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
+local docker_video_decoder_pipeline = 'docker-video-decoder';
 
 local godot_gdnative_pipelines =
   [plugin_info["pipeline_name"] for plugin_info in enabled_groups_gdnative_plugins];
@@ -1238,4 +1297,17 @@ local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godo
       docker_dir='.',
     )
   ),
+  'docker_video_decoder.gopipeline.json'
+  : std.prune(
+    video_decoder_docker_job(
+      pipeline_name=docker_video_decoder_pipeline,
+      gocd_group='beta',
+      docker_repo_variable='DOCKER_URO_REPO',
+      docker_git='https://github.com/V-Sekai/godot-videodecoder.git',
+      docker_branch='master',
+      docker_dir='.',
+    )
+  ),
 }
+
+

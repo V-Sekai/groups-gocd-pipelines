@@ -1,0 +1,47 @@
+{
+   "group": "beta",
+   "label_template": "${docker-video-decoder_git[:8]}.${COUNT}",
+   "materials": [
+      {
+         "branch": "master",
+         "destination": "g",
+         "name": "docker-video-decoder_git",
+         "type": "git",
+         "url": "https://github.com/V-Sekai/godot-videodecoder.git"
+      }
+   ],
+   "name": "docker-video-decoder",
+   "stages": [
+      {
+         "clean_workspace": false,
+         "fetch_materials": true,
+         "jobs": [
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "docker_image.txt",
+                     "type": "build"
+                  }
+               ],
+               "name": "dockerJob",
+               "resources": [
+                  "dind"
+               ],
+               "tasks": [
+                  {
+                     "arguments": [
+                        "-c",
+                        "chmod +x ./build_gdnative.sh && ./build_gdnative.sh"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  }
+               ]
+            }
+         ],
+         "name": "buildPushStage"
+      }
+   ]
+}
