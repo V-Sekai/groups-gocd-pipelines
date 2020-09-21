@@ -20,7 +20,7 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "docker_image.txt",
+                     "source": "g/target",
                      "type": "build"
                   }
                ],

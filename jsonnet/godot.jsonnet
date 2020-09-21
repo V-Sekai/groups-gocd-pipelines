@@ -1126,8 +1126,8 @@ local video_decoder_docker_job(pipeline_name='',
             ],
             artifacts: [
               {
-                type: 'build',
-                source: 'docker_image.txt',
+                type: 'build',                
+                source: 'g/target',
                 destination: '',
               },
             ],
