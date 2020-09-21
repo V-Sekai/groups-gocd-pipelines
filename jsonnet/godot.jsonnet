@@ -1138,7 +1138,7 @@ local video_decoder_docker_job(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'chmod +x ./build_gdnative.sh && ./build_gdnative.sh',
+                  'chmod +x ./build_gdnative.sh && ADDON_BIN_DIR=$PWD/target ./build_gdnative.sh',
                 ],
                 command: '/bin/bash',
                 working_directory: 'g',
