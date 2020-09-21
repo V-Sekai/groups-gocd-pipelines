@@ -1141,7 +1141,7 @@ local video_decoder_docker_job(pipeline_name='',
                   'chmod +x ./build_gdnative.sh && ./build_gdnative.sh',
                 ],
                 command: '/bin/bash',
-                working_directory: '',
+                working_directory: 'g',
               },
             ],
           }
@@ -1302,7 +1302,6 @@ local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godo
     video_decoder_docker_job(
       pipeline_name=docker_video_decoder_pipeline,
       gocd_group='beta',
-      docker_repo_variable='DOCKER_URO_REPO',
       docker_git='https://github.com/V-Sekai/godot-videodecoder.git',
       docker_branch='master',
       docker_dir='.',
