@@ -1116,7 +1116,7 @@ local video_decoder_docker_job(pipeline_name='',
     stages: [
       {
         name: 'buildPushStage',
-        clean_workspace: false,
+        clean_workspace: true,
         fetch_materials: true,
         jobs: [
           {
