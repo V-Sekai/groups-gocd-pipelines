@@ -358,7 +358,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cd linux_x11 && ../squashfs-root/AppRun --create-desktop-file --icon-file=../v_sekai_linux_x11.svg --appdir ../export_linux_x11"
+                        "cd linux_x11 && ../squashfs-root/AppRun --create-desktop-file --executable ./v_sekai_linux_x11 --icon-file=../v_sekai_linux_x11.svg --appdir ../export_linux_x11"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
