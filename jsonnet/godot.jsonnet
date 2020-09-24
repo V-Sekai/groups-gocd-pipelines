@@ -272,7 +272,7 @@ local groups_export_configurations = {
       'curl -L https://github.com/$(curl -L https://github.com/probonopd/go-appimage/releases | grep "appimagetool-.*-x86_64.AppImage" | head -n 1 | cut -d \'"\' -f 2) -o appimagetool.x86_64.AppImage',
       'chmod +x appimagetool.x86_64.AppImage',
       'tee v_sekai_linux_x11.desktop <<<\"[Desktop Entry]\\nName=Godot Game Engine\\nComment=V-Sekai Client\\nExec=godot.x11.opt.tools.64\\nTerminal=false\\nType=Application\\nCategories=Utility;Application;\"',
-      'cd export_linux_x11 && ./appimagetool.x86_64.AppImage -s ../v_sekai_linux_x11.desktop',
+      'cd export_linux_x11 && ../appimagetool.x86_64.AppImage -s ../v_sekai_linux_x11.desktop',
       './appimagetool.x86_64.AppImage ./export_linux_x11',
     ],
   },
