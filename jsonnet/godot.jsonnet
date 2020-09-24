@@ -269,11 +269,12 @@ local groups_export_configurations = {
     ],
     extra_commands: [
       'cp -a g/addons/vr_manager/openvr/actions export_linux_x11/',
-      'curl -L https://github.com/$(curl -L https://github.com/probonopd/go-appimage/releases | grep "appimagetool-.*-x86_64.AppImage" | head -n 1 | cut -d \'"\' -f 2) -o appimagetool.x86_64.AppImage',
-      'chmod +x appimagetool.x86_64.AppImage',
-      'tee v_sekai_linux_x11.desktop <<<\"[Desktop Entry]\\nName=Godot Game Engine\\nComment=V-Sekai Client\\nExec=godot.x11.opt.tools.64\\nTerminal=false\\nType=Application\\nCategories=Utility;Application;\"',
-      'cd export_linux_x11 && ../appimagetool.x86_64.AppImage --appimage-extract-and-run -s ../v_sekai_linux_x11.desktop',
-      './appimagetool.x86_64.AppImage --appimage-extract-and-run ./export_linux_x11',
+      'mv export_linux_x11/ linux_x11',
+      'tee v_sekai_linux_x11.desktop <<<"[Desktop Entry]\\nName=Godot Game Engine\\nComment=V-Sekai Client\\nExec=godot.x11.opt.tools.64\\nTerminal=false\\nType=Application\\nCategories=Utility;Application;"',
+      'curl -L https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage -o linuxdeploy-x86_64.AppImage',
+      'chmod a+x linuxdeploy-x86_64.AppImage',     
+      './appimagetool.x86_64.AppImage --appimage-extract',
+      './squashfs-root/AppRun -d v_sekai_linux_x11.desktop --appdir export_linux_x11',
     ],
   },
   "linuxServer": {
