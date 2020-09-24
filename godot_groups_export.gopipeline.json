@@ -309,6 +309,42 @@
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "echo -e \"[Desktop Entry]\\nName=Godot Game Engine\\nComment=V-Sekai Client\\nExec=godot.x11.opt.tools.64\\nTerminal=false\\nType=Application\\nCategories=Utility;Application;\" > v_sekai_linux_x11.desktop"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "wget -c -nv \"https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage\""
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "chmod a+x linuxdeployqt-continuous-x86_64.AppImage"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cd export_linux_x11 && ./linuxdeployqt-continuous-x86_64.AppImage ../v_sekai_linux_x11.desktop -appimage -verbose=2"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
                   }
                ]
             },
