@@ -309,60 +309,6 @@
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": ""
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "mv export_linux_x11/ linux_x11"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "curl -L https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage -o linuxdeploy-x86_64.AppImage"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "chmod a+x linuxdeploy-x86_64.AppImage"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "./linuxdeploy-x86_64.AppImage --appimage-extract"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "touch v_sekai_linux_x11.svg"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cd linux_x11 && ../squashfs-root/AppRun --create-desktop-file --executable ./v_sekai_linux_x11 --icon-file=../v_sekai_linux_x11.svg --appdir ../export_linux_x11"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
                   }
                ]
             },

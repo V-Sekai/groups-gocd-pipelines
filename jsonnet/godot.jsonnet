@@ -269,12 +269,6 @@ local groups_export_configurations = {
     ],
     extra_commands: [
       'cp -a g/addons/vr_manager/openvr/actions export_linux_x11/',
-      'mv export_linux_x11/ linux_x11',
-      'curl -L https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage -o linuxdeploy-x86_64.AppImage',
-      'chmod a+x linuxdeploy-x86_64.AppImage',     
-      './linuxdeploy-x86_64.AppImage --appimage-extract',
-      'touch v_sekai_linux_x11.svg',
-      'cd linux_x11 && ../squashfs-root/AppRun --create-desktop-file --executable ./v_sekai_linux_x11 --icon-file=../v_sekai_linux_x11.svg --appdir ../export_linux_x11',
     ],
   },
   "linuxServer": {
