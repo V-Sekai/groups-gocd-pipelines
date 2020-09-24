@@ -340,7 +340,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cd export_linux_x11 && ../linuxdeployqt-continuous-x86_64.AppImage ../v_sekai_linux_x11.desktop -appimage -verbose=2"
+                        "cd export_linux_x11 && ../linuxdeployqt-continuous-x86_64.AppImage --appimage-extract-and-run ../v_sekai_linux_x11.desktop -appimage -verbose=2"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

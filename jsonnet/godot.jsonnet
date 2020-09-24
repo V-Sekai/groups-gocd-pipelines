@@ -272,7 +272,7 @@ local groups_export_configurations = {
       'tee v_sekai_linux_x11.desktop <<<"[Desktop Entry]\\nName=Godot Game Engine\\nComment=V-Sekai Client\\nExec=godot.x11.opt.tools.64\\nTerminal=false\\nType=Application\\nCategories=Utility;Application;"',
       'curl -L https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage -o linuxdeployqt-continuous-x86_64.AppImage',
       'chmod a+x linuxdeployqt-continuous-x86_64.AppImage',
-      'cd export_linux_x11 && ../linuxdeployqt-continuous-x86_64.AppImage ../v_sekai_linux_x11.desktop -appimage -verbose=2',      
+      'cd export_linux_x11 && ../linuxdeployqt-continuous-x86_64.AppImage --appimage-extract-and-run ../v_sekai_linux_x11.desktop -appimage -verbose=2',      
     ],
   },
   "linuxServer": {
