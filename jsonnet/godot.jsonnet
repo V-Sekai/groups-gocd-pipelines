@@ -270,12 +270,11 @@ local groups_export_configurations = {
     extra_commands: [
       'cp -a g/addons/vr_manager/openvr/actions export_linux_x11/',
       'mv export_linux_x11/ linux_x11',
-      'tee v_sekai_linux_x11.desktop <<<"[Desktop Entry]\\nIcon=v_sekai_linux_x11.svg\\nName=Godot Game Engine\\nComment=V-Sekai Client\\nExec=godot.x11.opt.tools.64\\nTerminal=false\\nType=Application\\nCategories=Utility;Application;"',
       'curl -L https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage -o linuxdeploy-x86_64.AppImage',
       'chmod a+x linuxdeploy-x86_64.AppImage',     
       './linuxdeploy-x86_64.AppImage --appimage-extract',
       'touch v_sekai_linux_x11.svg',
-      'cd linux_x11 && ../squashfs-root/AppRun -d ../v_sekai_linux_x11.desktop --icon-file=../v_sekai_linux_x11.svg --appdir ../export_linux_x11',
+      'cd linux_x11 && ../squashfs-root/AppRun --create-desktop-file --icon-file=../v_sekai_linux_x11.svg --appdir ../export_linux_x11',
     ],
   },
   "linuxServer": {
