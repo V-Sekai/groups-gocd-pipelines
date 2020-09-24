@@ -322,7 +322,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "tee v_sekai_linux_x11.desktop <<<\"[Desktop Entry]\\nName=Godot Game Engine\\nComment=V-Sekai Client\\nExec=godot.x11.opt.tools.64\\nTerminal=false\\nType=Application\\nCategories=Utility;Application;\""
+                        "tee v_sekai_linux_x11.desktop <<<\"[Desktop Entry]\\nIcon=v_sekai_linux_x11.svg\\nName=Godot Game Engine\\nComment=V-Sekai Client\\nExec=godot.x11.opt.tools.64\\nTerminal=false\\nType=Application\\nCategories=Utility;Application;\""
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -358,7 +358,16 @@
                   {
                      "arguments": [
                         "-c",
-                        "cd linux_x11 && ../squashfs-root/AppRun -d ../v_sekai_linux_x11.desktop --appdir ../export_linux_x11"
+                        "touch v_sekai_linux_x11.svg"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cd linux_x11 && ../squashfs-root/AppRun -d ../v_sekai_linux_x11.desktop --icon v_sekai_linux_x11.svg --appdir ../export_linux_x11"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
