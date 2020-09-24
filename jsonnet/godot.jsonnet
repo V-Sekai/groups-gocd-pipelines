@@ -275,7 +275,7 @@ local groups_export_configurations = {
       'chmod a+x linuxdeploy-x86_64.AppImage',     
       './linuxdeploy-x86_64.AppImage --appimage-extract',
       'touch v_sekai_linux_x11.svg',
-      'cd linux_x11 && ../squashfs-root/AppRun -d ../v_sekai_linux_x11.desktop --icon v_sekai_linux_x11.svg --appdir ../export_linux_x11',
+      'cd linux_x11 && ../squashfs-root/AppRun -d ../v_sekai_linux_x11.desktop --icon-file=v_sekai_linux_x11.svg --appdir ../export_linux_x11',
     ],
   },
   "linuxServer": {
