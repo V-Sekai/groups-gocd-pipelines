@@ -349,7 +349,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "./appimagetool.x86_64.AppImage --appimage-extract"
+                        "./linuxdeploy-x86_64.AppImage --appimage-extract"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
