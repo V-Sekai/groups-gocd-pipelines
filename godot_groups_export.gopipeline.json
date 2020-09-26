@@ -175,7 +175,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -a g/addons/vr_manager/openvr/actions export_windows/"
+                        "cp -a g/assets/actions/openvr/actions export_windows/"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -304,7 +304,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -a g/addons/vr_manager/openvr/actions export_linux_x11/"
+                        "cp -a g/assets/actions/openvr/actions export_linux_x11/"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

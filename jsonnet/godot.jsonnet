@@ -249,7 +249,7 @@ local groups_export_configurations = {
       'cp -p godot_openvr/libgodot_openvr.dll godot_openvr/openvr_api.dll g/addons/godot-openvr/bin/win64/',
     ],
     extra_commands: [
-      'cp -a g/addons/vr_manager/openvr/actions export_windows/',
+      'cp -a g/assets/actions/openvr/actions export_windows/',
       'cp -p pdbs/*.pdb godot_speech/*.pdb godot_openvr/*.pdb export_windows/'
     ],
   },
@@ -268,7 +268,7 @@ local groups_export_configurations = {
       'cp -p godot_openvr/libgodot_openvr.so godot_openvr/libopenvr_api.so g/addons/godot-openvr/bin/x11/',
     ],
     extra_commands: [
-      'cp -a g/addons/vr_manager/openvr/actions export_linux_x11/',
+      'cp -a g/assets/actions/openvr/actions export_linux_x11/',
     ],
   },
   "linuxServer": {
