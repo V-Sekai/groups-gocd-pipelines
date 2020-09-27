@@ -356,7 +356,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cd emsdk && emsdk activate latest"
+                        "../emsdk/emsdk activate latest"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
