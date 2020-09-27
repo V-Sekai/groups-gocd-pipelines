@@ -148,6 +148,44 @@
                      "working_directory": "p"
                   }
                ]
+            },
+            {
+               "artifacts": [ ],
+               "environment_variables": [ ],
+               "name": "webJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "job": "webJob",
+                     "pipeline": "gdnative-cpp",
+                     "source": "godot-cpp",
+                     "stage": "godotCppStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a godot-cpp p"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "scons werror=no platform=web target=release -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes--version"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  }
+               ]
             }
          ],
          "name": "gdnativeBuildStage"

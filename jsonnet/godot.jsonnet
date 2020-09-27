@@ -173,6 +173,20 @@ local groups_gdnative_plugins = {
         ],
         #install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
       },
+      "web": {
+        artifacts: [
+        ],
+        output_artifacts: [
+        ],
+        debug_artifacts: [
+        ],
+        scons_arguments: "--version",
+        environment_variables: [],
+        prepare_commands: [],
+        extra_commands: [
+        ],
+        #install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
+      },
     },
   },
   "godot_openvr": {
@@ -226,6 +240,22 @@ local groups_gdnative_plugins = {
         ],
         extra_commands: [
           "cd demo/addons/godot-openvr/bin/x11 && mv libgodot_openvr.so libgodot_openvr.dbg.so && strip --strip-debug -o libgodot_openvr.so libgodot_openvr.dbg.so"
+        ],
+        #install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
+      },     
+      "web": {
+        artifacts: [
+        ],
+        output_artifacts: [
+        ],
+        debug_artifacts: [
+        ],
+        scons_arguments: "--versionlp",
+        environment_variables: [],
+        # NOTE: We will use prebuilt libopenvr_api.so
+        prepare_commands: [
+        ],
+        extra_commands: [
         ],
         #install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
       },
