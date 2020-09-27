@@ -16,7 +16,7 @@
          "url": "https://github.com/V-Sekai/godot.git"
       },
       {
-         "branch": "2.0.4",
+         "branch": "master",
          "destination": "emsdk",
          "name": "emsdk_git_sandbox",
          "type": "git",
