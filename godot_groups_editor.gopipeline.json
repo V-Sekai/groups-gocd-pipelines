@@ -14,6 +14,13 @@
          "name": "godot_sandbox",
          "type": "git",
          "url": "https://github.com/V-Sekai/godot.git"
+      },
+      {
+         "branch": "2.0.4",
+         "destination": "emsdk",
+         "name": "emsdk_git_sandbox",
+         "type": "git",
+         "url": "https://github.com/emscripten-core/emsdk.git"
       }
    ],
    "name": "godot-template-groups",
@@ -346,6 +353,15 @@
                   "mingw5"
                ],
                "tasks": [
+                  {
+                     "arguments": [
+                        "-c",
+                        "cd emsdk && emsdk activate latest"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
                   {
                      "arguments": [
                         "-c",
