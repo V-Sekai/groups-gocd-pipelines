@@ -127,48 +127,6 @@
                      "working_directory": "g"
                   }
                ]
-            },
-            {
-               "artifacts": [
-                  {
-                     "destination": "",
-                     "source": "g/bin/godot_server.x11.opt.tools.64.llvm",
-                     "type": "build"
-                  }
-               ],
-               "name": "webJob",
-               "resources": [
-                  "mingw5",
-                  "linux"
-               ],
-               "tasks": [
-                  {
-                     "arguments": [
-                        "-c",
-                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "scons werror=no platform=javascript target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp g/bin/godot.javascript.opt.debug.zipg/bin/godot_server.x11.opt.tools.64.llvm"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec"
-                  }
-               ]
             }
          ],
          "name": "defaultStage"

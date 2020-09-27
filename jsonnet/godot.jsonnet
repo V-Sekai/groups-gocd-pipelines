@@ -123,7 +123,7 @@ local platform_info_dict = {
   },
 };
 
-local enabled_engine_platforms = [platform_info_dict[x] for x in ["windows", "linux", "server", "web"]];
+local enabled_engine_platforms = [platform_info_dict[x] for x in ["windows", "linux", "server"]];
 
 local enabled_template_platforms = [platform_info_dict[x] for x in ["windows", "linux", "server", "web"]];
 
