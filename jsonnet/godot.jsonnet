@@ -65,7 +65,7 @@ local platform_info_dict = {
     strip_command: null, # unknown if release should be built separately.
     scons_platform: "javascript",
     godot_scons_arguments: "use_llvm=yes builtin_freetype=yes",
-    extra_commands: ["/opt/emsdk/emsdk activate latest"],
+    extra_commands: ["source /opt/emsdk/emsdk_env.sh"],
     environment_variables: [],
     template_artifacts_override: null,
     template_output_artifacts: null,
