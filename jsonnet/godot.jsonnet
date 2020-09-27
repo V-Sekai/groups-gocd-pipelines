@@ -64,7 +64,7 @@ local platform_info_dict = {
     template_release_binary: "webassembly_release.zip",
     strip_command: null, # unknown if release should be built separately.
     scons_platform: "javascript",
-    gdnative_platform: "web",
+    gdnative_platform: "linux",
     godot_scons_arguments: "use_llvm=yes builtin_freetype=yes",
     extra_commands: ["cd emsdk && emsdk activate latest"],
     environment_variables: [],
@@ -738,7 +738,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
               working_directory: 'godot-cpp',
             },
           ],
-        } for platform_info in enabled_template_platforms if platform_info["platform_name"] != "server" && platform_info["platform_name"] != "web"
+        } for platform_info in enabled_template_platforms if platform_info["platform_name"] != "server"
       ],
     },
   ],
