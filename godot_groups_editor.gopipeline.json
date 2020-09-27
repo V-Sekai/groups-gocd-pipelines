@@ -349,7 +349,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "source /opt/emsdk/emsdk_env.sh"
+                        "/opt/emsdk/emsdk activate latest"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
