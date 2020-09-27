@@ -57,7 +57,7 @@ local platform_info_dict = {
   },
   "web": {
     platform_name: "web",
-    scons_env: "",
+    scons_env: "HOME=../emsdk ",
     intermediate_godot_binary: "godot.javascript.opt.debug.zip",
     editor_godot_binary: HEADLESS_SERVER_EDITOR,
     template_debug_binary: "webassembly_debug.zip",
