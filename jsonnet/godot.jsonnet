@@ -59,11 +59,12 @@ local platform_info_dict = {
     platform_name: "web",
     scons_env: "",
     intermediate_godot_binary: "godot.javascript.opt.debug.zip",
-    editor_godot_binary: null,
+    editor_godot_binary: HEADLESS_SERVER_EDITOR,
     template_debug_binary: "webassembly_debug.zip",
     template_release_binary: "webassembly_release.zip",
     strip_command: null, # unknown if release should be built separately.
     scons_platform: "javascript",
+    gdnative_platform: "web",
     godot_scons_arguments: "use_llvm=yes builtin_freetype=yes",
     extra_commands: ["source /opt/emsdk/emsdk_env.sh"],
     environment_variables: [],
@@ -122,9 +123,9 @@ local platform_info_dict = {
   },
 };
 
-local enabled_engine_platforms = [platform_info_dict[x] for x in ["windows", "linux", "server"]];
+local enabled_engine_platforms = [platform_info_dict[x] for x in ["windows", "linux", "server", "web"]];
 
-local enabled_template_platforms = [platform_info_dict[x] for x in ["windows", "linux", "server"]];
+local enabled_template_platforms = [platform_info_dict[x] for x in ["windows", "linux", "server", "web"]];
 
 
 
@@ -252,6 +253,19 @@ local groups_export_configurations = {
       'cp -a g/assets/actions/openvr/actions export_windows/',
       'cp -p pdbs/*.pdb godot_speech/*.pdb godot_openvr/*.pdb export_windows/'
     ],
+  },  
+  "web": {
+    export_name: "web",
+    platform_name: "web",
+    gdnative_platform: "web",
+    export_configuration: "Web",
+    export_directory: "export_web",
+    export_executable: "v_sekai_web",
+    itchio_out: "windows-web",
+    prepare_commands: [
+    ],
+    extra_commands: [
+    ],
   },
   "linuxDesktop": {
     export_name: "linuxDesktop",
@@ -319,13 +333,6 @@ local godot_pipeline(pipeline_name='',
       branch: godot_branch,
       destination: 'g',
     },
-#    {
-#      name: 'butler_git_sandbox',
-#      url: gocd_build_git,
-#      type: 'git',
-#      branch: gocd_build_branch,
-#      destination: 'b',
-#    },
     if godot_modules_git != '' then
       {
         name: 'godot_custom_modules',
