@@ -57,7 +57,7 @@ local platform_info_dict = {
   },
   "web": {
     platform_name: "web",
-    scons_env: "",
+    scons_env: "source /opt/emsdk/emsdk_env.sh && ",
     intermediate_godot_binary: "godot.javascript.opt.debug.zip",
     editor_godot_binary: HEADLESS_SERVER_EDITOR,
     template_debug_binary: "webassembly_debug.zip",
@@ -66,7 +66,7 @@ local platform_info_dict = {
     scons_platform: "javascript",
     gdnative_platform: "web",
     godot_scons_arguments: "use_llvm=yes builtin_freetype=yes",
-    extra_commands: ["/opt/emsdk/emsdk activate latest"],
+    extra_commands: [],
     environment_variables: [],
     template_artifacts_override: null,
     template_output_artifacts: null,

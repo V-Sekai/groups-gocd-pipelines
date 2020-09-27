@@ -179,7 +179,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=web target=release -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes--version"
+                        "source /opt/emsdk/emsdk_env.sh && scons werror=no platform=web target=release -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes--version"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
