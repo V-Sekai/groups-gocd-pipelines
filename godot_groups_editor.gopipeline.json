@@ -358,7 +358,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "source /opt/emsdk/emsdk_env.sh && scons werror=no platform=javascript target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes"
+                        "source /opt/emsdk/emsdk_env.sh && CACHE=.emscripten scons werror=no platform=javascript target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
