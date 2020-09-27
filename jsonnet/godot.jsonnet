@@ -738,7 +738,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
               working_directory: 'godot-cpp',
             },
           ],
-        } for platform_info in enabled_template_platforms if platform_info["platform_name"] != "server"
+        } for platform_info in enabled_template_platforms if platform_info["platform_name"] != "server" && platform_info["platform_name"] != "web"
       ],
     },
   ],
