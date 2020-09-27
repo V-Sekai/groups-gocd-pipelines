@@ -216,7 +216,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "source /opt/emsdk/emsdk_env.sh && CACHE=.emscripten scons werror=no platform=web target=release -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes--versionlp"
+                        "scons werror=no platform=web target=release -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes--versionlp"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
