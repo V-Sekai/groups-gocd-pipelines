@@ -979,11 +979,6 @@ local godot_tools_pipeline_export(pipeline_name='',
               'linux',
               'mingw5',
             ],
-#            environment_variables:
-#              [{
-#                name: 'BUTLER_API_KEY',
-#                encrypted_value: butler_api_key,
-#              },{name: 'ITCHIO_LOGIN', value: ....}],
             tasks: [
               {
                 type: 'fetch',
