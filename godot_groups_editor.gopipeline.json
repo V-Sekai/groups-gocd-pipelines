@@ -356,6 +356,15 @@
                   {
                      "arguments": [
                         "-c",
+                        "../emsdk/emsdk install latest"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
                         "../emsdk/emsdk activate latest"
                      ],
                      "command": "/bin/bash",

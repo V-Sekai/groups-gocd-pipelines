@@ -66,7 +66,7 @@ local platform_info_dict = {
     scons_platform: "javascript",
     gdnative_platform: "linux",
     godot_scons_arguments: "use_llvm=yes builtin_freetype=yes",
-    extra_commands: ["../emsdk/emsdk activate latest"],
+    extra_commands: ["../emsdk/emsdk install latest", "../emsdk/emsdk activate latest"],
     environment_variables: [],
     template_artifacts_override: null,
     template_output_artifacts: null,
