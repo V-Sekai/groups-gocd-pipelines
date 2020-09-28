@@ -59,13 +59,14 @@ local platform_info_dict = {
     platform_name: "web",
     scons_env: "",
     intermediate_godot_binary: "godot.javascript.opt.debug.zip",
-    editor_godot_binary: null,
+    editor_godot_binary: HEADLESS_SERVER_EDITOR,
     template_debug_binary: "webassembly_debug.zip",
     template_release_binary: "webassembly_release.zip",
     strip_command: null, # unknown if release should be built separately.
     scons_platform: "javascript",
+    gdnative_platform: "linux",
     godot_scons_arguments: "use_llvm=yes builtin_freetype=yes",
-    extra_commands: ["/opt/emsdk/emsdk activate latest"],
+    extra_commands: ["cd emsdk && emsdk activate latest"],
     environment_variables: [],
     template_artifacts_override: null,
     template_output_artifacts: null,
@@ -124,7 +125,7 @@ local platform_info_dict = {
 
 local enabled_engine_platforms = [platform_info_dict[x] for x in ["windows", "linux", "server"]];
 
-local enabled_template_platforms = [platform_info_dict[x] for x in ["windows", "linux", "server"]];
+local enabled_template_platforms = [platform_info_dict[x] for x in ["windows", "linux", "server", "web"]];
 
 
 
@@ -169,6 +170,20 @@ local groups_gdnative_plugins = {
         prepare_commands: [],
         extra_commands: [
           "cd bin/release && mv libGodotSpeech.so libGodotSpeech.dbg.so && strip --strip-debug -o libGodotSpeech.so libGodotSpeech.dbg.so"
+        ],
+        #install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
+      },
+      "web": {
+        artifacts: [
+        ],
+        output_artifacts: [
+        ],
+        debug_artifacts: [
+        ],
+        scons_arguments: "--version",
+        environment_variables: [],
+        prepare_commands: [],
+        extra_commands: [
         ],
         #install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
       },
@@ -227,6 +242,22 @@ local groups_gdnative_plugins = {
           "cd demo/addons/godot-openvr/bin/x11 && mv libgodot_openvr.so libgodot_openvr.dbg.so && strip --strip-debug -o libgodot_openvr.so libgodot_openvr.dbg.so"
         ],
         #install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
+      },     
+      "web": {
+        artifacts: [
+        ],
+        output_artifacts: [
+        ],
+        debug_artifacts: [
+        ],
+        scons_arguments: "--versionlp",
+        environment_variables: [],
+        # NOTE: We will use prebuilt libopenvr_api.so
+        prepare_commands: [
+        ],
+        extra_commands: [
+        ],
+        #install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
       },
     },
   },
@@ -251,6 +282,19 @@ local groups_export_configurations = {
     extra_commands: [
       'cp -a g/assets/actions/openvr/actions export_windows/',
       'cp -p pdbs/*.pdb godot_speech/*.pdb godot_openvr/*.pdb export_windows/'
+    ],
+  },  
+  "web": {
+    export_name: "web",
+    platform_name: "web",
+    gdnative_platform: "web",
+    export_configuration: "Web",
+    export_directory: "export_web",
+    export_executable: "v_sekai_web",
+    itchio_out: "windows-web",
+    prepare_commands: [
+    ],
+    extra_commands: [
     ],
   },
   "linuxDesktop": {
@@ -300,6 +344,8 @@ local godot_pipeline(pipeline_name='',
                      godot_status='',
                      godot_git='',
                      godot_branch='',
+                     emsdk_git='',
+                     emsdk_branch='',
                      gocd_group='',
                      godot_modules_git='',
                      godot_modules_branch='') = {
@@ -318,14 +364,14 @@ local godot_pipeline(pipeline_name='',
       type: 'git',
       branch: godot_branch,
       destination: 'g',
+    },      
+    {
+      name: 'emsdk_git_sandbox',
+      url: emsdk_git,
+      type: 'git',
+      branch: emsdk_branch,
+      destination: 'emsdk',
     },
-#    {
-#      name: 'butler_git_sandbox',
-#      url: gocd_build_git,
-#      type: 'git',
-#      branch: gocd_build_branch,
-#      destination: 'b',
-#    },
     if godot_modules_git != '' then
       {
         name: 'godot_custom_modules',
@@ -972,11 +1018,6 @@ local godot_tools_pipeline_export(pipeline_name='',
               'linux',
               'mingw5',
             ],
-#            environment_variables:
-#              [{
-#                name: 'BUTLER_API_KEY',
-#                encrypted_value: butler_api_key,
-#              },{name: 'ITCHIO_LOGIN', value: ....}],
             tasks: [
               {
                 type: 'fetch',
@@ -1238,6 +1279,8 @@ local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godo
     godot_status='groups',
     godot_git='https://github.com/V-Sekai/godot.git',
     godot_branch='groups',
+    emsdk_git='https://github.com/emscripten-core/emsdk.git',
+    emsdk_branch='2.0.4',
     gocd_group='beta',
 #    godot_modules_git='https://github.com/godot-extended-libraries/godot-modules-fire.git',
 #    godot_modules_branch='master',
