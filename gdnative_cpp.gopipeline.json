@@ -195,7 +195,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "source ../emsdk/emsdk_env.sh && scons werror=no platform=linux target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json use_llvm=yes builtin_freetype=yes"
+                        "scons werror=no platform=linux target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json use_llvm=yes builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
