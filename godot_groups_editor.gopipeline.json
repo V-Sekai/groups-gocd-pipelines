@@ -14,13 +14,6 @@
          "name": "godot_sandbox",
          "type": "git",
          "url": "https://github.com/V-Sekai/godot.git"
-      },
-      {
-         "branch": "2.0.4",
-         "destination": "emsdk",
-         "name": "emsdk_git_sandbox",
-         "type": "git",
-         "url": "https://github.com/emscripten-core/emsdk.git"
       }
    ],
    "name": "godot-template-groups",
@@ -328,77 +321,6 @@
                      "working_directory": "g"
                   }
                ]
-            },
-            {
-               "artifacts": [
-                  {
-                     "destination": "",
-                     "source": "g/bin/webassembly_debug.zip",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "",
-                     "source": "g/bin/webassembly_release.zip",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "",
-                     "source": "g/bin/version.txt",
-                     "type": "build"
-                  }
-               ],
-               "name": "webJob",
-               "resources": [
-                  "linux",
-                  "mingw5"
-               ],
-               "tasks": [
-                  {
-                     "arguments": [
-                        "-c",
-                        "cd emsdk && emsdk activate latest"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "scons werror=no platform=javascript target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp bin/godot.javascript.opt.debug.zip bin/webassembly_debug.zip && cp bin/godot.javascript.opt.debug.zip bin/webassembly_release.zip"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "eval `sed -e \"s/ = /=/\" version.py` && echo $major.$minor.$patch.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  }
-               ]
             }
          ],
          "name": "templateStage"
@@ -504,26 +426,6 @@
                      "job": "serverJob",
                      "pipeline": "godot-template-groups",
                      "source": "server_64_release",
-                     "stage": "templateStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "templates",
-                     "is_source_a_file": true,
-                     "job": "webJob",
-                     "pipeline": "godot-template-groups",
-                     "source": "webassembly_debug.zip",
-                     "stage": "templateStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "templates",
-                     "is_source_a_file": true,
-                     "job": "webJob",
-                     "pipeline": "godot-template-groups",
-                     "source": "webassembly_release.zip",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
