@@ -16,7 +16,7 @@
          "url": "https://github.com/V-Sekai/godot.git"
       },
       {
-         "branch": "2.0.4",
+         "branch": "master",
          "destination": "emsdk",
          "name": "emsdk_git_sandbox",
          "type": "git",
@@ -356,7 +356,16 @@
                   {
                      "arguments": [
                         "-c",
-                        "cd emsdk && emsdk activate latest"
+                        "../emsdk/emsdk install latest"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "../emsdk/emsdk activate latest"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -374,7 +383,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=javascript target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes"
+                        "source ../emsdk/emsdk_env.sh && scons werror=no platform=javascript target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
