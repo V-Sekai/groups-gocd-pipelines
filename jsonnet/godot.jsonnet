@@ -1239,8 +1239,8 @@ local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godo
     godot_git='https://github.com/V-Sekai/godot.git',
     godot_branch='groups',
     gocd_group='beta',
-#    godot_modules_git='https://github.com/godot-extended-libraries/godot-modules-fire.git',
-#    godot_modules_branch='master',
+    godot_modules_git='https://github.com/V-Sekai/godot-modules-groups.git',
+    godot_modules_branch='groups',
   )),
   'gdnative_cpp.gopipeline.json'
   : std.prune(

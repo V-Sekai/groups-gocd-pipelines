@@ -14,6 +14,14 @@
          "name": "godot_sandbox",
          "type": "git",
          "url": "https://github.com/V-Sekai/godot.git"
+      },
+      {
+         "branch": "groups",
+         "destination": "godot_custom_modules",
+         "name": "godot_custom_modules",
+         "shallow_clone": false,
+         "type": "git",
+         "url": "https://github.com/V-Sekai/godot-modules-groups.git"
       }
    ],
    "name": "godot-template-groups",
@@ -52,7 +60,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=release_debug -j`nproc` use_lto=no deprecated=no use_mingw=yes use_llvm=yes use_lld=yes use_thinlto=yes LINKFLAGS=-Wl,-pdb= CCFLAGS='-g -gcodeview' debug_symbols=no"
+                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=release_debug -j`nproc` use_lto=no deprecated=no use_mingw=yes use_llvm=yes use_lld=yes use_thinlto=yes LINKFLAGS=-Wl,-pdb= CCFLAGS='-g -gcodeview' debug_symbols=no custom_modules=../godot_custom_modules"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -86,7 +94,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no deprecated=no use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
+                        "scons werror=no platform=x11 target=release_debug -j`nproc` use_lto=no deprecated=no use_static_cpp=yes use_llvm=yes builtin_freetype=yes custom_modules=../godot_custom_modules"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -120,7 +128,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no use_static_cpp=yes use_llvm=yes"
+                        "scons werror=no platform=server target=release_debug -j`nproc` use_lto=no deprecated=no use_static_cpp=yes use_llvm=yes custom_modules=../godot_custom_modules"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
