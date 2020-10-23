@@ -1278,7 +1278,7 @@ local godot_template = [godot_template_chibifire_editor] + [godot_template_stern
     godot_status='chibifire',
     godot_git='https://github.com/godot-extended-libraries/godot-fire.git',
     godot_branch='extended-fire',
-    gocd_group='beta',
+    gocd_group='chibifire',
     godot_modules_git='https://github.com/godot-extended-libraries/godot-modules-fire.git',
     godot_modules_branch='master',
   )),
@@ -1289,7 +1289,7 @@ local godot_template = [godot_template_chibifire_editor] + [godot_template_stern
     godot_status='stern-flowers',
     godot_git='https://github.com/godotengine/godot.git',
     godot_branch='master',
-    gocd_group='beta'
+    gocd_group='stern-flowers'
   )),
   // GROUPS
   'godot_groups_editor.gopipeline.json'

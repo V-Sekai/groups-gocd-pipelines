@@ -5,7 +5,7 @@
          "value": "chibifire"
       }
    ],
-   "group": "beta",
+   "group": "chibifire",
    "label_template": "chibifire.${godot_sandbox[:8]}.${COUNT}",
    "materials": [
       {

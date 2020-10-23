@@ -5,7 +5,7 @@
          "value": "stern-flowers"
       }
    ],
-   "group": "beta",
+   "group": "stern-flowers",
    "label_template": "stern-flowers.${godot_sandbox[:8]}.${COUNT}",
    "materials": [
       {
