@@ -1261,7 +1261,7 @@ local godot_gdnative_pipelines =
   [plugin_info.pipeline_name for plugin_info in enabled_groups_gdnative_plugins];
 
 
-local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
+local godot_template = [godot_template_chibifire_editor] + [godot_template_stern_flowers_editor] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
 
 
 {
