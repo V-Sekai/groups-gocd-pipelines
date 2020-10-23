@@ -1,17 +1,17 @@
-local HEADLESS_SERVER_EDITOR = "godot_server.x11.opt.tools.64.llvm";
+local HEADLESS_SERVER_EDITOR = 'godot_server.x11.opt.tools.64.llvm';
 
 local platform_info_dict = {
-  "windows": {
-    platform_name: "windows",
-    scons_env: "PATH=/opt/llvm-mingw/bin:$PATH ",
-    intermediate_godot_binary: "godot.windows.opt.tools.64.exe",
-    editor_godot_binary: "godot.windows.opt.tools.64.exe",
-    template_debug_binary: "windows_64_debug.exe",
-    template_release_binary: "windows_64_release.exe",
-    export_directory: "export_windows",
-    scons_platform: "windows",
-    gdnative_platform: "windows",
-    strip_command: "mingw-strip --strip-debug",
+  windows: {
+    platform_name: 'windows',
+    scons_env: 'PATH=/opt/llvm-mingw/bin:$PATH ',
+    intermediate_godot_binary: 'godot.windows.opt.tools.64.exe',
+    editor_godot_binary: 'godot.windows.opt.tools.64.exe',
+    template_debug_binary: 'windows_64_debug.exe',
+    template_release_binary: 'windows_64_release.exe',
+    export_directory: 'export_windows',
+    scons_platform: 'windows',
+    gdnative_platform: 'windows',
+    strip_command: 'mingw-strip --strip-debug',
     godot_scons_arguments: "use_mingw=yes use_llvm=yes use_lld=yes use_thinlto=yes LINKFLAGS=-Wl,-pdb= CCFLAGS='-g -gcodeview' debug_symbols=no",
     extra_commands: [],
     environment_variables: [],
@@ -19,69 +19,69 @@ local platform_info_dict = {
     template_output_artifacts: null,
     template_extra_commands: [],
   },
-  "linux": {
-    platform_name: "linux",
-    scons_env: "",
-    intermediate_godot_binary: "godot.x11.opt.tools.64.llvm",
-    editor_godot_binary: "godot.x11.opt.tools.64.llvm",
-    template_debug_binary: "linux_x11_64_debug",
-    template_release_binary: "linux_x11_64_release",
-    export_directory: "export_linux_x11",
-    scons_platform: "x11",
-    gdnative_platform: "linux",
-    strip_command: "strip --strip-debug",
-    godot_scons_arguments: "use_static_cpp=yes use_llvm=yes builtin_freetype=yes",
+  linux: {
+    platform_name: 'linux',
+    scons_env: '',
+    intermediate_godot_binary: 'godot.x11.opt.tools.64.llvm',
+    editor_godot_binary: 'godot.x11.opt.tools.64.llvm',
+    template_debug_binary: 'linux_x11_64_debug',
+    template_release_binary: 'linux_x11_64_release',
+    export_directory: 'export_linux_x11',
+    scons_platform: 'x11',
+    gdnative_platform: 'linux',
+    strip_command: 'strip --strip-debug',
+    godot_scons_arguments: 'use_static_cpp=yes use_llvm=yes builtin_freetype=yes',
     extra_commands: [],
     environment_variables: [],
     template_artifacts_override: null,
     template_output_artifacts: null,
     template_extra_commands: [],
   },
-  "server": {
-    platform_name: "server",
-    scons_env: "",
+  server: {
+    platform_name: 'server',
+    scons_env: '',
     intermediate_godot_binary: HEADLESS_SERVER_EDITOR,
     editor_godot_binary: HEADLESS_SERVER_EDITOR,
-    template_debug_binary: "server_64_debug",
-    template_release_binary: "server_64_release",
-    export_directory: "export_linux_server",
-    scons_platform: "server",
-    gdnative_platform: "linux",
-    strip_command: "strip --strip-debug",
-    godot_scons_arguments: "use_static_cpp=yes use_llvm=yes", # FIXME: use_llvm=yes????
+    template_debug_binary: 'server_64_debug',
+    template_release_binary: 'server_64_release',
+    export_directory: 'export_linux_server',
+    scons_platform: 'server',
+    gdnative_platform: 'linux',
+    strip_command: 'strip --strip-debug',
+    godot_scons_arguments: 'use_static_cpp=yes use_llvm=yes',  // FIXME: use_llvm=yes????
     extra_commands: [],
     environment_variables: [],
     template_artifacts_override: null,
     template_output_artifacts: null,
     template_extra_commands: [],
   },
-  "web": {
-    platform_name: "web",
-    scons_env: "",
-    intermediate_godot_binary: "godot.javascript.opt.debug.zip",
+  web: {
+    platform_name: 'web',
+    scons_env: '',
+    intermediate_godot_binary: 'godot.javascript.opt.debug.zip',
     editor_godot_binary: null,
-    template_debug_binary: "webassembly_debug.zip",
-    template_release_binary: "webassembly_release.zip",
-    strip_command: null, # unknown if release should be built separately.
-    scons_platform: "javascript",
-    godot_scons_arguments: "use_llvm=yes builtin_freetype=yes",
-    extra_commands: ["/opt/emsdk/emsdk activate latest"],
+    template_debug_binary: 'webassembly_debug.zip',
+    template_release_binary: 'webassembly_release.zip',
+    strip_command: null,  // unknown if release should be built separately.
+    scons_platform: 'javascript',
+    godot_scons_arguments: 'use_llvm=yes builtin_freetype=yes',
+    extra_commands: ['/opt/emsdk/emsdk activate latest'],
     environment_variables: [],
     template_artifacts_override: null,
     template_output_artifacts: null,
     template_extra_commands: [],
   },
-  "osx": {
-    platform_name: "osx",
-    scons_env: "OSXCROSS_ROOT=/opt/osxcross ",
-    intermediate_godot_binary: "godot.osx.opt.tools.64",
-    editor_godot_binary: "Godot",
-    template_debug_binary: "godot.osx.opt.debug.64", # FIXME
-    template_release_binary: "godot.osx.opt.debug.64", # FIXME
-    scons_platform: "osx",
+  osx: {
+    platform_name: 'osx',
+    scons_env: 'OSXCROSS_ROOT=/opt/osxcross ',
+    intermediate_godot_binary: 'godot.osx.opt.tools.64',
+    editor_godot_binary: 'Godot',
+    template_debug_binary: 'godot.osx.opt.debug.64',  // FIXME
+    template_release_binary: 'godot.osx.opt.debug.64',  // FIXME
+    scons_platform: 'osx',
     strip_command: null,
-    # FIXME: We should look into using osx_tools.app instead of osx_template.app, because we build with tools=yes
-    godot_scons_arguments: "osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes",
+    // FIXME: We should look into using osx_tools.app instead of osx_template.app, because we build with tools=yes
+    godot_scons_arguments: 'osxcross_sdk=darwin19 CXXFLAGS="-Wno-deprecated-declarations -Wno-error " builtin_freetype=yes',
     extra_commands: [],
     environment_variables: [
       {
@@ -122,165 +122,164 @@ local platform_info_dict = {
   },
 };
 
-local enabled_engine_platforms = [platform_info_dict[x] for x in ["windows", "linux", "server"]];
+local enabled_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'server']];
 
-local enabled_template_platforms = [platform_info_dict[x] for x in ["windows", "linux", "server"]];
-
+local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'server']];
 
 
 local groups_gdnative_plugins = {
-  "godot_speech": {
-    name: "godot_speech",
-    pipeline_name: "gdnative-godot-speech",
-    git_url: "https://github.com/V-Sekai/godot_speech.git",
-    git_branch: "master",
+  godot_speech: {
+    name: 'godot_speech',
+    pipeline_name: 'gdnative-godot-speech',
+    git_url: 'https://github.com/V-Sekai/godot_speech.git',
+    git_branch: 'master',
     platforms: {
-      "windows": {
+      windows: {
         artifacts: [
-          "bin/release/libGodotSpeech.dll"
+          'bin/release/libGodotSpeech.dll',
         ],
         output_artifacts: [
-          "libGodotSpeech.dll"
+          'libGodotSpeech.dll',
         ],
         debug_artifacts: [
-          "bin/release/libGodotSpeech.dbg.dll",
-          "bin/release/libGodotSpeech.pdb",
+          'bin/release/libGodotSpeech.dbg.dll',
+          'bin/release/libGodotSpeech.pdb',
         ],
-        scons_arguments: "",
+        scons_arguments: '',
         environment_variables: [],
         prepare_commands: [],
         extra_commands: [
-          "cd bin/release && mv libGodotSpeech.dll libGodotSpeech.dbg.dll && mingw-strip --strip-debug -o libGodotSpeech.dll libGodotSpeech.dbg.dll"
+          'cd bin/release && mv libGodotSpeech.dll libGodotSpeech.dbg.dll && mingw-strip --strip-debug -o libGodotSpeech.dll libGodotSpeech.dbg.dll',
         ],
-        #install_task: ["mv libGodotSpeech.dll g/addons/godot_speech/bin/libGodotSpeech.dll"],
+        //install_task: ["mv libGodotSpeech.dll g/addons/godot_speech/bin/libGodotSpeech.dll"],
       },
-      "linux": {
+      linux: {
         artifacts: [
-          "bin/release/libGodotSpeech.so"
+          'bin/release/libGodotSpeech.so',
         ],
         output_artifacts: [
-          "libGodotSpeech.so"
+          'libGodotSpeech.so',
         ],
         debug_artifacts: [
-          "bin/release/libGodotSpeech.dbg.so"
+          'bin/release/libGodotSpeech.dbg.so',
         ],
-        scons_arguments: "",
+        scons_arguments: '',
         environment_variables: [],
         prepare_commands: [],
         extra_commands: [
-          "cd bin/release && mv libGodotSpeech.so libGodotSpeech.dbg.so && strip --strip-debug -o libGodotSpeech.so libGodotSpeech.dbg.so"
+          'cd bin/release && mv libGodotSpeech.so libGodotSpeech.dbg.so && strip --strip-debug -o libGodotSpeech.so libGodotSpeech.dbg.so',
         ],
-        #install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
+        //install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
       },
     },
   },
-  "godot_openvr": {
-    name: "godot_openvr",
-    pipeline_name: "gdnative-godot-openvr",
-    git_url: "https://github.com/V-Sekai/godot_openvr.git",
-    git_branch: "groups",
+  godot_openvr: {
+    name: 'godot_openvr',
+    pipeline_name: 'gdnative-godot-openvr',
+    git_url: 'https://github.com/V-Sekai/godot_openvr.git',
+    git_branch: 'groups',
     platforms: {
-      "windows": {
+      windows: {
         artifacts: [
-          "demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll",
-          "demo/addons/godot-openvr/bin/win64/openvr_api.dll",
+          'demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll',
+          'demo/addons/godot-openvr/bin/win64/openvr_api.dll',
         ],
         output_artifacts: [
-          "libgodot_openvr.dll",
-          "openvr_api.dll",
+          'libgodot_openvr.dll',
+          'openvr_api.dll',
         ],
         debug_artifacts: [
-          "demo/addons/godot-openvr/bin/win64/libgodot_openvr.dbg.dll",
-          "demo/addons/godot-openvr/bin/win64/libgodot_openvr.pdb",
+          'demo/addons/godot-openvr/bin/win64/libgodot_openvr.dbg.dll',
+          'demo/addons/godot-openvr/bin/win64/libgodot_openvr.pdb',
         ],
-        scons_arguments: "",
+        scons_arguments: '',
         environment_variables: [],
-        # NOTE: We will use prebuilt openvr_api.dll
+        // NOTE: We will use prebuilt openvr_api.dll
         prepare_commands: [
-          "python wrap_openvr.py",
-          "rm -f demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll",
+          'python wrap_openvr.py',
+          'rm -f demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll',
         ],
         extra_commands: [
-          "cd demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.dll libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll"
+          'cd demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.dll libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll',
         ],
-        #install_task: ["mv libGodotSpeech.dll g/addons/godot_speech/bin/libGodotSpeech.dll"],
+        //install_task: ["mv libGodotSpeech.dll g/addons/godot_speech/bin/libGodotSpeech.dll"],
       },
-      "linux": {
+      linux: {
         artifacts: [
-          "demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
-          "demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
+          'demo/addons/godot-openvr/bin/x11/libgodot_openvr.so',
+          'demo/addons/godot-openvr/bin/x11/libopenvr_api.so',
         ],
         output_artifacts: [
-          "libgodot_openvr.so",
-          "libopenvr_api.so",
+          'libgodot_openvr.so',
+          'libopenvr_api.so',
         ],
         debug_artifacts: [
-          "demo/addons/godot-openvr/bin/x11/libgodot_openvr.dbg.so",
+          'demo/addons/godot-openvr/bin/x11/libgodot_openvr.dbg.so',
         ],
-        scons_arguments: "",
+        scons_arguments: '',
         environment_variables: [],
-        # NOTE: We will use prebuilt libopenvr_api.so
+        // NOTE: We will use prebuilt libopenvr_api.so
         prepare_commands: [
-          "rm -f demo/addons/godot-openvr/bin/x11/libgodot_openvr.so"
+          'rm -f demo/addons/godot-openvr/bin/x11/libgodot_openvr.so',
         ],
         extra_commands: [
-          "cd demo/addons/godot-openvr/bin/x11 && mv libgodot_openvr.so libgodot_openvr.dbg.so && strip --strip-debug -o libgodot_openvr.so libgodot_openvr.dbg.so"
+          'cd demo/addons/godot-openvr/bin/x11 && mv libgodot_openvr.so libgodot_openvr.dbg.so && strip --strip-debug -o libgodot_openvr.so libgodot_openvr.dbg.so',
         ],
-        #install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
+        //install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
       },
     },
   },
 };
 
-# TODO: Use std.escapeStringBash in case export configurations wish to output executables with spaces.
+// TODO: Use std.escapeStringBash in case export configurations wish to output executables with spaces.
 local groups_export_configurations = {
-  "windows": {
-    export_name: "windows",
-    platform_name: "windows",
-    gdnative_platform: "windows",
-    export_configuration: "Windows Desktop",
-    export_directory: "export_windows",
-    export_executable: "v_sekai_windows.exe",
-    itchio_out: "windows-master",
+  windows: {
+    export_name: 'windows',
+    platform_name: 'windows',
+    gdnative_platform: 'windows',
+    export_configuration: 'Windows Desktop',
+    export_directory: 'export_windows',
+    export_executable: 'v_sekai_windows.exe',
+    itchio_out: 'windows-master',
     prepare_commands: [
-      #'mingw-strip --strip-debug godot_speech/libGodotSpeech.dll',
+      //'mingw-strip --strip-debug godot_speech/libGodotSpeech.dll',
       'cp -p godot_speech/libGodotSpeech.dll g/addons/godot_speech/bin/',
-      #'strip --strip-debug godot_openvr/libgodot_openvr.dll',
+      //'strip --strip-debug godot_openvr/libgodot_openvr.dll',
       'cp -p godot_openvr/libgodot_openvr.dll godot_openvr/openvr_api.dll g/addons/godot-openvr/bin/win64/',
     ],
     extra_commands: [
       'cp -a g/assets/actions/openvr/actions export_windows/',
-      'cp -p pdbs/*.pdb godot_speech/*.pdb godot_openvr/*.pdb export_windows/'
+      'cp -p pdbs/*.pdb godot_speech/*.pdb godot_openvr/*.pdb export_windows/',
     ],
   },
-  "linuxDesktop": {
-    export_name: "linuxDesktop",
-    platform_name: "linux",
-    gdnative_platform: "linux",
-    export_configuration: "Linux/X11",
-    export_directory: "export_linux_x11",
-    export_executable: "v_sekai_linux_x11",
-    itchio_out: "x11-master",
+  linuxDesktop: {
+    export_name: 'linuxDesktop',
+    platform_name: 'linux',
+    gdnative_platform: 'linux',
+    export_configuration: 'Linux/X11',
+    export_directory: 'export_linux_x11',
+    export_executable: 'v_sekai_linux_x11',
+    itchio_out: 'x11-master',
     prepare_commands: [
-      #'strip --strip-debug godot_speech/libGodotSpeech.so',
+      //'strip --strip-debug godot_speech/libGodotSpeech.so',
       'cp -p godot_speech/libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so',
-      #'strip --strip-debug godot_openvr/libgodot_openvr.so',
+      //'strip --strip-debug godot_openvr/libgodot_openvr.so',
       'cp -p godot_openvr/libgodot_openvr.so godot_openvr/libopenvr_api.so g/addons/godot-openvr/bin/x11/',
     ],
     extra_commands: [
       'cp -a g/assets/actions/openvr/actions export_linux_x11/',
     ],
   },
-  "linuxServer": {
-    export_name: "linuxServer",
-    platform_name: "server",
-    gdnative_platform: "linux",
-    export_configuration: "Linux/Server",
-    export_directory: "export_linux_server",
-    export_executable: "v_sekai_linux_server",
-    itchio_out: "server-master",
+  linuxServer: {
+    export_name: 'linuxServer',
+    platform_name: 'server',
+    gdnative_platform: 'linux',
+    export_configuration: 'Linux/Server',
+    export_directory: 'export_linux_server',
+    export_executable: 'v_sekai_linux_server',
+    itchio_out: 'server-master',
     prepare_commands: [
-      #'strip --strip-debug godot_speech/libGodotSpeech.so',
+      //'strip --strip-debug godot_speech/libGodotSpeech.so',
       'cp -p godot_speech/libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so',
     ],
     extra_commands: [
@@ -289,11 +288,11 @@ local groups_export_configurations = {
   },
 };
 
-local enabled_groups_gdnative_plugins = [groups_gdnative_plugins[x] for x in ["godot_speech", "godot_openvr"]];
+local enabled_groups_gdnative_plugins = [groups_gdnative_plugins[x] for x in ['godot_speech', 'godot_openvr']];
 
-local enabled_groups_export_platforms = [groups_export_configurations[x] for x in ["windows", "linuxDesktop", "linuxServer"]];
+local enabled_groups_export_platforms = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop', 'linuxServer']];
 
-local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary)-4) + ".pdb");
+local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');
 
 
 local godot_pipeline(pipeline_name='',
@@ -319,13 +318,13 @@ local godot_pipeline(pipeline_name='',
       branch: godot_branch,
       destination: 'g',
     },
-#    {
-#      name: 'butler_git_sandbox',
-#      url: gocd_build_git,
-#      type: 'git',
-#      branch: gocd_build_branch,
-#      destination: 'b',
-#    },
+    //    {
+    //      name: 'butler_git_sandbox',
+    //      url: gocd_build_git,
+    //      type: 'git',
+    //      branch: gocd_build_branch,
+    //      destination: 'b',
+    //    },
     if godot_modules_git != '' then
       {
         name: 'godot_custom_modules',
@@ -343,24 +342,24 @@ local godot_pipeline(pipeline_name='',
       clean_workspace: false,
       jobs: [
         {
-          name: platform_info["platform_name"] + 'Job',
+          name: platform_info.platform_name + 'Job',
           resources: [
             'mingw5',
             'linux',
           ],
           artifacts: [
             {
-              source: 'g/bin/' + platform_info['editor_godot_binary'],
+              source: 'g/bin/' + platform_info.editor_godot_binary,
               destination: '',
               type: 'build',
             },
-            if std.endsWith(platform_info['editor_godot_binary'], ".exe") then {
-              source: 'g/bin/' + exe_to_pdb_path(platform_info['editor_godot_binary']),
+            if std.endsWith(platform_info.editor_godot_binary, '.exe') then {
+              source: 'g/bin/' + exe_to_pdb_path(platform_info.editor_godot_binary),
               destination: '',
               type: 'build',
             } else null,
           ],
-          environment_variables: platform_info["environment_variables"],
+          environment_variables: platform_info.environment_variables,
           tasks: [
             {
               type: 'exec',
@@ -375,44 +374,45 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                platform_info["scons_env"] + 'scons werror=no platform=' + platform_info["scons_platform"] + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + platform_info["godot_scons_arguments"] +
+                platform_info.scons_env + 'scons werror=no platform=' + platform_info.scons_platform + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + platform_info.godot_scons_arguments +
                 if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
               ],
               command: '/bin/bash',
               working_directory: 'g',
             },
-            if platform_info['editor_godot_binary'] != platform_info['intermediate_godot_binary'] then
+            if platform_info.editor_godot_binary != platform_info.intermediate_godot_binary then
               {
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'cp g/bin/' + platform_info['intermediate_godot_binary'] + 'g/bin/' + platform_info['editor_godot_binary'],
+                  'cp g/bin/' + platform_info.intermediate_godot_binary + 'g/bin/' + platform_info.editor_godot_binary,
                 ],
                 command: '/bin/bash',
               }
             else null,
           ],
-        } for platform_info in enabled_engine_platforms
+        }
+        for platform_info in enabled_engine_platforms
       ],
     },
     {
       name: 'templateStage',
       jobs: [
         {
-          name: platform_info["platform_name"] + 'Job',
+          name: platform_info.platform_name + 'Job',
           resources: [
             'linux',
             'mingw5',
           ],
-          artifacts: if platform_info["template_artifacts_override"] != null then platform_info["template_artifacts_override"] else [
+          artifacts: if platform_info.template_artifacts_override != null then platform_info.template_artifacts_override else [
             {
               type: 'build',
-              source: 'g/bin/' + platform_info["template_debug_binary"],
+              source: 'g/bin/' + platform_info.template_debug_binary,
               destination: '',
             },
             {
               type: 'build',
-              source: 'g/bin/' + platform_info["template_release_binary"],
+              source: 'g/bin/' + platform_info.template_release_binary,
               destination: '',
             },
             {
@@ -421,18 +421,19 @@ local godot_pipeline(pipeline_name='',
               destination: '',
             },
           ],
-          environment_variables: platform_info["environment_variables"],
+          environment_variables: platform_info.environment_variables,
           tasks: [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  extra_command,
-                ],
-                command: '/bin/bash',
-                working_directory: 'g',
-              } for extra_command in platform_info["extra_commands"]
-            ] + [
+            {
+              type: 'exec',
+              arguments: [
+                '-c',
+                extra_command,
+              ],
+              command: '/bin/bash',
+              working_directory: 'g',
+            }
+            for extra_command in platform_info.extra_commands
+          ] + [
             {
               type: 'exec',
               arguments: [
@@ -442,20 +443,20 @@ local godot_pipeline(pipeline_name='',
               command: '/bin/bash',
               working_directory: 'g',
             },
-            if platform_info["editor_godot_binary"] == platform_info["intermediate_godot_binary"] then {
+            if platform_info.editor_godot_binary == platform_info.intermediate_godot_binary then {
               type: 'fetch',
               artifact_origin: 'gocd',
               pipeline: pipeline_name,
               stage: 'defaultStage',
-              job: platform_info["platform_name"] + 'Job',
+              job: platform_info.platform_name + 'Job',
               is_source_a_file: true,
-              source: platform_info["intermediate_godot_binary"],
+              source: platform_info.intermediate_godot_binary,
               destination: 'g/bin/',
             } else {
               type: 'exec',
               arguments: [
                 '-c',
-                platform_info["scons_env"] + 'scons werror=no platform=' + platform_info["scons_platform"] + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + platform_info["godot_scons_arguments"] + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+                platform_info.scons_env + 'scons werror=no platform=' + platform_info.scons_platform + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
               ],
               command: '/bin/bash',
               working_directory: 'g',
@@ -464,7 +465,7 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                'cp bin/' + platform_info["intermediate_godot_binary"] + ' bin/' + platform_info["template_debug_binary"] + ' && cp bin/' + platform_info["intermediate_godot_binary"] + ' bin/' + platform_info["template_release_binary"] + if platform_info["strip_command"] != null then ' && ' + platform_info["strip_command"] + ' bin/' + platform_info["template_release_binary"] else '',
+                'cp bin/' + platform_info.intermediate_godot_binary + ' bin/' + platform_info.template_debug_binary + ' && cp bin/' + platform_info.intermediate_godot_binary + ' bin/' + platform_info.template_release_binary + if platform_info.strip_command != null then ' && ' + platform_info.strip_command + ' bin/' + platform_info.template_release_binary else '',
               ],
               command: '/bin/bash',
               working_directory: 'g',
@@ -478,7 +479,8 @@ local godot_pipeline(pipeline_name='',
               command: '/bin/bash',
               working_directory: 'g',
             },
-          ] + [{
+          ] + [
+            {
               type: 'exec',
               arguments: [
                 '-c',
@@ -486,9 +488,11 @@ local godot_pipeline(pipeline_name='',
               ],
               command: '/bin/bash',
               working_directory: 'g',
-            } for extra_command in platform_info["template_extra_commands"]
+            }
+            for extra_command in platform_info.template_extra_commands
           ],
-        } for platform_info in enabled_template_platforms
+        }
+        for platform_info in enabled_template_platforms
       ],
     },
     {
@@ -496,7 +500,7 @@ local godot_pipeline(pipeline_name='',
       jobs: [
         {
           name: 'defaultJob',
-	  resources: [
+          resources: [
             'linux',
             'mingw5',
           ],
@@ -524,13 +528,13 @@ local godot_pipeline(pipeline_name='',
               destination: 'templates',
               pipeline: pipeline_name,
               stage: 'templateStage',
-              job: enabled_template_platforms[0]["platform_name"] + 'Job',
+              job: enabled_template_platforms[0].platform_name + 'Job',
             },
             {
               type: 'fetch',
               artifact_origin: 'gocd',
               is_source_a_file: true,
-              source: exe_to_pdb_path(platform_info_dict['windows']['editor_godot_binary']),
+              source: exe_to_pdb_path(platform_info_dict.windows.editor_godot_binary),
               destination: 'templates',
               pipeline: pipeline_name,
               stage: 'defaultStage',
@@ -545,9 +549,12 @@ local godot_pipeline(pipeline_name='',
               destination: 'templates',
               pipeline: pipeline_name,
               stage: 'templateStage',
-              job: platform_info["platform_name"] + 'Job',
-            } for output_artifact in if platform_info["template_output_artifacts"] != null then platform_info["template_output_artifacts"] else [platform_info["template_debug_binary"],
-              platform_info["template_release_binary"]]
+              job: platform_info.platform_name + 'Job',
+            }
+            for output_artifact in if platform_info.template_output_artifacts != null then platform_info.template_output_artifacts else [
+              platform_info.template_debug_binary,
+              platform_info.template_release_binary,
+            ]
           ], enabled_template_platforms) + [
             {
               type: 'exec',
@@ -576,200 +583,207 @@ local generate_godot_cpp_pipeline(pipeline_name='',
                                   pipeline_dependency='',
                                   gocd_group='',
                                   godot_status='') =
-{
-  name: pipeline_name,
-  group: gocd_group,
-  label_template: godot_status + '.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
-  environment_variables:
-    [{
-      name: 'GODOT_STATUS',
-      value: godot_status,
-    }],
-  materials: [
-    {
-      name: pipeline_dependency + '_pipeline_dependency',
-      type: 'dependency',
-      pipeline: pipeline_dependency,
-      stage: 'defaultStage',
-    },
-    {
-      name: 'godot-cpp',
-      url: 'https://github.com/V-Sekai/godot-cpp.git',
-      type: 'git',
-      branch: 'groups',
-      destination: 'godot-cpp',
-      shallow_clone: false,
-      ignore_for_scheduling: false,
-    },
-  ],
-  stages: [
-    {
-      name: 'generateApiJsonStage',
-      jobs: [
-        {
-          name: 'generateApiJsonJob',
-          resources: [
-            'linux',
-            'mingw5',
-          ],
-          artifacts: [
-            {
-              type: 'build',
-              source: 'api.json',
-              destination: '',
-            },
-          ],
-          tasks: [
-            {
-              type: 'fetch',
-              artifact_origin: 'gocd',
-              pipeline: pipeline_dependency,
-              stage: 'defaultStage',
-              job: 'serverJob',
-              is_source_a_file: true,
-              source: HEADLESS_SERVER_EDITOR,
-              destination: '',
-            },
-            {
-              type: 'exec',
-              arguments: [
-                '-c',
-                # Due to a godot bug, the server crashes with "pure virtual function called"
-                'chmod +x ' + HEADLESS_SERVER_EDITOR + ' && HOME="`pwd`" ./' + HEADLESS_SERVER_EDITOR + ' --gdnative-generate-json-api api.json || [[ "$(cat api.json | tail -1)" = "]" ]]',
-              ],
-              command: '/bin/bash',
-              working_directory: '',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: 'godotCppStage',
-      jobs: [
-        {
-          name: platform_info["platform_name"] + 'Job',
-          resources: [
-            'linux',
-            'mingw5',
-          ],
-          artifacts: if platform_info["template_artifacts_override"] != null then platform_info["template_artifacts_override"] else [
-            {
-              type: 'build',
-              source: 'godot-cpp/include',
-              destination: 'godot-cpp',
-            },
-            {
-              type: 'build',
-              source: 'godot-cpp/godot_headers',
-              destination: 'godot-cpp',
-            },
-            {
-              type: 'build',
-              source: 'godot-cpp/bin',
-              destination: 'godot-cpp',
-            },
-          ],
-          environment_variables: platform_info["environment_variables"],
-          tasks: [
-            {
-              type: 'fetch',
-              artifact_origin: 'gocd',
-              pipeline: pipeline_name,
-              stage: 'generateApiJsonStage',
-              job: 'generateApiJsonJob',
-              is_source_a_file: true,
-              source: 'api.json',
-              destination: '',
-            },
-            {
-              type: 'exec',
-              arguments: [
-                '-c',
-                platform_info["scons_env"] + 'scons werror=no platform=' + platform_info["gdnative_platform"] + ' target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json ' + platform_info["godot_scons_arguments"],
-              ],
-              command: '/bin/bash',
-              working_directory: 'godot-cpp',
-            },
-          ],
-        } for platform_info in enabled_template_platforms if platform_info["platform_name"] != "server"
-      ],
-    },
-  ],
-};
+  {
+    name: pipeline_name,
+    group: gocd_group,
+    label_template: godot_status + '.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
+    environment_variables:
+      [{
+        name: 'GODOT_STATUS',
+        value: godot_status,
+      }],
+    materials: [
+      {
+        name: pipeline_dependency + '_pipeline_dependency',
+        type: 'dependency',
+        pipeline: pipeline_dependency,
+        stage: 'defaultStage',
+      },
+      {
+        name: 'godot-cpp',
+        url: 'https://github.com/V-Sekai/godot-cpp.git',
+        type: 'git',
+        branch: 'groups',
+        destination: 'godot-cpp',
+        shallow_clone: false,
+        ignore_for_scheduling: false,
+      },
+    ],
+    stages: [
+      {
+        name: 'generateApiJsonStage',
+        jobs: [
+          {
+            name: 'generateApiJsonJob',
+            resources: [
+              'linux',
+              'mingw5',
+            ],
+            artifacts: [
+              {
+                type: 'build',
+                source: 'api.json',
+                destination: '',
+              },
+            ],
+            tasks: [
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_dependency,
+                stage: 'defaultStage',
+                job: 'serverJob',
+                is_source_a_file: true,
+                source: HEADLESS_SERVER_EDITOR,
+                destination: '',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  // Due to a godot bug, the server crashes with "pure virtual function called"
+                  'chmod +x ' + HEADLESS_SERVER_EDITOR + ' && HOME="`pwd`" ./' + HEADLESS_SERVER_EDITOR + ' --gdnative-generate-json-api api.json || [[ "$(cat api.json | tail -1)" = "]" ]]',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: 'godotCppStage',
+        jobs: [
+          {
+            name: platform_info.platform_name + 'Job',
+            resources: [
+              'linux',
+              'mingw5',
+            ],
+            artifacts: if platform_info.template_artifacts_override != null then platform_info.template_artifacts_override else [
+              {
+                type: 'build',
+                source: 'godot-cpp/include',
+                destination: 'godot-cpp',
+              },
+              {
+                type: 'build',
+                source: 'godot-cpp/godot_headers',
+                destination: 'godot-cpp',
+              },
+              {
+                type: 'build',
+                source: 'godot-cpp/bin',
+                destination: 'godot-cpp',
+              },
+            ],
+            environment_variables: platform_info.environment_variables,
+            tasks: [
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_name,
+                stage: 'generateApiJsonStage',
+                job: 'generateApiJsonJob',
+                is_source_a_file: true,
+                source: 'api.json',
+                destination: '',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdnative_platform + ' target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json ' + platform_info.godot_scons_arguments,
+                ],
+                command: '/bin/bash',
+                working_directory: 'godot-cpp',
+              },
+            ],
+          }
+          for platform_info in enabled_template_platforms
+          if platform_info.platform_name != 'server'
+        ],
+      },
+    ],
+  };
 
 local generate_godot_gdnative_pipeline(pipeline_name='',
-                                  pipeline_dependency='',
-                                  gocd_group='',
-                                  godot_status='',
-                                  library_info=null) =
-{
-  name: pipeline_name,
-  group: gocd_group,
-  label_template: godot_status + '.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
-  environment_variables:
-    [{
-      name: 'GODOT_STATUS',
-      value: godot_status,
-    }],
-  materials: [
-    {
-      name: pipeline_dependency + '_pipeline_dependency',
-      type: 'dependency',
-      pipeline: pipeline_dependency,
-      stage: 'godotCppStage',
-    },
-    {
-      name: 'p',
-      url: library_info["git_url"],
-      type: 'git',
-      branch: library_info["git_branch"],
-      destination: 'p',
-      shallow_clone: false,
-      ignore_for_scheduling: false,
-    },
-  ],
-  stages: [
-    {
-      name: 'gdnativeBuildStage',
-      jobs: [
-        {
-          name: platform_info["platform_name"] + 'Job',
-          resources: [
-            'linux',
-            'mingw5',
-          ],
-          artifacts: [{
-              type: 'build',
-              source: "p/" + artifact_path,
-              destination: '',
-            } for artifact_path in library_info["platforms"][platform_info["platform_name"]]["artifacts"]
-          ] + [{
-              type: 'build',
-              source: "p/" + artifact_path,
-              destination: 'debug',
-            } for artifact_path in library_info["platforms"][platform_info["platform_name"]]["debug_artifacts"]
-          ],
-          environment_variables: platform_info["environment_variables"] + library_info["platforms"][platform_info["platform_name"]]["environment_variables"],
-          tasks: [
-            {
-              type: 'fetch',
-              artifact_origin: 'gocd',
-              pipeline: pipeline_dependency,
-              stage: 'godotCppStage',
-              job: platform_info["platform_name"] + 'Job',
-              source: 'godot-cpp',
-              destination: '',
-            },
-            {
-              type: 'exec',
-              arguments: [
-                '-c',
-                "cp -a godot-cpp p",
-              ],
-              command: '/bin/bash',
-              working_directory: '',
-            }] + [
+                                       pipeline_dependency='',
+                                       gocd_group='',
+                                       godot_status='',
+                                       library_info=null) =
+  {
+    name: pipeline_name,
+    group: gocd_group,
+    label_template: godot_status + '.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
+    environment_variables:
+      [{
+        name: 'GODOT_STATUS',
+        value: godot_status,
+      }],
+    materials: [
+      {
+        name: pipeline_dependency + '_pipeline_dependency',
+        type: 'dependency',
+        pipeline: pipeline_dependency,
+        stage: 'godotCppStage',
+      },
+      {
+        name: 'p',
+        url: library_info.git_url,
+        type: 'git',
+        branch: library_info.git_branch,
+        destination: 'p',
+        shallow_clone: false,
+        ignore_for_scheduling: false,
+      },
+    ],
+    stages: [
+      {
+        name: 'gdnativeBuildStage',
+        jobs: [
+          {
+            name: platform_info.platform_name + 'Job',
+            resources: [
+              'linux',
+              'mingw5',
+            ],
+            artifacts: [
+              {
+                type: 'build',
+                source: 'p/' + artifact_path,
+                destination: '',
+              }
+              for artifact_path in library_info.platforms[platform_info.platform_name].artifacts
+            ] + [
+              {
+                type: 'build',
+                source: 'p/' + artifact_path,
+                destination: 'debug',
+              }
+              for artifact_path in library_info.platforms[platform_info.platform_name].debug_artifacts
+            ],
+            environment_variables: platform_info.environment_variables + library_info.platforms[platform_info.platform_name].environment_variables,
+            tasks: [
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_dependency,
+                stage: 'godotCppStage',
+                job: platform_info.platform_name + 'Job',
+                source: 'godot-cpp',
+                destination: '',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'cp -a godot-cpp p',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+            ] + [
               {
                 type: 'exec',
                 arguments: [
@@ -778,17 +792,19 @@ local generate_godot_gdnative_pipeline(pipeline_name='',
                 ],
                 command: '/bin/bash',
                 working_directory: 'p',
-              } for extra_command in library_info["platforms"][platform_info["platform_name"]]["prepare_commands"]
+              }
+              for extra_command in library_info.platforms[platform_info.platform_name].prepare_commands
             ] + [
-            {
-              type: 'exec',
-              arguments: [
-                '-c',
-                platform_info["scons_env"] + 'scons werror=no platform=' + platform_info["gdnative_platform"] + ' target=release -j`nproc` use_lto=no deprecated=no ' + platform_info["godot_scons_arguments"] + library_info["platforms"][platform_info["platform_name"]]["scons_arguments"],
-              ],
-              command: '/bin/bash',
-              working_directory: 'p',
-            }] + [
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdnative_platform + ' target=release -j`nproc` use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + library_info.platforms[platform_info.platform_name].scons_arguments,
+                ],
+                command: '/bin/bash',
+                working_directory: 'p',
+              },
+            ] + [
               {
                 type: 'exec',
                 arguments: [
@@ -797,26 +813,30 @@ local generate_godot_gdnative_pipeline(pipeline_name='',
                 ],
                 command: '/bin/bash',
                 working_directory: 'p',
-              } for extra_command in library_info["platforms"][platform_info["platform_name"]]["extra_commands"]
+              }
+              for extra_command in library_info.platforms[platform_info.platform_name].extra_commands
             ] + [
-          ],
-        } for platform_info in enabled_template_platforms if platform_info["platform_name"] != "server" && std.objectHas(library_info["platforms"], platform_info["platform_name"])
-      ],
-    },
-  ],
-};
+            ],
+          }
+          for platform_info in enabled_template_platforms
+          if platform_info.platform_name != 'server' && std.objectHas(library_info.platforms, platform_info.platform_name)
+        ],
+      },
+    ],
+  };
 
-local godot_tools_pipeline_export(pipeline_name='',
-                                  pipeline_dependency='',
-                                  gdnative_plugins=[],
-                                  itchio_login='',
-                                  gocd_group='',
-                                  godot_status='',
-                                  gocd_project_folder='',
-                                  groups_git='',
-                                  groups_branch='',
-                                  enabled_export_platforms=[],
-                                  ) =
+local godot_tools_pipeline_export(
+  pipeline_name='',
+  pipeline_dependency='',
+  gdnative_plugins=[],
+  itchio_login='',
+  gocd_group='',
+  godot_status='',
+  gocd_project_folder='',
+  groups_git='',
+  groups_branch='',
+  enabled_export_platforms=[],
+      ) =
   {
     name: pipeline_name,
     group: gocd_group,
@@ -843,13 +863,14 @@ local godot_tools_pipeline_export(pipeline_name='',
       },
     ] + [
       {
-        name: library_info['pipeline_name'] + '_pipeline_dependency',
+        name: library_info.pipeline_name + '_pipeline_dependency',
         type: 'dependency',
-        pipeline: library_info['pipeline_name'],
+        pipeline: library_info.pipeline_name,
         stage: 'gdnativeBuildStage',
         ignore_for_scheduling: false,
-      },
-    for library_info in gdnative_plugins],
+      }
+      for library_info in gdnative_plugins
+    ],
     stages: [
       {
         name: 'exportStage',
@@ -857,7 +878,7 @@ local godot_tools_pipeline_export(pipeline_name='',
         fetch_materials: true,
         jobs: [
           {
-            name: export_info["export_name"] + 'Job',
+            name: export_info.export_name + 'Job',
             resources: [
               'linux',
               'mingw5',
@@ -865,7 +886,7 @@ local godot_tools_pipeline_export(pipeline_name='',
             artifacts: [
               {
                 type: 'build',
-                source: export_info["export_directory"],
+                source: export_info.export_directory,
                 destination: '',
               },
             ],
@@ -891,29 +912,35 @@ local godot_tools_pipeline_export(pipeline_name='',
                 is_source_a_file: true,
                 source: HEADLESS_SERVER_EDITOR,
                 destination: '',
-              }] + std.flatMap(function(library_info) [
-                {
-                  type: 'fetch',
-                  artifact_origin: 'gocd',
-                  pipeline: library_info["pipeline_name"],
-                  stage: 'gdnativeBuildStage',
-                  job: export_info["gdnative_platform"] + 'Job',
-                  is_source_a_file: true,
-                  source: artifact,
-                  destination: library_info["name"],
-                } for artifact in library_info["platforms"][export_info["gdnative_platform"]]["output_artifacts"]],
-              gdnative_plugins) + std.flatMap(function(library_info) [
-                 if std.endsWith(artifact,".dll") && artifact != 'openvr_api.dll' then {
-                  type: 'fetch',
-                  artifact_origin: 'gocd',
-                  pipeline: library_info["pipeline_name"],
-                  stage: 'gdnativeBuildStage',
-                  job: export_info["gdnative_platform"] + 'Job',
-                  is_source_a_file: true,
-                  source: 'debug/' + exe_to_pdb_path(artifact),
-                  destination: library_info["name"],
-                } else null for artifact in library_info["platforms"][export_info["gdnative_platform"]]["output_artifacts"]],
-              gdnative_plugins) + [{
+              },
+            ] + std.flatMap(function(library_info) [
+                              {
+                                type: 'fetch',
+                                artifact_origin: 'gocd',
+                                pipeline: library_info.pipeline_name,
+                                stage: 'gdnativeBuildStage',
+                                job: export_info.gdnative_platform + 'Job',
+                                is_source_a_file: true,
+                                source: artifact,
+                                destination: library_info.name,
+                              }
+                              for artifact in library_info.platforms[export_info.gdnative_platform].output_artifacts
+                            ],
+                            gdnative_plugins) + std.flatMap(function(library_info) [
+                                                              if std.endsWith(artifact, '.dll') && artifact != 'openvr_api.dll' then {
+                                                                type: 'fetch',
+                                                                artifact_origin: 'gocd',
+                                                                pipeline: library_info.pipeline_name,
+                                                                stage: 'gdnativeBuildStage',
+                                                                job: export_info.gdnative_platform + 'Job',
+                                                                is_source_a_file: true,
+                                                                source: 'debug/' + exe_to_pdb_path(artifact),
+                                                                destination: library_info.name,
+                                                              } else null
+                                                              for artifact in library_info.platforms[export_info.gdnative_platform].output_artifacts
+                                                            ],
+                                                            gdnative_plugins) + [
+              {
                 type: 'exec',
                 arguments: [
                   '-c',
@@ -922,7 +949,8 @@ local godot_tools_pipeline_export(pipeline_name='',
                 command: '/bin/bash',
                 working_directory: '',
               },
-            ] + [{
+            ] + [
+              {
                 type: 'exec',
                 arguments: [
                   '-c',
@@ -930,12 +958,14 @@ local godot_tools_pipeline_export(pipeline_name='',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
-              } for extra_task in export_info["prepare_commands"]
-            ] + [{
+              }
+              for extra_task in export_info.prepare_commands
+            ] + [
+              {
                 type: 'exec',
                 arguments: [
                   '-c',
-                  '(echo "## AUTOGENERATED BY BUILD"; echo ""; echo "const BUILD_LABEL = \\\"$GO_PIPELINE_LABEL\\\""; echo "const BUILD_DATE_STR = \\\"$(date --utc --iso=seconds)\\\""; echo "const BUILD_UNIX_TIME = $(date +%s)" ) > addons/vsk_version/build_constants.gd',
+                  '(echo "## AUTOGENERATED BY BUILD"; echo ""; echo "const BUILD_LABEL = \\"$GO_PIPELINE_LABEL\\""; echo "const BUILD_DATE_STR = \\"$(date --utc --iso=seconds)\\""; echo "const BUILD_UNIX_TIME = $(date +%s)" ) > addons/vsk_version/build_constants.gd',
                 ],
                 command: '/bin/bash',
                 working_directory: 'g',
@@ -944,12 +974,13 @@ local godot_tools_pipeline_export(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'rm -rf ' + export_info["export_directory"] + ' && mkdir ' + export_info["export_directory"] + ' && chmod +x ' + HEADLESS_SERVER_EDITOR + ' && HOME="`pwd`" ./' + HEADLESS_SERVER_EDITOR + ' --export "' + export_info["export_configuration"] + '" "`pwd`"/' + export_info["export_directory"] + '/' + export_info["export_executable"] + ' --path g -v',
+                  'rm -rf ' + export_info.export_directory + ' && mkdir ' + export_info.export_directory + ' && chmod +x ' + HEADLESS_SERVER_EDITOR + ' && HOME="`pwd`" ./' + HEADLESS_SERVER_EDITOR + ' --export "' + export_info.export_configuration + '" "`pwd`"/' + export_info.export_directory + '/' + export_info.export_executable + ' --path g -v',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
               },
-            ] + [{
+            ] + [
+              {
                 type: 'exec',
                 arguments: [
                   '-c',
@@ -957,9 +988,11 @@ local godot_tools_pipeline_export(pipeline_name='',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
-              } for extra_task in export_info["extra_commands"]
+              }
+              for extra_task in export_info.extra_commands
             ],
-          } for export_info in enabled_export_platforms
+          }
+          for export_info in enabled_export_platforms
         ],
       },
       {
@@ -967,52 +1000,54 @@ local godot_tools_pipeline_export(pipeline_name='',
         clean_workspace: false,
         jobs: [
           {
-            name: export_info["export_name"] + 'Job',
+            name: export_info.export_name + 'Job',
             resources: [
               'linux',
               'mingw5',
             ],
-#            environment_variables:
-#              [{
-#                name: 'BUTLER_API_KEY',
-#                encrypted_value: butler_api_key,
-#              },{name: 'ITCHIO_LOGIN', value: ....}],
+            //            environment_variables:
+            //              [{
+            //                name: 'BUTLER_API_KEY',
+            //                encrypted_value: butler_api_key,
+            //              },{name: 'ITCHIO_LOGIN', value: ....}],
             tasks: [
               {
                 type: 'fetch',
                 artifact_origin: 'gocd',
                 pipeline: pipeline_name,
                 stage: 'exportStage',
-                job: export_info["export_name"] + 'Job',
+                job: export_info.export_name + 'Job',
                 is_source_a_file: false,
-                source: export_info["export_directory"],
+                source: export_info.export_directory,
                 destination: '',
               },
               {
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'butler push ' + export_info["export_directory"] + ' $ITCHIO_LOGIN:' + export_info["itchio_out"] + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+                  'butler push ' + export_info.export_directory + ' $ITCHIO_LOGIN:' + export_info.itchio_out + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
               },
             ],
-          } for export_info in enabled_export_platforms
+          }
+          for export_info in enabled_export_platforms
         ],
       },
     ],
   };
 
-local build_docker_server(pipeline_name='',
-                                  pipeline_dependency='',
-                                  gocd_group='',
-                                  godot_status='',
-                                  docker_groups_git='',
-                                  docker_groups_branch='',
-                                  docker_groups_dir='',
-                                  server_export_info={},
-                                  ) =
+local build_docker_server(
+  pipeline_name='',
+  pipeline_dependency='',
+  gocd_group='',
+  godot_status='',
+  docker_groups_git='',
+  docker_groups_branch='',
+  docker_groups_dir='',
+  server_export_info={},
+      ) =
   {
     name: pipeline_name,
     group: gocd_group,
@@ -1061,9 +1096,9 @@ local build_docker_server(pipeline_name='',
                 artifact_origin: 'gocd',
                 pipeline: pipeline_dependency,
                 stage: 'exportStage',
-                job: server_export_info["export_name"] + 'Job',
+                job: server_export_info.export_name + 'Job',
                 is_source_a_file: false,
-                source: server_export_info["export_directory"],
+                source: server_export_info.export_directory,
                 destination: 'g/' + docker_groups_dir,
               },
               {
@@ -1071,10 +1106,10 @@ local build_docker_server(pipeline_name='',
                 arguments: [
                   '-c',
                   'set -x; DOCKER_IMAGE="$DOCKER_REPO_GROUPS_SERVER:$GO_PIPELINE_LABEL" ' +
-                  '; chmod 01777 g/"' + docker_groups_dir + '"/' + groups_export_configurations["linuxServer"]["export_directory"] +
-                  '; chmod a+x g/"' + docker_groups_dir + '"/' + groups_export_configurations["linuxServer"]["export_directory"] + "/" + groups_export_configurations["linuxServer"]["export_executable"] +
+                  '; chmod 01777 g/"' + docker_groups_dir + '"/' + groups_export_configurations.linuxServer.export_directory +
+                  '; chmod a+x g/"' + docker_groups_dir + '"/' + groups_export_configurations.linuxServer.export_directory + '/' + groups_export_configurations.linuxServer.export_executable +
                   '; docker build -t "$DOCKER_REPO_GROUPS_SERVER" -t "$DOCKER_IMAGE"' +
-                  ' --build-arg SERVER_EXPORT="' + server_export_info["export_directory"] + '"' +
+                  ' --build-arg SERVER_EXPORT="' + server_export_info.export_directory + '"' +
                   ' --build-arg GODOT_REVISION="master"' +
                   ' --build-arg USER=1234' +
                   ' --build-arg HOME=/server' +
@@ -1093,11 +1128,11 @@ local build_docker_server(pipeline_name='',
   };
 
 local video_decoder_docker_job(pipeline_name='',
-                        gocd_group='',
-                        docker_repo_variable='',
-                        docker_git='',
-                        docker_branch='',
-                        docker_dir='') =
+                               gocd_group='',
+                               docker_repo_variable='',
+                               docker_git='',
+                               docker_branch='',
+                               docker_dir='') =
   {
     name: pipeline_name,
     group: gocd_group,
@@ -1126,7 +1161,7 @@ local video_decoder_docker_job(pipeline_name='',
             ],
             artifacts: [
               {
-                type: 'build',                
+                type: 'build',
                 source: 'g/target',
                 destination: '',
               },
@@ -1144,7 +1179,7 @@ local video_decoder_docker_job(pipeline_name='',
                 working_directory: 'g',
               },
             ],
-          }
+          },
         ],
       },
     ],
@@ -1205,21 +1240,25 @@ local simple_docker_job(pipeline_name='',
                 working_directory: '',
               },
             ],
-          }
+          },
         ],
       },
     ],
   };
-
+// Groups
 local godot_template_groups_editor = 'godot-template-groups';
 local godot_cpp_pipeline = 'gdnative-cpp';
 local godot_template_groups_export = 'production-groups-release-export';
 local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
 local docker_video_decoder_pipeline = 'docker-video-decoder';
-
+// CHIBIFIRE
+local godot_template_chibifire_editor = 'godot-template-chibifire';
+// STERN FLOWERS
+local godot_template_stern_flowers_editor = 'godot-template-_stern-flowers';
+// END
 local godot_gdnative_pipelines =
-  [plugin_info["pipeline_name"] for plugin_info in enabled_groups_gdnative_plugins];
+  [plugin_info.pipeline_name for plugin_info in enabled_groups_gdnative_plugins];
 
 
 local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
@@ -1232,6 +1271,27 @@ local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godo
     environment_variables:
       [],
   },
+  // CHIBIFIRE
+  'godot_chibifire_editor.gopipeline.json'
+  : std.prune(godot_pipeline(
+    pipeline_name=godot_template_chibifire_editor,
+    godot_status='chibifire',
+    godot_git='https://github.com/godot-extended-libraries/godot-fire.git',
+    godot_branch='groups',
+    gocd_group='beta',
+    godot_modules_git='https://github.com/godot-extended-libraries/godot-modules-fire.git',
+    godot_modules_branch='master',
+  )),
+  // STERN FLOWERS
+  'godot_stern_flowers_editor.gopipeline.json'
+  : std.prune(godot_pipeline(
+    pipeline_name=godot_template_stern_flowers_editor,
+    godot_status='stern-flowers',
+    godot_git='https://github.com/godotengine/godot.git',
+    godot_branch='master',
+    gocd_group='beta'
+  )),
+  // GROUPS
   'godot_groups_editor.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_groups_editor,
@@ -1250,15 +1310,17 @@ local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godo
       gocd_group='beta',
       godot_status='gdnative.godot-cpp'
     )
-  )} + {
-    ['gdnative_' + library_info["name"] + '.gopipeline.json']: generate_godot_gdnative_pipeline(
-      pipeline_name=library_info["pipeline_name"],
-      pipeline_dependency=godot_cpp_pipeline,
-      gocd_group='beta',
-      godot_status='gdnative.' + library_info["name"],
-      library_info=library_info,
-    ) for library_info in enabled_groups_gdnative_plugins
-  } + {
+  ),
+} + {
+  ['gdnative_' + library_info.name + '.gopipeline.json']: generate_godot_gdnative_pipeline(
+    pipeline_name=library_info.pipeline_name,
+    pipeline_dependency=godot_cpp_pipeline,
+    gocd_group='beta',
+    godot_status='gdnative.' + library_info.name,
+    library_info=library_info,
+  )
+  for library_info in enabled_groups_gdnative_plugins
+} + {
   'godot_groups_export.gopipeline.json'
   : std.prune(
     godot_tools_pipeline_export(
@@ -1283,7 +1345,7 @@ local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godo
       docker_groups_dir='groups_server',
       gocd_group='beta',
       godot_status='docker',
-      server_export_info=groups_export_configurations["linuxServer"],
+      server_export_info=groups_export_configurations.linuxServer,
     )
   ),
   'docker_uro.gopipeline.json'
@@ -1308,5 +1370,3 @@ local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godo
     )
   ),
 }
-
-
