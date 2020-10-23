@@ -9,7 +9,7 @@
    "label_template": "chibifire.${godot_sandbox[:8]}.${COUNT}",
    "materials": [
       {
-         "branch": "groups",
+         "branch": "extended-fire",
          "destination": "g",
          "name": "godot_sandbox",
          "type": "git",
