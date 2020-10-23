@@ -16,7 +16,7 @@
          "url": "https://github.com/godotengine/godot.git"
       }
    ],
-   "name": "godot-template-_stern-flowers",
+   "name": "godot-template-stern-flowers",
    "stages": [
       {
          "clean_workspace": false,
@@ -171,7 +171,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-_stern-flowers",
+                     "pipeline": "godot-template-stern-flowers",
                      "source": "godot.windows.opt.tools.64.exe",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -234,7 +234,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-template-_stern-flowers",
+                     "pipeline": "godot-template-stern-flowers",
                      "source": "godot.x11.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -297,7 +297,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "serverJob",
-                     "pipeline": "godot-template-_stern-flowers",
+                     "pipeline": "godot-template-stern-flowers",
                      "source": "godot_server.x11.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -354,7 +354,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-_stern-flowers",
+                     "pipeline": "godot-template-stern-flowers",
                      "source": "version.txt",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -364,7 +364,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-_stern-flowers",
+                     "pipeline": "godot-template-stern-flowers",
                      "source": "godot.windows.opt.tools.64.pdb",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -374,7 +374,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-_stern-flowers",
+                     "pipeline": "godot-template-stern-flowers",
                      "source": "windows_64_debug.exe",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -384,7 +384,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-_stern-flowers",
+                     "pipeline": "godot-template-stern-flowers",
                      "source": "windows_64_release.exe",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -394,7 +394,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-template-_stern-flowers",
+                     "pipeline": "godot-template-stern-flowers",
                      "source": "linux_x11_64_debug",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -404,7 +404,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-template-_stern-flowers",
+                     "pipeline": "godot-template-stern-flowers",
                      "source": "linux_x11_64_release",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -414,7 +414,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "serverJob",
-                     "pipeline": "godot-template-_stern-flowers",
+                     "pipeline": "godot-template-stern-flowers",
                      "source": "server_64_debug",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -424,7 +424,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "serverJob",
-                     "pipeline": "godot-template-_stern-flowers",
+                     "pipeline": "godot-template-stern-flowers",
                      "source": "server_64_release",
                      "stage": "templateStage",
                      "type": "fetch"

@@ -1255,7 +1255,7 @@ local docker_video_decoder_pipeline = 'docker-video-decoder';
 // CHIBIFIRE
 local godot_template_chibifire_editor = 'godot-template-chibifire';
 // STERN FLOWERS
-local godot_template_stern_flowers_editor = 'godot-template-_stern-flowers';
+local godot_template_stern_flowers_editor = 'godot-template-stern-flowers';
 // END
 local godot_gdnative_pipelines =
   [plugin_info.pipeline_name for plugin_info in enabled_groups_gdnative_plugins];
