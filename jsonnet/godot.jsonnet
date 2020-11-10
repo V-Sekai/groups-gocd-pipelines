@@ -185,7 +185,7 @@ local groups_gdnative_plugins = {
         debug_artifacts: [
           "bin/release/libGodotSpeech.dbg.dylib"
         ],
-        scons_arguments: "",
+        scons_arguments: '',
         environment_variables: [],
         prepare_commands: [],
         extra_commands: [
@@ -253,7 +253,7 @@ local groups_gdnative_plugins = {
         artifacts: [],
         output_artifacts: [],
         debug_artifacts: [],
-        scons_arguments: "--version",
+        scons_arguments: ' --version',
         environment_variables: [],
         prepare_commands: [],
         extra_commands: [],
@@ -801,7 +801,7 @@ local generate_godot_gdnative_pipeline(pipeline_name='',
         name: 'gdnativeBuildStage',
         jobs: [
           {
-            name: platform_info.platform_name + 'Job',
+            name: platform_info.gdnative_platform + 'Job',
             resources: [
               'linux',
               'mingw5',
@@ -812,23 +812,23 @@ local generate_godot_gdnative_pipeline(pipeline_name='',
                 source: 'p/' + artifact_path,
                 destination: '',
               }
-              for artifact_path in library_info.platforms[platform_info.platform_name].artifacts
+              for artifact_path in library_info.platforms[platform_info.gdnative_platform].artifacts
             ] + [
               {
                 type: 'build',
                 source: 'p/' + artifact_path,
                 destination: 'debug',
               }
-              for artifact_path in library_info.platforms[platform_info.platform_name].debug_artifacts
+              for artifact_path in library_info.platforms[platform_info.gdnative_platform].debug_artifacts
             ],
-            environment_variables: platform_info.environment_variables + library_info.platforms[platform_info.platform_name].environment_variables,
+            environment_variables: platform_info.environment_variables + library_info.platforms[platform_info.gdnative_platform].environment_variables,
             tasks: [
               {
                 type: 'fetch',
                 artifact_origin: 'gocd',
                 pipeline: pipeline_dependency,
                 stage: 'godotCppStage',
-                job: platform_info.platform_name + 'Job',
+                job: platform_info.gdnative_platform + 'Job',
                 source: 'godot-cpp',
                 destination: '',
               },
@@ -851,13 +851,13 @@ local generate_godot_gdnative_pipeline(pipeline_name='',
                 command: '/bin/bash',
                 working_directory: 'p',
               }
-              for extra_command in library_info.platforms[platform_info.platform_name].prepare_commands
+              for extra_command in library_info.platforms[platform_info.gdnative_platform].prepare_commands
             ] + [
               {
                 type: 'exec',
                 arguments: [
                   '-c',
-                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdnative_platform + ' target=release -j`nproc` use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + library_info.platforms[platform_info.platform_name].scons_arguments,
+                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdnative_platform + ' target=release -j`nproc` use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + library_info.platforms[platform_info.gdnative_platform].scons_arguments,
                 ],
                 command: '/bin/bash',
                 working_directory: 'p',
@@ -872,12 +872,12 @@ local generate_godot_gdnative_pipeline(pipeline_name='',
                 command: '/bin/bash',
                 working_directory: 'p',
               }
-              for extra_command in library_info.platforms[platform_info.platform_name].extra_commands
+              for extra_command in library_info.platforms[platform_info.gdnative_platform].extra_commands
             ] + [
             ],
           }
           for platform_info in enabled_gdnative_platforms
-          if std.objectHas(library_info.platforms, platform_info.platform_name)
+          if std.objectHas(library_info.platforms, platform_info.gdnative_platform) && std.length(library_info.platforms[platform_info.gdnative_platform].artifacts) + std.length(library_info.platforms[platform_info.gdnative_platform].debug_artifacts) > 0
         ],
       },
     ],
