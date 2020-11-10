@@ -74,7 +74,7 @@ local platform_info_dict = {
   },
   macos: {
     platform_name: 'macos',
-    scons_env: 'OSXCROSS_ROOT=/opt/osxcross LD_LIBRARY_PATH=/opt/osxcross/target/bin ',
+    scons_env: 'OSXCROSS_ROOT="LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross" ',
     intermediate_godot_binary: 'godot.osx.opt.tools.64',
     editor_godot_binary: 'godot.osx.opt.tools.64',
     template_debug_binary: 'godot_osx_debug.64',
@@ -175,7 +175,7 @@ local groups_gdnative_plugins = {
         ],
         //install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
       },
-      "osx": {
+      osx: {
         artifacts: [
           "bin/release/libGodotSpeech.dylib"
         ],
@@ -249,7 +249,7 @@ local groups_gdnative_plugins = {
         ],
         //install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
       },
-      "osx": {
+      osx: {
         artifacts: [],
         output_artifacts: [],
         debug_artifacts: [],
@@ -317,14 +317,14 @@ local groups_export_configurations = {
       'rm -f export_linux_server/*.so',
     ],
   },
-  "macos": {
-    export_name: "macos",
-    platform_name: "macos",
-    gdnative_platform: "osx",
-    export_configuration: "Mac OSX",
-    export_directory: "export_macos",
-    export_executable: "v_sekai_macos",
-    itchio_out: "macos",
+  macos: {
+    export_name: 'macos',
+    platform_name: 'macos',
+    gdnative_platform: 'osx',
+    export_configuration: 'Mac OSX',
+    export_directory: 'export_macos',
+    export_executable: 'v_sekai_macos',
+    itchio_out: 'macos',
     prepare_commands: [
       #'strip --strip-debug godot_speech/libGodotSpeech.so',
       'cp -p godot_speech/libGodotSpeech.dylib g/addons/godot_speech/bin/libGodotSpeech.dylib',
@@ -332,14 +332,14 @@ local groups_export_configurations = {
     extra_commands: [
     ],
   },
-  "web": {
-    export_name: "web",
-    platform_name: "web",
-    gdnative_platform: "linux",
-    export_configuration: "HTML5",
-    export_directory: "export_web",
-    export_executable: "v_sekai_web",
-    itchio_out: "web",
+  web: {
+    export_name: 'web',
+    platform_name: 'web',
+    gdnative_platform: 'linux',
+    export_configuration: 'HTML5',
+    export_directory: 'export_web',
+    export_executable: 'v_sekai_web',
+    itchio_out: 'web',
     prepare_commands: [
     ],
     extra_commands: [
