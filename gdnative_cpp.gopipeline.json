@@ -182,7 +182,7 @@
                      "value": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
                   }
                ],
-               "name": "macosJob",
+               "name": "osxJob",
                "resources": [
                   "linux",
                   "mingw5"

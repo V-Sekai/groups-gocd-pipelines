@@ -714,7 +714,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
         name: 'godotCppStage',
         jobs: [
           {
-            name: platform_info.platform_name + 'Job',
+            name: platform_info.gdnative_platform + 'Job',
             resources: [
               'linux',
               'mingw5',
