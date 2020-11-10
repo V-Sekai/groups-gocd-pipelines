@@ -57,28 +57,30 @@ local platform_info_dict = {
   },
   web: {
     platform_name: 'web',
-    scons_env: '',
+    scons_env: 'source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ',
     intermediate_godot_binary: 'godot.javascript.opt.debug.zip',
     editor_godot_binary: null,
     template_debug_binary: 'webassembly_debug.zip',
     template_release_binary: 'webassembly_release.zip',
     strip_command: null,  // unknown if release should be built separately.
     scons_platform: 'javascript',
+    gdnative_platform: 'linux', # TODO: We need godot_speech for web.
     godot_scons_arguments: 'use_llvm=yes builtin_freetype=yes',
-    extra_commands: ['/opt/emsdk/emsdk activate latest'],
+    extra_commands: [],
     environment_variables: [],
     template_artifacts_override: null,
     template_output_artifacts: null,
     template_extra_commands: [],
   },
-  osx: {
-    platform_name: 'osx',
+  macos: {
+    platform_name: 'macos',
     scons_env: 'OSXCROSS_ROOT=/opt/osxcross ',
     intermediate_godot_binary: 'godot.osx.opt.tools.64',
-    editor_godot_binary: 'Godot',
-    template_debug_binary: 'godot.osx.opt.debug.64',  // FIXME
-    template_release_binary: 'godot.osx.opt.debug.64',  // FIXME
+    editor_godot_binary: 'godot.osx.opt.tools.64',
+    template_debug_binary: 'godot_osx_debug.64',
+    template_release_binary: 'godot_osx_release.64',
     scons_platform: 'osx',
+    gdnative_platform: 'osx',
     strip_command: null,
     // FIXME: We should look into using osx_tools.app instead of osx_template.app, because we build with tools=yes
     godot_scons_arguments: 'osxcross_sdk=darwin19 CXXFLAGS="-Wno-deprecated-declarations -Wno-error " builtin_freetype=yes',
@@ -111,9 +113,9 @@ local platform_info_dict = {
       'rm -rf ./bin/osx_template.app',
       'cp -r ./misc/dist/osx_template.app ./bin/',
       'mkdir -p ./bin/osx_template.app/Contents/MacOS',
-      'cp ./bin/godot.osx.opt.debug.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_debug.64',
+      'mv godot_osx_debug.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_debug.64',
       'chmod +x ./bin/osx_template.app/Contents/MacOS/godot_osx_debug.64',
-      'cp ./bin/godot.osx.opt.debug.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_release.64',
+      'mv godot_osx_release.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_release.64',
       'chmod +x ./bin/osx_template.app/Contents/MacOS/godot_osx_release.64',
       'rm -rf bin/osx.zip',
       'cd bin && zip -9 -r osx.zip osx_template.app/',
@@ -122,9 +124,11 @@ local platform_info_dict = {
   },
 };
 
-local enabled_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'server']];
+local enabled_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'server', 'macos']];
 
-local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'server']];
+local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'server', 'web', 'macos']];
+
+local enabled_gdnative_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'macos']];
 
 
 local groups_gdnative_plugins = {
@@ -170,6 +174,24 @@ local groups_gdnative_plugins = {
           'cd bin/release && mv libGodotSpeech.so libGodotSpeech.dbg.so && strip --strip-debug -o libGodotSpeech.so libGodotSpeech.dbg.so',
         ],
         //install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
+      },
+      "osx": {
+        artifacts: [
+          "bin/release/libGodotSpeech.dylib"
+        ],
+        output_artifacts: [
+          "libGodotSpeech.dylib"
+        ],
+        debug_artifacts: [
+          "bin/release/libGodotSpeech.dbg.dylib"
+        ],
+        scons_arguments: "",
+        environment_variables: [],
+        prepare_commands: [],
+        extra_commands: [
+          "cd bin/release && mv libGodotSpeech.dylib libGodotSpeech.dbg.dylib && strip --strip-debug -o libGodotSpeech.dylib libGodotSpeech.dbg.dylib"
+        ],
+        #install_task: ["mv libGodotSpeech.dylib g/addons/godot_speech/bin/libGodotSpeech.dylib"],
       },
     },
   },
@@ -227,6 +249,15 @@ local groups_gdnative_plugins = {
         ],
         //install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
       },
+      "osx": {
+        artifacts: [],
+        output_artifacts: [],
+        debug_artifacts: [],
+        scons_arguments: "--version",
+        environment_variables: [],
+        prepare_commands: [],
+        extra_commands: [],
+      }
     },
   },
 };
@@ -286,11 +317,39 @@ local groups_export_configurations = {
       'rm -f export_linux_server/*.so',
     ],
   },
+  "macos": {
+    export_name: "macos",
+    platform_name: "macos",
+    gdnative_platform: "osx",
+    export_configuration: "Mac OSX",
+    export_directory: "export_macos",
+    export_executable: "v_sekai_macos",
+    itchio_out: "macos",
+    prepare_commands: [
+      #'strip --strip-debug godot_speech/libGodotSpeech.so',
+      'cp -p godot_speech/libGodotSpeech.dylib g/addons/godot_speech/bin/libGodotSpeech.dylib',
+    ],
+    extra_commands: [
+    ],
+  },
+  "web": {
+    export_name: "web",
+    platform_name: "web",
+    gdnative_platform: "linux",
+    export_configuration: "HTML5",
+    export_directory: "export_web",
+    export_executable: "v_sekai_web",
+    itchio_out: "web",
+    prepare_commands: [
+    ],
+    extra_commands: [
+    ],
+  },
 };
 
 local enabled_groups_gdnative_plugins = [groups_gdnative_plugins[x] for x in ['godot_speech', 'godot_openvr']];
 
-local enabled_groups_export_platforms = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop', 'linuxServer']];
+local enabled_groups_export_platforms = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop', 'linuxServer', 'web', 'macos']];
 
 local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');
 
@@ -385,7 +444,7 @@ local godot_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'cp g/bin/' + platform_info.intermediate_godot_binary + 'g/bin/' + platform_info.editor_godot_binary,
+                  'cp -p g/bin/' + platform_info.intermediate_godot_binary + 'g/bin/' + platform_info.editor_godot_binary,
                 ],
                 command: '/bin/bash',
               }
@@ -700,8 +759,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
               },
             ],
           }
-          for platform_info in enabled_template_platforms
-          if platform_info.platform_name != 'server'
+          for platform_info in enabled_gdnative_platforms
         ],
       },
     ],
@@ -818,8 +876,8 @@ local generate_godot_gdnative_pipeline(pipeline_name='',
             ] + [
             ],
           }
-          for platform_info in enabled_template_platforms
-          if platform_info.platform_name != 'server' && std.objectHas(library_info.platforms, platform_info.platform_name)
+          for platform_info in enabled_gdnative_platforms
+          if std.objectHas(library_info.platforms, platform_info.platform_name)
         ],
       },
     ],
