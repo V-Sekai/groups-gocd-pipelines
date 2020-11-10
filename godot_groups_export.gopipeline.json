@@ -508,7 +508,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_web && mkdir export_web && chmod +x godot_server.x11.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64.llvm --export \"HTML5\" \"`pwd`\"/export_web/v_sekai_web --path g -v"
+                        "rm -rf export_web && mkdir export_web && chmod +x godot_server.x11.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64.llvm --export \"HTML5\" \"`pwd`\"/export_web/v_sekai_web.html --path g -v"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -590,7 +590,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_macos && mkdir export_macos && chmod +x godot_server.x11.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64.llvm --export \"Mac OSX\" \"`pwd`\"/export_macos/v_sekai_macos --path g -v"
+                        "rm -rf export_macos && mkdir export_macos && chmod +x godot_server.x11.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64.llvm --export \"Mac OSX\" \"`pwd`\"/export_macos/v_sekai_macos.zip --path g -v"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -681,34 +681,6 @@
                      "arguments": [
                         "-c",
                         "butler push export_linux_server $ITCHIO_LOGIN:server-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
-                  }
-               ]
-            },
-            {
-               "name": "webJob",
-               "resources": [
-                  "linux",
-                  "mingw5"
-               ],
-               "tasks": [
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "",
-                     "is_source_a_file": false,
-                     "job": "webJob",
-                     "pipeline": "production-groups-release-export",
-                     "source": "export_web",
-                     "stage": "exportStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "butler push export_web $ITCHIO_LOGIN:web --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

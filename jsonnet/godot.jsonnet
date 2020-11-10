@@ -323,7 +323,7 @@ local groups_export_configurations = {
     gdnative_platform: 'osx',
     export_configuration: 'Mac OSX',
     export_directory: 'export_macos',
-    export_executable: 'v_sekai_macos',
+    export_executable: 'v_sekai_macos.zip',
     itchio_out: 'macos',
     prepare_commands: [
       'cp -p godot_speech/libGodotSpeech.dylib g/addons/godot_speech/bin/libGodotSpeech.dylib',
@@ -337,8 +337,8 @@ local groups_export_configurations = {
     gdnative_platform: 'linux',
     export_configuration: 'HTML5',
     export_directory: 'export_web',
-    export_executable: 'v_sekai_web',
-    itchio_out: 'web',
+    export_executable: 'v_sekai_web.html',
+    itchio_out: null,
     prepare_commands: [
     ],
     extra_commands: [
@@ -1090,6 +1090,7 @@ local godot_tools_pipeline_export(
             ],
           }
           for export_info in enabled_export_platforms
+          if export_info.itchio_out != null
         ],
       },
     ],
