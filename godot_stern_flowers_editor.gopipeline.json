@@ -476,7 +476,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.osx.opt.tools.64 bin/godot_osx_debug.64 && cp bin/godot.osx.opt.tools.64 bin/godot_osx_release.64 && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip bin/godot_osx_release.64"
+                        "cp bin/godot.osx.opt.tools.64 bin/godot_osx_debug.64 && cp bin/godot.osx.opt.tools.64 bin/godot_osx_release.64 && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S bin/godot_osx_release.64"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
