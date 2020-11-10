@@ -81,7 +81,7 @@ local platform_info_dict = {
     template_release_binary: 'godot_osx_release.64',
     scons_platform: 'osx',
     gdnative_platform: 'osx',
-    strip_command: 'LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip',
+    strip_command: 'LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S',
     // FIXME: We should look into using osx_tools.app instead of osx_template.app, because we build with tools=yes
     godot_scons_arguments: 'osxcross_sdk=darwin19 CXXFLAGS="-Wno-deprecated-declarations -Wno-error " builtin_freetype=yes',
     extra_commands: [],
@@ -189,7 +189,7 @@ local groups_gdnative_plugins = {
         environment_variables: [],
         prepare_commands: [],
         extra_commands: [
-          "cd bin/release && mv libGodotSpeech.dylib libGodotSpeech.dbg.dylib && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip --strip-debug -o libGodotSpeech.dylib libGodotSpeech.dbg.dylib"
+          "cd bin/release && mv libGodotSpeech.dylib libGodotSpeech.dbg.dylib && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S -o libGodotSpeech.dylib libGodotSpeech.dbg.dylib"
         ],
         //install_task: ["mv libGodotSpeech.dylib g/addons/godot_speech/bin/libGodotSpeech.dylib"],
       },
@@ -326,7 +326,6 @@ local groups_export_configurations = {
     export_executable: 'v_sekai_macos',
     itchio_out: 'macos',
     prepare_commands: [
-      //'strip --strip-debug godot_speech/libGodotSpeech.so',
       'cp -p godot_speech/libGodotSpeech.dylib g/addons/godot_speech/bin/libGodotSpeech.dylib',
     ],
     extra_commands: [
