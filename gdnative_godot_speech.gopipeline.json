@@ -204,7 +204,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cd bin/release && mv libGodotSpeech.dylib libGodotSpeech.dbg.dylib && strip --strip-debug -o libGodotSpeech.dylib libGodotSpeech.dbg.dylib"
+                        "cd bin/release && mv libGodotSpeech.dylib libGodotSpeech.dbg.dylib && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip --strip-debug -o libGodotSpeech.dylib libGodotSpeech.dbg.dylib"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
