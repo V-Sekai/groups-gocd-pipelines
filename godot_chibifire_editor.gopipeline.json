@@ -168,7 +168,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "OSXCROSS_ROOT=/opt/osxcross LD_LIBRARY_PATH=/opt/osxcross/target/bin scons werror=no platform=osx target=release_debug -j`nproc` use_lto=no deprecated=no osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes custom_modules=../godot_custom_modules"
+                        "OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" scons werror=no platform=osx target=release_debug -j`nproc` use_lto=no deprecated=no osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes custom_modules=../godot_custom_modules"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
