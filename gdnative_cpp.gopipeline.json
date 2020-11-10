@@ -161,18 +161,18 @@
             {
                "artifacts": [
                   {
-                     "destination": "",
-                     "source": "g/bin/osx.zip",
+                     "destination": "godot-cpp",
+                     "source": "godot-cpp/include",
                      "type": "build"
                   },
                   {
-                     "destination": "",
-                     "source": "Godot.app",
+                     "destination": "godot-cpp",
+                     "source": "godot-cpp/godot_headers",
                      "type": "build"
                   },
                   {
-                     "destination": "",
-                     "source": "g/bin/version.txt",
+                     "destination": "godot-cpp",
+                     "source": "godot-cpp/bin",
                      "type": "build"
                   }
                ],

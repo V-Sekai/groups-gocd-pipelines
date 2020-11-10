@@ -719,7 +719,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
               'linux',
               'mingw5',
             ],
-            artifacts: if platform_info.template_artifacts_override != null then platform_info.template_artifacts_override else [
+            artifacts: [
               {
                 type: 'build',
                 source: 'godot-cpp/include',
