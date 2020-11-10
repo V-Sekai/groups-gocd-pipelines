@@ -521,7 +521,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mv godot_osx_debug.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_debug.64"
+                        "mv ./bin/godot_osx_debug.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_debug.64"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -539,7 +539,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mv godot_osx_release.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_release.64"
+                        "mv ./bin/godot_osx_release.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_release.64"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
