@@ -195,7 +195,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "OSXCROSS_ROOT=/opt/osxcross scons werror=no platform=osx target=release -j`nproc` use_lto=no deprecated=no osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes"
+                        "OSXCROSS_ROOT=/opt/osxcross LD_LIBRARY_PATH=/opt/osxcross/target/bin scons werror=no platform=osx target=release -j`nproc` use_lto=no deprecated=no osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
