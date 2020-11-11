@@ -327,6 +327,7 @@ local groups_export_configurations = {
     itchio_out: 'macos',
     prepare_commands: [
       'cp -p godot_speech/libGodotSpeech.dylib g/addons/godot_speech/bin/libGodotSpeech.dylib',
+      'sed -ibak -e "/mix_rate=48000/d" g/project.godot',
     ],
     extra_commands: [
     ],
