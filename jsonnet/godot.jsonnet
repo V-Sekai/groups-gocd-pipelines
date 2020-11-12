@@ -330,6 +330,8 @@ local groups_export_configurations = {
       'sed -ibak -e "/mix_rate=48000/d" g/project.godot',
     ],
     extra_commands: [
+      // https://itch.io/t/303643/cant-get-a-mac-app-to-run-after-butler-push-resolved
+      'cd export_macos && unzip v_sekai_macos.zip && rm v_sekai_macos.zip',
     ],
   },
   web: {

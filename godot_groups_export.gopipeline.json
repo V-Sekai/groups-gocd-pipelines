@@ -604,6 +604,15 @@
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cd export_macos && unzip v_sekai_macos.zip && rm v_sekai_macos.zip"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
                   }
                ]
             }
