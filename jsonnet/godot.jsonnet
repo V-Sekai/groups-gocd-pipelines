@@ -260,6 +260,66 @@ local groups_gdnative_plugins = {
       }
     },
   },
+  godot_gltf: {
+    name: 'godot_gltf',
+    pipeline_name: 'gdnative-godot-gltf',
+    git_url: 'https://github.com/V-Sekai/godot-gltf-module.git',
+    git_branch: 'gdnative',
+    platforms: {
+      windows: {
+        artifacts: [
+          'bin/release_debug/libgodot_gltf.dll',
+        ],
+        output_artifacts: [
+          'libgodot_gltf.dll',
+        ],
+        debug_artifacts: [
+          'bin/release_debug/libgodot_gltf.dbg.dll',
+          'bin/release_debug/libgodot_gltf.pdb',
+        ],
+        scons_arguments: '',
+        environment_variables: [],
+        prepare_commands: [],
+        extra_commands: [
+          'cd bin/release && mv libgodot_gltf.dll libgodot_gltf.dbg.dll && mingw-strip --strip-debug -o libgodot_gltf.dll libgodot_gltf.dbg.dll',
+        ],
+      },
+      linux: {
+        artifacts: [
+          'bin/release/libgodot_gltf.so',
+        ],
+        output_artifacts: [
+          'libgodot_gltf.so',
+        ],
+        debug_artifacts: [
+          'bin/release/libgodot_gltf.dbg.so',
+        ],
+        scons_arguments: '',
+        environment_variables: [],
+        prepare_commands: [],
+        extra_commands: [
+          'cd bin/release && mv libgodot_gltf.so libgodot_gltf.dbg.so && strip --strip-debug -o libgodot_gltf.so libgodot_gltf.dbg.so',
+        ],
+      },
+      osx: {
+        artifacts: [
+          "bin/release/libgodot_gltf.dylib"
+        ],
+        output_artifacts: [
+          "libgodot_gltf.dylib"
+        ],
+        debug_artifacts: [
+          "bin/release/libgodot_gltf.dbg.dylib"
+        ],
+        scons_arguments: '',
+        environment_variables: [],
+        prepare_commands: [],
+        extra_commands: [
+          "cd bin/release && mv libgodot_gltf.dylib libgodot_gltf.dbg.dylib && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S -o libgodot_gltf.dylib libgodot_gltf.dbg.dylib"
+        ],
+      },
+    },
+  },
 };
 
 // TODO: Use std.escapeStringBash in case export configurations wish to output executables with spaces.
@@ -348,6 +408,8 @@ local groups_export_configurations = {
     ],
   },
 };
+
+local all_gdnative_plugins = [groups_gdnative_plugins[x] for x in ['godot_speech', 'godot_openvr', 'godot_gltf']];
 
 local enabled_groups_gdnative_plugins = [groups_gdnative_plugins[x] for x in ['godot_speech', 'godot_openvr']];
 
@@ -1319,7 +1381,7 @@ local godot_template_chibifire_editor = 'godot-template-chibifire';
 local godot_template_stern_flowers_editor = 'godot-template-stern-flowers';
 // END
 local godot_gdnative_pipelines =
-  [plugin_info.pipeline_name for plugin_info in enabled_groups_gdnative_plugins];
+  [plugin_info.pipeline_name for plugin_info in all_gdnative_plugins];
 
 
 local godot_template = [godot_template_chibifire_editor] + [godot_template_stern_flowers_editor] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
@@ -1380,7 +1442,7 @@ local godot_template = [godot_template_chibifire_editor] + [godot_template_stern
     godot_status='gdnative.' + library_info.name,
     library_info=library_info,
   )
-  for library_info in enabled_groups_gdnative_plugins
+  for library_info in all_gdnative_plugins
 } + {
   'godot_groups_export.gopipeline.json'
   : std.prune(

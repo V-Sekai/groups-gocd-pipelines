@@ -1,0 +1,219 @@
+{
+   "environment_variables": [
+      {
+         "name": "GODOT_STATUS",
+         "value": "gdnative.godot_gltf"
+      }
+   ],
+   "group": "beta",
+   "label_template": "gdnative.godot_gltf.${gdnative-cpp_pipeline_dependency}.${COUNT}",
+   "materials": [
+      {
+         "name": "gdnative-cpp_pipeline_dependency",
+         "pipeline": "gdnative-cpp",
+         "stage": "godotCppStage",
+         "type": "dependency"
+      },
+      {
+         "branch": "gdnative",
+         "destination": "p",
+         "ignore_for_scheduling": false,
+         "name": "p",
+         "shallow_clone": false,
+         "type": "git",
+         "url": "https://github.com/V-Sekai/godot-gltf-module.git"
+      }
+   ],
+   "name": "gdnative-godot-gltf",
+   "stages": [
+      {
+         "jobs": [
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "p/bin/release_debug/libgodot_gltf.dll",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "debug",
+                     "source": "p/bin/release_debug/libgodot_gltf.dbg.dll",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "debug",
+                     "source": "p/bin/release_debug/libgodot_gltf.pdb",
+                     "type": "build"
+                  }
+               ],
+               "environment_variables": [ ],
+               "name": "windowsJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "job": "windowsJob",
+                     "pipeline": "gdnative-cpp",
+                     "source": "godot-cpp",
+                     "stage": "godotCppStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a godot-cpp p"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=release -j`nproc` use_lto=no deprecated=no use_mingw=yes use_llvm=yes use_lld=yes use_thinlto=yes LINKFLAGS=-Wl,-pdb= CCFLAGS='-g -gcodeview' debug_symbols=no"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cd bin/release && mv libgodot_gltf.dll libgodot_gltf.dbg.dll && mingw-strip --strip-debug -o libgodot_gltf.dll libgodot_gltf.dbg.dll"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  }
+               ]
+            },
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "p/bin/release/libgodot_gltf.so",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "debug",
+                     "source": "p/bin/release/libgodot_gltf.dbg.so",
+                     "type": "build"
+                  }
+               ],
+               "environment_variables": [ ],
+               "name": "linuxJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "job": "linuxJob",
+                     "pipeline": "gdnative-cpp",
+                     "source": "godot-cpp",
+                     "stage": "godotCppStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a godot-cpp p"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "scons werror=no platform=linux target=release -j`nproc` use_lto=no deprecated=no use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cd bin/release && mv libgodot_gltf.so libgodot_gltf.dbg.so && strip --strip-debug -o libgodot_gltf.so libgodot_gltf.dbg.so"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  }
+               ]
+            },
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "p/bin/release/libgodot_gltf.dylib",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "debug",
+                     "source": "p/bin/release/libgodot_gltf.dbg.dylib",
+                     "type": "build"
+                  }
+               ],
+               "environment_variables": [
+                  {
+                     "name": "PATH",
+                     "value": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+                  }
+               ],
+               "name": "osxJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "job": "osxJob",
+                     "pipeline": "gdnative-cpp",
+                     "source": "godot-cpp",
+                     "stage": "godotCppStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a godot-cpp p"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" scons werror=no platform=osx target=release -j`nproc` use_lto=no deprecated=no osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cd bin/release && mv libgodot_gltf.dylib libgodot_gltf.dbg.dylib && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S -o libgodot_gltf.dylib libgodot_gltf.dbg.dylib"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  }
+               ]
+            }
+         ],
+         "name": "gdnativeBuildStage"
+      }
+   ]
+}
