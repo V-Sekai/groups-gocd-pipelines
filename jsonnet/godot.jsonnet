@@ -268,20 +268,18 @@ local groups_gdnative_plugins = {
     platforms: {
       windows: {
         artifacts: [
-          'bin/release_debug/libgodot_gltf.dll',
+          'bin/release/libgodot_gltf.dll',
         ],
         output_artifacts: [
           'libgodot_gltf.dll',
         ],
         debug_artifacts: [
-          'bin/release_debug/libgodot_gltf.dbg.dll',
-          'bin/release_debug/libgodot_gltf.pdb',
+          'bin/release/libgodot_gltf.pdb',
         ],
         scons_arguments: '',
         environment_variables: [],
         prepare_commands: [],
         extra_commands: [
-          'cd bin/release && mv libgodot_gltf.dll libgodot_gltf.dbg.dll && mingw-strip --strip-debug -o libgodot_gltf.dll libgodot_gltf.dbg.dll',
         ],
       },
       linux: {
