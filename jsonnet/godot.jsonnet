@@ -791,7 +791,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
               },
               {
                 type: 'build',
-                source: 'godot-cpp/godot_headers',
+                source: 'godot-cpp/godot-headers',
                 destination: 'godot-cpp',
               },
               {
