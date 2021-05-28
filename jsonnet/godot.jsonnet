@@ -900,7 +900,7 @@ local generate_godot_gdnative_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'cp -a godot-cpp p',
+                  'rm -f godot-cpp/godot-headers/.git && cp -a godot-cpp p',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
