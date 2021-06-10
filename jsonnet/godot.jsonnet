@@ -891,7 +891,7 @@ local godot_pipeline_4_x(pipeline_name='',
             for extra_command in platform_info.template_extra_commands
           ],
         }
-        for platform_info in enabled_template_platforms
+        for platform_info in enabled_template_platforms_4_x
       ],
     },
     {
@@ -954,7 +954,7 @@ local godot_pipeline_4_x(pipeline_name='',
               platform_info.template_debug_binary,
               platform_info.template_release_binary,
             ]
-          ], enabled_template_platforms) + [
+          ], enabled_template_platforms_4_x) + [
             {
               type: 'exec',
               arguments: [
@@ -1947,7 +1947,7 @@ local itch_fire_template = [godot_template_groups_editor_4_x] + [godot_template_
   },
   // STERN FLOWERS
   'godot_stern_flowers_editor.gopipeline.json'
-  : std.prune(godot_pipeline(
+  : std.prune(godot_pipeline_4_x(
     pipeline_name=godot_template_stern_flowers_editor,
     godot_status='stern-flowers',
     godot_git='https://github.com/godotengine/godot.git',
