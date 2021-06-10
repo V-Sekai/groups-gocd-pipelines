@@ -126,6 +126,8 @@ local platform_info_dict = {
 
 local enabled_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'server', 'macos']];
 
+local enabled_engine_platforms_4_x = [platform_info_dict[x] for x in ['windows', 'linux', 'macos']];
+
 local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'server', 'web', 'macos']];
 
 local enabled_gdnative_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'macos']];
@@ -695,6 +697,285 @@ local godot_pipeline(pipeline_name='',
   ],
 };
 
+
+
+local godot_pipeline_4_x(pipeline_name='',
+                     godot_status='',
+                     godot_git='',
+                     godot_branch='',
+                     gocd_group='',
+                     godot_modules_git='',
+                     godot_modules_branch='') = {
+  name: pipeline_name,
+  group: gocd_group,
+  label_template: godot_status + '.${godot_sandbox[:8]}.${COUNT}',
+  environment_variables:
+    [{
+      name: 'GODOT_STATUS',
+      value: godot_status,
+    }],
+  materials: [
+    {
+      name: 'godot_sandbox',
+      url: godot_git,
+      type: 'git',
+      branch: godot_branch,
+      destination: 'g',
+    },
+    if godot_modules_git != '' then
+      {
+        name: 'godot_custom_modules',
+        url: godot_modules_git,
+        type: 'git',
+        branch: godot_modules_branch,
+        destination: 'godot_custom_modules',
+        shallow_clone: false,
+      }
+    else null,
+  ],
+  stages: [
+    {
+      name: 'defaultStage',
+      clean_workspace: false,
+      jobs: [
+        {
+          name: platform_info.platform_name + 'Job',
+          resources: [
+            'mingw5',
+            'linux',
+          ],
+          artifacts: [
+            {
+              source: 'g/bin/' + platform_info.editor_godot_binary,
+              destination: '',
+              type: 'build',
+            },
+            if std.endsWith(platform_info.editor_godot_binary, '.exe') then {
+              source: 'g/bin/' + exe_to_pdb_path(platform_info.editor_godot_binary),
+              destination: '',
+              type: 'build',
+            } else null,
+          ],
+          environment_variables: platform_info.environment_variables,
+          tasks: [
+            {
+              type: 'exec',
+              arguments: [
+                '-c',
+                'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
+              ],
+              command: '/bin/bash',
+              working_directory: 'g',
+            },
+            {
+              type: 'exec',
+              arguments: [
+                '-c',
+                platform_info.scons_env + 'scons werror=no platform=' + platform_info.scons_platform + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + platform_info.godot_scons_arguments +
+                if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+              ],
+              command: '/bin/bash',
+              working_directory: 'g',
+            },
+            if platform_info.editor_godot_binary != platform_info.intermediate_godot_binary then
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'cp -p g/bin/' + platform_info.intermediate_godot_binary + 'g/bin/' + platform_info.editor_godot_binary,
+                ],
+                command: '/bin/bash',
+              }
+            else null,
+          ],
+        }
+        for platform_info in enabled_engine_platforms_4_x
+      ],
+    },
+    {
+      name: 'templateStage',
+      jobs: [
+        {
+          name: platform_info.platform_name + 'Job',
+          resources: [
+            'linux',
+            'mingw5',
+          ],
+          artifacts: if platform_info.template_artifacts_override != null then platform_info.template_artifacts_override else [
+            {
+              type: 'build',
+              source: 'g/bin/' + platform_info.template_debug_binary,
+              destination: '',
+            },
+            {
+              type: 'build',
+              source: 'g/bin/' + platform_info.template_release_binary,
+              destination: '',
+            },
+            {
+              type: 'build',
+              source: 'g/bin/version.txt',
+              destination: '',
+            },
+          ],
+          environment_variables: platform_info.environment_variables,
+          tasks: [
+            {
+              type: 'exec',
+              arguments: [
+                '-c',
+                extra_command,
+              ],
+              command: '/bin/bash',
+              working_directory: 'g',
+            }
+            for extra_command in platform_info.extra_commands
+          ] + [
+            {
+              type: 'exec',
+              arguments: [
+                '-c',
+                'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
+              ],
+              command: '/bin/bash',
+              working_directory: 'g',
+            },
+            if platform_info.editor_godot_binary == platform_info.intermediate_godot_binary then {
+              type: 'fetch',
+              artifact_origin: 'gocd',
+              pipeline: pipeline_name,
+              stage: 'defaultStage',
+              job: platform_info.platform_name + 'Job',
+              is_source_a_file: true,
+              source: platform_info.intermediate_godot_binary,
+              destination: 'g/bin/',
+            } else {
+              type: 'exec',
+              arguments: [
+                '-c',
+                platform_info.scons_env + 'scons werror=no platform=' + platform_info.scons_platform + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+              ],
+              command: '/bin/bash',
+              working_directory: 'g',
+            },
+            {
+              type: 'exec',
+              arguments: [
+                '-c',
+                'cp bin/' + platform_info.intermediate_godot_binary + ' bin/' + platform_info.template_debug_binary + ' && cp bin/' + platform_info.intermediate_godot_binary + ' bin/' + platform_info.template_release_binary + if platform_info.strip_command != null then ' && ' + platform_info.strip_command + ' bin/' + platform_info.template_release_binary else '',
+              ],
+              command: '/bin/bash',
+              working_directory: 'g',
+            },
+            {
+              type: 'exec',
+              arguments: [
+                '-c',
+                'eval `sed -e "s/ = /=/" version.py` && declare "_tmp$patch=.$patch" "_tmp0=" "_tmp=_tmp$patch" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt',
+              ],
+              command: '/bin/bash',
+              working_directory: 'g',
+            },
+          ] + [
+            {
+              type: 'exec',
+              arguments: [
+                '-c',
+                extra_command,
+              ],
+              command: '/bin/bash',
+              working_directory: 'g',
+            }
+            for extra_command in platform_info.template_extra_commands
+          ],
+        }
+        for platform_info in enabled_template_platforms
+      ],
+    },
+    {
+      name: 'templateZipStage',
+      jobs: [
+        {
+          name: 'defaultJob',
+          resources: [
+            'linux',
+            'mingw5',
+          ],
+          artifacts: [
+            {
+              type: 'build',
+              source: 'godot.templates.tpz',
+              destination: '',
+            },
+          ],
+          tasks: [
+            {
+              type: 'exec',
+              arguments: [
+                '-c',
+                'rm -rf templates',
+              ],
+              command: '/bin/bash',
+            },
+            {
+              type: 'fetch',
+              artifact_origin: 'gocd',
+              is_source_a_file: true,
+              source: 'version.txt',
+              destination: 'templates',
+              pipeline: pipeline_name,
+              stage: 'templateStage',
+              job: enabled_template_platforms[0].platform_name + 'Job',
+            },
+            {
+              type: 'fetch',
+              artifact_origin: 'gocd',
+              is_source_a_file: true,
+              source: exe_to_pdb_path(platform_info_dict.windows.editor_godot_binary),
+              destination: 'templates',
+              pipeline: pipeline_name,
+              stage: 'defaultStage',
+              job: 'windowsJob',
+            },
+          ] + std.flatMap(function(platform_info) [
+            {
+              type: 'fetch',
+              artifact_origin: 'gocd',
+              is_source_a_file: true,
+              source: output_artifact,
+              destination: 'templates',
+              pipeline: pipeline_name,
+              stage: 'templateStage',
+              job: platform_info.platform_name + 'Job',
+            }
+            for output_artifact in if platform_info.template_output_artifacts != null then platform_info.template_output_artifacts else [
+              platform_info.template_debug_binary,
+              platform_info.template_release_binary,
+            ]
+          ], enabled_template_platforms) + [
+            {
+              type: 'exec',
+              arguments: [
+                '-c',
+                'rm -rf godot.templates.tpz',
+              ],
+              command: '/bin/bash',
+            },
+            {
+              type: 'exec',
+              arguments: [
+                '-c',
+                'zip -9 godot.templates.tpz templates/*',
+              ],
+              command: '/bin/bash',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 local generate_godot_cpp_pipeline(pipeline_name='',
                                   pipeline_dependency='',
                                   gocd_group='',
@@ -935,6 +1216,142 @@ local generate_godot_gdnative_pipeline(pipeline_name='',
           }
           for platform_info in enabled_gdnative_platforms
           if std.objectHas(library_info.platforms, platform_info.gdnative_platform) && std.length(library_info.platforms[platform_info.gdnative_platform].artifacts) + std.length(library_info.platforms[platform_info.gdnative_platform].debug_artifacts) > 0
+        ],
+      },
+    ],
+  };
+
+local godot_editor_export_4_x(
+  pipeline_name='',
+  pipeline_dependency='',
+  itchio_login='',
+  gocd_group='',
+  godot_status='',
+  gocd_project_folder='',
+  enabled_export_platforms=[],
+      ) =
+  {
+    name: pipeline_name,
+    group: gocd_group,
+    label_template: godot_status + '.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
+    environment_variables:
+      [{
+        name: 'GODOT_STATUS',
+        value: godot_status,
+      }],
+    materials: [
+      {
+        name: pipeline_dependency + '_pipeline_dependency',
+        type: 'dependency',
+        pipeline: pipeline_dependency,
+        stage: 'templateZipStage',
+        ignore_for_scheduling: false,
+      },
+    ],
+    stages: [
+      {
+        name: 'exportStage',
+        clean_workspace: false,
+        fetch_materials: true,
+        jobs: [
+          {
+            name: export_info.export_name + 'Job',
+            resources: [
+              'linux',
+              'mingw5',
+            ],
+            artifacts: [
+              {
+                type: 'build',
+                source: export_info.export_directory,
+                destination: '',
+              },
+            ],
+            environment_variables:
+              [],
+            tasks: [
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_dependency,
+                stage: 'templateZipStage',
+                job: 'defaultJob',
+                is_source_a_file: true,
+                source: 'godot.templates.tpz',
+                destination: '',
+              }
+            ] +
+            [
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'rm -rf templates && unzip "godot.templates.tpz" && mkdir pdbs && mv templates/*.pdb pdbs && export VERSION="`cat templates/version.txt`" && export TEMPLATEDIR=".local/share/godot/templates/$VERSION" && export BASEDIR="`pwd`" && rm -rf "$TEMPLATEDIR" && mkdir -p "$TEMPLATEDIR" && cd "$TEMPLATEDIR" && mv "$BASEDIR"/templates/* . && ln server_* "$BASEDIR/templates/"',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+            ] + [
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  extra_task,
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              }
+              for extra_task in export_info.prepare_commands
+            ] + [
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  extra_task,
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              }
+              for extra_task in export_info.extra_commands
+            ],
+          }
+          for export_info in enabled_export_platforms
+        ],
+      },
+      {
+        name: 'uploadStage',
+        clean_workspace: false,
+        jobs: [
+          {
+            name: export_info.export_name + 'Job',
+            resources: [
+              'linux',
+              'mingw5',
+            ],
+            tasks: [
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_name,
+                stage: 'exportStage',
+                job: export_info.export_name + 'Job',
+                is_source_a_file: false,
+                source: export_info.export_directory,
+                destination: '',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'butler push ' + export_info.export_directory + ' $ITCHIO_LOGIN:' + export_info.itchio_out + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+            ],
+          }
+          for export_info in enabled_export_platforms
+          if export_info.itchio_out != null
         ],
       },
     ],
@@ -1537,7 +1954,7 @@ local itch_fire_template = [godot_template_groups_editor_4_x] + [godot_template_
   )),
   // GROUPS 4.x
   'godot_v_sekai_editor_4_x.gopipeline.json'
-  : std.prune(godot_pipeline(
+  : std.prune(godot_pipeline_4_x(
     pipeline_name=godot_template_groups_editor_4_x,
     godot_status='groups_4_x',
     godot_git='https://github.com/V-Sekai/godot.git',
@@ -1578,7 +1995,7 @@ local itch_fire_template = [godot_template_groups_editor_4_x] + [godot_template_
 } + {
   'godot_groups_editor_export_4_x.gopipeline.json'
   : std.prune(
-    godot_editor_export(
+    godot_editor_export_4_x(
       pipeline_name=godot_template_groups_export_4_x,
       pipeline_dependency=godot_template_groups_editor_4_x,
       gocd_group='gamma',
