@@ -6,7 +6,7 @@
       }
    ],
    "group": "gamma",
-   "label_template": "v_sekai_4_x.${pipeline_dependency[:8]}.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
+   "label_template": "v_sekai_4_x.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "ignore_for_scheduling": false,

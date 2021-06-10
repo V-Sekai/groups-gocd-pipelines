@@ -959,7 +959,7 @@ local godot_editor_export(
   {
     name: pipeline_name,
     group: gocd_group,
-    label_template: godot_status + '.${pipeline_dependency[:8]}.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
+    label_template: godot_status + '.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
     environment_variables:
       [{
         name: 'GODOT_STATUS',
