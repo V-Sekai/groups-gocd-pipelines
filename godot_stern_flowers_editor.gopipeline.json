@@ -303,69 +303,6 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/server_64_debug",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "",
-                     "source": "g/bin/server_64_release",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "",
-                     "source": "g/bin/version.txt",
-                     "type": "build"
-                  }
-               ],
-               "name": "serverJob",
-               "resources": [
-                  "linux",
-                  "mingw5"
-               ],
-               "tasks": [
-                  {
-                     "arguments": [
-                        "-c",
-                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "g/bin/",
-                     "is_source_a_file": true,
-                     "job": "serverJob",
-                     "pipeline": "godot-template-stern-flowers",
-                     "source": "godot_server.x11.opt.tools.64.llvm",
-                     "stage": "defaultStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp bin/godot_server.x11.opt.tools.64.llvm bin/server_64_debug && cp bin/godot_server.x11.opt.tools.64.llvm bin/server_64_release && strip --strip-debug bin/server_64_release"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  }
-               ]
-            },
-            {
-               "artifacts": [
-                  {
-                     "destination": "",
                      "source": "g/bin/webassembly_debug.zip",
                      "type": "build"
                   },

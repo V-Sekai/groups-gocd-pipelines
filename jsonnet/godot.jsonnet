@@ -130,6 +130,8 @@ local enabled_engine_platforms_4_x = [platform_info_dict[x] for x in ['windows',
 
 local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'server', 'web', 'macos']];
 
+local enabled_template_platforms_4_x= [platform_info_dict[x] for x in ['windows', 'linux', 'web', 'macos']];
+
 local enabled_gdnative_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'macos']];
 
 
@@ -610,7 +612,7 @@ local godot_pipeline(pipeline_name='',
             for extra_command in platform_info.template_extra_commands
           ],
         }
-        for platform_info in enabled_template_platforms
+        for platform_info in enabled_template_platforms_4_x
       ],
     },
     {
