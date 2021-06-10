@@ -753,7 +753,8 @@ local godot_template_groups_editor_4_x = 'godot-template-groups-4-x';
 local godot_template_groups_export_4_x = 'production-groups-release-export-4-x';
 
 // STERN FLOWERS
-local godot_template_stern_flowers_editor = 'godot-template-stern-flowers';
+local godot_template_stern_flowers_editor = 'godot-template-stern-flowers-4-x';
+local godot_template_stern_flowers_export_4_x = 'production-stern-flowers-release-export-4-x';
 // END
 local itch_fire_template = [godot_template_groups_editor_4_x] + [godot_template_groups_export_4_x];
 
@@ -800,6 +801,16 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor];
       pipeline_dependency=godot_template_groups_editor_4_x,
       gocd_group='gamma',
       godot_status='groups_4_x',
+      enabled_export_platforms=enabled_groups_export_platforms_4_x,
+    )
+  ),
+  'godot_stern_flowers_editor_export_4_x.gopipeline.json'
+  : std.prune(
+    godot_editor_export_4_x(
+      pipeline_name=godot_template_stern_flowers_export_4_x,
+      pipeline_dependency=godot_template_stern_flowers_editor,
+      gocd_group='gamma',
+      godot_status='stern-flowers',
       enabled_export_platforms=enabled_groups_export_platforms_4_x,
     )
   ),
