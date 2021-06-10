@@ -1931,7 +1931,10 @@ local godot_gdnative_pipelines =
 
 local godot_template =  [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
 
-local itch_fire_template = [godot_template_stern_flowers_editor] + [godot_template_groups_editor_4_x] + [godot_template_groups_export_4_x];
+local itch_fire_template = [godot_template_groups_editor_4_x] + [godot_template_groups_export_4_x];
+
+local itch_stern_flowers_template = [godot_template_stern_flowers_editor];
+
 {
   'env.development.goenvironment.json': {
     name: 'development',
@@ -1942,6 +1945,12 @@ local itch_fire_template = [godot_template_stern_flowers_editor] + [godot_templa
   'env.fire.goenvironment.json': {
     name: 'itch-fire',
     pipelines: itch_fire_template,
+    environment_variables:
+      [],
+  },
+  'env.stern-flowers.goenvironment.json': {
+    name: 'itch-stern-flowers',
+    pipelines: itch_stern_flowers_template,
     environment_variables:
       [],
   },
