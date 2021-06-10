@@ -124,13 +124,119 @@ local platform_info_dict = {
   },
 };
 
+local platform_info_dict_4_x = {
+  windows: {
+    platform_name: 'windows',
+    scons_env: 'PATH=/opt/llvm-mingw/bin:$PATH ',
+    intermediate_godot_binary: 'godot.windows.opt.tools.64.exe',
+    editor_godot_binary: 'godot.windows.opt.tools.64.exe',
+    template_debug_binary: 'windows_64_debug.exe',
+    template_release_binary: 'windows_64_release.exe',
+    export_directory: 'export_windows',
+    scons_platform: 'windows',
+    gdnative_platform: 'windows',
+    strip_command: 'mingw-strip --strip-debug',
+    godot_scons_arguments: "use_mingw=yes use_llvm=yes use_lld=yes use_thinlto=yes LINKFLAGS=-Wl,-pdb= CCFLAGS='-g -gcodeview' debug_symbols=no",
+    extra_commands: [],
+    environment_variables: [],
+    template_artifacts_override: null,
+    template_output_artifacts: null,
+    template_extra_commands: [],
+  },
+  linux: {
+    platform_name: 'linux',
+    scons_env: '',
+    intermediate_godot_binary: 'godot.linuxbsd.opt.tools.64.llvm',
+    editor_godot_binary: 'godot.linuxbsd.opt.tools.64.llvm',
+    template_debug_binary: 'linux_linuxbsd_64_debug',
+    template_release_binary: 'linux_linuxbsd_64_release',
+    export_directory: 'export_linux_linuxbsd',
+    scons_platform: 'linuxbsd',
+    gdnative_platform: 'linux',
+    strip_command: 'strip --strip-debug',
+    godot_scons_arguments: 'use_static_cpp=yes use_llvm=yes builtin_freetype=yes',
+    extra_commands: [],
+    environment_variables: [],
+    template_artifacts_override: null,
+    template_output_artifacts: null,
+    template_extra_commands: [],
+  },
+  web: {
+    platform_name: 'web',
+    scons_env: 'source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ',
+    intermediate_godot_binary: 'godot.javascript.opt.debug.zip',
+    editor_godot_binary: null,
+    template_debug_binary: 'webassembly_debug.zip',
+    template_release_binary: 'webassembly_release.zip',
+    strip_command: null,  // unknown if release should be built separately.
+    scons_platform: 'javascript',
+    gdnative_platform: 'linux', // TODO: We need godot_speech for web.
+    godot_scons_arguments: 'use_llvm=yes builtin_freetype=yes',
+    extra_commands: [],
+    environment_variables: [],
+    template_artifacts_override: null,
+    template_output_artifacts: null,
+    template_extra_commands: [],
+  },
+  macos: {
+    platform_name: 'macos',
+    scons_env: 'OSXCROSS_ROOT="LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross" ',
+    intermediate_godot_binary: 'godot.osx.opt.tools.64',
+    editor_godot_binary: 'godot.osx.opt.tools.64',
+    template_debug_binary: 'godot_osx_debug.64',
+    template_release_binary: 'godot_osx_release.64',
+    scons_platform: 'osx',
+    gdnative_platform: 'osx',
+    strip_command: 'LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S',
+    // FIXME: We should look into using osx_tools.app instead of osx_template.app, because we build with tools=yes
+    godot_scons_arguments: 'osxcross_sdk=darwin19 CXXFLAGS="-Wno-deprecated-declarations -Wno-error " builtin_freetype=yes',
+    extra_commands: [],
+    environment_variables: [
+      {
+        name: 'PATH',
+        value: '/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+      },
+    ],
+    template_artifacts_override: [
+      {
+        type: 'build',
+        source: 'g/bin/osx.zip',
+        destination: '',
+      },
+      {
+        type: 'build',
+        source: 'Godot.app',
+        destination: '',
+      },
+      {
+        type: 'build',
+        source: 'g/bin/version.txt',
+        destination: '',
+      },
+    ],
+    template_output_artifacts: ['osx.zip'],
+    template_extra_commands: [
+      'rm -rf ./bin/osx_template.app',
+      'cp -r ./misc/dist/osx_template.app ./bin/',
+      'mkdir -p ./bin/osx_template.app/Contents/MacOS',
+      'mv ./bin/godot_osx_debug.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_debug.64',
+      'chmod +x ./bin/osx_template.app/Contents/MacOS/godot_osx_debug.64',
+      'mv ./bin/godot_osx_release.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_release.64',
+      'chmod +x ./bin/osx_template.app/Contents/MacOS/godot_osx_release.64',
+      'rm -rf bin/osx.zip',
+      'cd bin && zip -9 -r osx.zip osx_template.app/',
+      'cd .. && rm -rf Godot.app && cp -r ./g/misc/dist/osx_template.app Godot.app',
+    ],
+  },
+};
+
 local enabled_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'server', 'macos']];
 
-local enabled_engine_platforms_4_x = [platform_info_dict[x] for x in ['windows', 'linux', 'macos']];
+local enabled_engine_platforms_4_x = [platform_info_dict_4_x[x] for x in ['windows', 'linux', 'macos']];
 
 local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'server', 'web', 'macos']];
 
-local enabled_template_platforms_4_x= [platform_info_dict[x] for x in ['windows', 'linux', 'web', 'macos']];
+local enabled_template_platforms_4_x= [platform_info_dict_4_x[x] for x in ['windows', 'linux', 'web', 'macos']];
 
 local enabled_gdnative_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'macos']];
 
