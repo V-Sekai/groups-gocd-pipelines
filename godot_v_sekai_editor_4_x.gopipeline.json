@@ -2,29 +2,29 @@
    "environment_variables": [
       {
          "name": "GODOT_STATUS",
-         "value": "chibifire"
+         "value": "groups_4_x"
       }
    ],
-   "group": "chibifire",
-   "label_template": "chibifire.${godot_sandbox[:8]}.${COUNT}",
+   "group": "gamma",
+   "label_template": "groups_4_x.${godot_sandbox[:8]}.${COUNT}",
    "materials": [
       {
-         "branch": "extended-fire",
+         "branch": "groups_4_x",
          "destination": "g",
          "name": "godot_sandbox",
          "type": "git",
-         "url": "https://github.com/godot-extended-libraries/godot-fire.git"
+         "url": "https://github.com/V-Sekai/godot.git"
       },
       {
-         "branch": "master",
+         "branch": "groups-modules-4.x",
          "destination": "godot_custom_modules",
          "name": "godot_custom_modules",
          "shallow_clone": false,
          "type": "git",
-         "url": "https://github.com/godot-extended-libraries/godot-modules-fire.git"
+         "url": "https://github.com/V-Sekai/godot-modules-groups.git"
       }
    ],
-   "name": "godot-template-chibifire",
+   "name": "godot-template-groups-4-x",
    "stages": [
       {
          "clean_workspace": false,
@@ -219,7 +219,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-chibifire",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "godot.windows.opt.tools.64.exe",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -282,7 +282,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-template-chibifire",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "godot.x11.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -345,7 +345,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "serverJob",
-                     "pipeline": "godot-template-chibifire",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "godot_server.x11.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -476,7 +476,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "macosJob",
-                     "pipeline": "godot-template-chibifire",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "godot.osx.opt.tools.64",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -623,7 +623,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-chibifire",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "version.txt",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -633,7 +633,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-chibifire",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "godot.windows.opt.tools.64.pdb",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -643,7 +643,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-chibifire",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "windows_64_debug.exe",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -653,7 +653,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-chibifire",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "windows_64_release.exe",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -663,7 +663,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-template-chibifire",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "linux_x11_64_debug",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -673,7 +673,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-template-chibifire",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "linux_x11_64_release",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -683,7 +683,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "serverJob",
-                     "pipeline": "godot-template-chibifire",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "server_64_debug",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -693,7 +693,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "serverJob",
-                     "pipeline": "godot-template-chibifire",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "server_64_release",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -703,7 +703,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "webJob",
-                     "pipeline": "godot-template-chibifire",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "webassembly_debug.zip",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -713,7 +713,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "webJob",
-                     "pipeline": "godot-template-chibifire",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "webassembly_release.zip",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -723,7 +723,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "macosJob",
-                     "pipeline": "godot-template-chibifire",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "osx.zip",
                      "stage": "templateStage",
                      "type": "fetch"

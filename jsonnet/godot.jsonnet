@@ -947,6 +947,142 @@ local generate_godot_gdnative_pipeline(pipeline_name='',
     ],
   };
 
+local godot_editor_export(
+  pipeline_name='',
+  pipeline_dependency='',
+  itchio_login='',
+  gocd_group='',
+  godot_status='',
+  gocd_project_folder='',
+  enabled_export_platforms=[],
+      ) =
+  {
+    name: pipeline_name,
+    group: gocd_group,
+    label_template: godot_status + '.${groups_git_sandbox[:8]}.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
+    environment_variables:
+      [{
+        name: 'GODOT_STATUS',
+        value: godot_status,
+      }],
+    materials: [
+      {
+        name: pipeline_dependency + '_pipeline_dependency',
+        type: 'dependency',
+        pipeline: pipeline_dependency,
+        stage: 'templateZipStage',
+        ignore_for_scheduling: false,
+      },
+    ],
+    stages: [
+      {
+        name: 'exportStage',
+        clean_workspace: false,
+        fetch_materials: true,
+        jobs: [
+          {
+            name: export_info.export_name + 'Job',
+            resources: [
+              'linux',
+              'mingw5',
+            ],
+            artifacts: [
+              {
+                type: 'build',
+                source: export_info.export_directory,
+                destination: '',
+              },
+            ],
+            environment_variables:
+              [],
+            tasks: [
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_dependency,
+                stage: 'templateZipStage',
+                job: 'defaultJob',
+                is_source_a_file: true,
+                source: 'godot.templates.tpz',
+                destination: '',
+              }
+            ] +
+            [
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'rm -rf templates && unzip "godot.templates.tpz" && mkdir pdbs && mv templates/*.pdb pdbs && export VERSION="`cat templates/version.txt`" && export TEMPLATEDIR=".local/share/godot/templates/$VERSION" && export BASEDIR="`pwd`" && rm -rf "$TEMPLATEDIR" && mkdir -p "$TEMPLATEDIR" && cd "$TEMPLATEDIR" && mv "$BASEDIR"/templates/* . && ln server_* "$BASEDIR/templates/"',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+            ] + [
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  extra_task,
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              }
+              for extra_task in export_info.prepare_commands
+            ] + [
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  extra_task,
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              }
+              for extra_task in export_info.extra_commands
+            ],
+          }
+          for export_info in enabled_export_platforms
+        ],
+      },
+      {
+        name: 'uploadStage',
+        clean_workspace: false,
+        jobs: [
+          {
+            name: export_info.export_name + 'Job',
+            resources: [
+              'linux',
+              'mingw5',
+            ],
+            tasks: [
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_name,
+                stage: 'exportStage',
+                job: export_info.export_name + 'Job',
+                is_source_a_file: false,
+                source: export_info.export_directory,
+                destination: '',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'butler push ' + export_info.export_directory + ' $ITCHIO_LOGIN:' + export_info.itchio_out + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+            ],
+          }
+          for export_info in enabled_export_platforms
+          if export_info.itchio_out != null
+        ],
+      },
+    ],
+  };
+
 local godot_tools_pipeline_export(
   pipeline_name='',
   pipeline_dependency='',
@@ -1127,11 +1263,6 @@ local godot_tools_pipeline_export(
               'linux',
               'mingw5',
             ],
-            //            environment_variables:
-            //              [{
-            //                name: 'BUTLER_API_KEY',
-            //                encrypted_value: butler_api_key,
-            //              },{name: 'ITCHIO_LOGIN', value: ....}],
             tasks: [
               {
                 type: 'fetch',
@@ -1369,6 +1500,7 @@ local simple_docker_job(pipeline_name='',
     ],
   };
 // Groups
+local godot_template_groups_editor_4_x = 'godot-template-groups-4-x';
 local godot_template_groups_editor = 'godot-template-groups';
 local godot_cpp_pipeline = 'gdnative-cpp';
 local godot_template_groups_export = 'production-groups-release-export';
@@ -1384,28 +1516,22 @@ local godot_gdnative_pipelines =
   [plugin_info.pipeline_name for plugin_info in all_gdnative_plugins];
 
 
-local godot_template = [godot_template_groups_editor_4_x] + [godot_template_stern_flowers_editor] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
+local godot_template = [godot_template_stern_flowers_editor] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
 
-
+local itch_fire_template = [godot_template_groups_editor_4_x];
 {
-  'env.goenvironment.json': {
+  'env.development.goenvironment.json': {
     name: 'development',
     pipelines: godot_template,
     environment_variables:
       [],
   },
-
-  'godot_v_sekai_editor_4_x.yaml'
-  : std.prune(godot_pipeline(
-    pipeline_name=godot_template_groups_editor_4_x,
-    godot_status='groups_4_x',
-    godot_git='https://github.com/V-Sekai/godot.git',
-    godot_branch='groups_4_x',
-    gocd_group='gamma',
-    godot_modules_git='https://github.com/V-Sekai/godot-modules-groups.git',
-    godot_modules_branch='groups-modules-4.x',
-    enabled_export_platforms=enabled_groups_export_platforms_4_x,
-  )),
+  'env.fire.goenvironment.json': {
+    name: 'itch-fire',
+    pipelines: itch_fire_template,
+    environment_variables:
+      [],
+  },
   // STERN FLOWERS
   'godot_stern_flowers_editor.gopipeline.json'
   : std.prune(godot_pipeline(
@@ -1414,6 +1540,17 @@ local godot_template = [godot_template_groups_editor_4_x] + [godot_template_ster
     godot_git='https://github.com/godotengine/godot.git',
     godot_branch='master',
     gocd_group='stern-flowers'
+  )),
+  // GROUPS 4.x
+  'godot_v_sekai_editor_4_x.gopipeline.json'
+  : std.prune(godot_pipeline(
+    pipeline_name=godot_template_groups_editor_4_x,
+    godot_status='groups_4_x',
+    godot_git='https://github.com/V-Sekai/godot.git',
+    godot_branch='groups_4_x',
+    gocd_group='gamma',
+    godot_modules_git='https://github.com/V-Sekai/godot-modules-groups.git',
+    godot_modules_branch='groups-modules-4.x',
   )),
   // GROUPS
   'godot_groups_editor.gopipeline.json'
@@ -1445,6 +1582,16 @@ local godot_template = [godot_template_groups_editor_4_x] + [godot_template_ster
   )
   for library_info in all_gdnative_plugins
 } + {
+  'godot_groups_editor_export.gopipeline.json'
+  : std.prune(
+    godot_editor_export(
+      pipeline_name=godot_template_groups_export,
+      pipeline_dependency=godot_template_groups_editor,
+      gocd_group='gamma',
+      godot_status='v_sekai_4_x',
+      enabled_export_platforms=enabled_groups_export_platforms_4_x,
+    )
+  ),
   'godot_groups_export.gopipeline.json'
   : std.prune(
     godot_tools_pipeline_export(
