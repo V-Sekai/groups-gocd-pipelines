@@ -1519,7 +1519,7 @@ local godot_gdnative_pipelines =
 
 local godot_template = [godot_template_stern_flowers_editor] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
 
-local itch_fire_template = [godot_template_groups_editor_4_x];
+local itch_fire_template = [godot_template_groups_editor_4_x] + [godot_template_groups_export_4_x];
 {
   'env.development.goenvironment.json': {
     name: 'development',
