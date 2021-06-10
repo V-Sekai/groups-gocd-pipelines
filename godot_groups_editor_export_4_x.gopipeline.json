@@ -2,11 +2,11 @@
    "environment_variables": [
       {
          "name": "GODOT_STATUS",
-         "value": "v_sekai_4_x"
+         "value": "groups_4_x"
       }
    ],
    "group": "gamma",
-   "label_template": "v_sekai_4_x.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
+   "label_template": "groups_4_x.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "ignore_for_scheduling": false,

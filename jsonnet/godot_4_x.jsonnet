@@ -799,7 +799,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor];
       pipeline_name=godot_template_groups_export_4_x,
       pipeline_dependency=godot_template_groups_editor_4_x,
       gocd_group='gamma',
-      godot_status='v_sekai_4_x',
+      godot_status='groups_4_x',
       enabled_export_platforms=enabled_groups_export_platforms_4_x,
     )
   ),
