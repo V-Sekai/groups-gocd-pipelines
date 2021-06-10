@@ -441,13 +441,6 @@ local godot_pipeline(pipeline_name='',
       branch: godot_branch,
       destination: 'g',
     },
-    //    {
-    //      name: 'butler_git_sandbox',
-    //      url: gocd_build_git,
-    //      type: 'git',
-    //      branch: gocd_build_branch,
-    //      destination: 'b',
-    //    },
     if godot_modules_git != '' then
       {
         name: 'godot_custom_modules',
