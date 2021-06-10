@@ -612,7 +612,7 @@ local godot_pipeline(pipeline_name='',
             for extra_command in platform_info.template_extra_commands
           ],
         }
-        for platform_info in enabled_template_platforms_4_x
+        for platform_info in enabled_template_platforms
       ],
     },
     {
