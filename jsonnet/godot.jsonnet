@@ -413,6 +413,8 @@ local enabled_groups_gdnative_plugins = [groups_gdnative_plugins[x] for x in ['g
 
 local enabled_groups_export_platforms = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop', 'linuxServer', 'web', 'macos']];
 
+local enabled_groups_export_platforms_4_x = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop', 'macos']];
+
 local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');
 
 
@@ -1382,7 +1384,7 @@ local godot_gdnative_pipelines =
   [plugin_info.pipeline_name for plugin_info in all_gdnative_plugins];
 
 
-local godot_template = [godot_template_chibifire_editor] + [godot_template_stern_flowers_editor] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
+local godot_template = [godot_template_groups_editor_4_x] + [godot_template_stern_flowers_editor] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
 
 
 {
@@ -1392,16 +1394,17 @@ local godot_template = [godot_template_chibifire_editor] + [godot_template_stern
     environment_variables:
       [],
   },
-  // CHIBIFIRE
-  'godot_chibifire_editor.gopipeline.json'
+
+  'godot_v_sekai_editor_4_x.yaml'
   : std.prune(godot_pipeline(
-    pipeline_name=godot_template_chibifire_editor,
-    godot_status='chibifire',
-    godot_git='https://github.com/godot-extended-libraries/godot-fire.git',
-    godot_branch='extended-fire',
-    gocd_group='chibifire',
-    godot_modules_git='https://github.com/godot-extended-libraries/godot-modules-fire.git',
-    godot_modules_branch='master',
+    pipeline_name=godot_template_groups_editor_4_x,
+    godot_status='groups_4_x',
+    godot_git='https://github.com/V-Sekai/godot.git',
+    godot_branch='groups_4_x',
+    gocd_group='gamma',
+    godot_modules_git='https://github.com/V-Sekai/godot-modules-groups.git',
+    godot_modules_branch='groups-modules-4.x',
+    enabled_export_platforms=enabled_groups_export_platforms_4_x,
   )),
   // STERN FLOWERS
   'godot_stern_flowers_editor.gopipeline.json'
