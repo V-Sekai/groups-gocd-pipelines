@@ -16,7 +16,7 @@
          "type": "dependency"
       }
    ],
-   "name": "production-groups-release-export",
+   "name": "production-groups-release-export-4-x",
    "stages": [
       {
          "clean_workspace": false,
@@ -235,7 +235,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "windowsJob",
-                     "pipeline": "production-groups-release-export",
+                     "pipeline": "production-groups-release-export-4-x",
                      "source": "export_windows",
                      "stage": "exportStage",
                      "type": "fetch"
@@ -263,7 +263,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "linuxDesktopJob",
-                     "pipeline": "production-groups-release-export",
+                     "pipeline": "production-groups-release-export-4-x",
                      "source": "export_linux_x11",
                      "stage": "exportStage",
                      "type": "fetch"
@@ -291,7 +291,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "macosJob",
-                     "pipeline": "production-groups-release-export",
+                     "pipeline": "production-groups-release-export-4-x",
                      "source": "export_macos",
                      "stage": "exportStage",
                      "type": "fetch"

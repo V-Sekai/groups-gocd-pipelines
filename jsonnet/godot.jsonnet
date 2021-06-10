@@ -1504,6 +1504,7 @@ local godot_template_groups_editor_4_x = 'godot-template-groups-4-x';
 local godot_template_groups_editor = 'godot-template-groups';
 local godot_cpp_pipeline = 'gdnative-cpp';
 local godot_template_groups_export = 'production-groups-release-export';
+local godot_template_groups_export_4_x = 'production-groups-release-export-4-x';
 local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
 local docker_video_decoder_pipeline = 'docker-video-decoder';
@@ -1585,7 +1586,7 @@ local itch_fire_template = [godot_template_groups_editor_4_x];
   'godot_groups_editor_export.gopipeline.json'
   : std.prune(
     godot_editor_export(
-      pipeline_name=godot_template_groups_export,
+      pipeline_name=godot_template_groups_export_4_x,
       pipeline_dependency=godot_template_groups_editor,
       gocd_group='gamma',
       godot_status='v_sekai_4_x',
