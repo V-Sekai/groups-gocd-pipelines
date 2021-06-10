@@ -1587,6 +1587,7 @@ local itch_fire_template = [godot_template_groups_editor_4_x];
   : std.prune(
     godot_editor_export(
       pipeline_name=godot_template_groups_export_4_x,
+      pipeline_dependency=godot_template_groups_editor_4_x,
       pipeline_dependency=godot_template_groups_editor,
       gocd_group='gamma',
       godot_status='v_sekai_4_x',
