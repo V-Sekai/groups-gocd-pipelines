@@ -5,7 +5,7 @@
          "value": "stern-flowers"
       }
    ],
-   "group": "gamma",
+   "group": "delta",
    "label_template": "stern-flowers.${godot-template-stern-flowers-4-x_pipeline_dependency}.${COUNT}",
    "materials": [
       {

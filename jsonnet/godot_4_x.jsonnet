@@ -779,7 +779,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
     godot_status='stern-flowers',
     godot_git='https://github.com/godotengine/godot.git',
     godot_branch='master',
-    gocd_group='stern-flowers'
+    gocd_group='delta',
   )),
   // GROUPS 4.x
   'godot_v_sekai_editor_4_x.gopipeline.json'
@@ -808,7 +808,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
     godot_editor_export_4_x(
       pipeline_name=godot_template_stern_flowers_export_4_x,
       pipeline_dependency=godot_template_stern_flowers_editor,
-      gocd_group='gamma',
+      gocd_group='delta',
       godot_status='stern-flowers',
       enabled_export_platforms=enabled_groups_export_platforms_4_x,
     )
