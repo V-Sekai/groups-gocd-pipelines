@@ -959,7 +959,7 @@ local godot_editor_export(
   {
     name: pipeline_name,
     group: gocd_group,
-    label_template: godot_status + '.${groups_git_sandbox[:8]}.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
+    label_template: godot_status + '.${pipeline_dependency[:8]}.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
     environment_variables:
       [{
         name: 'GODOT_STATUS',
@@ -1583,12 +1583,11 @@ local itch_fire_template = [godot_template_groups_editor_4_x];
   )
   for library_info in all_gdnative_plugins
 } + {
-  'godot_groups_editor_export.gopipeline.json'
+  'godot_groups_editor_export_4_x.gopipeline.json'
   : std.prune(
     godot_editor_export(
       pipeline_name=godot_template_groups_export_4_x,
       pipeline_dependency=godot_template_groups_editor_4_x,
-      pipeline_dependency=godot_template_groups_editor,
       gocd_group='gamma',
       godot_status='v_sekai_4_x',
       enabled_export_platforms=enabled_groups_export_platforms_4_x,

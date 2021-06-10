@@ -6,12 +6,12 @@
       }
    ],
    "group": "gamma",
-   "label_template": "v_sekai_4_x.${groups_git_sandbox[:8]}.${godot-template-groups_pipeline_dependency}.${COUNT}",
+   "label_template": "v_sekai_4_x.${pipeline_dependency[:8]}.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "ignore_for_scheduling": false,
-         "name": "godot-template-groups_pipeline_dependency",
-         "pipeline": "godot-template-groups",
+         "name": "godot-template-groups-4-x_pipeline_dependency",
+         "pipeline": "godot-template-groups-4-x",
          "stage": "templateZipStage",
          "type": "dependency"
       }
@@ -41,7 +41,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "defaultJob",
-                     "pipeline": "godot-template-groups",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "godot.templates.tpz",
                      "stage": "templateZipStage",
                      "type": "fetch"
@@ -112,7 +112,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "defaultJob",
-                     "pipeline": "godot-template-groups",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "godot.templates.tpz",
                      "stage": "templateZipStage",
                      "type": "fetch"
@@ -174,7 +174,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "defaultJob",
-                     "pipeline": "godot-template-groups",
+                     "pipeline": "godot-template-groups-4-x",
                      "source": "godot.templates.tpz",
                      "stage": "templateZipStage",
                      "type": "fetch"
