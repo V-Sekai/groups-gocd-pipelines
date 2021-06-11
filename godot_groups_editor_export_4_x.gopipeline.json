@@ -58,7 +58,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_windows && mkdir export_windows"
+                        "rm -rf export_windows && mkdir export_windows && mv `pwd`/godot.windows.opt.tools.64.exe mv `pwd`/export_windows/godot.windows.opt.tools.64.exe"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -102,7 +102,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_linuxbsd && mkdir export_linuxbsd"
+                        "rm -rf export_linuxbsd && mkdir export_linuxbsd && mv `pwd`/godot.linuxbsd.opt.tools.64 mv `pwd`/export_linuxbsd/godot.linuxbsd.opt.tools.64"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -146,7 +146,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_macos && mkdir export_macos"
+                        "rm -rf export_macos && mkdir export_macos && mv `pwd`/godot_macos.zip mv `pwd`/export_macos/godot_macos.zip"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -155,7 +155,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cd export_macos && unzip v_sekai_macos.zip && rm v_sekai_macos.zip"
+                        "cd export_macos && unzip godot_macos.zip && rm godot_macos.zip"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
