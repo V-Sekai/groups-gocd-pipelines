@@ -538,7 +538,7 @@ local godot_editor_export_4_x(
     stages: [
       {
         name: 'uploadStage',
-        clean_workspace: false,
+        clean_workspace: true,
         jobs: [
           {
             name: export_info.export_name + 'Job',
