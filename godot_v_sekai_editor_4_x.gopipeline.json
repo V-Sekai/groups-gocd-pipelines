@@ -214,12 +214,12 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/linux_linuxbsd_64_debug",
+                     "source": "g/bin/linuxbsd_64_debug",
                      "type": "build"
                   },
                   {
                      "destination": "",
-                     "source": "g/bin/linux_linuxbsd_64_release",
+                     "source": "g/bin/linuxbsd_64_release",
                      "type": "build"
                   },
                   {
@@ -256,7 +256,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.linuxbsd.opt.tools.64.llvm bin/linux_linuxbsd_64_debug && cp bin/godot.linuxbsd.opt.tools.64.llvm bin/linux_linuxbsd_64_release && strip --strip-debug bin/linux_linuxbsd_64_release"
+                        "cp bin/godot.linuxbsd.opt.tools.64.llvm bin/linuxbsd_64_debug && cp bin/godot.linuxbsd.opt.tools.64.llvm bin/linuxbsd_64_release && strip --strip-debug bin/linuxbsd_64_release"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -505,7 +505,7 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "godot-template-groups-4-x",
-                     "source": "linux_linuxbsd_64_debug",
+                     "source": "linuxbsd_64_debug",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
@@ -515,7 +515,7 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "godot-template-groups-4-x",
-                     "source": "linux_linuxbsd_64_release",
+                     "source": "linuxbsd_64_release",
                      "stage": "templateStage",
                      "type": "fetch"
                   },

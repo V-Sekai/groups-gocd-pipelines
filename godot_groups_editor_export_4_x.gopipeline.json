@@ -61,7 +61,7 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "export_linux_x11",
+                     "source": "export_linuxbsd",
                      "type": "build"
                   }
                ],
@@ -183,14 +183,14 @@
                      "is_source_a_file": false,
                      "job": "linuxDesktopJob",
                      "pipeline": "production-groups-release-export-4-x",
-                     "source": "export_linux_x11",
+                     "source": "export_linuxbsd",
                      "stage": "exportStage",
                      "type": "fetch"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "butler push export_linux_x11 $ITCHIO_LOGIN:x11-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
+                        "butler push export_linuxbsd $ITCHIO_LOGIN:x11-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
