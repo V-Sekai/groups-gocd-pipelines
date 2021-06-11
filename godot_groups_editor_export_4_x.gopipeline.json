@@ -120,7 +120,7 @@
                      "is_source_a_file": true,
                      "job": "macosJob",
                      "pipeline": "godot-template-groups-4-x",
-                     "source": "godot_macos.zip",
+                     "source": "macos.zip",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },

@@ -142,13 +142,13 @@ local groups_export_configurations = {
     gdnative_platform: 'osx',
     export_configuration: 'Mac OSX',
     export_directory: 'export_macos',
-    export_executable: 'v_sekai_macos.zip',
+    export_executable: 'macos.zip',
     itchio_out: 'macos',
     prepare_commands: [
     ],
     extra_commands: [
       // https://itch.io/t/303643/cant-get-a-mac-app-to-run-after-butler-push-resolved
-      'cd export_macos && unzip v_sekai_macos.zip && rm v_sekai_macos.zip',
+      'cd export_macos && unzip macos.zip && rm macos.zip',
     ],
   },
   web: {
@@ -202,13 +202,13 @@ local stern_flowers_export_configurations = {
     gdnative_platform: 'osx',
     export_configuration: 'Mac OSX',
     export_directory: 'export_macos',
-    export_executable: 'godot_macos.zip',
+    export_executable: 'macos.zip',
     itchio_out: 'macos',
     prepare_commands: [
     ],
     extra_commands: [
       // https://itch.io/t/303643/cant-get-a-mac-app-to-run-after-butler-push-resolved
-      'cd export_macos && unzip godot_macos.zip && rm godot_macos.zip',
+      'cd export_macos && unzip macos.zip && rm macos.zip',
     ],
   },
   web: {
