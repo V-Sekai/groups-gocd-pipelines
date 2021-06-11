@@ -524,7 +524,7 @@ local godot_editor_export_4_x(
   {
     name: pipeline_name,
     group: gocd_group,
-    label_template: godot_status + '.${' + pipeline_dependency + '[:8]}_pipeline_dependency.${COUNT}',
+    label_template: '${' + pipeline_dependency + '[:8]}.${COUNT}',
     environment_variables:
       [{
         name: 'GODOT_STATUS',
@@ -585,7 +585,7 @@ local godot_editor_export_4_x(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'butler push ' + export_info.export_directory + ' $ITCHIO_LOGIN:' + export_info.itchio_out + ' --userversion $GO_PIPELINE_LABEL-`date +"%Y-%m-%dT%H%M%S%z" --utc`',
+                  'butler push ' + export_info.export_directory + ' $ITCHIO_LOGIN:' + export_info.itchio_out + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
                 ],
                 command: '/bin/bash',
                 working_directory: '',

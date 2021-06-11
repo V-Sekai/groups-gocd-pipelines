@@ -6,7 +6,7 @@
       }
    ],
    "group": "delta",
-   "label_template": "stern-flowers.${godot-template-stern-flowers-4-x[:8]}_pipeline_dependency.${COUNT}",
+   "label_template": "${godot-template-stern-flowers-4-x[:8]}.${COUNT}",
    "materials": [
       {
          "ignore_for_scheduling": false,
@@ -61,7 +61,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "butler push export_windows $ITCHIO_LOGIN:windows-master --userversion $GO_PIPELINE_LABEL-`date +\"%Y-%m-%dT%H%M%S%z\" --utc`"
+                        "butler push export_windows $ITCHIO_LOGIN:windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -99,7 +99,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "butler push export_linuxbsd $ITCHIO_LOGIN:x11-master --userversion $GO_PIPELINE_LABEL-`date +\"%Y-%m-%dT%H%M%S%z\" --utc`"
+                        "butler push export_linuxbsd $ITCHIO_LOGIN:x11-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
