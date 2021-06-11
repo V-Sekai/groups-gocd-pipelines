@@ -54,24 +54,6 @@
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": ""
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp -a g/assets/actions/openvr/actions export_windows/"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp -p pdbs/*.pdb godot_speech/*.pdb godot_openvr/*.pdb export_windows/"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
                   }
                ]
             },
@@ -103,15 +85,6 @@
                      "arguments": [
                         "-c",
                         "rm -rf templates && unzip \"godot.templates.tpz\" && mkdir pdbs && mv templates/*.pdb pdbs && export VERSION=\"`cat templates/version.txt`\" && export TEMPLATEDIR=\".local/share/godot/templates/$VERSION\" && export BASEDIR=\"`pwd`\" && rm -rf \"$TEMPLATEDIR\" && mkdir -p \"$TEMPLATEDIR\" && cd \"$TEMPLATEDIR\" && mv \"$BASEDIR\"/templates/* ."
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp -a g/assets/actions/openvr/actions export_linux_x11/"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

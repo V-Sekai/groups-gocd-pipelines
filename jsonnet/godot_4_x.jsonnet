@@ -121,8 +121,6 @@ local groups_export_configurations = {
     prepare_commands: [
     ],
     extra_commands: [
-      'cp -a g/assets/actions/openvr/actions export_windows/',
-      'cp -p pdbs/*.pdb godot_speech/*.pdb godot_openvr/*.pdb export_windows/',
     ],
   },
   linuxDesktop: {
@@ -136,21 +134,6 @@ local groups_export_configurations = {
     prepare_commands: [
     ],
     extra_commands: [
-      'cp -a g/assets/actions/openvr/actions export_linux_x11/',
-    ],
-  },
-  linuxServer: {
-    export_name: 'linuxServer',
-    platform_name: 'server',
-    gdnative_platform: 'linux',
-    export_configuration: 'Linux/Server',
-    export_directory: 'export_linux_server',
-    export_executable: 'v_sekai_linux_server',
-    itchio_out: 'server-master',
-    prepare_commands: [
-    ],
-    extra_commands: [
-      'rm -f export_linux_server/*.so',
     ],
   },
   macos: {
