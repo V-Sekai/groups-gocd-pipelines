@@ -6,7 +6,7 @@
       }
    ],
    "group": "gamma",
-   "label_template": "groups_4_x.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
+   "label_template": "groups_4_x.${godot-template-groups-4-x[:8]}_pipeline_dependency.${COUNT}",
    "materials": [
       {
          "ignore_for_scheduling": false,

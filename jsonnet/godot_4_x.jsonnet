@@ -110,7 +110,7 @@ local platform_info_dict_4_x = {
 
 local enabled_engine_platforms_4_x = [platform_info_dict_4_x[x] for x in ['windows', 'linux']];
 
-local enabled_template_platforms_4_x= [platform_info_dict_4_x[x] for x in ['windows', 'linux']];
+local enabled_template_platforms_4_x= [platform_info_dict_4_x[x] for x in ['windows', 'linux',]];
 
 // TODO: Use std.escapeStringBash in case export configurations wish to output executables with spaces.
 local groups_export_configurations = {
@@ -524,7 +524,7 @@ local godot_editor_export_4_x(
   {
     name: pipeline_name,
     group: gocd_group,
-    label_template: godot_status + '.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
+    label_template: godot_status + '.${' + pipeline_dependency + '[:8]}_pipeline_dependency.${COUNT}',
     environment_variables:
       [{
         name: 'GODOT_STATUS',
