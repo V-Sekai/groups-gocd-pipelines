@@ -6,7 +6,7 @@
       }
    ],
    "group": "delta",
-   "label_template": "${godot-template-stern-flowers-4-x[:8]}.${COUNT}",
+   "label_template": "stern-flowers-editor-4-x.${COUNT}",
    "materials": [
       {
          "ignore_for_scheduling": false,
