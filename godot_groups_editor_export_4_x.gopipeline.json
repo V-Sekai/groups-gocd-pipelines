@@ -35,7 +35,7 @@
                      "job": "windowsJob",
                      "pipeline": "groups-editor-4-x",
                      "source": "godot.windows.opt.tools.64.exe",
-                     "stage": "exportStage",
+                     "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
@@ -45,7 +45,7 @@
                      "job": "windowsJob",
                      "pipeline": "groups-editor-4-x",
                      "source": "godot.windows.opt.tools.64.exe",
-                     "stage": "exportStage",
+                     "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
@@ -55,7 +55,7 @@
                      "job": "windowsJob",
                      "pipeline": "groups-editor-4-x",
                      "source": "godot.windows.opt.tools.64.pdb",
-                     "stage": "exportStage",
+                     "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
@@ -83,7 +83,7 @@
                      "job": "linuxJob",
                      "pipeline": "groups-editor-4-x",
                      "source": "godot.linuxbsd.opt.tools.64",
-                     "stage": "exportStage",
+                     "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
@@ -93,7 +93,7 @@
                      "job": "linuxJob",
                      "pipeline": "groups-editor-4-x",
                      "source": "godot.linuxbsd.opt.tools.64",
-                     "stage": "exportStage",
+                     "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
@@ -121,7 +121,7 @@
                      "job": "macosJob",
                      "pipeline": "groups-editor-4-x",
                      "source": "godot_macos.zip",
-                     "stage": "exportStage",
+                     "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
@@ -131,7 +131,7 @@
                      "job": "macosJob",
                      "pipeline": "groups-editor-4-x",
                      "source": "godot_macos.zip",
-                     "stage": "exportStage",
+                     "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
