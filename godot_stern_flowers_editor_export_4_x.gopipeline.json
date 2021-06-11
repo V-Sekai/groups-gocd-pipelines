@@ -6,7 +6,7 @@
       }
    ],
    "group": "delta",
-   "label_template": "stern-flowers.${godot-template-stern-flowers-4-x[:8]}_pipeline_dependency",
+   "label_template": "stern-flowers.${godot-template-stern-flowers-4-x[:8]}_pipeline_dependency.${COUNT}",
    "materials": [
       {
          "ignore_for_scheduling": false,
