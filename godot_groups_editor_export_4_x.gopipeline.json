@@ -185,15 +185,6 @@
                      "source": "export_windows",
                      "stage": "exportStage",
                      "type": "fetch"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "butler push export_windows $ITCHIO_LOGIN:windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
                   }
                ]
             },
@@ -213,15 +204,6 @@
                      "source": "export_linuxbsd",
                      "stage": "exportStage",
                      "type": "fetch"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "butler push export_linuxbsd $ITCHIO_LOGIN:x11-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
                   }
                ]
             },
@@ -241,15 +223,6 @@
                      "source": "export_macos",
                      "stage": "exportStage",
                      "type": "fetch"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "butler push export_macos $ITCHIO_LOGIN:macos --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
                   }
                ]
             }
