@@ -550,7 +550,7 @@ local godot_editor_export_4_x(
               {
                 type: 'fetch',
                 artifact_origin: 'gocd',
-                pipeline: pipeline_name,
+                pipeline: pipeline_dependency,
                 stage: 'defaultStage',
                 job: export_info.platform_name + 'Job',
                 is_source_a_file: true,
@@ -560,7 +560,7 @@ local godot_editor_export_4_x(
               {
                 type: 'fetch',
                 artifact_origin: 'gocd',
-                pipeline: pipeline_name,
+                pipeline: pipeline_dependency,
                 stage: 'defaultStage',
                 job: export_info.platform_name + 'Job',
                 is_source_a_file: true,
@@ -570,7 +570,7 @@ local godot_editor_export_4_x(
               if std.endsWith(export_info.export_executable, '.exe') then {
                 type: 'fetch',
                 artifact_origin: 'gocd',
-                pipeline: pipeline_name,
+                pipeline: pipeline_dependency,
                 stage: 'defaultStage',
                 job: export_info.platform_name + 'Job',
                 is_source_a_file: true,
