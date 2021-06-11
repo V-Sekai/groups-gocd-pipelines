@@ -537,85 +537,6 @@ local godot_editor_export_4_x(
     ],
     stages: [
       {
-        name: 'exportStage',
-        clean_workspace: false,
-        fetch_materials: true,
-        jobs: [
-          {
-            name: export_info.export_name + 'Job',
-            resources: [
-              'linux',
-              'mingw5',
-            ],
-            artifacts: [
-              {
-                type: 'build',
-                source: export_info.export_directory,
-                destination: '',
-              },
-            ],
-            environment_variables:
-              [],
-            tasks: [
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                pipeline: pipeline_dependency,
-                stage: 'templateZipStage',
-                job: 'defaultJob',
-                is_source_a_file: true,
-                source: 'godot.templates.tpz',
-                destination: '',
-              }
-            ] +
-            [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'rm -rf templates && unzip "godot.templates.tpz" && mkdir pdbs && mv templates/*.pdb pdbs && export VERSION="`cat templates/version.txt`" && export TEMPLATEDIR=".local/share/godot/templates/$VERSION" && export BASEDIR="`pwd`" && rm -rf "$TEMPLATEDIR" && mkdir -p "$TEMPLATEDIR" && cd "$TEMPLATEDIR" && mv "$BASEDIR"/templates/* .',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-            ] + [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'rm -rf ' + export_info.export_directory + ' && mkdir ' + export_info.export_directory + ' && mv `pwd`/' + export_info.export_executable + ' mv `pwd`/' + export_info.export_directory + '/' + export_info.export_executable,
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-            ] + [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  extra_task,
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              }
-              for extra_task in export_info.prepare_commands
-            ] + [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  extra_task,
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              }
-              for extra_task in export_info.extra_commands
-            ],
-          }
-          for export_info in enabled_export_platforms
-        ],
-      },
-      {
         name: 'uploadStage',
         clean_workspace: false,
         jobs: [
@@ -631,20 +552,40 @@ local godot_editor_export_4_x(
                 artifact_origin: 'gocd',
                 pipeline: pipeline_name,
                 stage: 'exportStage',
-                job: export_info.export_name + 'Job',
-                is_source_a_file: false,
-                source: export_info.export_directory,
-                destination: '',
+                job: export_info.platform_name + 'Job',
+                is_source_a_file: true,
+                source: export_info.export_executable,
+                destination: export_info.export_directory,
               },
-              // {
-              //   type: 'exec',
-              //   arguments: [
-              //     '-c',
-              //     'butler push ' + export_info.export_directory + ' $ITCHIO_LOGIN:' + export_info.itchio_out + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
-              //   ],
-              //   command: '/bin/bash',
-              //   working_directory: '',
-              // },
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_name,
+                stage: 'exportStage',
+                job: export_info.platform_name + 'Job',
+                is_source_a_file: true,
+                source: export_info.export_executable,
+                destination: export_info.export_directory,
+              },
+              if std.endsWith(export_info.export_executable, '.exe') then {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_name,
+                stage: 'exportStage',
+                job: export_info.platform_name + 'Job',
+                is_source_a_file: true,
+                source: exe_to_pdb_path(export_info.export_executable),
+                destination: export_info.export_directory,
+              } else null,
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'butler push ' + export_info.export_directory + ' $ITCHIO_LOGIN:' + export_info.itchio_out + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
             ],
           }
           for export_info in enabled_export_platforms
@@ -656,11 +597,11 @@ local godot_editor_export_4_x(
 
 // CHIBIFIRE
 local godot_template_groups_editor_4_x = 'godot-template-groups-4-x';
-local godot_template_groups_export_4_x = 'production-groups-release-export-4-x';
+local godot_template_groups_export_4_x = 'groups-editor-4-x';
 
 // STERN FLOWERS
 local godot_template_stern_flowers_editor = 'godot-template-stern-flowers-4-x';
-local godot_template_stern_flowers_export_4_x = 'production-stern-flowers-release-export-4-x';
+local godot_template_stern_flowers_export_4_x = 'stern-flowers-editor-4-x';
 // END
 local itch_fire_template = [godot_template_groups_editor_4_x] + [godot_template_groups_export_4_x];
 local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [godot_template_stern_flowers_export_4_x];
