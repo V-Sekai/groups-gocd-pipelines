@@ -106,44 +106,6 @@
                      "working_directory": ""
                   }
                ]
-            },
-            {
-               "name": "macosJob",
-               "resources": [
-                  "linux",
-                  "mingw5"
-               ],
-               "tasks": [
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "export_macos",
-                     "is_source_a_file": true,
-                     "job": "macosJob",
-                     "pipeline": "godot-template-stern-flowers-4-x",
-                     "source": "macos.zip",
-                     "stage": "defaultStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "export_macos",
-                     "is_source_a_file": true,
-                     "job": "defaultJob",
-                     "pipeline": "godot-template-stern-flowers-4-x",
-                     "source": "godot.templates.tpz",
-                     "stage": "templateZipStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "butler push export_macos $ITCHIO_LOGIN:macos --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
-                  }
-               ]
             }
          ],
          "name": "uploadStage"

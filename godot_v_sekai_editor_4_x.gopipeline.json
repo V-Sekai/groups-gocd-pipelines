@@ -106,7 +106,7 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/godot.osx.opt.tools.64",
+                     "source": "g/bin/Godot.app",
                      "type": "build"
                   }
                ],
@@ -306,6 +306,42 @@
                   {
                      "arguments": [
                         "-c",
+                        "rm -rf ./bin/Godot.app"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -r ./misc/dist/osx_tools.app ./bin/"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp bin/godot.osx.opt.tools.universal ./bin/Godot.app/Contents/MacOS/Godot"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "chmod +x ./bin/Godot.app/Contents/MacOS/Godot"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
                         "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
                      ],
                      "command": "/bin/bash",
@@ -318,14 +354,14 @@
                      "is_source_a_file": true,
                      "job": "macosJob",
                      "pipeline": "godot-template-groups-4-x",
-                     "source": "godot.osx.opt.tools.64",
+                     "source": "Godot.app",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.osx.opt.tools.64 bin/godot_osx_debug.64 && cp bin/godot.osx.opt.tools.64 bin/godot_osx_release.64 && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S bin/godot_osx_release.64"
+                        "cp bin/Godot.app bin/godot_osx_debug.64 && cp bin/Godot.app bin/godot_osx_release.64 && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S bin/godot_osx_release.64"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

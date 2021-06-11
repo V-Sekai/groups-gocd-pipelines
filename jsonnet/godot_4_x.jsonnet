@@ -55,16 +55,20 @@ local platform_info_dict_4_x = {
   macos: {
     platform_name: 'macos',
     scons_env: 'OSXCROSS_ROOT="LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross" ',
-    intermediate_godot_binary: 'godot.osx.opt.tools.64',
-    editor_godot_binary: 'godot.osx.opt.tools.64',
+    intermediate_godot_binary: 'Godot.app',
+    editor_godot_binary: 'Godot.app',
     template_debug_binary: 'godot_osx_debug.64',
     template_release_binary: 'godot_osx_release.64',
     scons_platform: 'osx',
     gdnative_platform: 'osx',
     strip_command: 'LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S',
-    // FIXME: We should look into using osx_tools.app instead of osx_template.app, because we build with tools=yes
     godot_scons_arguments: 'osxcross_sdk=darwin19 CXXFLAGS="-Wno-deprecated-declarations -Wno-error " builtin_freetype=yes',
-    extra_commands: [],
+    extra_commands: [          
+      'rm -rf ./bin/Godot.app',
+      'cp -r ./misc/dist/osx_tools.app ./bin/',
+      'cp bin/godot.osx.opt.tools.universal ./bin/Godot.app/Contents/MacOS/Godot',
+      'chmod +x ./bin/Godot.app/Contents/MacOS/Godot',
+    ],
     environment_variables: [
       {
         name: 'PATH',
@@ -166,7 +170,7 @@ local groups_export_configurations = {
   },
 };
 
-local enabled_groups_export_platforms_4_x = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop', 'macos']];
+local enabled_groups_export_platforms_4_x = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 
 // TODO: Use std.escapeStringBash in case export configurations wish to output executables with spaces.
 local stern_flowers_export_configurations = {
@@ -227,7 +231,7 @@ local stern_flowers_export_configurations = {
 };
 
 
-local enabled_stern_flowers_export_platforms_4_x = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop', 'macos']];
+local enabled_stern_flowers_export_platforms_4_x = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 
 local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');
 
@@ -556,7 +560,7 @@ local godot_editor_export_4_x(
                 is_source_a_file: true,
                 source: export_info.export_executable,
                 destination: export_info.export_directory,
-              },          
+              },
               if std.endsWith(export_info.export_executable, '.exe') then {
                 type: 'fetch',
                 artifact_origin: 'gocd',
