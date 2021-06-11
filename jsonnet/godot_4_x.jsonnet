@@ -217,7 +217,7 @@ local stern_flowers_export_configurations = {
     gdnative_platform: 'linux',
     export_configuration: 'HTML5',
     export_directory: 'export_web',
-    export_executable: 'v_sekai_web.html',
+    export_executable: 'godot_web.html',
     itchio_out: null,
     prepare_commands: [
     ],
