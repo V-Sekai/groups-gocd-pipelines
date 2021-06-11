@@ -82,7 +82,7 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "godot-template-groups-4-x",
-                     "source": "godot.linuxbsd.opt.tools.64",
+                     "source": "godot.linuxbsd.opt.tools.64.llvm ",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },

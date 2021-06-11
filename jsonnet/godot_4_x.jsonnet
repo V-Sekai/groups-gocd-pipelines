@@ -189,7 +189,7 @@ local stern_flowers_export_configurations = {
     gdnative_platform: 'linux',
     export_configuration: 'Linuxbsd',
     export_directory: 'export_linuxbsd',
-    export_executable: 'godot.linuxbsd.opt.tools.64',
+    export_executable: 'godot.linuxbsd.opt.tools.64.llvm ',
     itchio_out: 'x11-master',
     prepare_commands: [
     ],
