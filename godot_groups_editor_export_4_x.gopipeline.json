@@ -99,7 +99,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "butler push export_linuxbsd $ITCHIO_LOGIN:x11-master --userversion `date +\"%Y-%m-%dT%H%M%SZ\" --utc`-$GO_PIPELINE_NAME"
+                        "butler push export_linuxbsd $ITCHIO_LOGIN:linux-master --userversion `date +\"%Y-%m-%dT%H%M%SZ\" --utc`-$GO_PIPELINE_NAME"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

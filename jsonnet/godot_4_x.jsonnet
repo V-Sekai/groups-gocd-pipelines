@@ -134,7 +134,7 @@ local groups_export_configurations = {
     export_configuration: 'Linuxbsd',
     export_directory: 'export_linuxbsd',
     export_executable: 'v_sekai_linuxbsd',
-    itchio_out: 'x11-master',
+    itchio_out: 'linux-master',
     prepare_commands: [
     ],
     extra_commands: [
@@ -194,7 +194,7 @@ local stern_flowers_export_configurations = {
     export_configuration: 'Linuxbsd',
     export_directory: 'export_linuxbsd',
     export_executable: 'godot.linuxbsd.opt.tools.64.llvm',
-    itchio_out: 'x11-master',
+    itchio_out: 'linux-master',
     prepare_commands: [
     ],
     extra_commands: [
