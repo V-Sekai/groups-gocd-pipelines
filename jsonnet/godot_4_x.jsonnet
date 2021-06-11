@@ -119,10 +119,6 @@ local groups_export_configurations = {
     export_executable: 'v_sekai_windows.exe',
     itchio_out: 'windows-master',
     prepare_commands: [
-      //'mingw-strip --strip-debug godot_speech/libGodotSpeech.dll',
-      'cp -p godot_speech/libGodotSpeech.dll g/addons/godot_speech/bin/',
-      //'strip --strip-debug godot_openvr/libgodot_openvr.dll',
-      'cp -p godot_openvr/libgodot_openvr.dll godot_openvr/openvr_api.dll g/addons/godot-openvr/bin/win64/',
     ],
     extra_commands: [
       'cp -a g/assets/actions/openvr/actions export_windows/',
@@ -138,10 +134,6 @@ local groups_export_configurations = {
     export_executable: 'v_sekai_linux_x11',
     itchio_out: 'x11-master',
     prepare_commands: [
-      //'strip --strip-debug godot_speech/libGodotSpeech.so',
-      'cp -p godot_speech/libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so',
-      //'strip --strip-debug godot_openvr/libgodot_openvr.so',
-      'cp -p godot_openvr/libgodot_openvr.so godot_openvr/libopenvr_api.so g/addons/godot-openvr/bin/x11/',
     ],
     extra_commands: [
       'cp -a g/assets/actions/openvr/actions export_linux_x11/',
@@ -156,8 +148,6 @@ local groups_export_configurations = {
     export_executable: 'v_sekai_linux_server',
     itchio_out: 'server-master',
     prepare_commands: [
-      //'strip --strip-debug godot_speech/libGodotSpeech.so',
-      'cp -p godot_speech/libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so',
     ],
     extra_commands: [
       'rm -f export_linux_server/*.so',
@@ -172,8 +162,6 @@ local groups_export_configurations = {
     export_executable: 'v_sekai_macos.zip',
     itchio_out: 'macos',
     prepare_commands: [
-      'cp -p godot_speech/libGodotSpeech.dylib g/addons/godot_speech/bin/libGodotSpeech.dylib',
-      'sed -ibak -e "/mix_rate=48000/d" g/project.godot',
     ],
     extra_commands: [
       // https://itch.io/t/303643/cant-get-a-mac-app-to-run-after-butler-push-resolved
