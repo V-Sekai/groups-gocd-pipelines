@@ -556,17 +556,7 @@ local godot_editor_export_4_x(
                 is_source_a_file: true,
                 source: export_info.export_executable,
                 destination: export_info.export_directory,
-              },
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                pipeline: pipeline_dependency,
-                stage: 'defaultStage',
-                job: export_info.platform_name + 'Job',
-                is_source_a_file: true,
-                source: export_info.export_executable,
-                destination: export_info.export_directory,
-              },
+              },          
               if std.endsWith(export_info.export_executable, '.exe') then {
                 type: 'fetch',
                 artifact_origin: 'gocd',
@@ -576,7 +566,17 @@ local godot_editor_export_4_x(
                 is_source_a_file: true,
                 source: exe_to_pdb_path(export_info.export_executable),
                 destination: export_info.export_directory,
-              } else null,
+              } else null,  
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_dependency,
+                stage: 'templateZipStage',
+                job: 'defaultJob',
+                is_source_a_file: true,
+                source: 'godot.templates.tpz',
+                destination: export_info.export_directory,
+              },
               {
                 type: 'exec',
                 arguments: [

@@ -44,7 +44,7 @@
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "godot-template-stern-flowers-4-x",
-                     "source": "godot.windows.opt.tools.64.exe",
+                     "source": "godot.windows.opt.tools.64.pdb",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
@@ -52,10 +52,10 @@
                      "artifact_origin": "gocd",
                      "destination": "export_windows",
                      "is_source_a_file": true,
-                     "job": "windowsJob",
+                     "job": "defaultJob",
                      "pipeline": "godot-template-stern-flowers-4-x",
-                     "source": "godot.windows.opt.tools.64.pdb",
-                     "stage": "defaultStage",
+                     "source": "godot.templates.tpz",
+                     "stage": "templateZipStage",
                      "type": "fetch"
                   },
                   {
@@ -90,10 +90,10 @@
                      "artifact_origin": "gocd",
                      "destination": "export_linuxbsd",
                      "is_source_a_file": true,
-                     "job": "linuxJob",
+                     "job": "defaultJob",
                      "pipeline": "godot-template-stern-flowers-4-x",
-                     "source": "godot.linuxbsd.opt.tools.64",
-                     "stage": "defaultStage",
+                     "source": "godot.templates.tpz",
+                     "stage": "templateZipStage",
                      "type": "fetch"
                   },
                   {
@@ -128,10 +128,10 @@
                      "artifact_origin": "gocd",
                      "destination": "export_macos",
                      "is_source_a_file": true,
-                     "job": "macosJob",
+                     "job": "defaultJob",
                      "pipeline": "godot-template-stern-flowers-4-x",
-                     "source": "godot_macos.zip",
-                     "stage": "defaultStage",
+                     "source": "godot.templates.tpz",
+                     "stage": "templateZipStage",
                      "type": "fetch"
                   },
                   {
