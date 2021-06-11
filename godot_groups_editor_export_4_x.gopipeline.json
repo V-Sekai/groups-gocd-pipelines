@@ -61,7 +61,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "butler push export_windows $ITCHIO_LOGIN:windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
+                        "butler push export_windows $ITCHIO_LOGIN:windows-master --userversion $GO_PIPELINE_LABEL-`date +\"%Y-%m-%dT%H%M%S%z\" --utc`"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -99,7 +99,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "butler push export_linuxbsd $ITCHIO_LOGIN:x11-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
+                        "butler push export_linuxbsd $ITCHIO_LOGIN:x11-master --userversion $GO_PIPELINE_LABEL-`date +\"%Y-%m-%dT%H%M%S%z\" --utc`"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

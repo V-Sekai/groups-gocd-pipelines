@@ -585,7 +585,7 @@ local godot_editor_export_4_x(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'butler push ' + export_info.export_directory + ' $ITCHIO_LOGIN:' + export_info.itchio_out + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+                  'butler push ' + export_info.export_directory + ' $ITCHIO_LOGIN:' + export_info.itchio_out + ' --userversion $GO_PIPELINE_LABEL-`date +"%Y-%m-%dT%H%M%S%z" --utc`',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
