@@ -524,7 +524,7 @@ local godot_editor_export_4_x(
   {
     name: pipeline_name,
     group: gocd_group,
-    label_template: godot_status + '.${' + pipeline_dependency + '[:8]}_pipeline_dependency.${COUNT}',
+    label_template: godot_status + '.${' + pipeline_dependency + '[:8]}_pipeline_dependency',
     environment_variables:
       [{
         name: 'GODOT_STATUS',
