@@ -522,6 +522,16 @@ local godot_editor_export_4_x(
                 type: 'exec',
                 arguments: [
                   '-c',
+                  'rm -rf ' + export_info.export_directory + ' && mkdir ' + export_info.export_directory,
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+            ] + [
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
                   extra_task,
                 ],
                 command: '/bin/bash',
