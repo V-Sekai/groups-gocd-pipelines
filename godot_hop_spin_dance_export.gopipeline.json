@@ -23,7 +23,7 @@
          "type": "dependency"
       }
    ],
-   "name": "groups-editor-4-x",
+   "name": "hop-skip-dance-editor",
    "stages": [
       {
          "clean_workspace": false,
@@ -173,7 +173,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "windowsJob",
-                     "pipeline": "groups-editor-4-x",
+                     "pipeline": "hop-skip-dance-editor",
                      "source": "export_windows",
                      "stage": "exportStage",
                      "type": "fetch"
@@ -201,7 +201,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "linuxDesktopJob",
-                     "pipeline": "groups-editor-4-x",
+                     "pipeline": "hop-skip-dance-editor",
                      "source": "export_linuxbsd",
                      "stage": "exportStage",
                      "type": "fetch"
