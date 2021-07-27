@@ -606,8 +606,8 @@ local godot_tools_pipeline_export(
   gocd_group='',
   godot_status='',
   gocd_project_folder='',
-  groups_git='',
-  groups_branch='',
+  project_git='',
+  project_branch='',
   enabled_export_platforms=[],
       ) =
   {
@@ -621,10 +621,10 @@ local godot_tools_pipeline_export(
       }],
     materials: [
       {
-        name: 'groups_git_sandbox',
-        url: groups_git,
+        name: 'project_git_sandbox',
+        url: project_git,
         type: 'git',
-        branch: groups_branch,
+        branch: project_branch,
         destination: 'g',
       },
       {
@@ -870,8 +870,8 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       pipeline_name=godot_template_hop_skip_dance_export,
       pipeline_dependency=godot_template_groups_editor_4_x,
       itchio_login='ifiregames/hop-skip-dance',
-      groups_git='https://github.com/V-Sekai/godot-hop-spin-dance.git',
-      groups_branch='main',
+      project_git='https://github.com/V-Sekai/godot-hop-spin-dance.git',
+      project_branch='main',
       gocd_group='gamma',
       godot_status='hop_spin_dance',
       gocd_project_folder='hop_spin_dance',
