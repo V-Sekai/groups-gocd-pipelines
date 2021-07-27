@@ -64,7 +64,7 @@ local platform_info_dict = {
     template_release_binary: 'webassembly_release.zip',
     strip_command: null,  // unknown if release should be built separately.
     scons_platform: 'javascript',
-    gdnative_platform: 'linux', // TODO: We need godot_speech for web.
+    gdnative_platform: 'linux',  // TODO: We need godot_speech for web.
     godot_scons_arguments: 'use_llvm=yes builtin_freetype=yes',
     extra_commands: [],
     environment_variables: [],
@@ -177,19 +177,19 @@ local groups_gdnative_plugins = {
       },
       osx: {
         artifacts: [
-          "bin/release/libGodotSpeech.dylib"
+          'bin/release/libGodotSpeech.dylib',
         ],
         output_artifacts: [
-          "libGodotSpeech.dylib"
+          'libGodotSpeech.dylib',
         ],
         debug_artifacts: [
-          "bin/release/libGodotSpeech.dbg.dylib"
+          'bin/release/libGodotSpeech.dbg.dylib',
         ],
         scons_arguments: '',
         environment_variables: [],
         prepare_commands: [],
         extra_commands: [
-          "cd bin/release && mv libGodotSpeech.dylib libGodotSpeech.dbg.dylib && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S -o libGodotSpeech.dylib libGodotSpeech.dbg.dylib"
+          'cd bin/release && mv libGodotSpeech.dylib libGodotSpeech.dbg.dylib && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S -o libGodotSpeech.dylib libGodotSpeech.dbg.dylib',
         ],
         //install_task: ["mv libGodotSpeech.dylib g/addons/godot_speech/bin/libGodotSpeech.dylib"],
       },
@@ -257,7 +257,7 @@ local groups_gdnative_plugins = {
         environment_variables: [],
         prepare_commands: [],
         extra_commands: [],
-      }
+      },
     },
   },
   godot_gltf: {
@@ -301,19 +301,19 @@ local groups_gdnative_plugins = {
       },
       osx: {
         artifacts: [
-          "bin/release/libgodot_gltf.dylib"
+          'bin/release/libgodot_gltf.dylib',
         ],
         output_artifacts: [
-          "libgodot_gltf.dylib"
+          'libgodot_gltf.dylib',
         ],
         debug_artifacts: [
-          "bin/release/libgodot_gltf.dbg.dylib"
+          'bin/release/libgodot_gltf.dbg.dylib',
         ],
         scons_arguments: '',
         environment_variables: [],
         prepare_commands: [],
         extra_commands: [
-          "cd bin/release && mv libgodot_gltf.dylib libgodot_gltf.dbg.dylib && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S -o libgodot_gltf.dylib libgodot_gltf.dbg.dylib"
+          'cd bin/release && mv libgodot_gltf.dylib libgodot_gltf.dbg.dylib && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S -o libgodot_gltf.dylib libgodot_gltf.dbg.dylib',
         ],
       },
     },
@@ -987,28 +987,28 @@ local godot_editor_export(
             environment_variables:
               [],
             tasks: [
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                pipeline: pipeline_dependency,
-                stage: 'templateZipStage',
-                job: 'defaultJob',
-                is_source_a_file: true,
-                source: 'godot.templates.tpz',
-                destination: '',
-              }
-            ] +
-            [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'rm -rf templates && unzip "godot.templates.tpz" && mkdir pdbs && mv templates/*.pdb pdbs && export VERSION="`cat templates/version.txt`" && export TEMPLATEDIR=".local/share/godot/templates/$VERSION" && export BASEDIR="`pwd`" && rm -rf "$TEMPLATEDIR" && mkdir -p "$TEMPLATEDIR" && cd "$TEMPLATEDIR" && mv "$BASEDIR"/templates/* . && ln server_* "$BASEDIR/templates/"',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-            ] + [
+                     {
+                       type: 'fetch',
+                       artifact_origin: 'gocd',
+                       pipeline: pipeline_dependency,
+                       stage: 'templateZipStage',
+                       job: 'defaultJob',
+                       is_source_a_file: true,
+                       source: 'godot.templates.tpz',
+                       destination: '',
+                     },
+                   ] +
+                   [
+                     {
+                       type: 'exec',
+                       arguments: [
+                         '-c',
+                         'rm -rf templates && unzip "godot.templates.tpz" && mkdir pdbs && mv templates/*.pdb pdbs && export VERSION="`cat templates/version.txt`" && export TEMPLATEDIR=".local/share/godot/templates/$VERSION" && export BASEDIR="`pwd`" && rm -rf "$TEMPLATEDIR" && mkdir -p "$TEMPLATEDIR" && cd "$TEMPLATEDIR" && mv "$BASEDIR"/templates/* . && ln server_* "$BASEDIR/templates/"',
+                       ],
+                       command: '/bin/bash',
+                       working_directory: '',
+                     },
+                   ] + [
               {
                 type: 'exec',
                 arguments: [
@@ -1502,7 +1502,7 @@ local godot_gdnative_pipelines =
   [plugin_info.pipeline_name for plugin_info in all_gdnative_plugins];
 
 
-local godot_template =  [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
+local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
 {
   'env.development.goenvironment.json': {
     name: 'development',

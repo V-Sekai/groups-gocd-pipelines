@@ -61,7 +61,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "butler push export_windows $ITCHIO_LOGIN:windows-master --userversion `date +\"%Y-%m-%dT%H%M%SZ\" --utc`-$GO_PIPELINE_NAME"
+                        "butler push export_windows ifiregames/stern-flowers-chibifire-com-godot-engine:windows-master --userversion `date +\"%Y-%m-%dT%H%M%SZ\" --utc`-$GO_PIPELINE_NAME"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -99,7 +99,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "butler push export_linuxbsd $ITCHIO_LOGIN:linux-master --userversion `date +\"%Y-%m-%dT%H%M%SZ\" --utc`-$GO_PIPELINE_NAME"
+                        "butler push export_linuxbsd ifiregames/stern-flowers-chibifire-com-godot-engine:linux-master --userversion `date +\"%Y-%m-%dT%H%M%SZ\" --utc`-$GO_PIPELINE_NAME"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
