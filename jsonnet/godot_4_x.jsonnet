@@ -647,7 +647,7 @@ local godot_tools_pipeline_export(
     stages: [
       {
         name: 'exportStage',
-        clean_workspace: true,
+        clean_workspace: false,
         fetch_materials: true,
         jobs: [
           {
