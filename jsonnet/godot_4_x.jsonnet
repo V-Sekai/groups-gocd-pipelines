@@ -810,7 +810,7 @@ local godot_tools_pipeline_export(
 // CHIBIFIRE
 local godot_template_groups_editor_4_x = 'godot-template-groups-4-x';
 local godot_template_groups_export_4_x = 'groups-editor-4-x';
-local godot_template_hop_skip_dance_export = 'hop-skip-dance-release-export';
+local godot_template_hop_skip_dance_export = 'hop-skip-dance-export';
 // STERN FLOWERS
 local godot_template_stern_flowers_editor = 'godot-template-stern-flowers-4-x';
 local godot_template_stern_flowers_export_4_x = 'stern-flowers-editor-4-x';

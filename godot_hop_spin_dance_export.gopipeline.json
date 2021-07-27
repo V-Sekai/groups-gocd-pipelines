@@ -6,7 +6,7 @@
       }
    ],
    "group": "gamma",
-   "label_template": "hop_spin_dance.${hop-skip-dance-release-export[:8]}.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
+   "label_template": "hop_spin_dance.${hop-skip-dance-export[:8]}.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "branch": "main",
@@ -23,7 +23,7 @@
          "type": "dependency"
       }
    ],
-   "name": "hop-skip-dance-release-export",
+   "name": "hop-skip-dance-export",
    "stages": [
       {
          "clean_workspace": true,
@@ -173,7 +173,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "windowsJob",
-                     "pipeline": "hop-skip-dance-release-export",
+                     "pipeline": "hop-skip-dance-export",
                      "source": "export_windows",
                      "stage": "exportStage",
                      "type": "fetch"
@@ -201,7 +201,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "linuxDesktopJob",
-                     "pipeline": "hop-skip-dance-release-export",
+                     "pipeline": "hop-skip-dance-export",
                      "source": "export_linuxbsd",
                      "stage": "exportStage",
                      "type": "fetch"
