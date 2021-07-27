@@ -9,7 +9,7 @@
    "label_template": "hop_spin_dance.${groups_git_sandbox[:8]}.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
    "materials": [
       {
-         "branch": "master",
+         "branch": "main",
          "destination": "g",
          "name": "groups_git_sandbox",
          "type": "git",
