@@ -170,8 +170,6 @@ local groups_export_configurations = {
   },
 };
 
-local enabled_groups_export_platforms_4_x = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop']];
-
 // TODO: Use std.escapeStringBash in case export configurations wish to output executables with spaces.
 local stern_flowers_export_configurations = {
   windows: {
@@ -600,8 +598,6 @@ local godot_editor_export_4_x(
     ],
   };
 
-local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.opt.tools.64.llvm';
-
 local godot_tools_pipeline_export(
   pipeline_name='',
   pipeline_dependency='',
@@ -685,9 +681,9 @@ local godot_tools_pipeline_export(
                 artifact_origin: 'gocd',
                 pipeline: pipeline_dependency,
                 stage: 'defaultStage',
-                job: 'serverJob',
+                job: 'linuxJob',
                 is_source_a_file: true,
-                source: HEADLESS_SERVER_EDITOR,
+                source: 'godot.linuxbsd.opt.tools.64.llvm',
                 destination: '',
               },
             ] + std.flatMap(function(library_info) [
@@ -751,7 +747,7 @@ local godot_tools_pipeline_export(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'rm -rf ' + export_info.export_directory + ' && mkdir ' + export_info.export_directory + ' && chmod +x ' + HEADLESS_SERVER_EDITOR + ' && HOME="`pwd`" ./' + HEADLESS_SERVER_EDITOR + ' --export "' + export_info.export_configuration + '" "`pwd`"/' + export_info.export_directory + '/' + export_info.export_executable + ' --path g -v',
+                  'rm -rf ' + export_info.export_directory + ' && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.opt.tools.64.llvm' + ' && HOME="`pwd`" ./' + 'godot.linuxbsd.opt.tools.64.llvm' + ' --export "' + export_info.export_configuration + '" "`pwd`"/' + export_info.export_directory + '/' + export_info.export_executable + ' --path g -v',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
