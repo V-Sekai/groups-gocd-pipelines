@@ -810,12 +810,12 @@ local godot_tools_pipeline_export(
 // CHIBIFIRE
 local godot_template_groups_editor_4_x = 'godot-template-groups-4-x';
 local godot_template_groups_export_4_x = 'groups-editor-4-x';
-
+local godot_template_hop_skip_dance_export = 'hop-skip-dance-release-export';
 // STERN FLOWERS
 local godot_template_stern_flowers_editor = 'godot-template-stern-flowers-4-x';
 local godot_template_stern_flowers_export_4_x = 'stern-flowers-editor-4-x';
 // END
-local itch_fire_template = [godot_template_groups_editor_4_x] + [godot_template_groups_export_4_x];
+local itch_fire_template = [godot_template_groups_editor_4_x] + [godot_template_groups_export_4_x] + [godot_template_hop_skip_dance_export];
 local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [godot_template_stern_flowers_export_4_x];
 
 {
@@ -867,7 +867,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
   'godot_hop_spin_dance_export.gopipeline.json'
   : std.prune(
     godot_tools_pipeline_export(
-      pipeline_name='hop-skip-dance-editor',
+      pipeline_name=godot_template_hop_skip_dance_export,
       pipeline_dependency=godot_template_groups_editor_4_x,
       itchio_login='ifiregames/hop-skip-dance',
       groups_git='https://github.com/V-Sekai/godot-hop-spin-dance.git',
