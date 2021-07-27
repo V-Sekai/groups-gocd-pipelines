@@ -232,6 +232,7 @@ local stern_flowers_export_configurations = {
 
 
 local enabled_stern_flowers_export_platforms_4_x = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
+local enabled_groups_export_platforms_4_x = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 
 local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');
 
@@ -585,7 +586,7 @@ local godot_editor_export_4_x(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'butler push ' + export_info.export_directory + ' ' + itchio_login + ":" + export_info.itchio_out + ' --userversion `date +"%Y-%m-%dT%H%M%SZ" --utc`-$GO_PIPELINE_NAME',
+                  'butler push ' + export_info.export_directory + ' ' + itchio_login + ':' + export_info.itchio_out + ' --userversion `date +"%Y-%m-%dT%H%M%SZ" --utc`-$GO_PIPELINE_NAME',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -878,7 +879,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       gocd_group='gamma',
       godot_status='hop_spin_dance',
       gocd_project_folder='hop_spin_dance',
-      enabled_export_platforms=enabled_stern_flowers_export_platforms_4_x,
+      enabled_export_platforms=enabled_groups_export_platforms_4_x,
     )
   ),
 } + {
