@@ -877,7 +877,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       groups_branch='master',
       gocd_group='gamma',
       godot_status='hop_spin_dance',
-      gocd_project_folder='groups_4_x',
+      gocd_project_folder='hop_spin_dance',
       enabled_export_platforms=enabled_stern_flowers_export_platforms_4_x,
     )
   ),
