@@ -6,7 +6,7 @@
       }
    ],
    "group": "gamma",
-   "label_template": "hop_spin_dance.${groups_git_sandbox[:8]}.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
+   "label_template": "hop_spin_dance.${hop-skip-dance-release-export[:8]}.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "branch": "main",
