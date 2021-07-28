@@ -398,7 +398,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mv ./bin/godot.osx.opt.tools.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_debug.64"
+                        "cp ./bin/godot.osx.opt.tools.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_debug.64"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -416,7 +416,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mv ./bin/godot.osx.opt.tools.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_release.64"
+                        "cp ./bin/godot.osx.opt.tools.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_release.64"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
