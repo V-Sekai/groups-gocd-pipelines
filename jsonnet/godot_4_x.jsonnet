@@ -864,6 +864,21 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
     )
   ),
 } + {
+  'godot_purple_gold_spitz_export.gopipeline.json'
+  : std.prune(
+    godot_tools_pipeline_export(
+      pipeline_name=godot_template_hop_skip_dance_export,
+      pipeline_dependency=godot_template_groups_editor_4_x,
+      itchio_login='ifiregames/purple-gold-spitz',
+      project_git='https://github.com/fire/godot-purple-gold-spitz.git',
+      project_branch='main',
+      gocd_group='gamma',
+      godot_status='purple_gold_spitz',
+      gocd_project_folder='purple_gold_spitz',
+      enabled_export_platforms=enabled_groups_export_platforms_4_x,
+    )
+  ),
+} + {
   'godot_hop_spin_dance_export.gopipeline.json'
   : std.prune(
     godot_tools_pipeline_export(
