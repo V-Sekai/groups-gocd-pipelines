@@ -749,7 +749,7 @@ local godot_tools_pipeline_export(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'rm -rf ' + export_info.export_directory + ' && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.opt.tools.64.llvm' + ' && HOME="`pwd`" ./' + 'DRI_PRIME=0 xvfb-run --auto-servernum godot.linuxbsd.opt.tools.64.llvm' + ' --export "' + export_info.export_configuration + '" "`pwd`"/' + export_info.export_directory + '/' + export_info.export_executable + ' --path g -v',
+                  'rm -rf ' + export_info.export_directory + ' && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.opt.tools.64.llvm' + ' && HOME="`pwd`" DRI_PRIME=0 xvfb-run --auto-servernum ./' + 'godot.linuxbsd.opt.tools.64.llvm' + ' --export "' + export_info.export_configuration + '" "`pwd`"/' + export_info.export_directory + '/' + export_info.export_executable + ' --path g -v',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
