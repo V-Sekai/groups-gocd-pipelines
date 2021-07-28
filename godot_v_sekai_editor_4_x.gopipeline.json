@@ -143,7 +143,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -p g/bin/godot.osx.opt.tools.64g/bin/Godot.app"
+                        "cp -p g/bin/godot.osx.opt.tools.64 g/bin/Godot.app"
                      ],
                      "command": "/bin/bash",
                      "type": "exec"

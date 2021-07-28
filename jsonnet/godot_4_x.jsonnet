@@ -317,7 +317,7 @@ local godot_pipeline_4_x(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'cp -p g/bin/' + platform_info.intermediate_godot_binary + 'g/bin/' + platform_info.editor_godot_binary,
+                  'cp -p g/bin/' + platform_info.intermediate_godot_binary + ' g/bin/' + platform_info.editor_godot_binary,
                 ],
                 command: '/bin/bash',
               }
