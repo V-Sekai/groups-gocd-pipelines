@@ -75,7 +75,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_windows && mkdir export_windows && chmod +x godot.linuxbsd.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot.linuxbsd.opt.tools.64.llvm --export \"Windows Desktop\" \"`pwd`\"/export_windows/godot.windows.opt.tools.64.exe --path g -v"
+                        "rm -rf export_windows && mkdir export_windows && chmod +x godot.linuxbsd.opt.tools.64.llvm && HOME=\"`pwd`\" ./DRI_PRIME=0 xvfb-run --auto-servernum godot.linuxbsd.opt.tools.64.llvm --export \"Windows Desktop\" \"`pwd`\"/export_windows/godot.windows.opt.tools.64.exe --path g -v"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -129,7 +129,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_linuxbsd && mkdir export_linuxbsd && chmod +x godot.linuxbsd.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot.linuxbsd.opt.tools.64.llvm --export \"Linuxbsd\" \"`pwd`\"/export_linuxbsd/godot.linuxbsd.opt.tools.64.llvm --path g -v"
+                        "rm -rf export_linuxbsd && mkdir export_linuxbsd && chmod +x godot.linuxbsd.opt.tools.64.llvm && HOME=\"`pwd`\" ./DRI_PRIME=0 xvfb-run --auto-servernum godot.linuxbsd.opt.tools.64.llvm --export \"Linuxbsd\" \"`pwd`\"/export_linuxbsd/godot.linuxbsd.opt.tools.64.llvm --path g -v"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
