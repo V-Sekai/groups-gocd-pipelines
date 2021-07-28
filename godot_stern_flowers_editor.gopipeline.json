@@ -131,6 +131,14 @@
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -p g/bin/godot.osx.opt.tools.64g/bin/Godot.app"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec"
                   }
                ]
             }
@@ -341,19 +349,18 @@
                      "working_directory": "g"
                   },
                   {
-                     "artifact_origin": "gocd",
-                     "destination": "g/bin/",
-                     "is_source_a_file": true,
-                     "job": "macosJob",
-                     "pipeline": "godot-template-stern-flowers-4-x",
-                     "source": "Godot.app",
-                     "stage": "defaultStage",
-                     "type": "fetch"
+                     "arguments": [
+                        "-c",
+                        "OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" scons werror=no platform=osx target=release_debug -j`nproc` use_lto=no deprecated=no osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/Godot.app bin/godot_osx_debug.64 && cp bin/Godot.app bin/godot_osx_release.64 && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S bin/godot_osx_release.64"
+                        "cp bin/godot.osx.opt.tools.64 bin/godot_osx_debug.64 && cp bin/godot.osx.opt.tools.64 bin/godot_osx_release.64 && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S bin/godot_osx_release.64"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

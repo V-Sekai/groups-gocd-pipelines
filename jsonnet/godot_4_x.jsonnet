@@ -55,7 +55,7 @@ local platform_info_dict_4_x = {
   macos: {
     platform_name: 'macos',
     scons_env: 'OSXCROSS_ROOT="LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross" ',
-    intermediate_godot_binary: 'Godot.app',
+    intermediate_godot_binary: 'godot.osx.opt.tools.64',
     editor_godot_binary: 'Godot.app',
     template_debug_binary: 'godot_osx_debug.64',
     template_release_binary: 'godot_osx_release.64',
