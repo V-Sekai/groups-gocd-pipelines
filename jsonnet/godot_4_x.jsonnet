@@ -814,11 +814,12 @@ local godot_template_groups_editor_4_x = 'godot-template-groups-4-x';
 local godot_template_groups_export_4_x = 'groups-editor-4-x';
 local godot_template_hop_skip_dance_export = 'hop-skip-dance-export';
 local godot_template_purple_gold_spitz_export = 'purple-gold-spitz-export';
+local godot_template_blue_steel_wolf_export = 'blue-steel-wolf-export';
 // STERN FLOWERS
 local godot_template_stern_flowers_editor = 'godot-template-stern-flowers-4-x';
 local godot_template_stern_flowers_export_4_x = 'stern-flowers-editor-4-x';
 // END
-local itch_fire_template = [godot_template_groups_editor_4_x] + [godot_template_groups_export_4_x] + [godot_template_hop_skip_dance_export] + [godot_template_purple_gold_spitz_export];
+local itch_fire_template = [godot_template_groups_editor_4_x] + [godot_template_groups_export_4_x] + [godot_template_hop_skip_dance_export] + [godot_template_purple_gold_spitz_export] + [godot_template_blue_steel_wolf_export];
 local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [godot_template_stern_flowers_export_4_x];
 
 {
@@ -864,6 +865,22 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       gocd_group='gamma',
       godot_status='groups_4_x',
       enabled_export_platforms=enabled_stern_flowers_export_platforms_4_x,
+    )
+  ),
+} + {
+  'godot_blue_steel_wolf_export.gopipeline.json'
+  : std.prune(
+    godot_tools_pipeline_export(
+      pipeline_name=godot_template_blue_steel_wolf_export,
+      pipeline_dependency=godot_template_groups_editor_4_x,
+      itchio_login='ifiregames/moz-festival',
+      project_git='https://github.com/V-Sekai/godot-blue-steel-wolf.git',
+      project_branch='main',
+      gocd_group='gamma',
+      godot_status='moz_festival',
+      gocd_project_folder='moz_festival',
+      enabled_export_platforms=enabled_groups_export_platforms_4_x,
+      vsk=false,
     )
   ),
 } + {
