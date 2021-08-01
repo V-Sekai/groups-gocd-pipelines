@@ -229,8 +229,10 @@ local stern_flowers_export_configurations = {
 };
 
 
-local enabled_stern_flowers_export_platforms_4_x = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop', 'macos']];
-local enabled_groups_export_platforms_4_x = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop', 'macos']];
+local enabled_stern_flowers_export_platforms_4_x = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
+local enabled_groups_export_platforms_4_x = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
+local enabled_groups_export_platforms_mac_4_x = [stern_flowers_export_configurations[x] for x in ['macos']];
+
 
 local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');
 
@@ -913,6 +915,21 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       godot_status='hop_spin_dance',
       gocd_project_folder='hop_spin_dance',
       enabled_export_platforms=enabled_groups_export_platforms_4_x,
+    )
+  ),
+} + {
+  'godot_hop_spin_dance_export_macos.gopipeline.json'
+  : std.prune(
+    godot_tools_pipeline_export(
+      pipeline_name=godot_template_hop_skip_dance_export_macos,
+      pipeline_dependency=godot_template_groups_editor_4_x,
+      itchio_login='ifiregames/hop-skip-dance',
+      project_git='https://github.com/V-Sekai/godot-hop-spin-dance.git',
+      project_branch='main',
+      gocd_group='gamma',
+      godot_status='hop_spin_dance',
+      gocd_project_folder='hop_spin_dance',
+      enabled_export_platforms=enabled_groups_export_platforms_mac_4_x,
     )
   ),
 } + {
