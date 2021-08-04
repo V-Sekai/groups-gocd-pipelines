@@ -883,7 +883,6 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       godot_status='groups-4.x',
       gocd_project_folder='groups_4_x',
       enabled_export_platforms=enabled_groups_export_platforms_4_x,
-      vsk=false,
     )
   ),
 } + {
