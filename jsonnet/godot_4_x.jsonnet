@@ -871,22 +871,6 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
     )
   ),
 } + {
-  'groups_4_x_export.gopipeline.json'
-  : std.prune(
-    godot_tools_pipeline_export(
-      pipeline_name=godot_template_groups_4_x,
-      pipeline_dependency=godot_template_groups_editor_4_x,
-      itchio_login='ifiregames/moz-festival',
-      project_git='https://github.com/V-Sekai/godot-blue-steel-wolf.git',
-      project_branch='main',
-      gocd_group='gamma',
-      godot_status='moz_festival',
-      gocd_project_folder='moz_festival',
-      enabled_export_platforms=enabled_groups_export_platforms_4_x,
-      vsk=false,
-    )
-  ),
-} + {
   'godot_template_groups_4_x_export.gopipeline.json'
   : std.prune(
     godot_tools_pipeline_export(
