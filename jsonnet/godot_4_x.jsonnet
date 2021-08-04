@@ -822,7 +822,7 @@ local godot_template_groups_4_x = 'groups-4-x-export';
 local godot_template_stern_flowers_editor = 'godot-template-stern-flowers-4-x';
 local godot_template_stern_flowers_export_4_x = 'stern-flowers-editor-4-x';
 // END
-local itch_fire_template = [godot_template_groups_editor_4_x] + [godot_template_groups_export_4_x] + [godot_template_hop_skip_dance_export] + [godot_template_purple_gold_spitz_export] + [godot_template_groups_4_x] + [godot_template_hop_skip_dance_export_macos];
+local itch_fire_template = [godot_template_groups_editor_4_x] + [godot_template_groups_export_4_x] + [godot_template_hop_skip_dance_export] + [godot_template_purple_gold_spitz_export] + [godot_template_hop_skip_dance_export_macos];
 local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [godot_template_stern_flowers_export_4_x];
 
 {
