@@ -876,7 +876,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
     godot_tools_pipeline_export(
       pipeline_name=godot_template_groups_4_x,
       pipeline_dependency=godot_template_groups_editor_4_x,
-      itchio_login='saracenone/groups-4.x',
+      itchio_login='saracenone/groups-4x',
       project_git='git@gitlab.com:SaracenOne/groups.git',
       project_branch='godot4',
       gocd_group='gamma',
