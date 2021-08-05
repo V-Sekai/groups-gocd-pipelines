@@ -1,4 +1,4 @@
-local platform_info_dict_4_x = {
+local platform_info_dict = {
   windows: {
     platform_name: 'windows',
     scons_env: 'PATH=/opt/llvm-mingw/bin:$PATH ',
@@ -108,9 +108,9 @@ local platform_info_dict_4_x = {
   },
 };
 
-local enabled_engine_platforms_4_x = [platform_info_dict_4_x[x] for x in ['windows', 'linux']];
+local enabled_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
 
-local enabled_template_platforms_4_x = [platform_info_dict_4_x[x] for x in ['windows', 'linux']];
+local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
 
 // TODO: Use std.escapeStringBash in case export configurations wish to output executables with spaces.
 local groups_export_configurations = {
@@ -229,14 +229,14 @@ local stern_flowers_export_configurations = {
 };
 
 
-local enabled_stern_flowers_export_platforms_4_x = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
-local enabled_groups_export_platforms_4_x = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
-local enabled_groups_export_platforms_mac_4_x = [stern_flowers_export_configurations[x] for x in ['macos']];
+local enabled_stern_flowers_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
+local enabled_groups_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
+local enabled_groups_export_platforms_mac = [stern_flowers_export_configurations[x] for x in ['macos']];
 
 
 local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');
 
-local godot_pipeline_4_x(pipeline_name='',
+local godot_pipeline(pipeline_name='',
                          godot_status='',
                          godot_git='',
                          godot_branch='',
@@ -326,7 +326,7 @@ local godot_pipeline_4_x(pipeline_name='',
             else null,
           ],
         }
-        for platform_info in enabled_engine_platforms_4_x
+        for platform_info in enabled_engine_platforms
       ],
     },
     {
@@ -426,7 +426,7 @@ local godot_pipeline_4_x(pipeline_name='',
             for extra_command in platform_info.template_extra_commands
           ],
         }
-        for platform_info in enabled_template_platforms_4_x
+        for platform_info in enabled_template_platforms
       ],
     },
     {
@@ -462,13 +462,13 @@ local godot_pipeline_4_x(pipeline_name='',
               destination: 'templates',
               pipeline: pipeline_name,
               stage: 'templateStage',
-              job: enabled_template_platforms_4_x[0].platform_name + 'Job',
+              job: enabled_template_platforms[0].platform_name + 'Job',
             },
             {
               type: 'fetch',
               artifact_origin: 'gocd',
               is_source_a_file: true,
-              source: exe_to_pdb_path(platform_info_dict_4_x.windows.editor_godot_binary),
+              source: exe_to_pdb_path(platform_info_dict.windows.editor_godot_binary),
               destination: 'templates',
               pipeline: pipeline_name,
               stage: 'defaultStage',
@@ -489,7 +489,7 @@ local godot_pipeline_4_x(pipeline_name='',
               platform_info.template_debug_binary,
               platform_info.template_release_binary,
             ]
-          ], enabled_template_platforms_4_x) + [
+          ], enabled_template_platforms) + [
             {
               type: 'exec',
               arguments: [
@@ -513,7 +513,7 @@ local godot_pipeline_4_x(pipeline_name='',
   ],
 };
 
-local godot_editor_export_4_x(
+local godot_editor_export(
   pipeline_name='',
   pipeline_dependency='',
   itchio_login='',
@@ -812,18 +812,18 @@ local godot_tools_pipeline_export(
   };
 
 // CHIBIFIRE
-local godot_template_groups_editor_4_x = 'godot-template-groups-4-x';
-local godot_template_groups_export_4_x = 'groups-editor-4-x';
+local godot_template_groups_editor = 'godot-template-groups-4-x';
+local godot_template_groups_export = 'groups-editor-4-x';
 local godot_template_hop_skip_dance_export = 'hop-skip-dance-export';
 local godot_template_hop_skip_dance_export_macos = 'hop-skip-dance-export-macos';
 local godot_template_purple_gold_spitz_export = 'purple-gold-spitz-export';
-local godot_template_groups_4_x = 'groups-4-x-export';
+local godot_template_groups = 'groups-4-x-export';
 // STERN FLOWERS
 local godot_template_stern_flowers_editor = 'godot-template-stern-flowers-4-x';
-local godot_template_stern_flowers_export_4_x = 'stern-flowers-editor-4-x';
+local godot_template_stern_flowers_export = 'stern-flowers-editor-4-x';
 // END
-local itch_fire_template = [godot_template_groups_editor_4_x] + [godot_template_groups_export_4_x] + [godot_template_groups_4_x] + [godot_template_hop_skip_dance_export] + [godot_template_purple_gold_spitz_export] + [godot_template_hop_skip_dance_export_macos];
-local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [godot_template_stern_flowers_export_4_x];
+local itch_fire_template = [godot_template_groups_editor] + [godot_template_groups_export] + [godot_template_groups] + [godot_template_hop_skip_dance_export] + [godot_template_purple_gold_spitz_export] + [godot_template_hop_skip_dance_export_macos];
+local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [godot_template_stern_flowers_export];
 
 {
   'env.fire.goenvironment.json': {
@@ -840,7 +840,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
   },
   // STERN FLOWERS
   'godot_stern_flowers_editor.gopipeline.json'
-  : std.prune(godot_pipeline_4_x(
+  : std.prune(godot_pipeline(
     pipeline_name=godot_template_stern_flowers_editor,
     godot_status='stern-flowers',
     godot_git='https://github.com/godotengine/godot.git',
@@ -848,9 +848,9 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
     gocd_group='delta',
   )),
   // GROUPS 4.x
-  'godot_v_sekai_editor_4_x.gopipeline.json'
-  : std.prune(godot_pipeline_4_x(
-    pipeline_name=godot_template_groups_editor_4_x,
+  'godot_v_sekai_editor.gopipeline.json'
+  : std.prune(godot_pipeline(
+    pipeline_name=godot_template_groups_editor,
     godot_status='groups_4_x',
     godot_git='https://github.com/V-Sekai/godot.git',
     godot_branch='groups-4.x',
@@ -859,30 +859,30 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
     godot_modules_branch='groups-modules-4.x',
   )),
 } + {
-  'godot_groups_editor_export_4_x.gopipeline.json'
+  'godot_groups_editor_export.gopipeline.json'
   : std.prune(
-    godot_editor_export_4_x(
-      pipeline_name=godot_template_groups_export_4_x,
-      pipeline_dependency=godot_template_groups_editor_4_x,
+    godot_editor_export(
+      pipeline_name=godot_template_groups_export,
+      pipeline_dependency=godot_template_groups_editor,
       itchio_login='ifiregames/chibifire-godot-4-custom-engine',
       gocd_group='gamma',
       godot_status='groups_4_x',
-      enabled_export_platforms=enabled_stern_flowers_export_platforms_4_x,
+      enabled_export_platforms=enabled_stern_flowers_export_platforms,
     )
   ),
 } + {
-  'godot_template_groups_4_x_export.gopipeline.json'
+  'godot_template_groups_export.gopipeline.json'
   : std.prune(
     godot_tools_pipeline_export(
-      pipeline_name=godot_template_groups_4_x,
-      pipeline_dependency=godot_template_groups_editor_4_x,
+      pipeline_name=godot_template_groups,
+      pipeline_dependency=godot_template_groups_editor,
       itchio_login='saracenone/groups-4x',
       project_git='git@gitlab.com:SaracenOne/groups.git',
       project_branch='godot4',
       gocd_group='gamma',
       godot_status='groups-4.x',
-      gocd_project_folder='groups_4_x',
-      enabled_export_platforms=enabled_groups_export_platforms_4_x,
+      gocd_project_folder='groups',
+      enabled_export_platforms=enabled_groups_export_platforms,
     )
   ),
 } + {
@@ -890,14 +890,14 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
   : std.prune(
     godot_tools_pipeline_export(
       pipeline_name=godot_template_purple_gold_spitz_export,
-      pipeline_dependency=godot_template_groups_editor_4_x,
+      pipeline_dependency=godot_template_groups_editor,
       itchio_login='ifiregames/purple-gold-spitz',
       project_git='https://github.com/fire/godot-purple-gold-spitz.git',
       project_branch='main',
       gocd_group='gamma',
       godot_status='purple_gold_spitz',
       gocd_project_folder='purple_gold_spitz',
-      enabled_export_platforms=enabled_groups_export_platforms_4_x,
+      enabled_export_platforms=enabled_groups_export_platforms,
       vsk=false,
     )
   ),
@@ -906,26 +906,26 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
   : std.prune(
     godot_tools_pipeline_export(
       pipeline_name=godot_template_hop_skip_dance_export,
-      pipeline_dependency=godot_template_groups_editor_4_x,
+      pipeline_dependency=godot_template_groups_editor,
       itchio_login='ifiregames/hop-skip-dance',
       project_git='https://github.com/V-Sekai/godot-hop-spin-dance.git',
       project_branch='main',
       gocd_group='gamma',
       godot_status='hop_spin_dance',
       gocd_project_folder='hop_spin_dance',
-      enabled_export_platforms=enabled_groups_export_platforms_4_x,
+      enabled_export_platforms=enabled_groups_export_platforms,
     )
   ),
 } + {
-  'godot_stern_flowers_editor_export_4_x.gopipeline.json'
+  'godot_stern_flowers_editor_export.gopipeline.json'
   : std.prune(
-    godot_editor_export_4_x(
-      pipeline_name=godot_template_stern_flowers_export_4_x,
+    godot_editor_export(
+      pipeline_name=godot_template_stern_flowers_export,
       pipeline_dependency=godot_template_stern_flowers_editor,
       itchio_login='ifiregames/stern-flowers-chibifire-com-godot-engine',
       gocd_group='delta',
       godot_status='stern-flowers',
-      enabled_export_platforms=enabled_stern_flowers_export_platforms_4_x,
+      enabled_export_platforms=enabled_stern_flowers_export_platforms,
     )
   ),
 }
