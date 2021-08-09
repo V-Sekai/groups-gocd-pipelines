@@ -236,12 +236,12 @@ local enabled_groups_export_platforms = [stern_flowers_export_configurations[x] 
 local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');
 
 local godot_pipeline(pipeline_name='',
-                         godot_status='',
-                         godot_git='',
-                         godot_branch='',
-                         gocd_group='',
-                         godot_modules_git='',
-                         godot_modules_branch='') = {
+                     godot_status='',
+                     godot_git='',
+                     godot_branch='',
+                     gocd_group='',
+                     godot_modules_git='',
+                     godot_modules_branch='') = {
   name: pipeline_name,
   group: gocd_group,
   label_template: godot_status + '.${godot_sandbox[:8]}.${COUNT}',
