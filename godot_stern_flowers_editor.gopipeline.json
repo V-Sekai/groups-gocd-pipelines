@@ -423,7 +423,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp ./bin/godot.osx.opt.tools.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_debug.64"
+                        "cp ./bin/godot.osx.opt.universal osx_template.app/Contents/MacOS/godot_osx_release.64"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -432,7 +432,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "chmod +x ./bin/osx_template.app/Contents/MacOS/godot_osx_debug.64"
+                        "cp ./bin/godot.osx.opt.universal osx_template.app/Contents/MacOS/godot_osx_debug.64"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -441,16 +441,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp ./bin/godot.osx.opt.tools.64 ./bin/osx_template.app/Contents/MacOS/godot_osx_release.64"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "chmod +x ./bin/osx_template.app/Contents/MacOS/godot_osx_release.64"
+                        "chmod +x osx_template.app/Contents/MacOS/godot_osx*"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
