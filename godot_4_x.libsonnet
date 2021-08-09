@@ -64,6 +64,8 @@ local platform_info_dict = {
     strip_command: 'LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S',
     godot_scons_arguments: 'osxcross_sdk=darwin19 CXXFLAGS="-Wno-deprecated-declarations -Wno-error " builtin_freetype=yes',
     extra_commands: [
+      'scons platform=osx arch=arm64 osxcross_sdk=darwin19 CXXFLAGS="-Wno-deprecated-declarations -Wno-error " builtin_freetype=yes',
+      'lipo -create bin/godot.osx.tools.x86_64 bin/godot.osx.tools.arm64 -output bin/godot.osx.tools.universal',
       'rm -rf ./bin/Godot.app',
       'cp -r ./misc/dist/osx_tools.app ./bin/',
       'cp bin/godot.osx.opt.tools.universal ./bin/Godot.app/Contents/MacOS/Godot',
