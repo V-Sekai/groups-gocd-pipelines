@@ -230,9 +230,8 @@ local stern_flowers_export_configurations = {
 };
 
 
-local enabled_stern_flowers_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
-local enabled_groups_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
-local enabled_groups_export_platforms_mac = [stern_flowers_export_configurations[x] for x in ['macos']];
+local enabled_stern_flowers_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop', 'macos']];
+local enabled_groups_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop', 'macos']];
 
 
 local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');
