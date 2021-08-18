@@ -109,9 +109,9 @@ local platform_info_dict = {
   },
 };
 
-local enabled_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
+local enabled_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'macos']];
 
-local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
+local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'macos']];
 
 // TODO: Use std.escapeStringBash in case export configurations wish to output executables with spaces.
 local groups_export_configurations = {
