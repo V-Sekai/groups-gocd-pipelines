@@ -109,9 +109,9 @@ local platform_info_dict = {
   },
 };
 
-local enabled_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'macos']];
+local enabled_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
 
-local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'macos']];
+local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
 
 // TODO: Use std.escapeStringBash in case export configurations wish to output executables with spaces.
 local groups_export_configurations = {
@@ -230,8 +230,8 @@ local stern_flowers_export_configurations = {
 };
 
 
-local enabled_stern_flowers_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop', 'macos']];
-local enabled_groups_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop', 'macos']];
+local enabled_stern_flowers_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
+local enabled_groups_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 
 
 local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');
