@@ -314,7 +314,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons platform=osx arch=arm64 osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes"
+                        "OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" scons platform=osx arch=arm64 osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
