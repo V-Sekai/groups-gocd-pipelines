@@ -2,11 +2,11 @@
    "environment_variables": [
       {
          "name": "GODOT_STATUS",
-         "value": "hop_spin_dance"
+         "value": "hop-spin-dance-0.1"
       }
    ],
    "group": "gamma",
-   "label_template": "hop_spin_dance.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
+   "label_template": "hop-spin-dance-0.1.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "branch": "main",

@@ -2,7 +2,7 @@
    "environment_variables": [
       {
          "name": "GODOT_STATUS",
-         "value": "stern-flowers"
+         "value": "stern-flowers-4.0"
       }
    ],
    "group": "delta",

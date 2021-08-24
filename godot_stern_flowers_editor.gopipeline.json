@@ -2,11 +2,11 @@
    "environment_variables": [
       {
          "name": "GODOT_STATUS",
-         "value": "stern-flowers"
+         "value": "stern-flowers-4.0"
       }
    ],
    "group": "delta",
-   "label_template": "stern-flowers.${godot_sandbox[:8]}.${COUNT}",
+   "label_template": "stern-flowers-4.0.${godot_sandbox[:8]}.${COUNT}",
    "materials": [
       {
          "branch": "master",

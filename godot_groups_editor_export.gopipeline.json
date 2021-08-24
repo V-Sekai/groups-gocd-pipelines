@@ -2,7 +2,7 @@
    "environment_variables": [
       {
          "name": "GODOT_STATUS",
-         "value": "groups_4_x"
+         "value": "groups-4.0"
       }
    ],
    "group": "gamma",

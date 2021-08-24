@@ -841,7 +841,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
   'godot_stern_flowers_editor.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_stern_flowers_editor,
-    godot_status='stern-flowers',
+    godot_status='stern-flowers-4.0',
     godot_git='https://github.com/godotengine/godot.git',
     godot_branch='master',
     gocd_group='delta',
@@ -850,9 +850,9 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
   'godot_v_sekai_editor.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_groups_editor,
-    godot_status='groups_4_x',
+    godot_status='groups-4.0',
     godot_git='https://github.com/V-Sekai/godot.git',
-    godot_branch='groups-4.x',
+    godot_branch='groups-4.0',
     gocd_group='gamma',
     godot_modules_git='https://github.com/V-Sekai/godot-modules-groups.git',
     godot_modules_branch='groups-modules-4.x',
@@ -865,7 +865,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       pipeline_dependency=godot_template_groups_editor,
       itchio_login='ifiregames/chibifire-godot-4-custom-engine',
       gocd_group='gamma',
-      godot_status='groups_4_x',
+      godot_status='groups-4.0',
       enabled_export_platforms=enabled_stern_flowers_export_platforms,
     )
   ),
@@ -879,7 +879,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       project_git='git@gitlab.com:SaracenOne/groups.git',
       project_branch='godot4',
       gocd_group='gamma',
-      godot_status='groups-4.x',
+      godot_status='groups-4.0',
       gocd_project_folder='groups',
       enabled_export_platforms=enabled_groups_export_platforms,
     )
@@ -894,7 +894,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       project_git='https://github.com/fire/godot-purple-gold-spitz.git',
       project_branch='main',
       gocd_group='gamma',
-      godot_status='purple_gold_spitz',
+      godot_status='purple-gold-spitz-0.1',
       gocd_project_folder='purple_gold_spitz',
       enabled_export_platforms=enabled_groups_export_platforms,
       vsk=false,
@@ -910,7 +910,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       project_git='https://github.com/V-Sekai/godot-hop-spin-dance.git',
       project_branch='main',
       gocd_group='gamma',
-      godot_status='hop_spin_dance',
+      godot_status='hop-spin-dance-0.1',
       gocd_project_folder='hop_spin_dance',
       enabled_export_platforms=enabled_groups_export_platforms,
     )
@@ -923,7 +923,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       pipeline_dependency=godot_template_stern_flowers_editor,
       itchio_login='ifiregames/stern-flowers-chibifire-com-godot-engine',
       gocd_group='delta',
-      godot_status='stern-flowers',
+      godot_status='stern-flowers-4.0',
       enabled_export_platforms=enabled_stern_flowers_export_platforms,
     )
   ),

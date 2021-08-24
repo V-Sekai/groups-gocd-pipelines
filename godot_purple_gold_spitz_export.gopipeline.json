@@ -2,11 +2,11 @@
    "environment_variables": [
       {
          "name": "GODOT_STATUS",
-         "value": "purple_gold_spitz"
+         "value": "purple-gold-spitz-0.1"
       }
    ],
    "group": "gamma",
-   "label_template": "purple_gold_spitz.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
+   "label_template": "purple-gold-spitz-0.1.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "branch": "main",

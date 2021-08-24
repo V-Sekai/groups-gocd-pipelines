@@ -2,11 +2,11 @@
    "environment_variables": [
       {
          "name": "GODOT_STATUS",
-         "value": "groups-4.x"
+         "value": "groups-4.0"
       }
    ],
    "group": "gamma",
-   "label_template": "groups-4.x.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
+   "label_template": "groups-4.0.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "branch": "godot4",
