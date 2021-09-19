@@ -63,7 +63,7 @@
                      "destination": "p",
                      "job": "windowsJob",
                      "pipeline": "gdextension-cpp",
-                     "source": "godot_cpp",
+                     "source": "godot-cpp",
                      "stage": "godotCppStage",
                      "type": "fetch"
                   },
@@ -135,7 +135,7 @@
                      "destination": "p",
                      "job": "linuxJob",
                      "pipeline": "gdextension-cpp",
-                     "source": "godot_cpp",
+                     "source": "godot-cpp",
                      "stage": "godotCppStage",
                      "type": "fetch"
                   },
