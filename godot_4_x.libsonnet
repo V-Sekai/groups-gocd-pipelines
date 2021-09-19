@@ -652,7 +652,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'chmod +x ' + HEADLESS_SERVER_EDITOR + ' && curl -L https://github.com/qarmin/gtk_library_store/releases/download/3.24.0/swiftshader2.zip > swiftshader.zip && unzip -o swiftshader.zip && rm swiftshader.zip && curr="$(pwd)/libvk_swiftshader.so" sed -i "s|PATH_TO_CHANGE|$curr|" vk_swiftshader_icd.json && chmod +x ' + 'godot.linuxbsd.opt.tools.64.llvm' + ' && HOME="`pwd`" VK_ICD_FILENAMES=vk_swiftshader_icd.json DRI_PRIME=0 HOME="`pwd`" xvfb-run --auto-servernum ./' + HEADLESS_SERVER_EDITOR + ' --dump-extension-api extension_api.json',
+                  'chmod +x ' + HEADLESS_SERVER_EDITOR + ' && curl -L https://github.com/qarmin/gtk_library_store/releases/download/3.24.0/swiftshader2.zip > swiftshader.zip && unzip -o swiftshader.zip && rm swiftshader.zip && curr="$(pwd)/libvk_swiftshader.so" sed -i "s|PATH_TO_CHANGE|$curr|" vk_swiftshader_icd.json && chmod +x ' + HEADLESS_SERVER_EDITOR + ' && HOME="`pwd`" VK_ICD_FILENAMES=vk_swiftshader_icd.json DRI_PRIME=0 HOME="`pwd`" xvfb-run --auto-servernum ./' + HEADLESS_SERVER_EDITOR + ' --dump-extension-api extension_api.json',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
