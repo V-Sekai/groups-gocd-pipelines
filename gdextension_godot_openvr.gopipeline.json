@@ -1,0 +1,193 @@
+{
+   "environment_variables": [
+      {
+         "name": "GODOT_STATUS",
+         "value": "gdextension.godot_openvr"
+      }
+   ],
+   "group": "gamma",
+   "label_template": "gdextension.godot_openvr.${gdextension-cpp_pipeline_dependency}.${COUNT}",
+   "materials": [
+      {
+         "name": "gdextension-cpp_pipeline_dependency",
+         "pipeline": "gdextension-cpp",
+         "stage": "godotCppStage",
+         "type": "dependency"
+      },
+      {
+         "branch": "port_to_godot_4_first_steps",
+         "destination": "p",
+         "ignore_for_scheduling": false,
+         "name": "p",
+         "shallow_clone": false,
+         "type": "git",
+         "url": "https://github.com/BastiaanOlij/godot_openxr.git"
+      }
+   ],
+   "name": "gdextension-godot-openvr",
+   "stages": [
+      {
+         "jobs": [
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "p/demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "p/demo/addons/godot-openvr/bin/win64/openvr_api.dll",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "debug",
+                     "source": "p/demo/addons/godot-openvr/bin/win64/libgodot_openvr.dbg.dll",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "debug",
+                     "source": "p/demo/addons/godot-openvr/bin/win64/libgodot_openvr.pdb",
+                     "type": "build"
+                  }
+               ],
+               "environment_variables": [ ],
+               "name": "windowsJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "job": "windowsJob",
+                     "pipeline": "gdextension-cpp",
+                     "source": "godot-cpp",
+                     "stage": "godotCppStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "rm -f godot-cpp/godot-headers/.git && cp -a godot-cpp p"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "python wrap_openvr.py"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "rm -f demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=release -j`nproc` use_lto=no deprecated=no use_mingw=yes use_llvm=yes use_lld=yes use_thinlto=yes LINKFLAGS=-Wl,-pdb= CCFLAGS='-g -gcodeview' debug_symbols=no"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cd demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.dll libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  }
+               ]
+            },
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "p/demo/addons/godot-openvr/bin/x11/libgodot_openvr.so",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "p/demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "debug",
+                     "source": "p/demo/addons/godot-openvr/bin/x11/libgodot_openvr.dbg.so",
+                     "type": "build"
+                  }
+               ],
+               "environment_variables": [ ],
+               "name": "linuxJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "job": "linuxJob",
+                     "pipeline": "gdextension-cpp",
+                     "source": "godot-cpp",
+                     "stage": "godotCppStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "rm -f godot-cpp/godot-headers/.git && cp -a godot-cpp p"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "rm -f demo/addons/godot-openvr/bin/x11/libgodot_openvr.so"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "scons werror=no platform=linux target=release -j`nproc` use_lto=no deprecated=no use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cd demo/addons/godot-openvr/bin/x11 && mv libgodot_openvr.so libgodot_openvr.dbg.so && strip --strip-debug -o libgodot_openvr.so libgodot_openvr.dbg.so"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  }
+               ]
+            }
+         ],
+         "name": "gdextensionBuildStage"
+      }
+   ]
+}

@@ -117,6 +117,75 @@ local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', '
 
 local enabled_gdextension_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
 
+
+local groups_gdextension_plugins = {
+  godot_openvr: {
+    name: 'godot_openvr',
+    pipeline_name: 'gdextension-godot-openvr',
+    git_url: 'https://github.com/BastiaanOlij/godot_openxr.git',
+    git_branch: 'port_to_godot_4_first_steps',
+    platforms: {
+      windows: {
+        artifacts: [
+          'demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll',
+          'demo/addons/godot-openvr/bin/win64/openvr_api.dll',
+        ],
+        output_artifacts: [
+          'libgodot_openvr.dll',
+          'openvr_api.dll',
+        ],
+        debug_artifacts: [
+          'demo/addons/godot-openvr/bin/win64/libgodot_openvr.dbg.dll',
+          'demo/addons/godot-openvr/bin/win64/libgodot_openvr.pdb',
+        ],
+        scons_arguments: '',
+        environment_variables: [],
+        // NOTE: We will use prebuilt openvr_api.dll
+        prepare_commands: [
+          'python wrap_openvr.py',
+          'rm -f demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll',
+        ],
+        extra_commands: [
+          'cd demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.dll libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll',
+        ],
+        //install_task: ["mv libGodotSpeech.dll g/addons/godot_speech/bin/libGodotSpeech.dll"],
+      },
+      linux: {
+        artifacts: [
+          'demo/addons/godot-openvr/bin/x11/libgodot_openvr.so',
+          'demo/addons/godot-openvr/bin/x11/libopenvr_api.so',
+        ],
+        output_artifacts: [
+          'libgodot_openvr.so',
+          'libopenvr_api.so',
+        ],
+        debug_artifacts: [
+          'demo/addons/godot-openvr/bin/x11/libgodot_openvr.dbg.so',
+        ],
+        scons_arguments: '',
+        environment_variables: [],
+        // NOTE: We will use prebuilt libopenvr_api.so
+        prepare_commands: [
+          'rm -f demo/addons/godot-openvr/bin/x11/libgodot_openvr.so',
+        ],
+        extra_commands: [
+          'cd demo/addons/godot-openvr/bin/x11 && mv libgodot_openvr.so libgodot_openvr.dbg.so && strip --strip-debug -o libgodot_openvr.so libgodot_openvr.dbg.so',
+        ],
+        //install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
+      },
+      osx: {
+        artifacts: [],
+        output_artifacts: [],
+        debug_artifacts: [],
+        scons_arguments: ' --version',
+        environment_variables: [],
+        prepare_commands: [],
+        extra_commands: [],
+      },
+    },
+  },
+};
+
 // TODO: Use std.escapeStringBash in case export configurations wish to output executables with spaces.
 local groups_export_configurations = {
   windows: {
@@ -236,6 +305,9 @@ local stern_flowers_export_configurations = {
 
 local enabled_stern_flowers_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 local enabled_groups_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
+
+local all_gdextension_plugins = [groups_gdextension_plugins[x] for x in ['godot_openvr']];
+local enabled_groups_gdextension_plugins = [groups_gdextension_plugins[x] for x in ['godot_openvr']];
 
 
 local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');
@@ -644,6 +716,125 @@ local generate_godot_cpp_pipeline(pipeline_name='',
     ],
   };
 
+  
+local generate_godot_gdextension_pipeline(pipeline_name='',
+                                       pipeline_dependency='',
+                                       gocd_group='',
+                                       godot_status='',
+                                       library_info=null) =
+  {
+    name: pipeline_name,
+    group: gocd_group,
+    label_template: godot_status + '.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
+    environment_variables:
+      [{
+        name: 'GODOT_STATUS',
+        value: godot_status,
+      }],
+    materials: [
+      {
+        name: pipeline_dependency + '_pipeline_dependency',
+        type: 'dependency',
+        pipeline: pipeline_dependency,
+        stage: 'godotCppStage',
+      },
+      {
+        name: 'p',
+        url: library_info.git_url,
+        type: 'git',
+        branch: library_info.git_branch,
+        destination: 'p',
+        shallow_clone: false,
+        ignore_for_scheduling: false,
+      },
+    ],
+    stages: [
+      {
+        name: 'gdextensionBuildStage',
+        jobs: [
+          {
+            name: platform_info.gdextension_platform + 'Job',
+            resources: [
+              'linux',
+              'mingw5',
+            ],
+            artifacts: [
+              {
+                type: 'build',
+                source: 'p/' + artifact_path,
+                destination: '',
+              }
+              for artifact_path in library_info.platforms[platform_info.gdextension_platform].artifacts
+            ] + [
+              {
+                type: 'build',
+                source: 'p/' + artifact_path,
+                destination: 'debug',
+              }
+              for artifact_path in library_info.platforms[platform_info.gdextension_platform].debug_artifacts
+            ],
+            environment_variables: platform_info.environment_variables + library_info.platforms[platform_info.gdextension_platform].environment_variables,
+            tasks: [
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_dependency,
+                stage: 'godotCppStage',
+                job: platform_info.gdextension_platform + 'Job',
+                source: 'godot-cpp',
+                destination: '',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'rm -f godot-cpp/godot-headers/.git && cp -a godot-cpp p',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+            ] + [
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  extra_command,
+                ],
+                command: '/bin/bash',
+                working_directory: 'p',
+              }
+              for extra_command in library_info.platforms[platform_info.gdextension_platform].prepare_commands
+            ] + [
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdextension_platform + ' target=release -j`nproc` use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + library_info.platforms[platform_info.gdextension_platform].scons_arguments,
+                ],
+                command: '/bin/bash',
+                working_directory: 'p',
+              },
+            ] + [
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  extra_command,
+                ],
+                command: '/bin/bash',
+                working_directory: 'p',
+              }
+              for extra_command in library_info.platforms[platform_info.gdextension_platform].extra_commands
+            ] + [
+            ],
+          }
+          for platform_info in enabled_gdextension_platforms
+          if std.objectHas(library_info.platforms, platform_info.gdextension_platform) && std.length(library_info.platforms[platform_info.gdextension_platform].artifacts) + std.length(library_info.platforms[platform_info.gdextension_platform].debug_artifacts) > 0
+        ],
+      },
+    ],
+  };
+
 local godot_editor_export(
   pipeline_name='',
   pipeline_dependency='',
@@ -734,7 +925,7 @@ local godot_editor_export(
 local godot_tools_pipeline_export(
   pipeline_name='',
   pipeline_dependency='',
-  gdnative_plugins=[],
+  gdextension_plugins=[],
   itchio_login='',
   gocd_group='',
   godot_status='',
@@ -773,10 +964,10 @@ local godot_tools_pipeline_export(
         name: library_info.pipeline_name + '_pipeline_dependency',
         type: 'dependency',
         pipeline: library_info.pipeline_name,
-        stage: 'gdnativeBuildStage',
+        stage: 'gdextensionBuildStage',
         ignore_for_scheduling: false,
       }
-      for library_info in gdnative_plugins
+      for library_info in gdextension_plugins
     ],
     stages: [
       {
@@ -825,7 +1016,7 @@ local godot_tools_pipeline_export(
                                 type: 'fetch',
                                 artifact_origin: 'gocd',
                                 pipeline: library_info.pipeline_name,
-                                stage: 'gdnativeBuildStage',
+                                stage: 'gdextensionBuildStage',
                                 job: export_info.gdextension_platform + 'Job',
                                 is_source_a_file: true,
                                 source: artifact,
@@ -833,12 +1024,12 @@ local godot_tools_pipeline_export(
                               }
                               for artifact in library_info.platforms[export_info.gdextension_platform].output_artifacts
                             ],
-                            gdnative_plugins) + std.flatMap(function(library_info) [
+                            gdextension_plugins) + std.flatMap(function(library_info) [
                                                               if std.endsWith(artifact, '.dll') && artifact != 'openvr_api.dll' then {
                                                                 type: 'fetch',
                                                                 artifact_origin: 'gocd',
                                                                 pipeline: library_info.pipeline_name,
-                                                                stage: 'gdnativeBuildStage',
+                                                                stage: 'gdextensionBuildStage',
                                                                 job: export_info.gdextension_platform + 'Job',
                                                                 is_source_a_file: true,
                                                                 source: 'debug/' + exe_to_pdb_path(artifact),
@@ -846,7 +1037,7 @@ local godot_tools_pipeline_export(
                                                               } else null
                                                               for artifact in library_info.platforms[export_info.gdextension_platform].output_artifacts
                                                             ],
-                                                            gdnative_plugins) + [
+                                                            gdextension_plugins) + [
               {
                 type: 'exec',
                 arguments: [
@@ -953,6 +1144,9 @@ local godot_cpp_pipeline = 'gdextension-cpp';
 local godot_template_stern_flowers_editor = 'godot-template-stern-flowers-4-x';
 local godot_template_stern_flowers_export = 'stern-flowers-editor-4-x';
 // END
+local godot_gdextension_pipelines =
+  [plugin_info.pipeline_name for plugin_info in all_gdextension_plugins];
+
 local itch_fire_template = [godot_template_groups_editor, godot_cpp_pipeline] + [godot_template_groups_export] + [godot_template_groups] + [godot_template_hop_dance_export] + [godot_template_purple_gold_spitz_export];
 local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [godot_template_stern_flowers_export];
 
@@ -989,7 +1183,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
     godot_modules_git='https://github.com/V-Sekai/godot-modules-groups.git',
     godot_modules_branch='groups-modules-4.x',
   )),
-  'gdnative_cpp.gopipeline.json'
+  'gdextension_cpp.gopipeline.json'
   : std.prune(
     generate_godot_cpp_pipeline(
       pipeline_name=godot_cpp_pipeline,
@@ -998,6 +1192,15 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       godot_status='gdextension.godot-cpp'
     )
   ),
+} + {
+  ['gdextension_' + library_info.name + '.gopipeline.json']: generate_godot_gdextension_pipeline(
+    pipeline_name=library_info.pipeline_name,
+    pipeline_dependency=godot_cpp_pipeline,
+    gocd_group='gamma',
+    godot_status='gdextension.' + library_info.name,
+    library_info=library_info,
+  )
+  for library_info in all_gdextension_plugins
 } + {
   'godot_groups_editor_export.gopipeline.json'
   : std.prune(
