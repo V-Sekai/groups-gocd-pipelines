@@ -9,11 +9,11 @@
    "label_template": "3d-platform-test-0.1.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
    "materials": [
       {
-         "branch": "export",
+         "branch": "main",
          "destination": "g",
          "name": "project_git_sandbox",
          "type": "git",
-         "url": "https://github.com/V-Sekai/3d-platform-test-for-godot4.git"
+         "url": "https://github.com/TokageItLab/3d-platform-test-for-godot4.git"
       },
       {
          "ignore_for_scheduling": false,
