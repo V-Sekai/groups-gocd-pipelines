@@ -76,8 +76,8 @@
                      "type": "build"
                   },
                   {
-                     "destination": "godot-cpp/gen/",
-                     "source": "godot-cpp/gen/include",
+                     "destination": "godot-cpp",
+                     "source": "godot-cpp/gen",
                      "type": "build"
                   },
                   {
@@ -126,8 +126,8 @@
                      "type": "build"
                   },
                   {
-                     "destination": "godot-cpp/gen/",
-                     "source": "godot-cpp/gen/include",
+                     "destination": "godot-cpp",
+                     "source": "godot-cpp/gen",
                      "type": "build"
                   },
                   {
