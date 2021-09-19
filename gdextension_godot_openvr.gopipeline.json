@@ -70,6 +70,24 @@
                   {
                      "arguments": [
                         "-c",
+                        "ls"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "ls"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
                         "python wrap_openvr.py"
                      ],
                      "command": "/bin/bash",
@@ -138,6 +156,24 @@
                      "source": "godot-cpp",
                      "stage": "godotCppStage",
                      "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "ls"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "ls"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
                   },
                   {
                      "arguments": [
