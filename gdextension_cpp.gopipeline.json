@@ -94,7 +94,7 @@
                "tasks": [
                   {
                      "artifact_origin": "gocd",
-                     "destination": "godot-headers-temp/extension_api.json",
+                     "destination": "godot-headers-temp",
                      "is_source_a_file": true,
                      "job": "generateApiJsonJob",
                      "pipeline": "gdextension-cpp",
@@ -139,7 +139,7 @@
                "tasks": [
                   {
                      "artifact_origin": "gocd",
-                     "destination": "godot-headers-temp/extension_api.json",
+                     "destination": "godot-headers-temp",
                      "is_source_a_file": true,
                      "job": "generateApiJsonJob",
                      "pipeline": "gdextension-cpp",
