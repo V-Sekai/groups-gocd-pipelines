@@ -46,7 +46,7 @@
                      "artifact_origin": "gocd",
                      "destination": "",
                      "is_source_a_file": true,
-                     "job": "serverJob",
+                     "job": "linuxJob",
                      "pipeline": "godot-template-groups-4-x",
                      "source": "godot.linuxbsd.opt.tools.64.llvm",
                      "stage": "defaultStage",
