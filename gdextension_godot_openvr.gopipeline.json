@@ -60,7 +60,7 @@
                "tasks": [
                   {
                      "artifact_origin": "gocd",
-                     "destination": "godot-cpp",
+                     "destination": "",
                      "job": "windowsJob",
                      "pipeline": "gdextension-cpp",
                      "source": "godot-cpp",
@@ -141,7 +141,7 @@
                "tasks": [
                   {
                      "artifact_origin": "gocd",
-                     "destination": "godot-cpp",
+                     "destination": "",
                      "job": "linuxJob",
                      "pipeline": "gdextension-cpp",
                      "source": "godot-cpp",
