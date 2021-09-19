@@ -2,18 +2,18 @@
    "environment_variables": [
       {
          "name": "GODOT_STATUS",
-         "value": "hop-spin-dance-0.1"
+         "value": "hop-dance-0.1"
       }
    ],
    "group": "gamma",
-   "label_template": "hop-spin-dance-0.1.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
+   "label_template": "hop-dance-0.1.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "branch": "main",
          "destination": "g",
          "name": "project_git_sandbox",
          "type": "git",
-         "url": "https://github.com/V-Sekai/godot-hop-spin-dance.git"
+         "url": "https://github.com/V-Sekai/godot-hop-dance.git"
       },
       {
          "ignore_for_scheduling": false,
@@ -181,7 +181,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "butler push export_windows ifiregames/hop-skip-dance:windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
+                        "butler push export_windows ifiregames/hop-dance:windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -209,7 +209,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "butler push export_linuxbsd ifiregames/hop-skip-dance:linux-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
+                        "butler push export_linuxbsd ifiregames/hop-dance:linux-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
