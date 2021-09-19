@@ -2,18 +2,18 @@
    "environment_variables": [
       {
          "name": "GODOT_STATUS",
-         "value": "purple-gold-spitz-0.1"
+         "value": "3d-platform-test-0.1"
       }
    ],
    "group": "gamma",
-   "label_template": "purple-gold-spitz-0.1.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
+   "label_template": "3d-platform-test-0.1.${godot-template-groups-4-x_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "branch": "main",
          "destination": "g",
          "name": "project_git_sandbox",
          "type": "git",
-         "url": "https://github.com/fire/godot-purple-gold-spitz.git"
+         "url": "https://github.com/TokageItLab/3d-platform-test-for-godot4.git"
       },
       {
          "ignore_for_scheduling": false,

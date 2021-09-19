@@ -885,17 +885,17 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
     )
   ),
 } + {
-  'godot_purple_gold_spitz_export.gopipeline.json'
+  'godot_3d_platform_test_for_godot4_export.gopipeline.json'
   : std.prune(
     godot_tools_pipeline_export(
       pipeline_name=godot_template_purple_gold_spitz_export,
       pipeline_dependency=godot_template_groups_editor,
       itchio_login='ifiregames/purple-gold-spitz',
-      project_git='https://github.com/fire/godot-purple-gold-spitz.git',
+      project_git='https://github.com/TokageItLab/3d-platform-test-for-godot4.git',
       project_branch='main',
       gocd_group='gamma',
-      godot_status='purple-gold-spitz-0.1',
-      gocd_project_folder='purple_gold_spitz',
+      godot_status='3d-platform-test-0.1',
+      gocd_project_folder='3d_platform_test_for_godot4',
       enabled_export_platforms=enabled_groups_export_platforms,
       vsk=false,
     )
