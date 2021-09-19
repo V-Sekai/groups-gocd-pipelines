@@ -787,16 +787,7 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                 stage: 'godotCppStage',
                 job: platform_info.gdextension_platform + 'Job',
                 source: 'godot-cpp',
-                destination: '',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'rm -f godot-cpp/godot-headers/.git && cp -a godot-cpp p',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
+                destination: 'p',
               },
             ] + [
               {
