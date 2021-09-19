@@ -814,14 +814,14 @@ local godot_tools_pipeline_export(
 // CHIBIFIRE
 local godot_template_groups_editor = 'godot-template-groups-4-x';
 local godot_template_groups_export = 'groups-editor-4-x';
-local godot_template_hop_skip_dance_export = 'hop-skip-dance-export';
+local godot_template_hop_dance_export = 'hop-dance-export';
 local godot_template_purple_gold_spitz_export = 'purple-gold-spitz-export';
 local godot_template_groups = 'groups-4-x-export';
 // STERN FLOWERS
 local godot_template_stern_flowers_editor = 'godot-template-stern-flowers-4-x';
 local godot_template_stern_flowers_export = 'stern-flowers-editor-4-x';
 // END
-local itch_fire_template = [godot_template_groups_editor] + [godot_template_groups_export] + [godot_template_groups] + [godot_template_hop_skip_dance_export] + [godot_template_purple_gold_spitz_export];
+local itch_fire_template = [godot_template_groups_editor] + [godot_template_groups_export] + [godot_template_groups] + [godot_template_hop_dance_export] + [godot_template_purple_gold_spitz_export];
 local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [godot_template_stern_flowers_export];
 
 {
@@ -904,7 +904,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
   'godot_hop_dance_export.gopipeline.json'
   : std.prune(
     godot_tools_pipeline_export(
-      pipeline_name=godot_template_hop_skip_dance_export,
+      pipeline_name=godot_template_hop_dance_export,
       pipeline_dependency=godot_template_groups_editor,
       itchio_login='ifiregames/hop-dance',
       project_git='https://github.com/V-Sekai/godot-hop-dance.git',
