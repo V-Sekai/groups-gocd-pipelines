@@ -652,7 +652,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'chmod +x ' + HEADLESS_SERVER_EDITOR + ' && ./' + HEADLESS_SERVER_EDITOR + ' --headless --dump-extension-api extension_api.json',
+                  'chmod +x ' + HEADLESS_SERVER_EDITOR + ' && ./' + HEADLESS_SERVER_EDITOR + ' --headless --dump-extension-api extension_api.json || true',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
