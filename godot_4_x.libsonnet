@@ -122,8 +122,8 @@ local groups_gdextension_plugins = {
   godot_openvr: {
     name: 'godot_openvr',
     pipeline_name: 'gdextension-godot-openvr',
-    git_url: 'https://github.com/BastiaanOlij/godot_openxr.git',
-    git_branch: 'port_to_godot_4_first_steps',
+    git_url: 'https://github.com/BastiaanOlij/godot_openvr.git',
+    git_branch: 'port_to_godot_4',
     platforms: {
       windows: {
         artifacts: [
@@ -633,7 +633,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
             artifacts: [
               {
                 type: 'build',
-                source: 'api.json',
+                source: 'extension_api.json',
                 destination: '',
               },
             ],
@@ -652,7 +652,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'chmod +x ' + HEADLESS_SERVER_EDITOR + ' && HOME="`pwd`" ./' + HEADLESS_SERVER_EDITOR + ' --gdnative-generate-json-api api.json || [[ "$(cat api.json | tail -1)" = "]" ]]',
+                  'chmod +x ' + HEADLESS_SERVER_EDITOR + ' && HOME="`pwd`" ./' + HEADLESS_SERVER_EDITOR + ' --dump-extension-api extension_api.json',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -696,14 +696,14 @@ local generate_godot_cpp_pipeline(pipeline_name='',
                 stage: 'generateApiJsonStage',
                 job: 'generateApiJsonJob',
                 is_source_a_file: true,
-                source: 'api.json',
+                source: 'extension_api.json',
                 destination: '',
               },
               {
                 type: 'exec',
                 arguments: [
                   '-c',
-                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdextension_platform + ' target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json ' + platform_info.godot_scons_arguments,
+                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdextension_platform + ' target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../extension_api.json ' + platform_info.godot_scons_arguments,
                 ],
                 command: '/bin/bash',
                 working_directory: 'godot-cpp',

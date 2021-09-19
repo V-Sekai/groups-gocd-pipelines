@@ -32,7 +32,7 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "api.json",
+                     "source": "extension_api.json",
                      "type": "build"
                   }
                ],
@@ -55,7 +55,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "chmod +x godot.linuxbsd.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot.linuxbsd.opt.tools.64.llvm --gdnative-generate-json-api api.json || [[ \"$(cat api.json | tail -1)\" = \"]\" ]]"
+                        "chmod +x godot.linuxbsd.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot.linuxbsd.opt.tools.64.llvm --dump-extension-api extension_api.json"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -98,14 +98,14 @@
                      "is_source_a_file": true,
                      "job": "generateApiJsonJob",
                      "pipeline": "gdextension-cpp",
-                     "source": "api.json",
+                     "source": "extension_api.json",
                      "stage": "generateApiJsonStage",
                      "type": "fetch"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json use_mingw=yes use_llvm=yes use_lld=yes use_thinlto=yes LINKFLAGS=-Wl,-pdb= CCFLAGS='-g -gcodeview' debug_symbols=no"
+                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../extension_api.json use_mingw=yes use_llvm=yes use_lld=yes use_thinlto=yes LINKFLAGS=-Wl,-pdb= CCFLAGS='-g -gcodeview' debug_symbols=no"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -143,14 +143,14 @@
                      "is_source_a_file": true,
                      "job": "generateApiJsonJob",
                      "pipeline": "gdextension-cpp",
-                     "source": "api.json",
+                     "source": "extension_api.json",
                      "stage": "generateApiJsonStage",
                      "type": "fetch"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=linux target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
+                        "scons werror=no platform=linux target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../extension_api.json use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

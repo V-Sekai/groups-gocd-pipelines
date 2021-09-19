@@ -15,13 +15,13 @@
          "type": "dependency"
       },
       {
-         "branch": "port_to_godot_4_first_steps",
+         "branch": "port_to_godot_4",
          "destination": "p",
          "ignore_for_scheduling": false,
          "name": "p",
          "shallow_clone": false,
          "type": "git",
-         "url": "https://github.com/BastiaanOlij/godot_openxr.git"
+         "url": "https://github.com/BastiaanOlij/godot_openvr.git"
       }
    ],
    "name": "gdextension-godot-openvr",
