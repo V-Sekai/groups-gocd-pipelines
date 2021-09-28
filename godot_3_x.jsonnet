@@ -1491,6 +1491,7 @@ local simple_docker_job(pipeline_name='',
     ],
   };
 // Groups
+local godot_template_groups_editor_web = 'godot-template-groups-web';
 local godot_template_groups_editor = 'godot-template-groups';
 local godot_cpp_pipeline = 'gdnative-cpp';
 local godot_template_groups_export = 'production-groups-release-export';
@@ -1502,7 +1503,7 @@ local godot_gdnative_pipelines =
   [plugin_info.pipeline_name for plugin_info in all_gdnative_plugins];
 
 
-local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
+local godot_template = godot_template_groups_editor_web + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
 {
   'env.development.goenvironment.json': {
     name: 'development',
@@ -1510,6 +1511,17 @@ local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godo
     environment_variables:
       [],
   },
+  // GROUPS-WEB
+  'godot_groups_editor-web.gopipeline.json'
+  : std.prune(godot_pipeline(
+    pipeline_name=godot_template_groups_editor_web,
+    godot_status='groups-web',
+    godot_git='https://github.com/V-Sekai/godot.git',
+    godot_branch='groups-web',
+    gocd_group='beta',
+    godot_modules_git='https://github.com/V-Sekai/godot-modules-groups.git',
+    godot_modules_branch='groups-web',
+  )),
   // GROUPS
   'godot_groups_editor.gopipeline.json'
   : std.prune(godot_pipeline(
