@@ -1512,7 +1512,7 @@ local godot_template = godot_template_groups_editor_web + [godot_template_groups
       [],
   },
   // GROUPS-WEB
-  'godot_groups_editor-web.gopipeline.json'
+  'godot_groups_editor_web.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_groups_editor_web,
     godot_status='groups-web',
