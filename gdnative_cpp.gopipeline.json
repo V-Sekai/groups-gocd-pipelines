@@ -157,57 +157,6 @@
                      "working_directory": "godot-cpp"
                   }
                ]
-            },
-            {
-               "artifacts": [
-                  {
-                     "destination": "godot-cpp",
-                     "source": "godot-cpp/include",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "godot-cpp",
-                     "source": "godot-cpp/godot-headers",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "godot-cpp",
-                     "source": "godot-cpp/bin",
-                     "type": "build"
-                  }
-               ],
-               "environment_variables": [
-                  {
-                     "name": "PATH",
-                     "value": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-                  }
-               ],
-               "name": "osxJob",
-               "resources": [
-                  "linux",
-                  "mingw5"
-               ],
-               "tasks": [
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "",
-                     "is_source_a_file": true,
-                     "job": "generateApiJsonJob",
-                     "pipeline": "gdnative-cpp",
-                     "source": "api.json",
-                     "stage": "generateApiJsonStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" scons werror=no platform=osx target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../api.json osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "godot-cpp"
-                  }
-               ]
             }
          ],
          "name": "godotCppStage"

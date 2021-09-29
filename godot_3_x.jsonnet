@@ -124,11 +124,11 @@ local platform_info_dict = {
   },
 };
 
-local enabled_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'server', 'macos']];
+local enabled_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'server']];
 
-local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'server', 'web', 'macos']];
+local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'server', 'web']];
 
-local enabled_gdnative_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'macos']];
+local enabled_gdnative_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
 
 
 local groups_gdnative_plugins = {
