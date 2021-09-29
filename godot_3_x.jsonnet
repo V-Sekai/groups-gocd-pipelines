@@ -411,7 +411,7 @@ local all_gdnative_plugins = [groups_gdnative_plugins[x] for x in ['godot_speech
 
 local enabled_groups_gdnative_plugins = [groups_gdnative_plugins[x] for x in ['godot_speech', 'godot_openvr']];
 
-local enabled_groups_export_platforms = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop', 'linuxServer', 'web', 'macos']];
+local enabled_groups_export_platforms = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop', 'linuxServer', 'web']];
 
 local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');
 
