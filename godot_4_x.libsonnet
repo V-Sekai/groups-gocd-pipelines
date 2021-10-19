@@ -142,7 +142,6 @@ local groups_gdextension_plugins = {
         environment_variables: [],
         // NOTE: We will use prebuilt openvr_api.dll
         prepare_commands: [
-          'python wrap_openvr.py',
           'rm -f demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll',
         ],
         extra_commands: [
