@@ -133,6 +133,33 @@
                   {
                      "arguments": [
                         "-c",
+                        "cp -a openvr/bin/win64/openvr_api.dll p/demo/addons/godot-openvr/bin/win64/openvr_api.dll"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a openvr/bin/win64/openvr_api.dll.sig p/demo/addons/godot-openvr/bin/win64/openvr_api.dll.sig"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a openvr/bin/win64/openvr_api.pdb p/demo/addons/godot-openvr/bin/win64/openvr_api.pdb"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
                         "cd demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.dll libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll"
                      ],
                      "command": "/bin/bash",
@@ -224,6 +251,24 @@
                      "arguments": [
                         "-c",
                         "scons werror=no platform=linux target=release -j`nproc` use_lto=no deprecated=no use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a openvr/bin/linux64/libopenvr_api.so p/demo/addons/godot-openvr/bin/linux64/libopenvr_api.so"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a openvr/bin/linux64/libopenvr_api.so.dbg p/demo/addons/godot-openvr/bin/linux64/libopenvr_api.so.dbg"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
