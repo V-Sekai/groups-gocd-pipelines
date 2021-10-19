@@ -108,7 +108,7 @@
                "tasks": [
                   {
                      "artifact_origin": "gocd",
-                     "destination": "godot-cpp/godot-headers",
+                     "destination": "godot-headers",
                      "is_source_a_file": true,
                      "job": "generateApiJsonJob",
                      "pipeline": "gdextension-cpp",
@@ -119,7 +119,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../godot-headers/extension_api.json headers_dir=../godot-headers use_mingw=yes use_llvm=yes use_lld=yes use_thinlto=yes LINKFLAGS=-Wl,-pdb= CCFLAGS='-g -gcodeview' debug_symbols=no"
+                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers use_mingw=yes use_llvm=yes use_lld=yes use_thinlto=yes LINKFLAGS=-Wl,-pdb= CCFLAGS='-g -gcodeview' debug_symbols=no"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -158,7 +158,7 @@
                "tasks": [
                   {
                      "artifact_origin": "gocd",
-                     "destination": "godot-cpp/godot-headers",
+                     "destination": "godot-headers",
                      "is_source_a_file": true,
                      "job": "generateApiJsonJob",
                      "pipeline": "gdextension-cpp",
@@ -169,7 +169,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=linux target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes custom_api_file=../godot-headers/extension_api.json headers_dir=../godot-headers use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
+                        "scons werror=no platform=linux target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
