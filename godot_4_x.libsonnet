@@ -716,7 +716,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdextension_platform + ' target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes ' + platform_info.godot_scons_arguments,
+                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdextension_platform + ' target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers ' + platform_info.godot_scons_arguments,
                 ],
                 command: '/bin/bash',
                 working_directory: 'godot-cpp',
