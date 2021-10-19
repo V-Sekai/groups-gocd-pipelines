@@ -677,6 +677,11 @@ local generate_godot_cpp_pipeline(pipeline_name='',
               },
               {
                 type: 'build',
+                source: 'godot-headers',
+                destination: '',
+              },
+              {
+                type: 'build',
                 source: 'godot-cpp/gen/include',
                 destination: 'godot-cpp',
               },
@@ -789,6 +794,15 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                 source: 'godot-cpp',
                 destination: 'p',
               },
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_dependency,
+                stage: 'godotCppStage',
+                job: platform_info.gdextension_platform + 'Job',
+                source: 'godot-headers',
+                destination: 'p',
+              },              
             ] + [
               {
                 type: 'exec',

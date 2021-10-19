@@ -76,6 +76,11 @@
                      "type": "build"
                   },
                   {
+                     "destination": "",
+                     "source": "godot-headers",
+                     "type": "build"
+                  },
+                  {
                      "destination": "godot-cpp",
                      "source": "godot-cpp/gen/include",
                      "type": "build"
@@ -118,6 +123,11 @@
                   {
                      "destination": "godot-cpp",
                      "source": "godot-cpp/include",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "godot-headers",
                      "type": "build"
                   },
                   {

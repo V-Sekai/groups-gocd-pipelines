@@ -73,13 +73,13 @@
                      "type": "fetch"
                   },
                   {
-                     "arguments": [
-                        "-c",
-                        "python wrap_openvr.py"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "p"
+                     "artifact_origin": "gocd",
+                     "destination": "p",
+                     "job": "windowsJob",
+                     "pipeline": "gdextension-cpp",
+                     "source": "godot-headers",
+                     "stage": "godotCppStage",
+                     "type": "fetch"
                   },
                   {
                      "arguments": [
@@ -146,6 +146,15 @@
                      "job": "linuxJob",
                      "pipeline": "gdextension-cpp",
                      "source": "godot-cpp",
+                     "stage": "godotCppStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "p",
+                     "job": "linuxJob",
+                     "pipeline": "gdextension-cpp",
+                     "source": "godot-headers",
                      "stage": "godotCppStage",
                      "type": "fetch"
                   },
