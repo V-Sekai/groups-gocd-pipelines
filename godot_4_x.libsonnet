@@ -786,7 +786,7 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                 stage: 'godotCppStage',
                 job: platform_info.gdextension_platform + 'Job',
                 source: 'godot-cpp',
-                destination: '',
+                destination: 'p',
               },
             ] + [
               {
@@ -796,7 +796,7 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                   extra_command,
                 ],
                 command: '/bin/bash',
-                working_directory: '',
+                working_directory: 'p',
               }
               for extra_command in library_info.platforms[platform_info.gdextension_platform].prepare_commands
             ] + [
@@ -807,7 +807,7 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                   platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdextension_platform + ' target=release -j`nproc` use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + library_info.platforms[platform_info.gdextension_platform].scons_arguments,
                 ],
                 command: '/bin/bash',
-                working_directory: '',
+                working_directory: 'p',
               },
             ] + [
               {
@@ -817,7 +817,7 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                   extra_command,
                 ],
                 command: '/bin/bash',
-                working_directory: '',
+                working_directory: 'godot-cpp',
               }
               for extra_command in library_info.platforms[platform_info.gdextension_platform].extra_commands
             ] + [
