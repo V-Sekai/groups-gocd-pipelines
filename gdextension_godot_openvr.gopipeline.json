@@ -269,7 +269,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -a openvr/bin/linux64/libopenvr_api.so demo/addons/godot-openvr/bin/linux64/libopenvr_api.so"
+                        "cp -a openvr/bin/linux64/libopenvr_api.so demo/addons/godot-openvr/bin/x11/libopenvr_api.so"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -278,7 +278,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -a openvr/bin/linux64/libopenvr_api.so.dbg demo/addons/godot-openvr/bin/linux64/libopenvr_api.so.dbg"
+                        "cp -a openvr/bin/linux64/libopenvr_api.so.dbg demo/addons/godot-openvr/bin/x11/libopenvr_api.so.dbg"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

@@ -171,8 +171,8 @@ local groups_gdextension_plugins = {
           'rm -f demo/addons/godot-openvr/bin/x11/libgodot_openvr.so',
         ],
         extra_commands: [
-          'cp -a openvr/bin/linux64/libopenvr_api.so demo/addons/godot-openvr/bin/linux64/libopenvr_api.so',
-          'cp -a openvr/bin/linux64/libopenvr_api.so.dbg demo/addons/godot-openvr/bin/linux64/libopenvr_api.so.dbg',
+          'cp -a openvr/bin/linux64/libopenvr_api.so demo/addons/godot-openvr/bin/x11/libopenvr_api.so',
+          'cp -a openvr/bin/linux64/libopenvr_api.so.dbg demo/addons/godot-openvr/bin/x11/libopenvr_api.so.dbg',
           'cd demo/addons/godot-openvr/bin/x11 && mv libgodot_openvr.so libgodot_openvr.dbg.so && strip --strip-debug -o libgodot_openvr.so libgodot_openvr.dbg.so',
         ],
         //install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
