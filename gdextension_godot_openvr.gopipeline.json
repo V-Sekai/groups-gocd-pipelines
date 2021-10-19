@@ -84,10 +84,10 @@
                   },
                   {
                      "artifact_origin": "gocd",
-                     "destination": "",
+                     "destination": "godot-cpp",
                      "job": "windowsJob",
                      "pipeline": "gdextension-cpp",
-                     "source": "godot-cpp/godot-headers",
+                     "source": "godot-headers",
                      "stage": "godotCppStage",
                      "type": "fetch"
                   },
@@ -206,10 +206,10 @@
                   },
                   {
                      "artifact_origin": "gocd",
-                     "destination": "",
+                     "destination": "godot-cpp",
                      "job": "linuxJob",
                      "pipeline": "gdextension-cpp",
-                     "source": "godot-cpp/godot-headers",
+                     "source": "godot-headers",
                      "stage": "godotCppStage",
                      "type": "fetch"
                   },
