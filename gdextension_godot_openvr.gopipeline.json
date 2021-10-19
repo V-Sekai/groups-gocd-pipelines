@@ -46,6 +46,11 @@
                      "type": "build"
                   },
                   {
+                     "destination": "",
+                     "source": "p/demo",
+                     "type": "build"
+                  },
+                  {
                      "destination": "debug",
                      "source": "p/demo/addons/godot-openvr/bin/win64/libgodot_openvr.dbg.dll",
                      "type": "build"
@@ -188,6 +193,11 @@
                   {
                      "destination": "",
                      "source": "p/demo/addons/godot-openvr/bin/x11/libopenvr_api.so",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "p/demo",
                      "type": "build"
                   },
                   {

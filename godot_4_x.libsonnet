@@ -130,6 +130,7 @@ local groups_gdextension_plugins = {
           'demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll',
           'demo/addons/godot-openvr/bin/win64/openvr_api.dll',
           'demo/addons/godot-openvr/bin/win64/openvr_api.dll.sig',
+          'demo',
         ],
         output_artifacts: [
           'libgodot_openvr.dll',
@@ -157,6 +158,7 @@ local groups_gdextension_plugins = {
         artifacts: [
           'demo/addons/godot-openvr/bin/x11/libgodot_openvr.so',
           'demo/addons/godot-openvr/bin/x11/libopenvr_api.so',
+          'demo',
         ],
         output_artifacts: [
           'libgodot_openvr.so',
