@@ -785,12 +785,6 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                 destination: 'debug',
               }
               for artifact_path in library_info.platforms[platform_info.gdextension_platform].debug_artifacts
-            ] + [              
-              {
-                type: 'build',
-                source: 'p',
-                destination: '',
-              },
             ],
             environment_variables: platform_info.environment_variables + library_info.platforms[platform_info.gdextension_platform].environment_variables,
             tasks: [
