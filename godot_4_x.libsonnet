@@ -708,15 +708,6 @@ local generate_godot_cpp_pipeline(pipeline_name='',
                 command: '/bin/bash',
                 working_directory: 'godot-cpp',
               },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'cp -a gen/include/godot_cpp/. include/godot_cpp',
-                ],
-                command: '/bin/bash',
-                working_directory: 'godot-cpp',
-              },
             ],
           }
           for platform_info in enabled_gdextension_platforms

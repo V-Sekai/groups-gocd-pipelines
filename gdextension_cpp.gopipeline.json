@@ -110,15 +110,6 @@
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": "godot-cpp"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp -a gen/include/godot_cpp/. include/godot_cpp"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "godot-cpp"
                   }
                ]
             },
@@ -160,15 +151,6 @@
                      "arguments": [
                         "-c",
                         "scons werror=no platform=linux target=release -j`nproc` use_lto=no deprecated=no generate_bindings=yes use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "godot-cpp"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp -a gen/include/godot_cpp/. include/godot_cpp"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
