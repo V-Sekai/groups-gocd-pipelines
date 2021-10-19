@@ -87,32 +87,14 @@
                      "destination": "",
                      "job": "windowsJob",
                      "pipeline": "gdextension-cpp",
-                     "source": "godot-headers",
+                     "source": "godot-cpp/godot-headers",
                      "stage": "godotCppStage",
                      "type": "fetch"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf godot-cpp/godot-headers"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "p"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
                         "cp -a godot-cpp/. p/godot-cpp"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp -a godot-headers/. p/godot-cpp/godot-headers"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -227,32 +209,14 @@
                      "destination": "",
                      "job": "linuxJob",
                      "pipeline": "gdextension-cpp",
-                     "source": "godot-headers",
+                     "source": "godot-cpp/godot-headers",
                      "stage": "godotCppStage",
                      "type": "fetch"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf godot-cpp/godot-headers"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "p"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
                         "cp -a godot-cpp/. p/godot-cpp"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp -a godot-headers/. p/godot-cpp/godot-headers"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

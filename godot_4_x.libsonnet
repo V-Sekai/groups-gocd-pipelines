@@ -810,32 +810,14 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                 pipeline: pipeline_dependency,
                 stage: 'godotCppStage',
                 job: platform_info.gdextension_platform + 'Job',
-                source: 'godot-headers',
+                source: 'godot-cpp/godot-headers',
                 destination: '',
               },
               {
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'rm -rf godot-cpp/godot-headers',
-                ],
-                command: '/bin/bash',
-                working_directory: 'p',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
                   'cp -a godot-cpp/. p/godot-cpp',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'cp -a godot-headers/. p/godot-cpp/godot-headers',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
