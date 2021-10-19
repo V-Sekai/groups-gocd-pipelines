@@ -618,6 +618,15 @@ local generate_godot_cpp_pipeline(pipeline_name='',
         shallow_clone: false,
         ignore_for_scheduling: false,
       },
+      {
+        name: 'godot-cpp',
+        url: 'https://github.com/godotengine/godot-headers.git',
+        type: 'git',
+        branch: 'master',
+        destination: 'godot-headers',
+        shallow_clone: false,
+        ignore_for_scheduling: false,
+      },
     ],
     stages: [
       {
