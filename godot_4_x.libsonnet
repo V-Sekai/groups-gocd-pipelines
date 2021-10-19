@@ -829,7 +829,7 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'cp -a godot-headers/. p/godot-headers',
+                  'cp -a godot-headers/. p/godot-cpp/godot-headers',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
