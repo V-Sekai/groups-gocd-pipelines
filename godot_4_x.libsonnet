@@ -798,6 +798,33 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                 destination: '',
               },
               {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'rm -rf godot-cpp/godot-headers',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'cp -a godot-cpp/. p/godot-cpp',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'cp -a godot-headers/. p/godot-headers',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+              {
                 type: 'fetch',
                 artifact_origin: 'gocd',
                 pipeline: pipeline_dependency,

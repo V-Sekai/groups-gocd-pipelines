@@ -68,6 +68,33 @@
                      "type": "fetch"
                   },
                   {
+                     "arguments": [
+                        "-c",
+                        "rm -rf godot-cpp/godot-headers"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a godot-cpp/. p/godot-cpp"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a godot-headers/. p/godot-headers"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
                      "artifact_origin": "gocd",
                      "destination": "p",
                      "job": "windowsJob",
@@ -138,6 +165,33 @@
                      "source": "godot-cpp",
                      "stage": "godotCppStage",
                      "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "rm -rf godot-cpp/godot-headers"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a godot-cpp/. p/godot-cpp"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a godot-headers/. p/godot-headers"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
                   },
                   {
                      "artifact_origin": "gocd",
