@@ -122,8 +122,8 @@ local groups_gdextension_plugins = {
   godot_openvr: {
     name: 'godot_openvr',
     pipeline_name: 'gdextension-godot-openvr',
-    git_url: 'https://github.com/BastiaanOlij/godot_openvr.git',
-    git_branch: 'fix_controllers_4',
+    git_url: 'https://github.com/V-Sekai/godot_openvr.git',
+    git_branch: 'groups-4.0',
     platforms: {
       windows: {
         artifacts: [
