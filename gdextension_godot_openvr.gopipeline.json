@@ -49,6 +49,11 @@
                      "destination": "debug",
                      "source": "p/demo/addons/godot-openvr/bin/win64/libgodot_openvr.pdb",
                      "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "p",
+                     "type": "build"
                   }
                ],
                "environment_variables": [ ],
@@ -120,6 +125,11 @@
                   {
                      "destination": "debug",
                      "source": "p/demo/addons/godot-openvr/bin/x11/libgodot_openvr.dbg.so",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "p",
                      "type": "build"
                   }
                ],
