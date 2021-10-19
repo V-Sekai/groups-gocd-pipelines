@@ -798,6 +798,15 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                 destination: '',
               },
               {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_dependency,
+                stage: 'godotCppStage',
+                job: platform_info.gdextension_platform + 'Job',
+                source: 'godot-headers',
+                destination: '',
+              },
+              {
                 type: 'exec',
                 arguments: [
                   '-c',
