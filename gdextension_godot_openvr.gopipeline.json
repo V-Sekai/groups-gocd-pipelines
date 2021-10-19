@@ -41,6 +41,11 @@
                      "type": "build"
                   },
                   {
+                     "destination": "",
+                     "source": "p/demo/addons/godot-openvr/bin/win64/openvr_api.dll.sig",
+                     "type": "build"
+                  },
+                  {
                      "destination": "debug",
                      "source": "p/demo/addons/godot-openvr/bin/win64/libgodot_openvr.dbg.dll",
                      "type": "build"
@@ -48,6 +53,11 @@
                   {
                      "destination": "debug",
                      "source": "p/demo/addons/godot-openvr/bin/win64/libgodot_openvr.pdb",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "debug",
+                     "source": "p/demo/addons/godot-openvr/bin/win64/openvr_api.pdb",
                      "type": "build"
                   }
                ],
@@ -133,7 +143,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -a openvr/bin/win64/openvr_api.dll p/demo/addons/godot-openvr/bin/win64/openvr_api.dll"
+                        "cp -a openvr/bin/win64/openvr_api.dll demo/addons/godot-openvr/bin/win64/openvr_api.dll"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -142,7 +152,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -a openvr/bin/win64/openvr_api.dll.sig p/demo/addons/godot-openvr/bin/win64/openvr_api.dll.sig"
+                        "cp -a openvr/bin/win64/openvr_api.dll.sig demo/addons/godot-openvr/bin/win64/openvr_api.dll.sig"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -151,7 +161,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -a openvr/bin/win64/openvr_api.pdb p/demo/addons/godot-openvr/bin/win64/openvr_api.pdb"
+                        "cp -a openvr/bin/win64/openvr_api.pdb demo/addons/godot-openvr/bin/win64/openvr_api.pdb"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -259,7 +269,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -a openvr/bin/linux64/libopenvr_api.so p/demo/addons/godot-openvr/bin/linux64/libopenvr_api.so"
+                        "cp -a openvr/bin/linux64/libopenvr_api.so demo/addons/godot-openvr/bin/linux64/libopenvr_api.so"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -268,7 +278,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -a openvr/bin/linux64/libopenvr_api.so.dbg p/demo/addons/godot-openvr/bin/linux64/libopenvr_api.so.dbg"
+                        "cp -a openvr/bin/linux64/libopenvr_api.so.dbg demo/addons/godot-openvr/bin/linux64/libopenvr_api.so.dbg"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

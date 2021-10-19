@@ -129,26 +129,26 @@ local groups_gdextension_plugins = {
         artifacts: [
           'demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll',
           'demo/addons/godot-openvr/bin/win64/openvr_api.dll',
+          'demo/addons/godot-openvr/bin/win64/openvr_api.dll.sig',
         ],
         output_artifacts: [
           'libgodot_openvr.dll',
-          'openvr_api.dll',
         ],
         debug_artifacts: [
           'demo/addons/godot-openvr/bin/win64/libgodot_openvr.dbg.dll',
           'demo/addons/godot-openvr/bin/win64/libgodot_openvr.pdb',
+          'demo/addons/godot-openvr/bin/win64/openvr_api.pdb',
         ],
         scons_arguments: '',
         environment_variables: [],
-        // NOTE: We will use prebuilt openvr_api.dll
         prepare_commands: [
           'python wrap_openvr.py',
           'rm -f demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll',
         ],
         extra_commands: [
-          'cp -a openvr/bin/win64/openvr_api.dll p/demo/addons/godot-openvr/bin/win64/openvr_api.dll',
-          'cp -a openvr/bin/win64/openvr_api.dll.sig p/demo/addons/godot-openvr/bin/win64/openvr_api.dll.sig',
-          'cp -a openvr/bin/win64/openvr_api.pdb p/demo/addons/godot-openvr/bin/win64/openvr_api.pdb',
+          'cp -a openvr/bin/win64/openvr_api.dll demo/addons/godot-openvr/bin/win64/openvr_api.dll',
+          'cp -a openvr/bin/win64/openvr_api.dll.sig demo/addons/godot-openvr/bin/win64/openvr_api.dll.sig',
+          'cp -a openvr/bin/win64/openvr_api.pdb demo/addons/godot-openvr/bin/win64/openvr_api.pdb',
           'cd demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.dll libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll',
         ],
         //install_task: ["mv libGodotSpeech.dll g/addons/godot_speech/bin/libGodotSpeech.dll"],
@@ -167,13 +167,12 @@ local groups_gdextension_plugins = {
         ],
         scons_arguments: '',
         environment_variables: [],
-        // NOTE: We will use prebuilt libopenvr_api.so
         prepare_commands: [
           'rm -f demo/addons/godot-openvr/bin/x11/libgodot_openvr.so',
         ],
         extra_commands: [
-          'cp -a openvr/bin/linux64/libopenvr_api.so p/demo/addons/godot-openvr/bin/linux64/libopenvr_api.so',
-          'cp -a openvr/bin/linux64/libopenvr_api.so.dbg p/demo/addons/godot-openvr/bin/linux64/libopenvr_api.so.dbg',
+          'cp -a openvr/bin/linux64/libopenvr_api.so demo/addons/godot-openvr/bin/linux64/libopenvr_api.so',
+          'cp -a openvr/bin/linux64/libopenvr_api.so.dbg demo/addons/godot-openvr/bin/linux64/libopenvr_api.so.dbg',
           'cd demo/addons/godot-openvr/bin/x11 && mv libgodot_openvr.so libgodot_openvr.dbg.so && strip --strip-debug -o libgodot_openvr.so libgodot_openvr.dbg.so',
         ],
         //install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
