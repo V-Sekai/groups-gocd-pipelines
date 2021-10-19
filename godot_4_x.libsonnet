@@ -788,11 +788,23 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                 source: 'godot-cpp',
                 destination: '',
               },
+            ] + [
               {
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'rm -f godot-cpp/godot-headers/.git && cp -a godot-cpp p',
+                  extra_command,
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              }
+              for extra_command in library_info.platforms[platform_info.gdextension_platform].prepare_commands
+            ] + [
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdextension_platform + ' target=release -j`nproc` use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + library_info.platforms[platform_info.gdextension_platform].scons_arguments,
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -805,28 +817,7 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                   extra_command,
                 ],
                 command: '/bin/bash',
-                working_directory: 'p',
-              }
-              for extra_command in library_info.platforms[platform_info.gdextension_platform].prepare_commands
-            ] + [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdextension_platform + ' target=release -j`nproc` use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + library_info.platforms[platform_info.gdextension_platform].scons_arguments,
-                ],
-                command: '/bin/bash',
-                working_directory: 'p',
-              },
-            ] + [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  extra_command,
-                ],
-                command: '/bin/bash',
-                working_directory: 'p',
+                working_directory: '',
               }
               for extra_command in library_info.platforms[platform_info.gdextension_platform].extra_commands
             ] + [

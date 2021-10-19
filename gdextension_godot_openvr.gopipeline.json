@@ -70,7 +70,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -f godot-cpp/godot-headers/.git && cp -a godot-cpp p"
+                        "python wrap_openvr.py"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -79,20 +79,11 @@
                   {
                      "arguments": [
                         "-c",
-                        "python wrap_openvr.py"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "p"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
                         "rm -f demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
-                     "working_directory": "p"
+                     "working_directory": ""
                   },
                   {
                      "arguments": [
@@ -101,7 +92,7 @@
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
-                     "working_directory": "p"
+                     "working_directory": ""
                   },
                   {
                      "arguments": [
@@ -110,7 +101,7 @@
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
-                     "working_directory": "p"
+                     "working_directory": ""
                   }
                ]
             },
@@ -151,7 +142,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -f godot-cpp/godot-headers/.git && cp -a godot-cpp p"
+                        "rm -f demo/addons/godot-openvr/bin/x11/libgodot_openvr.so"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -160,20 +151,11 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -f demo/addons/godot-openvr/bin/x11/libgodot_openvr.so"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "p"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
                         "scons werror=no platform=linux target=release -j`nproc` use_lto=no deprecated=no use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
-                     "working_directory": "p"
+                     "working_directory": ""
                   },
                   {
                      "arguments": [
@@ -182,7 +164,7 @@
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
-                     "working_directory": "p"
+                     "working_directory": ""
                   }
                ]
             }
