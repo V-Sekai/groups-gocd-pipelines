@@ -83,7 +83,7 @@
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
-                     "working_directory": ""
+                     "working_directory": "p"
                   },
                   {
                      "arguments": [
@@ -102,15 +102,6 @@
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": ""
-                  },
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "p",
-                     "job": "windowsJob",
-                     "pipeline": "gdextension-cpp",
-                     "source": "godot-headers",
-                     "stage": "godotCppStage",
-                     "type": "fetch"
                   },
                   {
                      "arguments": [
@@ -200,7 +191,7 @@
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
-                     "working_directory": ""
+                     "working_directory": "p"
                   },
                   {
                      "arguments": [
@@ -219,15 +210,6 @@
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": ""
-                  },
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "p",
-                     "job": "linuxJob",
-                     "pipeline": "gdextension-cpp",
-                     "source": "godot-headers",
-                     "stage": "godotCppStage",
-                     "type": "fetch"
                   },
                   {
                      "arguments": [
