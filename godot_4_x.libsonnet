@@ -795,7 +795,7 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                 stage: 'godotCppStage',
                 job: platform_info.gdextension_platform + 'Job',
                 source: 'godot-cpp',
-                destination: 'p',
+                destination: '',
               },
               {
                 type: 'fetch',
@@ -835,7 +835,7 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                   extra_command,
                 ],
                 command: '/bin/bash',
-                working_directory: 'godot-cpp',
+                working_directory: 'p',
               }
               for extra_command in library_info.platforms[platform_info.gdextension_platform].extra_commands
             ] + [

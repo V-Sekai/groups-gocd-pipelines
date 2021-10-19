@@ -60,7 +60,7 @@
                "tasks": [
                   {
                      "artifact_origin": "gocd",
-                     "destination": "p",
+                     "destination": "",
                      "job": "windowsJob",
                      "pipeline": "gdextension-cpp",
                      "source": "godot-cpp",
@@ -101,7 +101,7 @@
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
-                     "working_directory": "godot-cpp"
+                     "working_directory": "p"
                   }
                ]
             },
@@ -132,7 +132,7 @@
                "tasks": [
                   {
                      "artifact_origin": "gocd",
-                     "destination": "p",
+                     "destination": "",
                      "job": "linuxJob",
                      "pipeline": "gdextension-cpp",
                      "source": "godot-cpp",
@@ -173,7 +173,7 @@
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
-                     "working_directory": "godot-cpp"
+                     "working_directory": "p"
                   }
                ]
             }
