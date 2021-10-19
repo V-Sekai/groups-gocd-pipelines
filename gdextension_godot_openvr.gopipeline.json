@@ -115,6 +115,15 @@
                   {
                      "arguments": [
                         "-c",
+                        "python wrap_openvr.py"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
                         "rm -f demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll"
                      ],
                      "command": "/bin/bash",
