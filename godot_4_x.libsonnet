@@ -683,11 +683,6 @@ local generate_godot_cpp_pipeline(pipeline_name='',
               },
               {
                 type: 'build',
-                source: 'godot-cpp/godot-headers-temp',
-                destination: 'godot-cpp',
-              },
-              {
-                type: 'build',
                 source: 'godot-cpp/bin',
                 destination: 'godot-cpp',
               },

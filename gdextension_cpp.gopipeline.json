@@ -82,11 +82,6 @@
                   },
                   {
                      "destination": "godot-cpp",
-                     "source": "godot-cpp/godot-headers-temp",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "godot-cpp",
                      "source": "godot-cpp/bin",
                      "type": "build"
                   }
@@ -128,11 +123,6 @@
                   {
                      "destination": "godot-cpp",
                      "source": "godot-cpp/gen",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "godot-cpp",
-                     "source": "godot-cpp/godot-headers-temp",
                      "type": "build"
                   },
                   {
