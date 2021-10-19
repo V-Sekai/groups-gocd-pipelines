@@ -109,7 +109,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -a godot-cpp/gen/include/godot_cpp/. godot-cpp/include/godot_cpp"
+                        "cp -a gen/include/godot_cpp/. include/godot_cpp"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -158,7 +158,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -a godot-cpp/gen/include/godot_cpp/. godot-cpp/include/godot_cpp"
+                        "cp -a gen/include/godot_cpp/. include/godot_cpp"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

@@ -707,7 +707,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'cp -a godot-cpp/gen/include/godot_cpp/. godot-cpp/include/godot_cpp',
+                  'cp -a gen/include/godot_cpp/. include/godot_cpp',
                 ],
                 command: '/bin/bash',
                 working_directory: 'godot-cpp',
