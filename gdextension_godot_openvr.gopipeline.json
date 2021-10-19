@@ -15,13 +15,13 @@
          "type": "dependency"
       },
       {
-         "branch": "2.0-dev",
+         "branch": "fix_controllers_4",
          "destination": "p",
          "ignore_for_scheduling": false,
          "name": "p",
          "shallow_clone": false,
          "type": "git",
-         "url": "https://github.com/GodotVR/godot_openvr.git"
+         "url": "https://github.com/BastiaanOlij/godot_openvr.git"
       }
    ],
    "name": "gdextension-godot-openvr",
