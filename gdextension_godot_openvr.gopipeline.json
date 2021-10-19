@@ -70,6 +70,15 @@
                   {
                      "arguments": [
                         "-c",
+                        "rm -f godot-cpp/godot-headers/.git && cp -a godot-cpp p"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
                         "python wrap_openvr.py"
                      ],
                      "command": "/bin/bash",
@@ -138,6 +147,15 @@
                      "source": "godot-cpp",
                      "stage": "godotCppStage",
                      "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "rm -f godot-cpp/godot-headers/.git && cp -a godot-cpp p"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
                   },
                   {
                      "arguments": [
