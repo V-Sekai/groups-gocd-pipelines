@@ -187,6 +187,69 @@ local groups_gdextension_plugins = {
         extra_commands: [],
       },
     },
+  }, godot_openxr: {
+    name: 'godot_openxr',
+    pipeline_name: 'gdextension-godot-openxr',
+    git_url: 'https://github.com/V-Sekai/godot_openxr.git',
+    git_branch: 'groups-4.0',
+    platforms: {
+      windows: {
+        artifacts: [
+          'demo/addons/godot-openxr/bin/win64/libgodot_openxr.dll',
+          'demo/addons/godot-openxr/bin/win64/openxr_api.dll',
+          'demo/addons/godot-openxr/bin/win64/openxr_api.dll.sig',
+        ],
+        output_artifacts: [
+          'libgodot_openxr.dll',
+        ],
+        debug_artifacts: [
+          'demo/addons/godot-openxr/bin/win64/libgodot_openxr.dbg.dll',
+          'demo/addons/godot-openxr/bin/win64/libgodot_openxr.pdb',
+          'demo/addons/godot-openxr/bin/win64/openxr_api.pdb',
+        ],
+        scons_arguments: '',
+        environment_variables: [],
+        prepare_commands: [
+          'rm -f demo/addons/godot-openxr/bin/win64/libgodot_openxr.dll',
+        ],
+        extra_commands: [
+          'cd demo/addons/godot-openxr/bin/win64 && mv libgodot_openxr.dll libgodot_openxr.dbg.dll && mingw-strip --strip-debug -o libgodot_openxr.dll libgodot_openxr.dbg.dll',
+        ],
+        //install_task: ["mv libGodotSpeech.dll g/addons/godot_speech/bin/libGodotSpeech.dll"],
+      },
+      linux: {
+        artifacts: [
+          'demo/addons/godot-openxr/bin/x11/libgodot_openxr.so',
+          'demo/addons/godot-openxr/bin/x11/libopenxr_api.so',
+        ],
+        output_artifacts: [
+          'libgodot_openxr.so',
+          'libopenxr_api.so',
+        ],
+        debug_artifacts: [
+          'demo/addons/godot-openxr/bin/x11/libgodot_openxr.dbg.so',
+        ],
+        scons_arguments: '',
+        environment_variables: [],
+        prepare_commands: [
+          'rm -f demo/addons/godot-openxr/bin/x11/libgodot_openxr.so',
+        ],
+        extra_commands: [
+          'cp -a openxr/bin/linux64/libopenxr_api.so demo/addons/godot-openxr/bin/x11/libopenxr_api.so',
+          'cp -a openxr/bin/linux64/libopenxr_api.so.dbg demo/addons/godot-openxr/bin/x11/libopenxr_api.so.dbg',
+          'cd demo/addons/godot-openxr/bin/x11 && mv libgodot_openxr.so libgodot_openxr.dbg.so && strip --strip-debug -o libgodot_openxr.so libgodot_openxr.dbg.so',
+        ],
+      },
+      osx: {
+        artifacts: [],
+        output_artifacts: [],
+        debug_artifacts: [],
+        scons_arguments: ' --version',
+        environment_variables: [],
+        prepare_commands: [],
+        extra_commands: [],
+      },
+    },
   },
 };
 
@@ -310,8 +373,8 @@ local stern_flowers_export_configurations = {
 local enabled_stern_flowers_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 local enabled_groups_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 
-local all_gdextension_plugins = [groups_gdextension_plugins[x] for x in ['godot_openvr']];
-local enabled_groups_gdextension_plugins = [groups_gdextension_plugins[x] for x in ['godot_openvr']];
+local all_gdextension_plugins = [groups_gdextension_plugins[x] for x in ['godot_openvr', 'godot_openxr']];
+local enabled_groups_gdextension_plugins = [groups_gdextension_plugins[x] for x in ['godot_openvr', 'godot_openxr']];
 
 
 local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');

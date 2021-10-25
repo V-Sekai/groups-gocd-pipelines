@@ -1,0 +1,230 @@
+{
+   "environment_variables": [
+      {
+         "name": "GODOT_STATUS",
+         "value": "gdextension.godot_openxr"
+      }
+   ],
+   "group": "gamma",
+   "label_template": "gdextension.godot_openxr.${gdextension-cpp_pipeline_dependency}.${COUNT}",
+   "materials": [
+      {
+         "name": "gdextension-cpp_pipeline_dependency",
+         "pipeline": "gdextension-cpp",
+         "stage": "godotCppStage",
+         "type": "dependency"
+      },
+      {
+         "branch": "groups-4.0",
+         "destination": "p",
+         "ignore_for_scheduling": false,
+         "name": "p",
+         "shallow_clone": false,
+         "type": "git",
+         "url": "https://github.com/V-Sekai/godot_openxr.git"
+      }
+   ],
+   "name": "gdextension-godot-openxr",
+   "stages": [
+      {
+         "jobs": [
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "p/demo/addons/godot-openxr/bin/win64/libgodot_openxr.dll",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "p/demo/addons/godot-openxr/bin/win64/openxr_api.dll",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "p/demo/addons/godot-openxr/bin/win64/openxr_api.dll.sig",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "debug",
+                     "source": "p/demo/addons/godot-openxr/bin/win64/libgodot_openxr.dbg.dll",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "debug",
+                     "source": "p/demo/addons/godot-openxr/bin/win64/libgodot_openxr.pdb",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "debug",
+                     "source": "p/demo/addons/godot-openxr/bin/win64/openxr_api.pdb",
+                     "type": "build"
+                  }
+               ],
+               "environment_variables": [ ],
+               "name": "windowsJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "job": "windowsJob",
+                     "pipeline": "gdextension-cpp",
+                     "source": "godot-cpp",
+                     "stage": "godotCppStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "godot-cpp",
+                     "job": "windowsJob",
+                     "pipeline": "gdextension-cpp",
+                     "source": "godot-headers",
+                     "stage": "godotCppStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a godot-cpp/. p/godot-cpp"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "rm -f demo/addons/godot-openxr/bin/win64/libgodot_openxr.dll"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=debug -j`nproc` use_lto=no deprecated=no use_mingw=yes use_llvm=yes use_lld=yes use_thinlto=yes LINKFLAGS=-Wl,-pdb= CCFLAGS='-g -gcodeview' debug_symbols=no"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cd demo/addons/godot-openxr/bin/win64 && mv libgodot_openxr.dll libgodot_openxr.dbg.dll && mingw-strip --strip-debug -o libgodot_openxr.dll libgodot_openxr.dbg.dll"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  }
+               ]
+            },
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "p/demo/addons/godot-openxr/bin/x11/libgodot_openxr.so",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "p/demo/addons/godot-openxr/bin/x11/libopenxr_api.so",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "debug",
+                     "source": "p/demo/addons/godot-openxr/bin/x11/libgodot_openxr.dbg.so",
+                     "type": "build"
+                  }
+               ],
+               "environment_variables": [ ],
+               "name": "linuxJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "job": "linuxJob",
+                     "pipeline": "gdextension-cpp",
+                     "source": "godot-cpp",
+                     "stage": "godotCppStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "godot-cpp",
+                     "job": "linuxJob",
+                     "pipeline": "gdextension-cpp",
+                     "source": "godot-headers",
+                     "stage": "godotCppStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a godot-cpp/. p/godot-cpp"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "rm -f demo/addons/godot-openxr/bin/x11/libgodot_openxr.so"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "scons werror=no platform=linux target=debug -j`nproc` use_lto=no deprecated=no use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a openxr/bin/linux64/libopenxr_api.so demo/addons/godot-openxr/bin/x11/libopenxr_api.so"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a openxr/bin/linux64/libopenxr_api.so.dbg demo/addons/godot-openxr/bin/x11/libopenxr_api.so.dbg"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cd demo/addons/godot-openxr/bin/x11 && mv libgodot_openxr.so libgodot_openxr.dbg.so && strip --strip-debug -o libgodot_openxr.so libgodot_openxr.dbg.so"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  }
+               ]
+            }
+         ],
+         "name": "gdextensionBuildStage"
+      }
+   ]
+}
