@@ -413,6 +413,8 @@ local enabled_groups_gdnative_plugins = [groups_gdnative_plugins[x] for x in ['g
 
 local enabled_groups_export_platforms = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop', 'linuxServer', 'web']];
 
+local enabled_conceptgraph_export_platforms = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop']];
+
 local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');
 
 
@@ -1491,10 +1493,12 @@ local simple_docker_job(pipeline_name='',
     ],
   };
 // Groups
+local godot_template_protongraph_editor = 'godot-template-protongraph-editor';
 local godot_template_groups_editor_web = 'godot-template-groups-web';
 local godot_template_groups_editor = 'godot-template-groups';
 local godot_cpp_pipeline = 'gdnative-cpp';
 local godot_template_groups_export = 'production-groups-release-export';
+local godot_template_protongraph_export = 'production-protongraph-release-export';
 local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
 local docker_video_decoder_pipeline = 'docker-video-decoder';
@@ -1522,6 +1526,29 @@ local godot_template = [godot_template_groups_editor_web] + [godot_template_grou
     godot_modules_git='https://github.com/V-Sekai/godot-modules-groups.git',
     godot_modules_branch='groups-web',
   )),
+  'godot_proton_graph_editor.gopipeline.json'
+  : std.prune(godot_pipeline(
+    pipeline_name=godot_template_protongraph_editor,
+    godot_status='protongraph',
+    godot_git='https://github.com/V-Sekai/godot.git',
+    godot_branch='godot-3.4',
+    gocd_group='beta',
+  )) + {
+    'godot_groups_export.gopipeline.json'
+    : std.prune(
+      godot_tools_pipeline_export(
+        pipeline_name=godot_template_protongraph_export,
+        pipeline_dependency=godot_template_protongraph_editor,
+        groups_git='https://github.com/fire/protongraph.git',
+        groups_branch='groups-3.x',
+        itchio_login='ifiregames',
+        gocd_group='beta',
+        godot_status='protongraph',
+        gocd_project_folder='beta',
+        enabled_export_platforms=enabled_conceptgraph_export_platforms,
+      )
+    ),
+  },
   // GROUPS
   'godot_groups_editor.gopipeline.json'
   : std.prune(godot_pipeline(
