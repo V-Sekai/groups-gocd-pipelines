@@ -1578,11 +1578,18 @@ local godot_gdnative_pipelines =
   [plugin_info.pipeline_name for plugin_info in all_gdnative_plugins];
 
 
-local godot_template = [godot_template_groups_editor, godot_template_protongraph_editor, godot_template_protongraph_export] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
+local godot_template = [godot_template_groups_editor] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
+local itch_fire_template = [godot_template_protongraph_editor, godot_template_protongraph_export];
 {
   'env.development.goenvironment.json': {
     name: 'development',
     pipelines: godot_template,
+    environment_variables:
+      [],
+  },
+  'env.fire-3_x.goenvironment.json': {
+    name: 'itch-fire-3-4',
+    pipelines: itch_fire_template,
     environment_variables:
       [],
   },
