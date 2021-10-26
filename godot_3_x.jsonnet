@@ -1494,7 +1494,6 @@ local simple_docker_job(pipeline_name='',
   };
 // Groups
 local godot_template_protongraph_editor = 'godot-template-protongraph-editor';
-local godot_template_groups_editor_web = 'godot-template-groups-web';
 local godot_template_groups_editor = 'godot-template-groups';
 local godot_cpp_pipeline = 'gdnative-cpp';
 local godot_template_groups_export = 'production-groups-release-export';
@@ -1507,7 +1506,7 @@ local godot_gdnative_pipelines =
   [plugin_info.pipeline_name for plugin_info in all_gdnative_plugins];
 
 
-local godot_template = [godot_template_protongraph_editor] + [godot_template_protongraph_export] + [godot_template_groups_editor_web] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
+local godot_template = [godot_template_protongraph_editor] + [godot_template_protongraph_export] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdnative_pipelines + [godot_template_groups_export, docker_pipeline, docker_uro_pipeline, docker_video_decoder_pipeline];
 {
   'env.development.goenvironment.json': {
     name: 'development',
