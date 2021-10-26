@@ -1526,7 +1526,7 @@ local godot_template = [godot_template_protongraph_editor, godot_template_proton
     godot_modules_git='https://github.com/V-Sekai/godot-modules-groups.git',
     godot_modules_branch='groups-web',
   )),
-  'godot_proton_graph_editor.gopipeline.json'
+  'godot_protongraph_editor.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_protongraph_editor,
     godot_status='protongraph',
@@ -1534,7 +1534,7 @@ local godot_template = [godot_template_protongraph_editor, godot_template_proton
     godot_branch='godot-3.4',
     gocd_group='beta',
   )) + {
-    'godot_groups_export.gopipeline.json'
+    'godot_protongraph_export.gopipeline.json'
     : std.prune(
       godot_tools_pipeline_export(
         pipeline_name=godot_template_protongraph_export,

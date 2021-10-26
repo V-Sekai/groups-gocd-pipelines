@@ -5,7 +5,7 @@
          "value": "protongraph"
       }
    ],
-   "godot_groups_export.gopipeline.json": {
+   "godot_protongraph_export.gopipeline.json": {
       "environment_variables": [
          {
             "name": "GODOT_STATUS",
