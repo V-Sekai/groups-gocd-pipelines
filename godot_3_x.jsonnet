@@ -1515,17 +1515,6 @@ local godot_template = [godot_template_protongraph_editor] + [godot_template_pro
     environment_variables:
       [],
   },
-  // GROUPS-WEB
-  'godot_groups_editor_web.gopipeline.json'
-  : std.prune(godot_pipeline(
-    pipeline_name=godot_template_groups_editor_web,
-    godot_status='groups-web',
-    godot_git='https://github.com/V-Sekai/godot.git',
-    godot_branch='groups-web',
-    gocd_group='beta',
-    godot_modules_git='https://github.com/V-Sekai/godot-modules-groups.git',
-    godot_modules_branch='groups-web',
-  )),
   'godot_protongraph_editor.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_protongraph_editor,
