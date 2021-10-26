@@ -407,13 +407,85 @@ local groups_export_configurations = {
   },
 };
 
+
+// TODO: Use std.escapeStringBash in case export configurations wish to output executables with spaces.
+local protongraph_export_configurations = {
+  windows: {
+    export_name: 'windows',
+    platform_name: 'windows',
+    gdnative_platform: 'windows',
+    export_configuration: 'Windows Desktop',
+    export_directory: 'export_windows',
+    export_executable: 'protongraph_windows.exe',
+    itchio_out: 'windows-master',
+    prepare_commands: [
+    ],
+    extra_commands: [
+    ],
+  },
+  linuxDesktop: {
+    export_name: 'linuxDesktop',
+    platform_name: 'linux',
+    gdnative_platform: 'linux',
+    export_configuration: 'Linux/X11',
+    export_directory: 'export_linux_x11',
+    export_executable: 'protograph_linux_x11',
+    itchio_out: 'x11-master',
+    prepare_commands: [
+    ],
+    extra_commands: [
+    ],
+  },
+  linuxServer: {
+    export_name: 'linuxServer',
+    platform_name: 'server',
+    gdnative_platform: 'linux',
+    export_configuration: 'Linux/Server',
+    export_directory: 'export_linux_server',
+    export_executable: 'protongraph_linux_server',
+    itchio_out: 'server-master',
+    prepare_commands: [
+    ],
+    extra_commands: [
+    ],
+  },
+  macos: {
+    export_name: 'macos',
+    platform_name: 'macos',
+    gdnative_platform: 'osx',
+    export_configuration: 'Mac OSX',
+    export_directory: 'export_macos',
+    export_executable: 'protongraph_macos.zip',
+    itchio_out: 'macos',
+    prepare_commands: [
+    ],
+    extra_commands: [
+      // https://itch.io/t/303643/cant-get-a-mac-app-to-run-after-butler-push-resolved
+      'cd export_macos && unzip protograph_macos.zip && rm protograph_macos.zip',
+    ],
+  },
+  web: {
+    export_name: 'web',
+    platform_name: 'web',
+    gdnative_platform: 'linux',
+    export_configuration: 'HTML5',
+    export_directory: 'export_web',
+    export_executable: 'protongraph_web.html',
+    itchio_out: null,
+    prepare_commands: [
+    ],
+    extra_commands: [
+    ],
+  },
+};
+
 local all_gdnative_plugins = [groups_gdnative_plugins[x] for x in ['godot_speech', 'godot_openvr', 'godot_gltf']];
 
 local enabled_groups_gdnative_plugins = [groups_gdnative_plugins[x] for x in ['godot_speech', 'godot_openvr']];
 
 local enabled_groups_export_platforms = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop', 'linuxServer', 'web']];
 
-local enabled_conceptgraph_export_platforms = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop']];
+local enabled_protongraph_export_platforms = [protongraph_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 
 local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');
 
@@ -1563,7 +1635,7 @@ local godot_template = [godot_template_groups_editor, godot_template_protongraph
       gocd_group='beta',
       godot_status='protongraph',
       gocd_project_folder='beta',
-      enabled_export_platforms=enabled_conceptgraph_export_platforms,
+      enabled_export_platforms=enabled_protongraph_export_platforms,
     )
   ),
 
