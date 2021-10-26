@@ -1521,22 +1521,7 @@ local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godo
     godot_git='https://github.com/V-Sekai/godot.git',
     godot_branch='godot-3.4',
     gocd_group='beta',
-  )) + {
-    'godot_protongraph_export.gopipeline.json'
-    : std.prune(
-      godot_tools_pipeline_export(
-        pipeline_name=godot_template_protongraph_export,
-        pipeline_dependency=godot_template_protongraph_editor,
-        groups_git='https://github.com/fire/protongraph.git',
-        groups_branch='groups-3.x',
-        itchio_login='ifiregames/protongraph',
-        gocd_group='beta',
-        godot_status='protongraph',
-        gocd_project_folder='beta',
-        enabled_export_platforms=enabled_conceptgraph_export_platforms,
-      )
-    ),
-  },
+  )),
   // GROUPS
   'godot_groups_editor.gopipeline.json'
   : std.prune(godot_pipeline(
@@ -1567,6 +1552,21 @@ local godot_template = [godot_template_groups_editor, godot_cpp_pipeline] + godo
   )
   for library_info in all_gdnative_plugins
 } + {
+  'godot_protongraph_export.gopipeline.json'
+  : std.prune(
+    godot_tools_pipeline_export(
+      pipeline_name=godot_template_protongraph_export,
+      pipeline_dependency=godot_template_protongraph_editor,
+      groups_git='https://github.com/fire/protongraph.git',
+      groups_branch='groups-3.x',
+      itchio_login='ifiregames/protongraph',
+      gocd_group='beta',
+      godot_status='protongraph',
+      gocd_project_folder='beta',
+      enabled_export_platforms=enabled_conceptgraph_export_platforms,
+    )
+  ),
+
   'godot_groups_export.gopipeline.json'
   : std.prune(
     godot_tools_pipeline_export(
