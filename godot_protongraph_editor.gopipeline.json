@@ -5,7 +5,7 @@
          "value": "protongraph"
       }
    ],
-   "group": "beta",
+   "group": "gamma",
    "label_template": "protongraph.${godot_sandbox[:8]}.${COUNT}",
    "materials": [
       {
