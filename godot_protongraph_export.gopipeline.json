@@ -5,7 +5,7 @@
          "value": "protongraph"
       }
    ],
-   "group": "gamma",
+   "group": "delta",
    "label_template": "protongraph.${groups_git_sandbox[:8]}.${godot-template-protongraph-editor_pipeline_dependency}.${COUNT}",
    "materials": [
       {

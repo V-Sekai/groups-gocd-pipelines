@@ -1592,7 +1592,7 @@ local godot_template = [godot_template_groups_editor, godot_template_protongraph
     godot_status='protongraph',
     godot_git='https://github.com/V-Sekai/godot.git',
     godot_branch='godot-3.4',
-    gocd_group='gamma',
+    gocd_group='delta',
   )),
   // GROUPS
   'godot_groups_editor.gopipeline.json'
@@ -1632,7 +1632,7 @@ local godot_template = [godot_template_groups_editor, godot_template_protongraph
       groups_git='https://github.com/fire/protongraph.git',
       groups_branch='groups-3.x',
       itchio_login='ifiregames/protongraph',
-      gocd_group='gamma',
+      gocd_group='delta',
       godot_status='protongraph',
       gocd_project_folder='beta',
       enabled_export_platforms=enabled_protongraph_export_platforms,
