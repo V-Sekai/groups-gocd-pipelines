@@ -1134,7 +1134,7 @@ local godot_editor_export(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'butler push ' + export_info.export_directory + ' $ITCHIO_LOGIN:' + export_info.itchio_out + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+                  'butler push ' + export_info.export_directory + ' ' + itchio_login + ':' + export_info.itchio_out + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1343,7 +1343,7 @@ local godot_tools_pipeline_export(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'butler push ' + export_info.export_directory + ' $ITCHIO_LOGIN:' + export_info.itchio_out + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+                  'butler push ' + export_info.export_directory + ' ' + itchio_login + ':' + export_info.itchio_out + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1645,6 +1645,7 @@ local godot_template = [godot_template_groups_editor, godot_template_protongraph
       pipeline_name=godot_template_groups_export,
       pipeline_dependency=godot_template_groups_editor,
       gdnative_plugins=enabled_groups_gdnative_plugins,
+      itchio_login='saracenone/v-sekai',
       groups_git='git@gitlab.com:SaracenOne/groups.git',
       groups_branch='master',
       gocd_group='beta',

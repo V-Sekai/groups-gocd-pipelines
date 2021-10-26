@@ -542,7 +542,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "butler push export_windows $ITCHIO_LOGIN:windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
+                        "butler push export_windows saracenone/v-sekai:windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -570,7 +570,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "butler push export_linux_x11 $ITCHIO_LOGIN:x11-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
+                        "butler push export_linux_x11 saracenone/v-sekai:x11-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -598,7 +598,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "butler push export_linux_server $ITCHIO_LOGIN:server-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
+                        "butler push export_linux_server saracenone/v-sekai:server-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
