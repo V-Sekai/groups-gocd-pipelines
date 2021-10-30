@@ -84,7 +84,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_windows && mkdir -p export_windows && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir export_windows && chmod +x godot.linuxbsd.opt.tools.64.llvm && ./godot.linuxbsd.opt.tools.64.llvm --headless --export \"Windows Desktop\" export_windows/godot.windows.opt.tools.64.exe --path g -v"
+                        "rm -rf export_windows && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir export_windows && chmod +x godot.linuxbsd.opt.tools.64.llvm && ./godot.linuxbsd.opt.tools.64.llvm --headless --export \"Windows Desktop\" export_windows/godot.windows.opt.tools.64.exe --path g -v"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -147,7 +147,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_linuxbsd && mkdir -p export_linuxbsd && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir export_linuxbsd && chmod +x godot.linuxbsd.opt.tools.64.llvm && ./godot.linuxbsd.opt.tools.64.llvm --headless --export \"Linux/X11\" export_linuxbsd/godot.linuxbsd.opt.tools.64.llvm --path g -v"
+                        "rm -rf export_linuxbsd && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir export_linuxbsd && chmod +x godot.linuxbsd.opt.tools.64.llvm && ./godot.linuxbsd.opt.tools.64.llvm --headless --export \"Linux/X11\" export_linuxbsd/godot.linuxbsd.opt.tools.64.llvm --path g -v"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
