@@ -84,7 +84,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_windows && mkdir export_windows && chmod +x godot_server.x11.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64.llvm --export \"Windows Desktop\" export_windows/protongraph_windows.exe --path g -v"
+                        "rm -rf export_windows && mkdir export_windows && chmod +x godot_server.x11.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64.llvm --export \"Windows Desktop\" \"`pwd`\"/export_windows/protongraph_windows.exe --path g -v"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -147,7 +147,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_linux_x11 && mkdir export_linux_x11 && chmod +x godot_server.x11.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64.llvm --export \"Linux/X11\" export_linux_x11/protograph_linux_x11 --path g -v"
+                        "rm -rf export_linux_x11 && mkdir export_linux_x11 && chmod +x godot_server.x11.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64.llvm --export \"Linux/X11\" \"`pwd`\"/export_linux_x11/protograph_linux_x11 --path g -v"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

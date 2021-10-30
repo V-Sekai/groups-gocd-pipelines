@@ -166,7 +166,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_windows && mkdir export_windows && chmod +x godot_server.x11.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64.llvm --export \"Windows Desktop\" export_windows/v_sekai_windows.exe --path g -v"
+                        "rm -rf export_windows && mkdir export_windows && chmod +x godot_server.x11.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64.llvm --export \"Windows Desktop\" \"`pwd`\"/export_windows/v_sekai_windows.exe --path g -v"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -295,7 +295,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_linux_x11 && mkdir export_linux_x11 && chmod +x godot_server.x11.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64.llvm --export \"Linux/X11\" export_linux_x11/v_sekai_linux_x11 --path g -v"
+                        "rm -rf export_linux_x11 && mkdir export_linux_x11 && chmod +x godot_server.x11.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64.llvm --export \"Linux/X11\" \"`pwd`\"/export_linux_x11/v_sekai_linux_x11 --path g -v"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -406,7 +406,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_linux_server && mkdir export_linux_server && chmod +x godot_server.x11.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64.llvm --export \"Linux/Server\" export_linux_server/v_sekai_linux_server --path g -v"
+                        "rm -rf export_linux_server && mkdir export_linux_server && chmod +x godot_server.x11.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64.llvm --export \"Linux/Server\" \"`pwd`\"/export_linux_server/v_sekai_linux_server --path g -v"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -508,7 +508,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_web && mkdir export_web && chmod +x godot_server.x11.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64.llvm --export \"HTML5\" export_web/v_sekai_web.html --path g -v"
+                        "rm -rf export_web && mkdir export_web && chmod +x godot_server.x11.opt.tools.64.llvm && HOME=\"`pwd`\" ./godot_server.x11.opt.tools.64.llvm --export \"HTML5\" \"`pwd`\"/export_web/v_sekai_web.html --path g -v"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
