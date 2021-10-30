@@ -1163,7 +1163,7 @@ local godot_tools_pipeline_export(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'rm -rf ' + export_info.export_directory + ' && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.opt.tools.64.llvm' + ' && ./godot.linuxbsd.opt.tools.64.llvm --headless --export "' + export_info.export_configuration + '" "`pwd`"/' + export_info.export_directory + '/' + export_info.export_executable + ' --path g -v',
+                  'rm -rf ' + export_info.export_directory + ' && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.opt.tools.64.llvm' + ' && ./godot.linuxbsd.opt.tools.64.llvm --headless --export "' + export_info.export_configuration + '" `pwd`/' + export_info.export_directory + '/' + export_info.export_executable + ' --path g -v',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
