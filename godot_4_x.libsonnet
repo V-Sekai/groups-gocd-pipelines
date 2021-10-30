@@ -187,7 +187,8 @@ local groups_gdextension_plugins = {
         extra_commands: [],
       },
     },
-  }, godot_openxr: {
+  },
+  godot_openxr: {
     name: 'godot_openxr',
     pipeline_name: 'gdextension-godot-openxr',
     git_url: 'https://github.com/V-Sekai/godot_openxr.git',
@@ -733,7 +734,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
                 command: '/bin/bash',
                 working_directory: '',
               },
-            ],            
+            ],
           },
         ],
       },
@@ -797,12 +798,12 @@ local generate_godot_cpp_pipeline(pipeline_name='',
     ],
   };
 
-  
+
 local generate_godot_gdextension_pipeline(pipeline_name='',
-                                       pipeline_dependency='',
-                                       gocd_group='',
-                                       godot_status='',
-                                       library_info=null) =
+                                          pipeline_dependency='',
+                                          gocd_group='',
+                                          godot_status='',
+                                          library_info=null) =
   {
     name: pipeline_name,
     group: gocd_group,
@@ -1115,19 +1116,19 @@ local godot_tools_pipeline_export(
                               for artifact in library_info.platforms[export_info.gdextension_platform].output_artifacts
                             ],
                             gdextension_plugins) + std.flatMap(function(library_info) [
-                                                              if std.endsWith(artifact, '.dll') && artifact != 'openvr_api.dll' then {
-                                                                type: 'fetch',
-                                                                artifact_origin: 'gocd',
-                                                                pipeline: library_info.pipeline_name,
-                                                                stage: 'gdextensionBuildStage',
-                                                                job: export_info.gdextension_platform + 'Job',
-                                                                is_source_a_file: true,
-                                                                source: 'debug/' + exe_to_pdb_path(artifact),
-                                                                destination: library_info.name,
-                                                              } else null
-                                                              for artifact in library_info.platforms[export_info.gdextension_platform].output_artifacts
-                                                            ],
-                                                            gdextension_plugins) + [
+                                                                 if std.endsWith(artifact, '.dll') && artifact != 'openvr_api.dll' then {
+                                                                   type: 'fetch',
+                                                                   artifact_origin: 'gocd',
+                                                                   pipeline: library_info.pipeline_name,
+                                                                   stage: 'gdextensionBuildStage',
+                                                                   job: export_info.gdextension_platform + 'Job',
+                                                                   is_source_a_file: true,
+                                                                   source: 'debug/' + exe_to_pdb_path(artifact),
+                                                                   destination: library_info.name,
+                                                                 } else null
+                                                                 for artifact in library_info.platforms[export_info.gdextension_platform].output_artifacts
+                                                               ],
+                                                               gdextension_plugins) + [
               {
                 type: 'exec',
                 arguments: [
@@ -1163,7 +1164,7 @@ local godot_tools_pipeline_export(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'rm -rf ' + export_info.export_directory + ' && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.opt.tools.64.llvm' + ' && ./godot.linuxbsd.opt.tools.64.llvm --headless --export "' + export_info.export_configuration + '" ' + export_info.export_directory + '/' + export_info.export_executable + ' --path g -v',
+                  'rm -rf ' + export_info.export_directory + ' && mkdir -p ' + export_info.export_directory + ' && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.opt.tools.64.llvm' + ' && ./godot.linuxbsd.opt.tools.64.llvm --headless --export "' + export_info.export_configuration + '" ' + export_info.export_directory + '/' + export_info.export_executable + ' --path g -v',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
