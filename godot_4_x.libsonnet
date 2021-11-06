@@ -40,7 +40,7 @@ local platform_info_dict = {
   web: {
     platform_name: 'web',
     scons_env: 'source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ',
-    intermediate_godot_binary: 'godot.javascript.opt.debug.zip',
+    intermediate_godot_binary: 'godot.javascript.opt.debug.threads.zip',
     editor_godot_binary: 'webassembly_release.zip',
     template_debug_binary: 'webassembly_debug.zip',
     template_release_binary: 'webassembly_release.zip',

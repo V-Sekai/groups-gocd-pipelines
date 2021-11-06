@@ -137,7 +137,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -p g/bin/godot.javascript.opt.debug.zip g/bin/webassembly_release.zip"
+                        "cp -p g/bin/godot.javascript.opt.debug.threads.zip g/bin/webassembly_release.zip"
                      ],
                      "command": "/bin/bash",
                      "type": "exec"
@@ -320,7 +320,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.javascript.opt.debug.zip bin/webassembly_debug.zip && cp bin/godot.javascript.opt.debug.zip bin/webassembly_release.zip"
+                        "cp bin/godot.javascript.opt.debug.threads.zip bin/webassembly_debug.zip && cp bin/godot.javascript.opt.debug.threads.zip bin/webassembly_release.zip"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
