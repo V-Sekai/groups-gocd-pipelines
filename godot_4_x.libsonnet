@@ -41,7 +41,7 @@ local platform_info_dict = {
     platform_name: 'web',
     scons_env: 'source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ',
     intermediate_godot_binary: 'godot.javascript.opt.debug.zip',
-    editor_godot_binary: null,
+    editor_godot_binary: 'webassembly_release.zip',
     template_debug_binary: 'webassembly_debug.zip',
     template_release_binary: 'webassembly_release.zip',
     strip_command: null,  // unknown if release should be built separately.
@@ -112,10 +112,13 @@ local platform_info_dict = {
 };
 
 local enabled_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
+local enabled_groups_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'web']];
 
 local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
+local enabled_groups_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'web']];
 
 local enabled_gdextension_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
+local enabled_groups_gdextension_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
 
 
 local groups_gdextension_plugins = {
@@ -371,11 +374,9 @@ local stern_flowers_export_configurations = {
 
 
 local enabled_stern_flowers_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
-local enabled_groups_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
+local enabled_groups_export_platforms = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop', 'web']];
 
 local all_gdextension_plugins = [groups_gdextension_plugins[x] for x in ['godot_openvr']];
-local enabled_groups_gdextension_plugins = [groups_gdextension_plugins[x] for x in ['godot_openvr']];
-
 
 local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');
 
@@ -385,7 +386,9 @@ local godot_pipeline(pipeline_name='',
                      godot_branch='',
                      gocd_group='',
                      godot_modules_git='',
-                     godot_modules_branch='') = {
+                     godot_modules_branch='',
+                     godot_engine_platforms=enabled_engine_platforms,
+                     godot_template_platforms=enabled_template_platforms) = {
   name: pipeline_name,
   group: gocd_group,
   label_template: godot_status + '.${godot_sandbox[:8]}.${COUNT}',
@@ -469,7 +472,7 @@ local godot_pipeline(pipeline_name='',
             else null,
           ],
         }
-        for platform_info in enabled_engine_platforms
+        for platform_info in godot_engine_platforms
       ],
     },
     {
@@ -569,7 +572,7 @@ local godot_pipeline(pipeline_name='',
             for extra_command in platform_info.template_extra_commands
           ],
         }
-        for platform_info in enabled_template_platforms
+        for platform_info in godot_template_platforms
       ],
     },
     {
@@ -605,7 +608,7 @@ local godot_pipeline(pipeline_name='',
               destination: 'templates',
               pipeline: pipeline_name,
               stage: 'templateStage',
-              job: enabled_template_platforms[0].platform_name + 'Job',
+              job: godot_template_platforms[0].platform_name + 'Job',
             },
             {
               type: 'fetch',
@@ -632,7 +635,7 @@ local godot_pipeline(pipeline_name='',
               platform_info.template_debug_binary,
               platform_info.template_release_binary,
             ]
-          ], enabled_template_platforms) + [
+          ], godot_template_platforms) + [
             {
               type: 'exec',
               arguments: [
@@ -802,7 +805,8 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                                        pipeline_dependency='',
                                        gocd_group='',
                                        godot_status='',
-                                       library_info=null) =
+                                       library_info=null,
+                                       godot_gdextension_platforms=enabled_gdextension_platforms) =
   {
     name: pipeline_name,
     group: gocd_group,
@@ -918,7 +922,7 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
             ] + [
             ],
           }
-          for platform_info in enabled_gdextension_platforms
+          for platform_info in godot_gdextension_platforms
           if std.objectHas(library_info.platforms, platform_info.gdextension_platform) && std.length(library_info.platforms[platform_info.gdextension_platform].artifacts) + std.length(library_info.platforms[platform_info.gdextension_platform].debug_artifacts) > 0
         ],
       },
@@ -1271,6 +1275,8 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
     gocd_group='gamma',
     godot_modules_git='https://github.com/V-Sekai/godot-modules-groups.git',
     godot_modules_branch='groups-modules-4.x',
+    godot_engine_platforms=enabled_groups_engine_platforms,
+    godot_template_platforms=enabled_groups_template_platforms
   )),
   'gdextension_cpp.gopipeline.json'
   : std.prune(
@@ -1288,6 +1294,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
     gocd_group='gamma',
     godot_status='gdextension.' + library_info.name,
     library_info=library_info,
+    godot_gdextension_platforms=enabled_groups_gdextension_platforms,
   )
   for library_info in all_gdextension_plugins
 } + {
@@ -1314,7 +1321,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       gocd_group='gamma',
       godot_status='groups-4.0',
       gocd_project_folder='groups',
-      enabled_export_platforms=enabled_groups_export_platforms,
+      enabled_export_platforms=enabled_stern_flowers_export_platforms,
     )
   ),
 } + {
@@ -1329,7 +1336,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       gocd_group='gamma',
       godot_status='hop-dance-0.1',
       gocd_project_folder='hop_dance',
-      enabled_export_platforms=enabled_groups_export_platforms,
+      enabled_export_platforms=enabled_stern_flowers_export_platforms,
     )
   ),
 } + {
