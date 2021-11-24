@@ -1325,21 +1325,6 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
     )
   ),
 } + {
-  'godot_hop_dance_export.gopipeline.json'
-  : std.prune(
-    godot_tools_pipeline_export(
-      pipeline_name=godot_template_hop_dance_export,
-      pipeline_dependency=godot_template_groups_editor,
-      itchio_login='ifiregames/hop-dance',
-      project_git='https://github.com/V-Sekai/godot-hop-dance.git',
-      project_branch='main',
-      gocd_group='gamma',
-      godot_status='hop-dance-0.1',
-      gocd_project_folder='hop_dance',
-      enabled_export_platforms=enabled_stern_flowers_export_platforms,
-    )
-  ),
-} + {
   'godot_stern_flowers_editor_export.gopipeline.json'
   : std.prune(
     godot_editor_export(
