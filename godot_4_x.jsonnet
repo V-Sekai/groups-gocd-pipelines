@@ -4,7 +4,7 @@ local platform_info_dict = {
   windows: {
     platform_name: 'windows',
     scons_env: 'PATH=/opt/llvm-mingw/bin:$PATH ',
-    intermediate_godot_binary: 'godot.windows.double..opt.tools.64.exe',
+    intermediate_godot_binary: 'godot.windows.double.opt.tools.64.exe',
     editor_godot_binary: 'godot.windows.double.opt.tools.64.exe',
     template_debug_binary: 'windows_64_debug.exe',
     template_release_binary: 'windows_64_release.exe',

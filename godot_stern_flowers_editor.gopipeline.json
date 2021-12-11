@@ -57,14 +57,6 @@
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp -p g/bin/godot.windows.double..opt.tools.64.exe g/bin/godot.windows.double.opt.tools.64.exe"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec"
                   }
                ]
             },
@@ -141,18 +133,19 @@
                      "working_directory": "g"
                   },
                   {
-                     "arguments": [
-                        "-c",
-                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=release_debug -j`nproc` use_lto=no deprecated=no float=64 use_mingw=yes use_llvm=yes use_thinlto=yes LINKFLAGS=-Wl,-pdb= CCFLAGS='-g -gcodeview' debug_symbols=no"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
+                     "artifact_origin": "gocd",
+                     "destination": "g/bin/",
+                     "is_source_a_file": true,
+                     "job": "windowsJob",
+                     "pipeline": "godot-template-stern-flowers-4-x",
+                     "source": "godot.windows.double.opt.tools.64.exe",
+                     "stage": "defaultStage",
+                     "type": "fetch"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.windows.double..opt.tools.64.exe bin/windows_64_debug.exe && cp bin/godot.windows.double..opt.tools.64.exe bin/windows_64_release.exe && mingw-strip --strip-debug bin/windows_64_release.exe"
+                        "cp bin/godot.windows.double.opt.tools.64.exe bin/windows_64_debug.exe && cp bin/godot.windows.double.opt.tools.64.exe bin/windows_64_release.exe && mingw-strip --strip-debug bin/windows_64_release.exe"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
