@@ -38,7 +38,7 @@
                "tasks": [
                   {
                      "artifact_origin": "gocd",
-                     "destination": "g/export_linuxbsd",
+                     "destination": "g/groups_server",
                      "is_source_a_file": false,
                      "job": "linuxDesktopJob",
                      "pipeline": "groups-4-x-export",
@@ -49,7 +49,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "ls \"g/export_linuxbsd/export_linuxbsd\""
+                        "ls \"g/groups_server/export_linuxbsd\""
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -58,7 +58,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "chmod 01777 \"g/export_linuxbsd\""
+                        "chmod 01777 \"g/groups_server\""
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -67,7 +67,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "chmod a+x g/\"export_linuxbsd/v_sekai_linuxbsd\""
+                        "chmod a+x g/\"groups_server/v_sekai_linuxbsd\""
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -76,7 +76,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "ls \"g/export_linuxbsd/v_sekai_linuxbsd\""
+                        "ls \"g/groups_server/v_sekai_linuxbsd\""
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -85,7 +85,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "docker build -t groupsinfra/groups-server:$GO_PIPELINE_LABEL --build-arg SERVER_EXPORT=\"export_linuxbsd\" --build-arg GODOT_REVISION=\"master\" --build-arg USER=1234 --build-arg HOME=/server --build-arg GROUPS_REVISION=\"$GO_PIPELINE_LABEL\" g/\"export_linuxbsd\""
+                        "docker build -t groupsinfra/groups-server:$GO_PIPELINE_LABEL --build-arg SERVER_EXPORT=\"export_linuxbsd\" --build-arg GODOT_REVISION=\"master\" --build-arg USER=1234 --build-arg HOME=/server --build-arg GROUPS_REVISION=\"$GO_PIPELINE_LABEL\" g/\"groups_server\""
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
