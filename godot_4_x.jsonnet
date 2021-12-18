@@ -1306,7 +1306,7 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'chmod 01777 "g/' + server_export_info.export_directory + '"'
+                  'chmod 01777 "g/' + docker_groups_dir + '"'
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1315,7 +1315,16 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'chmod a+x g/"' + server_export_info.export_directory + '/' + server_export_info.export_executable + '"'
+                  'chmod a+x g/"' + docker_groups_dir + '/' + server_export_info.export_executable + '"'
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'ls "g/' + docker_groups_dir + '/' + server_export_info.export_executable + '"'
                 ],
                 command: '/bin/bash',
                 working_directory: '',
