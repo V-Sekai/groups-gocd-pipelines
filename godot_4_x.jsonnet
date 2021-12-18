@@ -1394,7 +1394,7 @@ local godot_template_stern_flowers_export = 'stern-flowers-editor-4-x';
 local godot_gdextension_pipelines =
   [plugin_info.pipeline_name for plugin_info in all_gdextension_plugins];
 
-local itch_fire_template = [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdextension_pipelines + [godot_template_groups_export] + [godot_template_groups];
+local itch_fire_template = [docker_pipeline, docker_uro_pipeline] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdextension_pipelines + [godot_template_groups_export] + [godot_template_groups];
 local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [godot_template_stern_flowers_export];
 
 {
