@@ -32,7 +32,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "set -x; DOCKER_IMAGE=\"$gocd-agent-centos-8-groups:$GO_PIPELINE_LABEL\" ; docker build -t \"$gocd-agent-centos-8-groups\" -t \"$DOCKER_IMAGE\" g/\"gocd-agent-centos-8-groups\" && docker push \"$DOCKER_IMAGE\" && docker push \"$gocd-agent-centos-8-groups\" && echo \"$DOCKER_IMAGE\" > docker_image.txt"
+                        "set -x; DOCKER_IMAGE=\"gocd-agent-centos-8-groups:$GO_PIPELINE_LABEL\" ; docker build -t \"gocd-agent-centos-8-groups\" -t \"$DOCKER_IMAGE\" g/\"gocd-agent-centos-8-groups\" && docker push \"$DOCKER_IMAGE\" && docker push \"$gocd-agent-centos-8-groups\" && echo \"$DOCKER_IMAGE\" > docker_image.txt"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
