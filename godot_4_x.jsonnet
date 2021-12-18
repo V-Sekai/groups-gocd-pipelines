@@ -1237,6 +1237,7 @@ local build_docker_server(
   docker_groups_git='',
   docker_groups_branch='',
   docker_groups_dir='',
+  docker_repo_groups_server='',
   server_export_info={},
       ) =
   {
@@ -1296,10 +1297,10 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'set -x; DOCKER_IMAGE="$DOCKER_REPO_GROUPS_SERVER:$GO_PIPELINE_LABEL" ' +
+                  'set -x; DOCKER_IMAGE="' + docker_repo_groups_server + ':$GO_PIPELINE_LABEL" ' +
                   '; chmod 01777 g/"' + docker_groups_dir + '"/' + groups_export_configurations.linuxDesktop.export_directory +
                   '; chmod a+x g/"' + docker_groups_dir + '"/' + groups_export_configurations.linuxDesktop.export_directory + '/' + groups_export_configurations.linuxDesktop.export_executable +
-                  '; docker build -t "$DOCKER_REPO_GROUPS_SERVER" -t "$DOCKER_IMAGE"' +
+                  '; docker build -t "' + docker_repo_groups_server + '" -t "$DOCKER_IMAGE"' +
                   ' --build-arg SERVER_EXPORT="' + server_export_info.export_directory + '"' +
                   ' --build-arg GODOT_REVISION="master"' +
                   ' --build-arg USER=1234' +
@@ -1500,6 +1501,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       docker_groups_dir='groups_server',
       gocd_group='beta',
       godot_status='docker',
+      docker_repo_groups_server='groupsinfra',
       server_export_info=groups_export_configurations.linuxDesktop,
     )
   ),
