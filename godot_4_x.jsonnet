@@ -1306,7 +1306,7 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'chmod a+x g/"' + docker_groups_dir + '/' + server_export_info.export_executable + '/' + server_export_info.export_executable + '"'
+                  'chmod a+x g/"' + docker_groups_dir + '/' + server_export_info.export_executable + '"'
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1530,7 +1530,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       pipeline_dependency=godot_template_groups,
       docker_groups_git='https://github.com/V-Sekai/docker-groups.git',
       docker_groups_branch='master',
-      docker_groups_dir='groups_server',
+      docker_groups_dir=groups_export_configurations.linuxDesktop.export_directory,
       gocd_group='beta',
       godot_status='docker',
       docker_repo_groups_server='groupsinfra/groups-server',
