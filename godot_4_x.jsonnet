@@ -1297,9 +1297,24 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'set -x;',
-                  '; chmod 01777 g/"' + docker_groups_dir + '"/' + server_export_info.export_directory +
-                  '; chmod a+x g/"' + docker_groups_dir + '"/' + server_export_info.export_directory + '/' + server_export_info.export_executable +
+                  'chmod 01777 g/"' + docker_groups_dir + '"/' + server_export_info.export_directory 
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'chmod a+x g/"' + docker_groups_dir + '"/' + server_export_info.export_directory + '/' + server_export_info.export_executable
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c', 
                   '; docker build -t "' + docker_repo_groups_server + ':%GO_PIPELINE_LABEL"' +
                   ' --build-arg SERVER_EXPORT="' + server_export_info.export_directory + '"' +
                   ' --build-arg GODOT_REVISION="master"' +
