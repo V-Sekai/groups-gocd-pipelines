@@ -49,6 +49,15 @@
                   {
                      "arguments": [
                         "-c",
+                        "ls \"g/export_linuxbsd\""
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
                         "chmod 01777 \"g/export_linuxbsd\""
                      ],
                      "command": "/bin/bash",

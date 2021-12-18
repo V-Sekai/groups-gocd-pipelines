@@ -1297,6 +1297,15 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
+                  'ls "g/' + docker_groups_dir + '"'
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
                   'chmod 01777 "g/' + docker_groups_dir + '"'
                 ],
                 command: '/bin/bash',
