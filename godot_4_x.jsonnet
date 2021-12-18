@@ -1300,7 +1300,7 @@ local build_docker_server(
                   'set -x;',
                   '; chmod 01777 g/"' + docker_groups_dir + '"/' + server_export_info.export_directory +
                   '; chmod a+x g/"' + docker_groups_dir + '"/' + server_export_info.export_directory + '/' + server_export_info.export_executable +
-                  '; docker build -t "' + docker_repo_groups_server + '"' +
+                  '; docker build -t $GO_PIPELINE_LABEL' +
                   ' --build-arg SERVER_EXPORT="' + server_export_info.export_directory + '"' +
                   ' --build-arg GODOT_REVISION="master"' +
                   ' --build-arg USER=1234' +
