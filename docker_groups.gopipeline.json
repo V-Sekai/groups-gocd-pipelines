@@ -32,7 +32,10 @@
                   }
                ],
                "environment_variables": [
-                  "DOCKER_IMAGE=groupsinfra/groups-server:$GO_PIPELINE_LABEL"
+                  {
+                     "name": "DOCKER_IMAGE",
+                     "value": "groupsinfra/groups-server:$GO_PIPELINE_LABEL"
+                  }
                ],
                "name": "dockerJob",
                "resources": [

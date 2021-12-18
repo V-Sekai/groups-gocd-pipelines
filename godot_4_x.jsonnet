@@ -1281,7 +1281,10 @@ local build_docker_server(
               },
             ],
             environment_variables: [
-              "DOCKER_IMAGE=" + docker_repo_groups_server + ":$GO_PIPELINE_LABEL",
+              {
+                name: 'DOCKER_IMAGE',
+                value: docker_repo_groups_server + ':$GO_PIPELINE_LABEL',
+              },
             ],
             tasks: [
               {
