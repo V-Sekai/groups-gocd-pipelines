@@ -1,16 +1,16 @@
 {
    "group": "beta",
-   "label_template": "${docker-uro_git[:8]}.${COUNT}",
+   "label_template": "${docker-gocd-agent-centos-8-groups_git[:8]}.${COUNT}",
    "materials": [
       {
          "branch": "master",
          "destination": "g",
-         "name": "docker-uro_git",
+         "name": "docker-gocd-agent-centos-8-groups_git",
          "type": "git",
-         "url": "https://github.com/V-Sekai/uro.git"
+         "url": "https://github.com/V-Sekai/docker-groups.git"
       }
    ],
-   "name": "docker-uro",
+   "name": "docker-gocd-agent-centos-8-groups",
    "stages": [
       {
          "clean_workspace": false,
@@ -32,7 +32,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "set -x; DOCKER_IMAGE=\"$groupsinfra/uro:$GO_PIPELINE_LABEL\" ; docker build -t \"$groupsinfra/uro\" -t \"$DOCKER_IMAGE\" g/\".\" && docker push \"$DOCKER_IMAGE\" && docker push \"$groupsinfra/uro\" && echo \"$DOCKER_IMAGE\" > docker_image.txt"
+                        "set -x; DOCKER_IMAGE=\"$gocd-agent-centos-8-groups:$GO_PIPELINE_LABEL\" ; docker build -t \"$gocd-agent-centos-8-groups\" -t \"$DOCKER_IMAGE\" g/\"gocd-agent-centos-8-groups\" && docker push \"$DOCKER_IMAGE\" && docker push \"$gocd-agent-centos-8-groups\" && echo \"$DOCKER_IMAGE\" > docker_image.txt"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
