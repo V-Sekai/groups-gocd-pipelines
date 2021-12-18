@@ -1280,8 +1280,9 @@ local build_docker_server(
                 destination: '',
               },
             ],
-            environment_variables:
-              [],
+            environment_variables: {
+              DOCKER_IMAGE: docker_repo_groups_server + ":$GO_PIPELINE_LABEL",
+            },
             tasks: [
               {
                 type: 'fetch',
@@ -1297,7 +1298,7 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'set -x; DOCKER_IMAGE="' + docker_repo_groups_server + ':$GO_PIPELINE_LABEL" ' +
+                  'set -x;',
                   '; chmod 01777 g/"' + docker_groups_dir + '"/' + server_export_info.export_directory +
                   '; chmod a+x g/"' + docker_groups_dir + '"/' + server_export_info.export_directory + '/' + server_export_info.export_executable +
                   '; docker build -t "' + docker_repo_groups_server + '" -t "$DOCKER_IMAGE"' +
