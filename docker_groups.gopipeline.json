@@ -68,7 +68,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "docker push \"groupsinfra/groups-server"
+                        "docker push \"groupsinfra/groups-server:$GO_PIPELINE_LABEL"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
