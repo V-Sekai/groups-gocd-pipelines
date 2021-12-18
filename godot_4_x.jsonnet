@@ -1517,7 +1517,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       gocd_group='gamma',
       godot_status='groups-4.0',
       gocd_project_folder='groups',
-      enabled_export_platforms=enabled_stern_flowers_export_platforms,
+      enabled_export_platforms=enabled_groups_export_platforms,
     )
   ),
 } + {
