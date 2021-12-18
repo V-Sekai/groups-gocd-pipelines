@@ -31,9 +31,9 @@
                      "type": "build"
                   }
                ],
-               "environment_variables": {
-                  "DOCKER_IMAGE": "groupsinfra/groups-server:$GO_PIPELINE_LABEL"
-               },
+               "environment_variables": [
+                  "DOCKER_IMAGE=groupsinfra/groups-server:$GO_PIPELINE_LABEL"
+               ],
                "name": "dockerJob",
                "resources": [
                   "dind"

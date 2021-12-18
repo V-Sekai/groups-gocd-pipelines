@@ -1280,9 +1280,9 @@ local build_docker_server(
                 destination: '',
               },
             ],
-            environment_variables: {
-              DOCKER_IMAGE: docker_repo_groups_server + ":$GO_PIPELINE_LABEL",
-            },
+            environment_variables: [
+              "DOCKER_IMAGE=" + docker_repo_groups_server + ":$GO_PIPELINE_LABEL",
+            ],
             tasks: [
               {
                 type: 'fetch',
