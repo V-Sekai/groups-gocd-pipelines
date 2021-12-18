@@ -1298,8 +1298,8 @@ local build_docker_server(
                 arguments: [
                   '-c',
                   'set -x; DOCKER_IMAGE="' + docker_repo_groups_server + ':$GO_PIPELINE_LABEL" ' +
-                  '; chmod 01777 g/"' + docker_groups_dir + '"/' + groups_export_configurations.linuxDesktop.export_directory +
-                  '; chmod a+x g/"' + docker_groups_dir + '"/' + groups_export_configurations.linuxDesktop.export_directory + '/' + groups_export_configurations.linuxDesktop.export_executable +
+                  '; chmod 01777 g/"' + docker_groups_dir + '"/' + server_export_info.export_directory +
+                  '; chmod a+x g/"' + docker_groups_dir + '"/' + server_export_info.export_directory + '/' + server_export_info.export_executable +
                   '; docker build -t "' + docker_repo_groups_server + '" -t "$DOCKER_IMAGE"' +
                   ' --build-arg SERVER_EXPORT="' + server_export_info.export_directory + '"' +
                   ' --build-arg GODOT_REVISION="master"' +
