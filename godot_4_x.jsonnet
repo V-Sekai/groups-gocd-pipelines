@@ -1291,13 +1291,13 @@ local build_docker_server(
                 job: server_export_info.export_name + 'Job',
                 is_source_a_file: false,
                 source: server_export_info.export_directory,
-                destination: 'g/' + docker_groups_dir,
+                destination: 'g/',
               },
               {
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'ls "g/' + docker_groups_dir + '"'
+                  'ls "g/' + server_export_info.export_directory + '"'
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1306,7 +1306,7 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'chmod 01777 "g/' + docker_groups_dir + '"'
+                  'chmod 01777 "g/' + server_export_info.export_directory + '"'
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1315,7 +1315,7 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'chmod a+x g/"' + docker_groups_dir + '/' + server_export_info.export_executable + '"'
+                  'chmod a+x g/"' + server_export_info.export_directory + '/' + server_export_info.export_executable + '"'
                 ],
                 command: '/bin/bash',
                 working_directory: '',
