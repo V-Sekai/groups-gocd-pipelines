@@ -1494,7 +1494,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
   : std.prune(
     build_docker_server(
       pipeline_name=docker_pipeline,
-      pipeline_dependency=godot_template_groups_export,
+      pipeline_dependency=godot_template_groups,
       docker_groups_git='https://github.com/V-Sekai/docker-groups.git',
       docker_groups_branch='master',
       docker_groups_dir='groups_server',
