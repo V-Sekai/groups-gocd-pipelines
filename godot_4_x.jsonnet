@@ -1300,14 +1300,13 @@ local build_docker_server(
                   'set -x;',
                   '; chmod 01777 g/"' + docker_groups_dir + '"/' + server_export_info.export_directory +
                   '; chmod a+x g/"' + docker_groups_dir + '"/' + server_export_info.export_directory + '/' + server_export_info.export_executable +
-                  '; export DOCKER_IMAGE="' + docker_repo_groups_server + ':$GO_PIPELINE_LABEL"' +
-                  '; docker build -t "$DOCKER_IMAGE"' +
+                  '; docker build -t "' + docker_repo_groups_server + ':$GO_PIPELINE_LABEL"' +
                   ' --build-arg SERVER_EXPORT="' + server_export_info.export_directory + '"' +
                   ' --build-arg GODOT_REVISION="master"' +
                   ' --build-arg USER=1234' +
                   ' --build-arg HOME=/server' +
                   ' --build-arg GROUPS_REVISION="$GO_PIPELINE_LABEL"' +
-                  ' g/"' + docker_groups_dir + '" && docker push "$DOCKER_IMAGE"'
+                  ' g/"' + docker_groups_dir + '" && docker push "'+ docker_repo_groups_server + ':$GO_PIPELINE_LABEL"'
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1317,8 +1316,7 @@ local build_docker_server(
                 arguments: [
                   '-c',
                   'set -x;',
-                  ';export DOCKER_IMAGE="' + docker_repo_groups_server + ':$GO_PIPELINE_LABEL"' +
-                  ';echo "$DOCKER_IMAGE" > docker_image.txt',
+                  ';echo "' + docker_repo_groups_server + ':$GO_PIPELINE_LABEL" > docker_image.txt',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
