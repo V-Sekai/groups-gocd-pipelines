@@ -1306,7 +1306,7 @@ local build_docker_server(
                   ' --build-arg USER=1234' +
                   ' --build-arg HOME=/server' +
                   ' --build-arg GROUPS_REVISION="$GO_PIPELINE_LABEL"' +
-                  ' g/"' + docker_groups_dir + '" && docker push "$DOCKER_IMAGE" && docker push "$DOCKER_REPO_GROUPS_SERVER"' +
+                  ' g/"' + docker_groups_dir + '" && docker push "$DOCKER_IMAGE" && docker push "' + docker_repo_groups_server + '"' +
                   ' && echo "$DOCKER_IMAGE" > docker_image.txt',
                 ],
                 command: '/bin/bash',
