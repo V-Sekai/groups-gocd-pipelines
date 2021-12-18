@@ -49,7 +49,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "ls \"g/export_linuxbsd\""
+                        "ls \"g/export_linuxbsd/export_linuxbsd\""
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

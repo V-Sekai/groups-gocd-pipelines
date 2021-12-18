@@ -1297,7 +1297,7 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'ls "g/' + server_export_info.export_directory + '"'
+                  'ls "g/' + docker_groups_dir + '/' + server_export_info.export_directory + '"'
                 ],
                 command: '/bin/bash',
                 working_directory: '',
