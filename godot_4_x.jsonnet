@@ -1407,10 +1407,10 @@ local simple_docker_job(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'set -x; DOCKER_IMAGE="'  + docker_repo_variable + ':$GO_PIPELINE_LABEL" ' +
-                  '; docker build -t "' + docker_repo_variable + '" -t "$DOCKER_IMAGE"' +
-                  ' g/"' + docker_dir + '" && docker push "$DOCKER_IMAGE" && docker push "$' + docker_repo_variable + '"' +
-                  ' && echo "$DOCKER_IMAGE" > docker_image.txt',
+                  'set -x;' +      
+                  '; docker build -t "' + docker_repo_variable + ':$GO_PIPELINE_LABEL"' +
+                  ' "g/' + docker_dir + '" && docker push "' + docker_repo_variable + ':$GO_PIPELINE_LABEL"' +
+                  ' && echo "' + docker_repo_variable + ':$GO_PIPELINE_LABEL" > docker_image.txt',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
