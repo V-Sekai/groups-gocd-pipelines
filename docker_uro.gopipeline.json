@@ -32,7 +32,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "set -x;; docker build -t \"groupsinfra/uro:$GO_PIPELINE_LABEL\" \"g/.\" && docker push \"groupsinfra/uro:$GO_PIPELINE_LABEL\" && echo \"groupsinfra/uro:$GO_PIPELINE_LABEL\" > docker_image.txt"
+                        "set -x; docker build -t \"groupsinfra/uro:$GO_PIPELINE_LABEL\" \"g/.\" && docker push \"groupsinfra/uro:$GO_PIPELINE_LABEL\" && echo \"groupsinfra/uro:$GO_PIPELINE_LABEL\" > docker_image.txt"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
