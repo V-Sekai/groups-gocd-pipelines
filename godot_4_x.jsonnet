@@ -1306,7 +1306,7 @@ local build_docker_server(
                   ' --build-arg USER=1234' +
                   ' --build-arg HOME=/server' +
                   ' --build-arg GROUPS_REVISION="$GO_PIPELINE_LABEL"' +
-                  ' g/"' + docker_groups_dir + '" && docker push "'+ docker_repo_groups_server + ':$GO_PIPELINE_LABEL"'
+                  ' g/"' + docker_groups_dir + '"'
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1315,8 +1315,16 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'set -x;',
-                  ';echo "' + docker_repo_groups_server + ':$GO_PIPELINE_LABEL" > docker_image.txt',
+                  'docker push "'+ docker_repo_groups_server + ':$GO_PIPELINE_LABEL"',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'echo "' + docker_repo_groups_server + ':$GO_PIPELINE_LABEL" > docker_image.txt',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
