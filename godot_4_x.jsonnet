@@ -1315,7 +1315,7 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'docker push "'+ docker_repo_groups_server + ':$GO_PIPELINE_LABEL',
+                  'docker push "'+ docker_repo_groups_server + ':$GO_PIPELINE_LABEL"',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
