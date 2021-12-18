@@ -1,0 +1,47 @@
+{
+   "group": "beta",
+   "label_template": "${docker-uro_git[:8]}.${COUNT}",
+   "materials": [
+      {
+         "branch": "master",
+         "destination": "g",
+         "name": "docker-uro_git",
+         "type": "git",
+         "url": "https://github.com/V-Sekai/uro.git"
+      }
+   ],
+   "name": "docker-uro",
+   "stages": [
+      {
+         "clean_workspace": false,
+         "fetch_materials": true,
+         "jobs": [
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "docker_image.txt",
+                     "type": "build"
+                  }
+               ],
+               "name": "dockerJob",
+               "resources": [
+                  "dind"
+               ],
+               "tasks": [
+                  {
+                     "arguments": [
+                        "-c",
+                        "set -x; DOCKER_IMAGE=\"$DOCKER_URO_REPO:$GO_PIPELINE_LABEL\" ; docker build -t \"$DOCKER_URO_REPO\" -t \"$DOCKER_IMAGE\" g/\".\" && docker push \"$DOCKER_IMAGE\" && docker push \"$DOCKER_URO_REPO\" && echo \"$DOCKER_IMAGE\" > docker_image.txt"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  }
+               ]
+            }
+         ],
+         "name": "buildPushStage"
+      }
+   ]
+}

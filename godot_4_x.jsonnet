@@ -190,7 +190,8 @@ local groups_gdextension_plugins = {
         extra_commands: [],
       },
     },
-  }, godot_openxr: {
+  },
+  godot_openxr: {
     name: 'godot_openxr',
     pipeline_name: 'gdextension-godot-openxr',
     git_url: 'https://github.com/V-Sekai/godot_openxr.git',
@@ -736,7 +737,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
                 command: '/bin/bash',
                 working_directory: '',
               },
-            ],            
+            ],
           },
         ],
       },
@@ -800,13 +801,13 @@ local generate_godot_cpp_pipeline(pipeline_name='',
     ],
   };
 
-  
+
 local generate_godot_gdextension_pipeline(pipeline_name='',
-                                       pipeline_dependency='',
-                                       gocd_group='',
-                                       godot_status='',
-                                       library_info=null,
-                                       godot_gdextension_platforms=enabled_gdextension_platforms) =
+                                          pipeline_dependency='',
+                                          gocd_group='',
+                                          godot_status='',
+                                          library_info=null,
+                                          godot_gdextension_platforms=enabled_gdextension_platforms) =
   {
     name: pipeline_name,
     group: gocd_group,
@@ -1119,19 +1120,19 @@ local godot_tools_pipeline_export(
                               for artifact in library_info.platforms[export_info.gdextension_platform].output_artifacts
                             ],
                             gdextension_plugins) + std.flatMap(function(library_info) [
-                                                              if std.endsWith(artifact, '.dll') && artifact != 'openvr_api.dll' then {
-                                                                type: 'fetch',
-                                                                artifact_origin: 'gocd',
-                                                                pipeline: library_info.pipeline_name,
-                                                                stage: 'gdextensionBuildStage',
-                                                                job: export_info.gdextension_platform + 'Job',
-                                                                is_source_a_file: true,
-                                                                source: 'debug/' + exe_to_pdb_path(artifact),
-                                                                destination: library_info.name,
-                                                              } else null
-                                                              for artifact in library_info.platforms[export_info.gdextension_platform].output_artifacts
-                                                            ],
-                                                            gdextension_plugins) + [
+                                                                 if std.endsWith(artifact, '.dll') && artifact != 'openvr_api.dll' then {
+                                                                   type: 'fetch',
+                                                                   artifact_origin: 'gocd',
+                                                                   pipeline: library_info.pipeline_name,
+                                                                   stage: 'gdextensionBuildStage',
+                                                                   job: export_info.gdextension_platform + 'Job',
+                                                                   is_source_a_file: true,
+                                                                   source: 'debug/' + exe_to_pdb_path(artifact),
+                                                                   destination: library_info.name,
+                                                                 } else null
+                                                                 for artifact in library_info.platforms[export_info.gdextension_platform].output_artifacts
+                                                               ],
+                                                               gdextension_plugins) + [
               {
                 type: 'exec',
                 arguments: [
@@ -1227,6 +1228,160 @@ local godot_tools_pipeline_export(
     ],
   };
 
+
+local build_docker_server(
+  pipeline_name='',
+  pipeline_dependency='',
+  gocd_group='',
+  godot_status='',
+  docker_groups_git='',
+  docker_groups_branch='',
+  docker_groups_dir='',
+  server_export_info={},
+      ) =
+  {
+    name: pipeline_name,
+    group: gocd_group,
+    label_template: '${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
+    environment_variables:
+      [],
+    materials: [
+      {
+        name: 'docker_groups_git',
+        url: docker_groups_git,
+        type: 'git',
+        branch: docker_groups_branch,
+        destination: 'g',
+      },
+      {
+        name: pipeline_dependency + '_pipeline_dependency',
+        type: 'dependency',
+        pipeline: pipeline_dependency,
+        stage: 'exportStage',
+        ignore_for_scheduling: false,
+      },
+    ],
+    stages: [
+      {
+        name: 'buildPushStage',
+        clean_workspace: false,
+        fetch_materials: true,
+        jobs: [
+          {
+            name: 'dockerJob',
+            resources: [
+              'dind',
+            ],
+            artifacts: [
+              {
+                type: 'build',
+                source: 'docker_image.txt',
+                destination: '',
+              },
+            ],
+            environment_variables:
+              [],
+            tasks: [
+              {
+                type: 'fetch',
+                artifact_origin: 'gocd',
+                pipeline: pipeline_dependency,
+                stage: 'exportStage',
+                job: server_export_info.export_name + 'Job',
+                is_source_a_file: false,
+                source: server_export_info.export_directory,
+                destination: 'g/' + docker_groups_dir,
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'set -x; DOCKER_IMAGE="$DOCKER_REPO_GROUPS_SERVER:$GO_PIPELINE_LABEL" ' +
+                  '; chmod 01777 g/"' + docker_groups_dir + '"/' + groups_export_configurations.linuxDesktop.export_directory +
+                  '; chmod a+x g/"' + docker_groups_dir + '"/' + groups_export_configurations.linuxDesktop.export_directory + '/' + groups_export_configurations.linuxDesktop.export_executable +
+                  '; docker build -t "$DOCKER_REPO_GROUPS_SERVER" -t "$DOCKER_IMAGE"' +
+                  ' --build-arg SERVER_EXPORT="' + server_export_info.export_directory + '"' +
+                  ' --build-arg GODOT_REVISION="master"' +
+                  ' --build-arg USER=1234' +
+                  ' --build-arg HOME=/server' +
+                  ' --build-arg GROUPS_REVISION="$GO_PIPELINE_LABEL"' +
+                  ' g/"' + docker_groups_dir + '" && docker push "$DOCKER_IMAGE" && docker push "$DOCKER_REPO_GROUPS_SERVER"' +
+                  ' && echo "$DOCKER_IMAGE" > docker_image.txt',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  };
+
+
+local simple_docker_job(pipeline_name='',
+                        gocd_group='',
+                        docker_repo_variable='',
+                        docker_git='',
+                        docker_branch='',
+                        docker_dir='') =
+  {
+    name: pipeline_name,
+    group: gocd_group,
+    label_template: '${' + pipeline_name + '_git[:8]}.${COUNT}',
+    environment_variables:
+      [],
+    materials: [
+      {
+        name: pipeline_name + '_git',
+        url: docker_git,
+        type: 'git',
+        branch: docker_branch,
+        destination: 'g',
+      },
+    ],
+    stages: [
+      {
+        name: 'buildPushStage',
+        clean_workspace: false,
+        fetch_materials: true,
+        jobs: [
+          {
+            name: 'dockerJob',
+            resources: [
+              'dind',
+            ],
+            artifacts: [
+              {
+                type: 'build',
+                source: 'docker_image.txt',
+                destination: '',
+              },
+            ],
+            environment_variables:
+              [],
+            tasks: [
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'set -x; DOCKER_IMAGE="$' + docker_repo_variable + ':$GO_PIPELINE_LABEL" ' +
+                  '; docker build -t "$' + docker_repo_variable + '" -t "$DOCKER_IMAGE"' +
+                  ' g/"' + docker_dir + '" && docker push "$DOCKER_IMAGE" && docker push "$' + docker_repo_variable + '"' +
+                  ' && echo "$DOCKER_IMAGE" > docker_image.txt',
+                ],
+                command: '/bin/bash',
+                working_directory: '',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  };
+// Groups
+local docker_pipeline = 'docker-groups';
+local docker_uro_pipeline = 'docker-uro';
 // CHIBIFIRE
 local godot_template_groups_editor = 'godot-template-groups-4-x';
 local godot_template_groups_export = 'groups-editor-4-x';
@@ -1333,6 +1488,30 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       gocd_group='delta',
       godot_status='stern-flowers-4.0',
       enabled_export_platforms=enabled_stern_flowers_export_platforms,
+    )
+  ),
+  'docker_groups.gopipeline.json'
+  : std.prune(
+    build_docker_server(
+      pipeline_name=docker_pipeline,
+      pipeline_dependency=godot_template_groups_export,
+      docker_groups_git='https://github.com/V-Sekai/docker-groups.git',
+      docker_groups_branch='master',
+      docker_groups_dir='groups_server',
+      gocd_group='beta',
+      godot_status='docker',
+      server_export_info=groups_export_configurations.linuxDesktop,
+    )
+  ),
+  'docker_uro.gopipeline.json'
+  : std.prune(
+    simple_docker_job(
+      pipeline_name=docker_uro_pipeline,
+      gocd_group='beta',
+      docker_repo_variable='DOCKER_URO_REPO',
+      docker_git='https://github.com/V-Sekai/uro.git',
+      docker_branch='master',
+      docker_dir='.',
     )
   ),
 }
