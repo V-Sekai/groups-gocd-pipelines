@@ -1168,8 +1168,7 @@ local godot_tools_pipeline_export(
                 type: 'exec',
                 arguments: [
                   '-c',
-                                  'rm -rf ' + export_info.export_directory + ' && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.opt.tools.64.llvm' + ' &&  curl -L https://github.com/qarmin/gtk_library_store/releases/download/3.24.0/swiftshader2.zip > swiftshader.zip && unzip -o swiftshader.zip && rm swiftshader.zip && curr="$(pwd)/libvk_swiftshader.so" sed -i "s|PATH_TO_CHANGE|$curr|" vk_swiftshader_icd.json && chmod +x ' + 'godot.linuxbsd.opt.tools.64.llvm' + ' && HOME="`pwd`" VK_ICD_FILENAMES=vk_swiftshader_icd.json DRI_PRIME=0 XDG_DATA_HOME=`pwd`/.local/share/ xvfb-run --auto-servernum ./godot.linuxbsd.opt.tools.64.llvm --export "' + export_info.export_configuration + '" `pwd`/' + export_info.export_directory + '/' + export_info.export_executable + ' --path g -v',
-  
+                  'rm -rf ' + export_info.export_directory + ' && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.opt.tools.64.llvm' + ' && XDG_DATA_HOME=`pwd`/.local/share/ ./godot.linuxbsd.opt.tools.64.llvm --headless --export "' + export_info.export_configuration + '" `pwd`/' + export_info.export_directory + '/' + export_info.export_executable + ' --path g',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
