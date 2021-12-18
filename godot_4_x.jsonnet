@@ -1501,7 +1501,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
       docker_groups_dir='groups_server',
       gocd_group='beta',
       godot_status='docker',
-      docker_repo_groups_server='groupsinfra',
+      docker_repo_groups_server='groupsinfra/groups-server',
       server_export_info=groups_export_configurations.linuxDesktop,
     )
   ),
