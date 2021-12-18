@@ -53,7 +53,7 @@
                      "arguments": [
                         "-c",
                         "set -x;",
-                        "; chmod 01777 g/\"groups_server\"/export_linuxbsd; chmod a+x g/\"groups_server\"/export_linuxbsd/v_sekai_linuxbsd; docker build -t \"groupsinfra/groups-server\" -t \"$DOCKER_IMAGE\" --build-arg SERVER_EXPORT=\"export_linuxbsd\" --build-arg GODOT_REVISION=\"master\" --build-arg USER=1234 --build-arg HOME=/server --build-arg GROUPS_REVISION=\"$GO_PIPELINE_LABEL\" g/\"groups_server\" && docker push \"$DOCKER_IMAGE\" && docker push \"groupsinfra/groups-server\" && echo \"$DOCKER_IMAGE\" > docker_image.txt"
+                        "; chmod 01777 g/\"groups_server\"/export_linuxbsd; chmod a+x g/\"groups_server\"/export_linuxbsd/v_sekai_linuxbsd; docker build -t \"$DOCKER_IMAGE\" --build-arg SERVER_EXPORT=\"export_linuxbsd\" --build-arg GODOT_REVISION=\"master\" --build-arg USER=1234 --build-arg HOME=/server --build-arg GROUPS_REVISION=\"$GO_PIPELINE_LABEL\" g/\"groups_server\" && docker push \"$DOCKER_IMAGE\" && echo \"$DOCKER_IMAGE\" > docker_image.txt"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

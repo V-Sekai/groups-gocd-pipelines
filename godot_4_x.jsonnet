@@ -1301,13 +1301,13 @@ local build_docker_server(
                   'set -x;',
                   '; chmod 01777 g/"' + docker_groups_dir + '"/' + server_export_info.export_directory +
                   '; chmod a+x g/"' + docker_groups_dir + '"/' + server_export_info.export_directory + '/' + server_export_info.export_executable +
-                  '; docker build -t "' + docker_repo_groups_server + '" -t "$DOCKER_IMAGE"' +
+                  '; docker build -t "$DOCKER_IMAGE"' +
                   ' --build-arg SERVER_EXPORT="' + server_export_info.export_directory + '"' +
                   ' --build-arg GODOT_REVISION="master"' +
                   ' --build-arg USER=1234' +
                   ' --build-arg HOME=/server' +
                   ' --build-arg GROUPS_REVISION="$GO_PIPELINE_LABEL"' +
-                  ' g/"' + docker_groups_dir + '" && docker push "$DOCKER_IMAGE" && docker push "' + docker_repo_groups_server + '"' +
+                  ' g/"' + docker_groups_dir + '" && docker push "$DOCKER_IMAGE"' +
                   ' && echo "$DOCKER_IMAGE" > docker_image.txt',
                 ],
                 command: '/bin/bash',
