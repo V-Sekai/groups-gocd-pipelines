@@ -59,7 +59,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "docker tag $GO_PIPELINE_LABEL groupsinfra/groups-server:$GO_PIPELINE_LABEL\""
+                        "docker tag $GO_PIPELINE_LABEL \"groupsinfra/groups-server:$GO_PIPELINE_LABEL\""
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
