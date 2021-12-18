@@ -49,7 +49,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "chmod 01777 g/\"groups_server\"/export_linuxbsd"
+                        "chmod 01777 \"g/groups_server\""
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -58,7 +58,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "chmod a+x g/\"groups_server\"/export_linuxbsd/v_sekai_linuxbsd"
+                        "chmod a+x g/\"groups_server/v_sekai_linuxbsd/v_sekai_linuxbsd\""
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
