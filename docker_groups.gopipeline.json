@@ -50,7 +50,7 @@
                      "arguments": [
                         "-c",
                         "set -x;",
-                        "; chmod 01777 g/\"groups_server\"/export_linuxbsd; chmod a+x g/\"groups_server\"/export_linuxbsd/v_sekai_linuxbsd; docker build -t \"groupsinfra/groups-server:$GO_PIPELINE_LABEL\" --build-arg SERVER_EXPORT=\"export_linuxbsd\" --build-arg GODOT_REVISION=\"master\" --build-arg USER=1234 --build-arg HOME=/server --build-arg GROUPS_REVISION=\"$GO_PIPELINE_LABEL\" g/\"groups_server\""
+                        "; chmod 01777 g/\"groups_server\"/export_linuxbsd; chmod a+x g/\"groups_server\"/export_linuxbsd/v_sekai_linuxbsd; docker build -t \"groupsinfra/groups-server\" -t \"groupsinfra/groups-server:$GO_PIPELINE_LABEL\" --build-arg SERVER_EXPORT=\"export_linuxbsd\" --build-arg GODOT_REVISION=\"master\" --build-arg USER=1234 --build-arg HOME=/server --build-arg GROUPS_REVISION=\"$GO_PIPELINE_LABEL\" g/\"groups_server\""
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
