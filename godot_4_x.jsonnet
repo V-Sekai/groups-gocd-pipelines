@@ -1168,8 +1168,8 @@ local godot_tools_pipeline_export(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'rm -rf ' + export_info.export_directory + ' && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.opt.tools.64.llvm' + ' &&  curl -L https://github.com/qarmin/gtk_library_store/releases/download/3.24.0/swiftshader2.zip > swiftshader.zip && unzip -o swiftshader.zip && rm swiftshader.zip && curr="$(pwd)/libvk_swiftshader.so" sed -i "s|PATH_TO_CHANGE|$curr|" vk_swiftshader_icd.json && chmod +x ' + 'godot.linuxbsd.opt.tools.64.llvm' + ' && HOME="`pwd`" VK_ICD_FILENAMES=vk_swiftshader_icd.json DRI_PRIME=0 XDG_DATA_HOME=`pwd`/.local/share/ xvfb-run --auto-servernum ./godot.linuxbsd.opt.tools.64.llvm --export "' + export_info.export_configuration + '" `pwd`/' + export_info.export_directory + '/' + export_info.export_executable + ' --path g -v',
-
+                                  'rm -rf ' + export_info.export_directory + ' && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.opt.tools.64.llvm' + ' &&  curl -L https://github.com/qarmin/gtk_library_store/releases/download/3.24.0/swiftshader2.zip > swiftshader.zip && unzip -o swiftshader.zip && rm swiftshader.zip && curr="$(pwd)/libvk_swiftshader.so" sed -i "s|PATH_TO_CHANGE|$curr|" vk_swiftshader_icd.json && chmod +x ' + 'godot.linuxbsd.opt.tools.64.llvm' + ' && HOME="`pwd`" VK_ICD_FILENAMES=vk_swiftshader_icd.json DRI_PRIME=0 XDG_DATA_HOME=`pwd`/.local/share/ xvfb-run --auto-servernum ./godot.linuxbsd.opt.tools.64.llvm --export "' + export_info.export_configuration + '" `pwd`/' + export_info.export_directory + '/' + export_info.export_executable + ' --path g -v',
+  
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1298,7 +1298,7 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'ls "g/' + server_export_info.export_directory + '"',
+                  'ls "g/' + server_export_info.export_directory + '"'
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1307,7 +1307,7 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'chmod 01777 "g/' + server_export_info.export_directory + '"',
+                  'chmod 01777 "g/' + server_export_info.export_directory + '"'
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1316,7 +1316,7 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'chmod a+x g/"' + server_export_info.export_directory + '/' + server_export_info.export_executable + '"',
+                  'chmod a+x g/"' + server_export_info.export_directory + '/' + server_export_info.export_executable + '"'
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1324,14 +1324,14 @@ local build_docker_server(
               {
                 type: 'exec',
                 arguments: [
-                  '-c',
+                  '-c', 
                   '; docker build -t "' + docker_repo_groups_server + ':%GO_PIPELINE_LABEL"' +
                   ' --build-arg SERVER_EXPORT="' + server_export_info.export_directory + '"' +
                   ' --build-arg GODOT_REVISION="master"' +
                   ' --build-arg USER=1234' +
                   ' --build-arg HOME=/server' +
                   ' --build-arg GROUPS_REVISION="$GO_PIPELINE_LABEL"' +
-                  ' g/"' + docker_groups_dir + '"',
+                  ' g/"' + docker_groups_dir + '"'
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1340,7 +1340,7 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'docker push "' + docker_repo_groups_server + ':$GO_PIPELINE_LABEL"',
+                  'docker push "'+ docker_repo_groups_server + ':$GO_PIPELINE_LABEL"',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
