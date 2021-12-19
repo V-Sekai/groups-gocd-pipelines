@@ -1552,7 +1552,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
     simple_docker_job(
       pipeline_name=docker_gocd_agent_pipeline,
       gocd_group='beta',
-      docker_repo_variable='gocd-agent-centos-8-groups',
+      docker_repo_variable='groupsinfra/gocd-agent-centos-8-groups',
       docker_git='https://github.com/V-Sekai/docker-groups.git',
       docker_branch='master',
       docker_dir='gocd-agent-centos-8-groups',
