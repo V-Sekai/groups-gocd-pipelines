@@ -1243,7 +1243,7 @@ local build_docker_server(
   {
     name: pipeline_name,
     group: gocd_group,
-    label_template: '${docker_groups_git}' + '.${COUNT}',
+    label_template: pipeline_name + '_${docker_groups_git}[8]' + '.${COUNT}',
     environment_variables:
       [],
     materials: [
@@ -1370,7 +1370,7 @@ local simple_docker_job(pipeline_name='',
   {
     name: pipeline_name,
     group: gocd_group,
-    label_template: '${' + pipeline_name + '_git[:8]}.${COUNT}',
+    label_template: pipeline_name +'_${' + pipeline_name + '_git[:8]}.${COUNT}',
     environment_variables:
       [],
     materials: [
