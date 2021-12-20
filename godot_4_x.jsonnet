@@ -1243,7 +1243,7 @@ local build_docker_server(
   {
     name: pipeline_name,
     group: gocd_group,
-    label_template: pipeline_name + '_${docker_groups_git}[8]' + '.${COUNT}',
+    label_template: '${docker_groups_git}' + '.${COUNT}',
     environment_variables:
       [],
     materials: [
