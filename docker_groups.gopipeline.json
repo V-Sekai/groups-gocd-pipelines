@@ -1,6 +1,6 @@
 {
    "group": "beta",
-   "label_template": "groups-4-x-export.${COUNT}",
+   "label_template": "${docker_groups_git}.${COUNT}",
    "materials": [
       {
          "branch": "master",
