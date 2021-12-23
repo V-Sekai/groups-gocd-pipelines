@@ -1,6 +1,6 @@
 {
    "group": "beta",
-   "label_template": "${groups-4-export_pipeline_dependency}.${COUNT}",
+   "label_template": "${groups-4-0-export_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "branch": "master",
@@ -11,8 +11,8 @@
       },
       {
          "ignore_for_scheduling": false,
-         "name": "groups-4-export_pipeline_dependency",
-         "pipeline": "groups-4-export",
+         "name": "groups-4-0-export_pipeline_dependency",
+         "pipeline": "groups-4-0-export",
          "stage": "exportStage",
          "type": "dependency"
       }
@@ -41,7 +41,7 @@
                      "destination": "g/groups_server",
                      "is_source_a_file": false,
                      "job": "linuxDesktopJob",
-                     "pipeline": "groups-4-export",
+                     "pipeline": "groups-4-0-export",
                      "source": "export_linuxbsd",
                      "stage": "exportStage",
                      "type": "fetch"
