@@ -408,7 +408,7 @@ local godot_pipeline(pipeline_name='',
     },
     if godot_modules_git != '' then
       {
-        name: 'godot_custom_modules',
+        name: 'godot_custom_modules_00',
         url: godot_modules_git,
         type: 'git',
         branch: godot_modules_branch,
