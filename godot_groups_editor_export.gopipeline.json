@@ -6,17 +6,17 @@
       }
    ],
    "group": "gamma",
-   "label_template": "groups-editor-4-x.${COUNT}",
+   "label_template": "groups-editor-4.${COUNT}",
    "materials": [
       {
          "ignore_for_scheduling": false,
-         "name": "godot-template-groups-4-x_pipeline_dependency",
-         "pipeline": "godot-template-groups-4-x",
+         "name": "godot-template-groups-4_pipeline_dependency",
+         "pipeline": "godot-template-groups-4",
          "stage": "templateZipStage",
          "type": "dependency"
       }
    ],
-   "name": "groups-editor-4-x",
+   "name": "groups-editor-4",
    "stages": [
       {
          "clean_workspace": true,
@@ -33,7 +33,7 @@
                      "destination": "export_windows",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-4-x",
+                     "pipeline": "godot-template-groups-4",
                      "source": "godot.windows.opt.tools.64.exe",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -43,7 +43,7 @@
                      "destination": "export_windows",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-4-x",
+                     "pipeline": "godot-template-groups-4",
                      "source": "godot.windows.opt.tools.64.pdb",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -53,7 +53,7 @@
                      "destination": "export_windows",
                      "is_source_a_file": true,
                      "job": "defaultJob",
-                     "pipeline": "godot-template-groups-4-x",
+                     "pipeline": "godot-template-groups-4",
                      "source": "godot.templates.tpz",
                      "stage": "templateZipStage",
                      "type": "fetch"
@@ -81,7 +81,7 @@
                      "destination": "export_linuxbsd",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-template-groups-4-x",
+                     "pipeline": "godot-template-groups-4",
                      "source": "godot.linuxbsd.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -91,7 +91,7 @@
                      "destination": "export_linuxbsd",
                      "is_source_a_file": true,
                      "job": "defaultJob",
-                     "pipeline": "godot-template-groups-4-x",
+                     "pipeline": "godot-template-groups-4",
                      "source": "godot.templates.tpz",
                      "stage": "templateZipStage",
                      "type": "fetch"

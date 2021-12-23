@@ -18,13 +18,13 @@
       {
          "branch": "groups-modules-4.x",
          "destination": "godot_custom_modules",
-         "name": "godot_custom_modules_00",
+         "name": "godot_custom_modules",
          "shallow_clone": false,
          "type": "git",
          "url": "https://github.com/V-Sekai/godot-modules-groups.git"
       }
    ],
-   "name": "godot-template-groups-4-x",
+   "name": "godot-template-groups-4",
    "stages": [
       {
          "clean_workspace": false,
@@ -187,7 +187,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-4-x",
+                     "pipeline": "godot-template-groups-4",
                      "source": "godot.windows.opt.tools.64.exe",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -250,7 +250,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-template-groups-4-x",
+                     "pipeline": "godot-template-groups-4",
                      "source": "godot.linuxbsd.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -369,7 +369,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-4-x",
+                     "pipeline": "godot-template-groups-4",
                      "source": "version.txt",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -379,7 +379,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-4-x",
+                     "pipeline": "godot-template-groups-4",
                      "source": "godot.windows.opt.tools.64.pdb",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -389,7 +389,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-4-x",
+                     "pipeline": "godot-template-groups-4",
                      "source": "windows_64_debug.exe",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -399,7 +399,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-4-x",
+                     "pipeline": "godot-template-groups-4",
                      "source": "windows_64_release.exe",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -409,7 +409,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-template-groups-4-x",
+                     "pipeline": "godot-template-groups-4",
                      "source": "linux_x11_64_debug",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -419,7 +419,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-template-groups-4-x",
+                     "pipeline": "godot-template-groups-4",
                      "source": "linux_x11_64_release",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -429,7 +429,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "webJob",
-                     "pipeline": "godot-template-groups-4-x",
+                     "pipeline": "godot-template-groups-4",
                      "source": "webassembly_debug.zip",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -439,7 +439,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "webJob",
-                     "pipeline": "godot-template-groups-4-x",
+                     "pipeline": "godot-template-groups-4",
                      "source": "webassembly_release.zip",
                      "stage": "templateStage",
                      "type": "fetch"
