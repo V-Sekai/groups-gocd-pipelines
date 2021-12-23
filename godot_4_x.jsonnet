@@ -420,7 +420,7 @@ local godot_pipeline(pipeline_name='',
   stages: [
     {
       name: 'defaultStage',
-      clean_workspace: true,
+      clean_workspace: false,
       jobs: [
         {
           name: platform_info.platform_name + 'Job',
@@ -1067,7 +1067,7 @@ local godot_tools_pipeline_export(
     stages: [
       {
         name: 'exportStage',
-        clean_workspace: true,
+        clean_workspace: false,
         fetch_materials: true,
         jobs: [
           {
@@ -1191,7 +1191,7 @@ local godot_tools_pipeline_export(
       },
       {
         name: 'uploadStage',
-        clean_workspace: true,
+        clean_workspace: false,
         jobs: [
           {
             name: export_info.export_name + 'Job',
@@ -1265,7 +1265,7 @@ local build_docker_server(
     stages: [
       {
         name: 'buildPushStage',
-        clean_workspace: true,
+        clean_workspace: false,
         fetch_materials: true,
         jobs: [
           {
@@ -1385,7 +1385,7 @@ local simple_docker_job(pipeline_name='',
     stages: [
       {
         name: 'buildPushStage',
-        clean_workspace: true,
+        clean_workspace: false,
         fetch_materials: true,
         jobs: [
           {

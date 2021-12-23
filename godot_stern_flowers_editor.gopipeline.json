@@ -19,7 +19,7 @@
    "name": "godot-template-stern-flowers-4-x",
    "stages": [
       {
-         "clean_workspace": true,
+         "clean_workspace": false,
          "jobs": [
             {
                "artifacts": [

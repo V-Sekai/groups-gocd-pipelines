@@ -20,7 +20,7 @@
    "name": "docker-groups",
    "stages": [
       {
-         "clean_workspace": true,
+         "clean_workspace": false,
          "fetch_materials": true,
          "jobs": [
             {

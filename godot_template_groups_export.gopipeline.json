@@ -26,7 +26,7 @@
    "name": "groups-4-x-export",
    "stages": [
       {
-         "clean_workspace": true,
+         "clean_workspace": false,
          "fetch_materials": true,
          "jobs": [
             {
@@ -159,7 +159,7 @@
          "name": "exportStage"
       },
       {
-         "clean_workspace": true,
+         "clean_workspace": false,
          "jobs": [
             {
                "name": "windowsJob",
