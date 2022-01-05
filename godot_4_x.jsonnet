@@ -1466,7 +1466,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
   'godot_v_sekai_editor.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_groups_editor,
-    godot_status='groups-4.0',
+    godot_status='groups-4.0.0',
     godot_git='https://github.com/V-Sekai/godot.git',
     godot_branch='groups-4.x',
     gocd_group='gamma',
