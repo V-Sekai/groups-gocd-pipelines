@@ -377,7 +377,7 @@ local stern_flowers_export_configurations = {
 local enabled_stern_flowers_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 local enabled_groups_export_platforms = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 
-local all_gdextension_plugins = [groups_gdextension_plugins[x] for x in ['godot_openvr']];
+local all_gdextension_plugins = [groups_gdextension_plugins[x] for x in []];
 
 local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');
 
