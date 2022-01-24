@@ -106,6 +106,44 @@
                      "working_directory": ""
                   }
                ]
+            },
+            {
+               "name": "webJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "export_web",
+                     "is_source_a_file": true,
+                     "job": "webJob",
+                     "pipeline": "godot-template-stern-flowers-4-0",
+                     "source": "godot_web.html",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "export_web",
+                     "is_source_a_file": true,
+                     "job": "defaultJob",
+                     "pipeline": "godot-template-stern-flowers-4-0",
+                     "source": "godot.templates.tpz",
+                     "stage": "templateZipStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "butler push export_web ifiregames/stern-flowers-chibifire-com-godot-engine:web --userversion `date +\"%Y-%m-%dT%H%M%SZ\" --utc`-$GO_PIPELINE_NAME"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  }
+               ]
             }
          ],
          "name": "uploadStage"

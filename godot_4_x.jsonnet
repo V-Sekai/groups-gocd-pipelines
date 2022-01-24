@@ -111,15 +111,13 @@ local platform_info_dict = {
   },
 };
 
-local enabled_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
-local enabled_groups_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'web']];
-
-local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
-local enabled_groups_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'web']];
-
+local enabled_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'web']];
+local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'web']];
 local enabled_gdextension_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
-local enabled_groups_gdextension_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
 
+local enabled_groups_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'web']];
+local enabled_groups_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'web']];
+local enabled_groups_gdextension_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
 
 local groups_gdextension_plugins = {
   godot_openvr: {
@@ -365,7 +363,7 @@ local stern_flowers_export_configurations = {
     export_configuration: 'HTML5',
     export_directory: 'export_web',
     export_executable: 'godot_web.html',
-    itchio_out: null,
+    itchio_out: 'web',
     prepare_commands: [
     ],
     extra_commands: [
@@ -374,7 +372,7 @@ local stern_flowers_export_configurations = {
 };
 
 
-local enabled_stern_flowers_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
+local enabled_stern_flowers_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop', 'web']];
 local enabled_groups_export_platforms = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 
 local all_gdextension_plugins = [groups_gdextension_plugins[x] for x in []];
