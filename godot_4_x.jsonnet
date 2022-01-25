@@ -117,7 +117,6 @@ local enabled_gdextension_platforms = [platform_info_dict[x] for x in ['windows'
 
 local enabled_groups_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'web']];
 local enabled_groups_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'web']];
-local enabled_groups_gdextension_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
 
 local groups_gdextension_plugins = {
   godot_openvr: {
@@ -1436,7 +1435,7 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
     gocd_group='gamma',
     godot_status='gdextension.' + library_info.name,
     library_info=library_info,
-    godot_gdextension_platforms=enabled_groups_gdextension_platforms,
+    godot_gdextension_platforms=enabled_gdextension_platforms,
   )
   for library_info in all_gdextension_plugins
 } + {
