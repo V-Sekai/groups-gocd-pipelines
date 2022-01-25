@@ -123,8 +123,8 @@ local groups_gdextension_plugins = {
   godot_openvr: {
     name: 'godot_openvr',
     pipeline_name: 'gdextension-godot-openvr',
-    git_url: 'https://github.com/V-Sekai/godot_openvr.git',
-    git_branch: 'groups-4.0',
+    git_url: 'https://github.com/GodotVR/godot_openvr.git',
+    git_branch: '2.0-dev',
     platforms: {
       windows: {
         artifacts: [
@@ -153,6 +153,17 @@ local groups_gdextension_plugins = {
           'cd demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.dll libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll',
         ],
         //install_task: ["mv libGodotSpeech.dll g/addons/godot_speech/bin/libGodotSpeech.dll"],
+      }, 
+      web: {
+        artifacts: [
+        ],
+        output_artifacts: [
+        ],
+        debug_artifacts: [],
+        scons_arguments: '',
+        environment_variables: [],
+        prepare_commands: [],
+        extra_commands: [],
       },
       linux: {
         artifacts: [
