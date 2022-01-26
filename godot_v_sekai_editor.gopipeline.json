@@ -72,7 +72,7 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/godot.linuxbsd.double.opt.tools.64.llvm",
+                     "source": "g/bin/godot.linuxbsd.opt.tools.64.llvm",
                      "type": "build"
                   }
                ],
@@ -94,7 +94,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=linuxbsd target=release_debug -j`nproc` use_lto=no deprecated=no use_static_cpp=yes float=64 use_llvm=yes builtin_freetype=yes custom_modules=../godot_custom_modules"
+                        "scons werror=no platform=linuxbsd target=release_debug -j`nproc` use_lto=no deprecated=no use_static_cpp=yes use_llvm=yes builtin_freetype=yes custom_modules=../godot_custom_modules"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -251,14 +251,14 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "godot-template-groups-4-0",
-                     "source": "godot.linuxbsd.double.opt.tools.64.llvm",
+                     "source": "godot.linuxbsd.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.linuxbsd.double.opt.tools.64.llvm bin/linux_x11_64_debug && cp bin/godot.linuxbsd.double.opt.tools.64.llvm bin/linux_x11_64_release && strip --strip-debug bin/linux_x11_64_release"
+                        "cp bin/godot.linuxbsd.opt.tools.64.llvm bin/linux_x11_64_debug && cp bin/godot.linuxbsd.opt.tools.64.llvm bin/linux_x11_64_release && strip --strip-debug bin/linux_x11_64_release"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
