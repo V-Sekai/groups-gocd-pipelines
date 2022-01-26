@@ -37,6 +37,42 @@ local platform_info_dict = {
     template_output_artifacts: null,
     template_extra_commands: [],
   },
+  windows_double: {
+    platform_name: 'windows',
+    scons_env: 'PATH=/opt/llvm-mingw/bin:$PATH ',
+    intermediate_godot_binary: 'godot.windows.double.opt.tools.64.exe',
+    editor_godot_binary: 'godot.windows.double.opt.tools.64.exe',
+    template_debug_binary: 'windows_64_debug.exe',
+    template_release_binary: 'windows_64_release.exe',
+    export_directory: 'export_windows',
+    scons_platform: 'windows',
+    gdextension_platform: 'windows_godot',
+    strip_command: 'mingw-strip --strip-debug',
+    godot_scons_arguments: "use_mingw=yes use_llvm=yes use_thinlto=yes double=64 LINKFLAGS=-Wl,-pdb= CCFLAGS='-g -gcodeview' debug_symbols=no",
+    extra_commands: [],
+    environment_variables: [],
+    template_artifacts_override: null,
+    template_output_artifacts: null,
+    template_extra_commands: [],
+  },
+  linux_double: {
+    platform_name: 'linux',
+    scons_env: '',
+    intermediate_godot_binary: 'godot.linuxbsd.double.opt.tools.64.llvm',
+    editor_godot_binary: 'godot.linuxbsd.double.opt.tools.64.llvm',
+    template_debug_binary: 'linux_x11_64_debug',
+    template_release_binary: 'linux_x11_64_release',
+    export_directory: 'export_linuxbsd',
+    scons_platform: 'linuxbsd',
+    gdextension_platform: 'linux_goodt',
+    strip_command: 'strip --strip-debug',
+    godot_scons_arguments: 'use_static_cpp=yes double=64 use_llvm=yes builtin_freetype=yes',
+    extra_commands: [],
+    environment_variables: [],
+    template_artifacts_override: null,
+    template_output_artifacts: null,
+    template_extra_commands: [],
+  },
   web: {
     platform_name: 'web',
     scons_env: 'source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ',
@@ -115,8 +151,8 @@ local enabled_engine_platforms = [platform_info_dict[x] for x in ['windows', 'li
 local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'web']];
 local enabled_gdextension_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
 
-local enabled_groups_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'web']];
-local enabled_groups_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'web']];
+local enabled_groups_engine_platforms = [platform_info_dict[x] for x in ['windows_double', 'linux_double', 'web']];
+local enabled_groups_template_platforms = [platform_info_dict[x] for x in ['windows_double', 'linux_double', 'web']];
 
 local groups_gdextension_plugins = {
   godot_openvr: {
