@@ -119,7 +119,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=debug -j`nproc` use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers use_mingw=yes use_llvm=yes LINKFLAGS=-Wl,-pdb= CCFLAGS='-g -gcodeview' debug_symbols=no"
+                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=debug -j`nproc` use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers use_mingw=yes use_llvm=yes use_thinlto=yes LINKFLAGS=-Wl,-pdb= CCFLAGS='-g -gcodeview' debug_symbols=no"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
