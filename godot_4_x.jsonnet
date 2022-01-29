@@ -122,8 +122,8 @@ local groups_gdextension_plugins = {
   godot_openvr: {
     name: 'godot_openvr',
     pipeline_name: 'gdextension-godot-openvr',
-    git_url: 'https://github.com/GodotVR/godot_openvr.git',
-    git_branch: '2.0-dev',
+    git_url: 'https://github.com/V-Sekai/godot_openvr.git',
+    git_branch: 'groups-4.0',
     platforms: {
       windows: {
         artifacts: [
@@ -143,12 +143,13 @@ local groups_gdextension_plugins = {
         environment_variables: [],
         prepare_commands: [
           'python wrap_openvr.py',
-          'rm -f demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll',
+          'rm -f demo/addons/godot-openvr/bin/win64/libgodot_openvr*.dll',
         ],
         extra_commands: [
           'cp -a openvr/bin/win64/openvr_api.dll demo/addons/godot-openvr/bin/win64/openvr_api.dll',
           'cp -a openvr/bin/win64/openvr_api.dll.sig demo/addons/godot-openvr/bin/win64/openvr_api.dll.sig',
           'cp -a openvr/bin/win64/openvr_api.pdb demo/addons/godot-openvr/bin/win64/openvr_api.pdb',
+          'cp -a demo/addons/godot-openvr/bin/win64/libgodot_openvr_debug.dll demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll', // Remove if build release
           'cd demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.dll libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll',
         ],
         //install_task: ["mv libGodotSpeech.dll g/addons/godot_speech/bin/libGodotSpeech.dll"],
@@ -184,6 +185,7 @@ local groups_gdextension_plugins = {
         extra_commands: [
           'cp -a openvr/bin/linux64/libopenvr_api.so demo/addons/godot-openvr/bin/x11/libopenvr_api.so',
           'cp -a openvr/bin/linux64/libopenvr_api.so.dbg demo/addons/godot-openvr/bin/x11/libopenvr_api.so.dbg',
+          'cp -a demo/addons/godot-openvr/bin/x11/libgodot_openvr_debug.so demo/addons/godot-openvr/bin/x11/libgodot_openvr.so', // Remove if build release
           'cd demo/addons/godot-openvr/bin/x11 && mv libgodot_openvr.so libgodot_openvr.dbg.so && strip --strip-debug -o libgodot_openvr.so libgodot_openvr.dbg.so',
         ],
         //install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],

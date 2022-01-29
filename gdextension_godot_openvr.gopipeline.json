@@ -15,13 +15,13 @@
          "type": "dependency"
       },
       {
-         "branch": "2.0-dev",
+         "branch": "groups-4.0",
          "destination": "p",
          "ignore_for_scheduling": false,
          "name": "p",
          "shallow_clone": false,
          "type": "git",
-         "url": "https://github.com/GodotVR/godot_openvr.git"
+         "url": "https://github.com/V-Sekai/godot_openvr.git"
       }
    ],
    "name": "gdextension-godot-openvr",
@@ -107,7 +107,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -f demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll"
+                        "rm -f demo/addons/godot-openvr/bin/win64/libgodot_openvr*.dll"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -144,6 +144,15 @@
                      "arguments": [
                         "-c",
                         "cp -a openvr/bin/win64/openvr_api.pdb demo/addons/godot-openvr/bin/win64/openvr_api.pdb"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a demo/addons/godot-openvr/bin/win64/libgodot_openvr_debug.dll demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -243,6 +252,15 @@
                      "arguments": [
                         "-c",
                         "cp -a openvr/bin/linux64/libopenvr_api.so.dbg demo/addons/godot-openvr/bin/x11/libopenvr_api.so.dbg"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a demo/addons/godot-openvr/bin/x11/libgodot_openvr_debug.so demo/addons/godot-openvr/bin/x11/libgodot_openvr.so"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
