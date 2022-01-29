@@ -152,15 +152,6 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -a demo/addons/godot-openvr/bin/win64/libgodot_openvr_debug.dll demo/addons/godot-openvr/bin/win64/libgodot_openvr.dll"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "p"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
                         "cd demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.dll libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll"
                      ],
                      "command": "/bin/bash",
@@ -252,15 +243,6 @@
                      "arguments": [
                         "-c",
                         "cp -a openvr/bin/linux64/libopenvr_api.so.dbg demo/addons/godot-openvr/bin/x11/libopenvr_api.so.dbg"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "p"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp -a demo/addons/godot-openvr/bin/x11/libgodot_openvr_debug.so demo/addons/godot-openvr/bin/x11/libgodot_openvr.so"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
