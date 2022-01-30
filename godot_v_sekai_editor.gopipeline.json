@@ -106,7 +106,7 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/webassembly_release.zip",
+                     "source": "g/bin/godot.javascript.opt.debug.threads.zip",
                      "type": "build"
                   }
                ],
@@ -133,14 +133,6 @@
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp -p g/bin/godot.javascript.opt.debug.threads.zip g/bin/webassembly_release.zip"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec"
                   }
                ]
             }
@@ -309,13 +301,14 @@
                      "working_directory": "g"
                   },
                   {
-                     "arguments": [
-                        "-c",
-                        "source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp scons werror=no platform=javascript target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes custom_modules=../godot_custom_modules"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
+                     "artifact_origin": "gocd",
+                     "destination": "g/bin/",
+                     "is_source_a_file": true,
+                     "job": "webJob",
+                     "pipeline": "godot-template-groups-4-0",
+                     "source": "godot.javascript.opt.debug.threads.zip",
+                     "stage": "defaultStage",
+                     "type": "fetch"
                   },
                   {
                      "arguments": [

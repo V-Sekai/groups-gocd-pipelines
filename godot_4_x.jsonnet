@@ -41,7 +41,8 @@ local platform_info_dict = {
     platform_name: 'web',
     scons_env: 'source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ',
     intermediate_godot_binary: 'godot.javascript.opt.debug.threads.zip',
-    editor_godot_binary: 'webassembly_release.zip',
+    editor_godot_binary: 'godot.javascript.opt.debug.threads.zip', # Same as intermediate = build only once
+    # editor_godot_binary: 'webassembly_release.zip', # Different than intermediate = build again in export templates
     template_debug_binary: 'webassembly_debug.zip',
     template_release_binary: 'webassembly_release.zip',
     strip_command: null,  // unknown if release should be built separately.
@@ -105,7 +106,7 @@ local platform_info_dict = {
       'cp ./bin/godot.osx.opt.universal osx_template.app/Contents/MacOS/godot_osx_debug.64',
       'chmod +x osx_template.app/Contents/MacOS/godot_osx*',
       'rm -rf bin/osx.zip',
-      'cd bin && zip -9 -r osx.zip osx_template.app/',
+      'cd bin && zip -1 -r osx.zip osx_template.app/',
       'cd .. && rm -rf Godot.app && cp -r ./g/misc/dist/osx_template.app Godot.app',
     ],
   },
