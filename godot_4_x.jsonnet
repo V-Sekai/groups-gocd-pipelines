@@ -934,16 +934,16 @@ local godot_editor_export(
                 source: exe_to_pdb_path(export_info.export_executable),
                 destination: export_info.export_directory,
               } else null,
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                pipeline: pipeline_dependency,
-                stage: 'templateZipStage',
-                job: 'defaultJob',
-                is_source_a_file: true,
-                source: 'godot.templates.tpz',
-                destination: export_info.export_directory,
-              },
+              #{
+              #  type: 'fetch',
+              #  artifact_origin: 'gocd',
+              #  pipeline: pipeline_dependency,
+              #  stage: 'templateZipStage',
+              #  job: 'defaultJob',
+              #  is_source_a_file: true,
+              #  source: 'godot.templates.tpz',
+              #  destination: export_info.export_directory,
+              #},
               {
                 type: 'exec',
                 arguments: [
