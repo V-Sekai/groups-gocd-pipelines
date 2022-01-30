@@ -594,7 +594,7 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                'zip -9 godot.templates.tpz templates/*',
+                'zip -1 godot.templates.tpz templates/*',
               ],
               command: '/bin/bash',
             },
