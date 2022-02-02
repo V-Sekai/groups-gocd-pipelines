@@ -12,7 +12,7 @@ local platform_info_dict = {
     scons_platform: 'windows',
     gdextension_platform: 'windows',
     strip_command: 'mingw-strip --strip-debug',
-    godot_scons_arguments: "use_mingw=yes use_llvm=yes use_thinlto=no LINKFLAGS=-Wl,-pdb= CPPFLAGS=-Wno-tautological-compare CCFLAGS='-g -gcodeview' debug_symbols=no",
+    godot_scons_arguments: "use_mingw=yes use_llvm=yes use_thinlto=no warnings=moderate LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wno-tautological-compare -g -gcodeview' debug_symbols=no",
     extra_commands: [],
     environment_variables: [],
     template_artifacts_override: null,
@@ -48,7 +48,8 @@ local platform_info_dict = {
     strip_command: null,  // unknown if release should be built separately.
     scons_platform: 'javascript',
     gdextension_platform: 'linux',  // TODO: We need godot_speech for web.
-    godot_scons_arguments: 'use_llvm=yes builtin_freetype=yes',
+    // With default of 64, we got "wasm-ld: error: initial memory too small, 116149008 bytes needed"
+    godot_scons_arguments: 'use_llvm=yes builtin_freetype=yes initial_memory=256',
     extra_commands: [],
     environment_variables: [],
     template_artifacts_override: null,
