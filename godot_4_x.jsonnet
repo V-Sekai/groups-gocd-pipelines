@@ -1,18 +1,18 @@
-local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.double.opt.tools.64.llvm';
+local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.opt.tools.64.llvm';
 
 local platform_info_dict = {
   windows: {
     platform_name: 'windows',
     scons_env: 'PATH=/opt/llvm-mingw/bin:$PATH ',
-    intermediate_godot_binary: 'godot.windows.double.opt.tools.64.exe',
-    editor_godot_binary: 'godot.windows.double.opt.tools.64.exe',
+    intermediate_godot_binary: 'godot.windows.opt.tools.64.exe',
+    editor_godot_binary: 'godot.windows.opt.tools.64.exe',
     template_debug_binary: 'windows_64_debug.exe',
     template_release_binary: 'windows_64_release.exe',
     export_directory: 'export_windows',
     scons_platform: 'windows',
     gdextension_platform: 'windows',
     strip_command: 'mingw-strip --strip-debug',
-    godot_scons_arguments: "float=64 use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no",
+    godot_scons_arguments: "use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no",
     extra_commands: [],
     environment_variables: [],
     template_artifacts_override: null,
@@ -22,15 +22,15 @@ local platform_info_dict = {
   linux: {
     platform_name: 'linux',
     scons_env: '',
-    intermediate_godot_binary: 'godot.linuxbsd.double.opt.tools.64.llvm',
-    editor_godot_binary: 'godot.linuxbsd.double.opt.tools.64.llvm',
+    intermediate_godot_binary: 'godot.linuxbsd.opt.tools.64.llvm',
+    editor_godot_binary: 'godot.linuxbsd.opt.tools.64.llvm',
     template_debug_binary: 'linux_x11_64_debug',
     template_release_binary: 'linux_x11_64_release',
     export_directory: 'export_linuxbsd',
     scons_platform: 'linuxbsd',
     gdextension_platform: 'linux',
     strip_command: 'strip --strip-debug',
-    godot_scons_arguments: 'use_static_cpp=yes float=64 use_llvm=yes builtin_freetype=yes',
+    godot_scons_arguments: 'use_static_cpp=yes use_llvm=yes builtin_freetype=yes',
     extra_commands: [],
     environment_variables: [],
     template_artifacts_override: null,
@@ -269,7 +269,7 @@ local stern_flowers_export_configurations = {
     gdextension_platform: 'windows',
     export_configuration: 'Windows Desktop',
     export_directory: 'export_windows',
-    export_executable: 'godot.windows.double.opt.tools.64.exe',
+    export_executable: 'godot.windows.opt.tools.64.exe',
     itchio_out: 'windows-master',
     prepare_commands: [
     ],
@@ -282,7 +282,7 @@ local stern_flowers_export_configurations = {
     gdextension_platform: 'linux',
     export_configuration: 'Linux/X11',
     export_directory: 'export_linuxbsd',
-    export_executable: 'godot.linuxbsd.double.opt.tools.64.llvm',
+    export_executable: 'godot.linuxbsd.opt.tools.64.llvm',
     itchio_out: 'linux-master',
     prepare_commands: [
     ],
@@ -1049,7 +1049,7 @@ local godot_tools_pipeline_export(
                 stage: 'defaultStage',
                 job: 'linuxJob',
                 is_source_a_file: true,
-                source: 'godot.linuxbsd.double.opt.tools.64.llvm',
+                source: 'godot.linuxbsd.opt.tools.64.llvm',
                 destination: '',
               },
             ] + std.flatMap(function(library_info) [
@@ -1114,7 +1114,7 @@ local godot_tools_pipeline_export(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'rm -rf ' + export_info.export_directory + ' && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.double.opt.tools.64.llvm' + ' && XDG_DATA_HOME=`pwd`/.local/share/ ./godot.linuxbsd.double.opt.tools.64.llvm --headless --export "' + export_info.export_configuration + '" `pwd`/' + export_info.export_directory + '/' + export_info.export_executable + ' --path g',
+                  'rm -rf ' + export_info.export_directory + ' && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.opt.tools.64.llvm' + ' && XDG_DATA_HOME=`pwd`/.local/share/ ./godot.linuxbsd.opt.tools.64.llvm --headless --export "' + export_info.export_configuration + '" `pwd`/' + export_info.export_directory + '/' + export_info.export_executable + ' --path g',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
