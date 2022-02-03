@@ -49,7 +49,7 @@ local platform_info_dict = {
     scons_platform: 'javascript',
     gdextension_platform: 'linux',  // TODO: We need godot_speech for web.
     // With default of 64, we got "wasm-ld: error: initial memory too small, 116149008 bytes needed"
-    godot_scons_arguments: 'use_llvm=yes builtin_freetype=yes initial_memory=256',
+    godot_scons_arguments: "use_llvm=yes builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'",
     extra_commands: [],
     environment_variables: [],
     template_artifacts_override: null,
