@@ -1383,7 +1383,6 @@ local godot_template_stern_flowers_export = 'stern-flowers-editor-4-0';
 local godot_gdextension_pipelines = [plugin_info.pipeline_name for plugin_info in all_gdextension_plugins];
 
 local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdextension_pipelines + [godot_template_groups_export] + [godot_template_groups];
-local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [godot_template_stern_flowers_export];
 
 {
   'env.fire.goenvironment.json': {
@@ -1392,21 +1391,6 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
     environment_variables:
       [],
   },
-  'env.stern-flowers.goenvironment.json': {
-    name: 'itch-stern-flowers',
-    pipelines: itch_stern_flowers_template,
-    environment_variables:
-      [],
-  },
-  // STERN FLOWERS
-  'godot_stern_flowers_editor.gopipeline.json'
-  : std.prune(godot_pipeline(
-    pipeline_name=godot_template_stern_flowers_editor,
-    godot_status='stern-flowers-4.0',
-    godot_git='https://github.com/godotengine/godot.git',
-    godot_branch='master',
-    gocd_group='delta',
-  )),
   // GROUPS 4.x
   'godot_v_sekai_editor.gopipeline.json'
   : std.prune(godot_pipeline(
@@ -1467,17 +1451,6 @@ local itch_stern_flowers_template = [godot_template_stern_flowers_editor] + [god
     )
   ),
 } + {
-  'godot_stern_flowers_editor_export.gopipeline.json'
-  : std.prune(
-    godot_editor_export(
-      pipeline_name=godot_template_stern_flowers_export,
-      pipeline_dependency=godot_template_stern_flowers_editor,
-      itchio_login='ifiregames/stern-flowers-chibifire-com-godot-engine',
-      gocd_group='delta',
-      godot_status='stern-flowers-4.0',
-      enabled_export_platforms=enabled_stern_flowers_export_platforms,
-    )
-  ),
   'docker_groups.gopipeline.json'
   : std.prune(
     build_docker_server(
