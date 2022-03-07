@@ -117,8 +117,8 @@ local enabled_engine_platforms = [platform_info_dict[x] for x in ['windows', 'li
 local enabled_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'web']];
 local enabled_gdextension_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
 
-local enabled_groups_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
-local enabled_groups_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux']];
+local enabled_groups_engine_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'web']];
+local enabled_groups_template_platforms = [platform_info_dict[x] for x in ['windows', 'linux', 'web']];
 
 local groups_gdextension_plugins = {
   godot_openvr: {
