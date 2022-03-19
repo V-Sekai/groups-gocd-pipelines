@@ -27,7 +27,7 @@
    "name": "godot-template-groups-4-0",
    "stages": [
       {
-         "clean_workspace": true,
+         "clean_workspace": false,
          "jobs": [
             {
                "artifacts": [
