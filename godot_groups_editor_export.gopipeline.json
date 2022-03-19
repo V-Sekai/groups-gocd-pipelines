@@ -34,7 +34,7 @@
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "godot-template-groups-4-0",
-                     "source": "godot.windows.opt.tools.64.exe",
+                     "source": "godot.windows.double.opt.tools.64.exe",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
@@ -44,7 +44,7 @@
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "godot-template-groups-4-0",
-                     "source": "godot.windows.opt.tools.64.pdb",
+                     "source": "godot.windows.double.opt.tools.64.pdb",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
@@ -72,7 +72,7 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "godot-template-groups-4-0",
-                     "source": "godot.linuxbsd.opt.tools.64.llvm",
+                     "source": "godot.linuxbsd.double.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
