@@ -59,7 +59,7 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "godot-template-groups-4-0",
-                     "source": "godot.linuxbsd.opt.tools.64.llvm",
+                     "source": "godot.linuxbsd.double.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
@@ -84,7 +84,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_windows && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir export_windows && chmod +x godot.linuxbsd.opt.tools.64.llvm && XDG_DATA_HOME=`pwd`/.local/share/ ./godot.linuxbsd.opt.tools.64.llvm --headless --export \"Windows Desktop\" \"`pwd`/export_windows/v_sekai_windows.exe\" --path g || [ -f \"`pwd`/export_windows/v_sekai_windows.exe\" ]"
+                        "rm -rf export_windows && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir export_windows && chmod +x godot.linuxbsd.double.opt.tools.64.llvm && XDG_DATA_HOME=`pwd`/.local/share/ ./godot.linuxbsd.double.opt.tools.64.llvm --headless --export \"Windows Desktop\" \"`pwd`/export_windows/v_sekai_windows.exe\" --path g || [ -f \"`pwd`/export_windows/v_sekai_windows.exe\" ]"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -122,7 +122,7 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "godot-template-groups-4-0",
-                     "source": "godot.linuxbsd.opt.tools.64.llvm",
+                     "source": "godot.linuxbsd.double.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
@@ -147,7 +147,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_linuxbsd && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir export_linuxbsd && chmod +x godot.linuxbsd.opt.tools.64.llvm && XDG_DATA_HOME=`pwd`/.local/share/ ./godot.linuxbsd.opt.tools.64.llvm --headless --export \"Linux/X11\" \"`pwd`/export_linuxbsd/v_sekai_linuxbsd\" --path g || [ -f \"`pwd`/export_linuxbsd/v_sekai_linuxbsd\" ]"
+                        "rm -rf export_linuxbsd && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir export_linuxbsd && chmod +x godot.linuxbsd.double.opt.tools.64.llvm && XDG_DATA_HOME=`pwd`/.local/share/ ./godot.linuxbsd.double.opt.tools.64.llvm --headless --export \"Linux/X11\" \"`pwd`/export_linuxbsd/v_sekai_linuxbsd\" --path g || [ -f \"`pwd`/export_linuxbsd/v_sekai_linuxbsd\" ]"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
