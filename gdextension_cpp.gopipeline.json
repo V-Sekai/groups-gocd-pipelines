@@ -15,13 +15,13 @@
          "type": "dependency"
       },
       {
-         "branch": "groups-4.0",
+         "branch": "master",
          "destination": "godot-cpp",
          "ignore_for_scheduling": false,
          "name": "godot-cpp",
          "shallow_clone": false,
          "type": "git",
-         "url": "https://github.com/V-Sekai/godot-cpp.git"
+         "url": "https://github.com/godotengine/godot-cpp.git"
       },
       {
          "branch": "master",
