@@ -40,8 +40,8 @@ local platform_info_dict = {
   web: {
     platform_name: 'web',
     scons_env: 'source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ',
-    intermediate_godot_binary: 'godot.javascript.double.opt.debug.threads.zip',
-    editor_godot_binary: 'godot.javascript.double.opt.debug.threads.zip', # Same as intermediate = build only once
+    intermediate_godot_binary: 'godot.javascript.opt.debug.threads.zip',
+    editor_godot_binary: 'godot.javascript.opt.debug.threads.zip', # Same as intermediate = build only once
     # editor_godot_binary: 'webassembly_release.zip', # Different than intermediate = build again in export templates
     template_debug_binary: 'webassembly_debug.zip',
     template_release_binary: 'webassembly_release.zip',
