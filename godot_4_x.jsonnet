@@ -366,7 +366,7 @@ local godot_pipeline(pipeline_name='',
   stages: [
     {
       name: 'defaultStage',
-      clean_workspace: false,
+      clean_workspace: true,
       jobs: [
         {
           name: platform_info.platform_name + 'Job',
