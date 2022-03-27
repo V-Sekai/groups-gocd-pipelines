@@ -1,7 +1,7 @@
-local groups_export = import '../lib/groups_export.libsonnet';
-local groups_gdextension = import '../lib/groups_gdextension.libsonnet';
-local platform = import '../lib/platform_dict.libsonnet';
-local stern_flowers_export = import '../lib/stern_flowers_export.libsonnet';
+local groups_export = import '../lib/groups_export.json';
+local groups_gdextension = import '../lib/groups_gdextension.json';
+local platform = import '../lib/platform_dict.json';
+local stern_flowers_export = import '../lib/stern_flowers_export.json';
 local templates = import '../lib/templates.libsonnet';
 
 local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.opt.tools.64.llvm';
