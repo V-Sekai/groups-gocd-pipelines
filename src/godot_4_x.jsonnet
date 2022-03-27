@@ -90,65 +90,6 @@ local groups_gdextension_plugins = {
     },
   },
 };
-
-// TODO: Use std.escapeStringBash in case export configurations wish to output executables with spaces.
-local groups_export_configurations = {
-  windows: {
-    export_name: 'windows',
-    platform_name: 'windows',
-    gdextension_platform: 'windows',
-    export_configuration: 'Windows Desktop',
-    export_directory: 'export_windows',
-    export_executable: 'v_sekai_windows.exe',
-    itchio_out: 'windows-master',
-    prepare_commands: [
-    ],
-    extra_commands: [
-    ],
-  },
-  linuxDesktop: {
-    export_name: 'linuxDesktop',
-    platform_name: 'linux',
-    gdextension_platform: 'linux',
-    export_configuration: 'Linux/X11',
-    export_directory: 'export_linuxbsd',
-    export_executable: 'v_sekai_linuxbsd',
-    itchio_out: 'linux-master',
-    prepare_commands: [
-    ],
-    extra_commands: [
-    ],
-  },
-  macos: {
-    export_name: 'macos',
-    platform_name: 'macos',
-    gdextension_platform: 'osx',
-    export_configuration: 'Mac OSX',
-    export_directory: 'export_macos',
-    export_executable: 'macos.zip',
-    itchio_out: 'macos',
-    prepare_commands: [
-    ],
-    extra_commands: [
-      // https://itch.io/t/303643/cant-get-a-mac-app-to-run-after-butler-push-resolved
-      'cd export_macos && unzip macos.zip && rm macos.zip',
-    ],
-  },
-  web: {
-    export_name: 'web',
-    platform_name: 'web',
-    gdextension_platform: 'linux',
-    export_configuration: 'HTML5',
-    export_directory: 'export_web',
-    export_executable: 'v_sekai_web.html',
-    itchio_out: null,
-    prepare_commands: [
-    ],
-    extra_commands: [
-    ],
-  },
-};
-
 // TODO: Use std.escapeStringBash in case export configurations wish to output executables with spaces.
 local stern_flowers_export_configurations = {
   windows: {
@@ -207,9 +148,9 @@ local stern_flowers_export_configurations = {
   },
 };
 
-
 local enabled_stern_flowers_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
-local enabled_groups_export_platforms = [groups_export_configurations[x] for x in ['windows', 'linuxDesktop']];
+local groups_export = import '../lib/groups_export.libsonnet';
+local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 
 local all_gdextension_plugins = [groups_gdextension_plugins[x] for x in ['godot_openvr']];
 
@@ -941,7 +882,7 @@ local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_ag
       gocd_group='beta',
       godot_status='docker',
       docker_repo_groups_server='groupsinfra/groups-server',
-      server_export_info=groups_export_configurations.linuxDesktop,
+      server_export_info=groups_export.groups_export_configurations.linuxDesktop,
     )
   ),
   'docker_gocd_agent.gopipeline.json'
