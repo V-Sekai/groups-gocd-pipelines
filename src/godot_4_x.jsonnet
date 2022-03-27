@@ -90,65 +90,8 @@ local groups_gdextension_plugins = {
     },
   },
 };
-// TODO: Use std.escapeStringBash in case export configurations wish to output executables with spaces.
-local stern_flowers_export_configurations = {
-  windows: {
-    export_name: 'windows',
-    platform_name: 'windows',
-    gdextension_platform: 'windows',
-    export_configuration: 'Windows Desktop',
-    export_directory: 'export_windows',
-    export_executable: 'godot.windows.opt.tools.64.exe',
-    itchio_out: 'windows-master',
-    prepare_commands: [
-    ],
-    extra_commands: [
-    ],
-  },
-  linuxDesktop: {
-    export_name: 'linuxDesktop',
-    platform_name: 'linux',
-    gdextension_platform: 'linux',
-    export_configuration: 'Linux/X11',
-    export_directory: 'export_linuxbsd',
-    export_executable: 'godot.linuxbsd.opt.tools.64.llvm',
-    itchio_out: 'linux-master',
-    prepare_commands: [
-    ],
-    extra_commands: [
-    ],
-  },
-  macos: {
-    export_name: 'macos',
-    platform_name: 'macos',
-    gdextension_platform: 'osx',
-    export_configuration: 'Mac OSX',
-    export_directory: 'export_macos',
-    export_executable: 'macos.zip',
-    itchio_out: 'macos',
-    prepare_commands: [
-    ],
-    extra_commands: [
-      // https://itch.io/t/303643/cant-get-a-mac-app-to-run-after-butler-push-resolved
-      'cd export_macos && unzip macos.zip && rm macos.zip',
-    ],
-  },
-  web: {
-    export_name: 'web',
-    platform_name: 'web',
-    gdextension_platform: 'linux',
-    export_configuration: 'HTML5',
-    export_directory: 'export_web',
-    export_executable: 'godot_web.html',
-    itchio_out: 'web',
-    prepare_commands: [
-    ],
-    extra_commands: [
-    ],
-  },
-};
-
-local enabled_stern_flowers_export_platforms = [stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
+local stern_flowers_export = import '../lib/stern_flowers_export.libsonnet';
+local enabled_stern_flowers_export_platforms = [stern_flowers_export.stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 local groups_export = import '../lib/groups_export.libsonnet';
 local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 
