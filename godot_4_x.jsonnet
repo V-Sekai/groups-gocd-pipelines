@@ -325,7 +325,7 @@ local enabled_groups_export_platforms = [groups_export_configurations[x] for x i
 
 local all_gdextension_plugins = [groups_gdextension_plugins[x] for x in ['godot_openvr']];
 
-local exe_to_pdb_path(binary) = (std.substr(binary, 0, std.length(binary) - 4) + '.pdb');
+local templates = import 'templates.libsonnet';
 
 local godot_pipeline(pipeline_name='',
                      godot_status='',
@@ -381,7 +381,7 @@ local godot_pipeline(pipeline_name='',
               type: 'build',
             },
             if std.endsWith(platform_info.editor_godot_binary, '.exe') then {
-              source: 'g/bin/' + exe_to_pdb_path(platform_info.editor_godot_binary),
+              source: 'g/bin/' + templates.exe_to_pdb_path(platform_info.editor_godot_binary),
               destination: '',
               type: 'build',
             } else null,
@@ -561,7 +561,7 @@ local godot_pipeline(pipeline_name='',
               type: 'fetch',
               artifact_origin: 'gocd',
               is_source_a_file: true,
-              source: exe_to_pdb_path(platform_info_dict.windows.editor_godot_binary),
+              source: templates.exe_to_pdb_path(platform_info_dict.windows.editor_godot_binary),
               destination: 'templates',
               pipeline: pipeline_name,
               stage: 'defaultStage',
@@ -932,7 +932,7 @@ local godot_editor_export(
                 stage: 'defaultStage',
                 job: export_info.platform_name + 'Job',
                 is_source_a_file: true,
-                source: exe_to_pdb_path(export_info.export_executable),
+                source: templates.exe_to_pdb_path(export_info.export_executable),
                 destination: export_info.export_directory,
               } else null,
               //{
@@ -963,218 +963,6 @@ local godot_editor_export(
     ],
   };
 
-local godot_tools_pipeline_export(
-  pipeline_name='',
-  pipeline_dependency='',
-  gdextension_plugins=[],
-  itchio_login='',
-  gocd_group='',
-  godot_status='',
-  gocd_project_folder='',
-  project_git='',
-  project_branch='',
-  enabled_export_platforms=[],
-  vsk=true,
-      ) =
-  {
-    name: pipeline_name,
-    group: gocd_group,
-    label_template: godot_status + '.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
-    environment_variables:
-      [{
-        name: 'GODOT_STATUS',
-        value: godot_status,
-      }],
-    materials: [
-      {
-        name: 'project_git_sandbox',
-        url: project_git,
-        type: 'git',
-        branch: project_branch,
-        destination: 'g',
-      },
-      {
-        name: pipeline_dependency + '_pipeline_dependency',
-        type: 'dependency',
-        pipeline: pipeline_dependency,
-        stage: 'templateZipStage',
-        ignore_for_scheduling: false,
-      },
-    ] + [
-      {
-        name: library_info.pipeline_name + '_pipeline_dependency',
-        type: 'dependency',
-        pipeline: library_info.pipeline_name,
-        stage: 'gdextensionBuildStage',
-        ignore_for_scheduling: false,
-      }
-      for library_info in gdextension_plugins
-    ],
-    stages: [
-      {
-        name: 'exportStage',
-        clean_workspace: false,
-        fetch_materials: true,
-        jobs: [
-          {
-            name: export_info.export_name + 'Job',
-            resources: [
-              'linux',
-              'mingw5',
-            ],
-            artifacts: [
-              {
-                type: 'build',
-                source: export_info.export_directory,
-                destination: '',
-              },
-            ],
-            environment_variables:
-              [],
-            tasks: [
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                pipeline: pipeline_dependency,
-                stage: 'templateZipStage',
-                job: 'defaultJob',
-                is_source_a_file: true,
-                source: 'godot.templates.tpz',
-                destination: '',
-              },
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                pipeline: pipeline_dependency,
-                stage: 'defaultStage',
-                job: 'linuxJob',
-                is_source_a_file: true,
-                source: 'godot.linuxbsd.opt.tools.64.llvm',
-                destination: '',
-              },
-            ] + std.flatMap(function(library_info) [
-                              {
-                                type: 'fetch',
-                                artifact_origin: 'gocd',
-                                pipeline: library_info.pipeline_name,
-                                stage: 'gdextensionBuildStage',
-                                job: export_info.gdextension_platform + 'Job',
-                                is_source_a_file: true,
-                                source: artifact,
-                                destination: library_info.name,
-                              }
-                              for artifact in library_info.platforms[export_info.gdextension_platform].output_artifacts
-                            ],
-                            gdextension_plugins) + std.flatMap(function(library_info) [
-                                                                 if std.endsWith(artifact, '.dll') && artifact != 'openvr_api.dll' then {
-                                                                   type: 'fetch',
-                                                                   artifact_origin: 'gocd',
-                                                                   pipeline: library_info.pipeline_name,
-                                                                   stage: 'gdextensionBuildStage',
-                                                                   job: export_info.gdextension_platform + 'Job',
-                                                                   is_source_a_file: true,
-                                                                   source: 'debug/' + exe_to_pdb_path(artifact),
-                                                                   destination: library_info.name,
-                                                                 } else null
-                                                                 for artifact in library_info.platforms[export_info.gdextension_platform].output_artifacts
-                                                               ],
-                                                               gdextension_plugins) + [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'rm -rf templates && unzip "godot.templates.tpz" && mkdir pdbs && mv templates/*.pdb pdbs && export VERSION="`cat templates/version.txt`" && export TEMPLATEDIR=".local/share/godot/templates/$VERSION/" && export HOME="`pwd`" && export BASEDIR="`pwd`" && rm -rf "$TEMPLATEDIR" && mkdir -p "$TEMPLATEDIR" && cd "$TEMPLATEDIR" && mv "$BASEDIR"/templates/* .',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-            ] + [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  extra_task,
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              }
-              for extra_task in export_info.prepare_commands
-            ] + [
-              if vsk then
-                {
-                  type: 'exec',
-                  arguments: [
-                    '-c',
-                    '(echo "## AUTOGENERATED BY BUILD"; echo ""; echo "const BUILD_LABEL = \\"$GO_PIPELINE_LABEL\\""; echo "const BUILD_DATE_STR = \\"$(date --utc --iso=seconds)\\""; echo "const BUILD_UNIX_TIME = $(date +%s)" ) > addons/vsk_version/build_constants.gd',
-                  ],
-                  command: '/bin/bash',
-                  working_directory: 'g',
-                } else null,
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'rm -rf ' + export_info.export_directory + ' && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.opt.tools.64.llvm' + ' && XDG_DATA_HOME=`pwd`/.local/share/ ./godot.linuxbsd.opt.tools.64.llvm --headless --export "' + export_info.export_configuration + '" "`pwd`/' + export_info.export_directory + '/' + export_info.export_executable + '" --path g || [ -f "`pwd`/' + export_info.export_directory + '/' + export_info.export_executable + '" ]',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-            ] + [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  extra_task,
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              }
-              for extra_task in export_info.extra_commands
-            ],
-          }
-          for export_info in enabled_export_platforms
-        ],
-      },
-      {
-        name: 'uploadStage',
-        clean_workspace: false,
-        jobs: [
-          {
-            name: export_info.export_name + 'Job',
-            resources: [
-              'linux',
-              'mingw5',
-            ],
-            tasks: [
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                pipeline: pipeline_name,
-                stage: 'exportStage',
-                job: export_info.export_name + 'Job',
-                is_source_a_file: false,
-                source: export_info.export_directory,
-                destination: '',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'butler push ' + export_info.export_directory + ' ' + itchio_login + ':' + export_info.itchio_out + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-            ],
-          }
-          for export_info in enabled_export_platforms
-          if export_info.itchio_out != null
-        ],
-      },
-    ],
-  };
-
-
 local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
 local docker_gocd_agent_pipeline = 'docker-gocd-agent-centos-8-groups';
@@ -1186,9 +974,6 @@ local godot_cpp_pipeline = 'gdextension-cpp';
 local godot_gdextension_pipelines = [plugin_info.pipeline_name for plugin_info in all_gdextension_plugins];
 
 local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdextension_pipelines + [godot_template_groups_export] + [godot_template_groups];
-
-local templates = import 'templates.libsonnet';
-
 
 {
   'env.fire.goenvironment.json': {
@@ -1244,7 +1029,7 @@ local templates = import 'templates.libsonnet';
 } + {
   'godot_template_groups_export.gopipeline.json'
   : std.prune(
-    godot_tools_pipeline_export(
+    templates.godot_tools_pipeline_export(
       pipeline_name=godot_template_groups,
       pipeline_dependency=godot_template_groups_editor,
       itchio_login='saracenone/groups-4x',
