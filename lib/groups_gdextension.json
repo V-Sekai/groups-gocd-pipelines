@@ -30,7 +30,6 @@
             "cp -a openvr/bin/win64/openvr_api.pdb demo/addons/godot-openvr/bin/win64/openvr_api.pdb",
             "cd demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.dll libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll"
           ]
-          //install_task: ["mv libGodotSpeech.dll g/addons/godot_speech/bin/libGodotSpeech.dll"],
         },
         "web": {
           "artifacts": [],
@@ -60,7 +59,6 @@
             "cp -a openvr/bin/linux64/libopenvr_api.so.dbg demo/addons/godot-openvr/bin/x11/libopenvr_api.so.dbg",
             "cd demo/addons/godot-openvr/bin/x11 && mv libgodot_openvr.so libgodot_openvr.dbg.so && strip --strip-debug -o libgodot_openvr.so libgodot_openvr.dbg.so"
           ]
-          //install_task: ["mv libGodotSpeech.so g/addons/godot_speech/bin/libGodotSpeech.so"],
         },
         "osx": {
           "artifacts": [],

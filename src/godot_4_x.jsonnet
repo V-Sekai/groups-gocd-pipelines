@@ -635,16 +635,6 @@ local godot_editor_export(
                 source: templates.exe_to_pdb_path(export_info.export_executable),
                 destination: export_info.export_directory,
               } else null,
-              //{
-              //  type: 'fetch',
-              //  artifact_origin: 'gocd',
-              //  pipeline: pipeline_dependency,
-              //  stage: 'templateZipStage',
-              //  job: 'defaultJob',
-              //  is_source_a_file: true,
-              //  source: 'godot.templates.tpz',
-              //  destination: export_info.export_directory,
-              //},
               {
                 type: 'exec',
                 arguments: [
@@ -670,7 +660,6 @@ local godot_editor_export(
     environment_variables:
       [],
   },
-  // GROUPS 4.x
   'godot_v_sekai_editor.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_groups_editor,

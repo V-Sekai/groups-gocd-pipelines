@@ -1,5 +1,4 @@
 {
-  // TODO: Use std.escapeStringBash in case export configurations wish to output executables with spaces.
   "stern_flowers_export_configurations": {
     "windows": {
       "export_name": "windows",
@@ -33,7 +32,6 @@
       "itchio_out": "macos",
       "prepare_commands": [],
       "extra_commands": [
-        // https://itch.io/t/303643/cant-get-a-mac-app-to-run-after-butler-push-resolved
         "cd export_macos && unzip macos.zip && rm macos.zip"
       ]
     },
