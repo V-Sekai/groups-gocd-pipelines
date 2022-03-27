@@ -1,3 +1,4 @@
-rm *.json
-jsonnet -m . src/godot_4_x.jsonnet
-dos2unix .\*.json
+rm -rf build
+mkdir -p build
+jsonnet -m build src/godot_4_x.jsonnet
+dos2unix build/*.json
