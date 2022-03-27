@@ -41,8 +41,8 @@ local platform_info_dict = {
     platform_name: 'web',
     scons_env: 'source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ',
     intermediate_godot_binary: 'godot.javascript.opt.debug.threads.zip',
-    editor_godot_binary: 'godot.javascript.opt.debug.threads.zip', # Same as intermediate = build only once
-    # editor_godot_binary: 'webassembly_release.zip', # Different than intermediate = build again in export templates
+    editor_godot_binary: 'godot.javascript.opt.debug.threads.zip',  // Same as intermediate = build only once
+    // editor_godot_binary: 'webassembly_release.zip', # Different than intermediate = build again in export templates
     template_debug_binary: 'webassembly_debug.zip',
     template_release_binary: 'webassembly_release.zip',
     strip_command: null,  // unknown if release should be built separately.
@@ -154,7 +154,7 @@ local groups_gdextension_plugins = {
           'cd demo/addons/godot-openvr/bin/win64 && mv libgodot_openvr.dll libgodot_openvr.dbg.dll && mingw-strip --strip-debug -o libgodot_openvr.dll libgodot_openvr.dbg.dll',
         ],
         //install_task: ["mv libGodotSpeech.dll g/addons/godot_speech/bin/libGodotSpeech.dll"],
-      }, 
+      },
       web: {
         artifacts: [
         ],
@@ -935,16 +935,16 @@ local godot_editor_export(
                 source: exe_to_pdb_path(export_info.export_executable),
                 destination: export_info.export_directory,
               } else null,
-              #{
-              #  type: 'fetch',
-              #  artifact_origin: 'gocd',
-              #  pipeline: pipeline_dependency,
-              #  stage: 'templateZipStage',
-              #  job: 'defaultJob',
-              #  is_source_a_file: true,
-              #  source: 'godot.templates.tpz',
-              #  destination: export_info.export_directory,
-              #},
+              //{
+              //  type: 'fetch',
+              //  artifact_origin: 'gocd',
+              //  pipeline: pipeline_dependency,
+              //  stage: 'templateZipStage',
+              //  job: 'defaultJob',
+              //  is_source_a_file: true,
+              //  source: 'godot.templates.tpz',
+              //  destination: export_info.export_directory,
+              //},
               {
                 type: 'exec',
                 arguments: [
@@ -1243,7 +1243,7 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'ls "g/' + docker_groups_dir + '"'
+                  'ls "g/' + docker_groups_dir + '"',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1252,7 +1252,7 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'chmod 01777 "g/' + docker_groups_dir + '/' + server_export_info.export_directory + '"'
+                  'chmod 01777 "g/' + docker_groups_dir + '/' + server_export_info.export_directory + '"',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1261,7 +1261,7 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'chmod a+x g/"' + docker_groups_dir + '/' + server_export_info.export_directory + '/' + server_export_info.export_executable +'"'
+                  'chmod a+x g/"' + docker_groups_dir + '/' + server_export_info.export_directory + '/' + server_export_info.export_executable + '"',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1269,14 +1269,14 @@ local build_docker_server(
               {
                 type: 'exec',
                 arguments: [
-                  '-c', 
+                  '-c',
                   'docker build -t ' + docker_repo_groups_server + ':$GO_PIPELINE_LABEL' +
                   ' --build-arg SERVER_EXPORT="' + server_export_info.export_directory + '"' +
                   ' --build-arg GODOT_REVISION="master"' +
                   ' --build-arg USER=1234' +
                   ' --build-arg HOME=/server' +
                   ' --build-arg GROUPS_REVISION="$GO_PIPELINE_LABEL"' +
-                  ' g/"' + docker_groups_dir + '"'
+                  ' g/"' + docker_groups_dir + '"',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1285,7 +1285,7 @@ local build_docker_server(
                 type: 'exec',
                 arguments: [
                   '-c',
-                  'docker push "'+ docker_repo_groups_server + ':$GO_PIPELINE_LABEL"',
+                  'docker push "' + docker_repo_groups_server + ':$GO_PIPELINE_LABEL"',
                 ],
                 command: '/bin/bash',
                 working_directory: '',
@@ -1306,67 +1306,6 @@ local build_docker_server(
     ],
   };
 
-
-local simple_docker_job(pipeline_name='',
-                        gocd_group='',
-                        docker_repo_variable='',
-                        docker_git='',
-                        docker_branch='',
-                        docker_dir='') =
-  {
-    name: pipeline_name,
-    group: gocd_group,
-    label_template: pipeline_name +'_${' + pipeline_name + '_git[:8]}.${COUNT}',
-    environment_variables:
-      [],
-    materials: [
-      {
-        name: pipeline_name + '_git',
-        url: docker_git,
-        type: 'git',
-        branch: docker_branch,
-        destination: 'g',
-      },
-    ],
-    stages: [
-      {
-        name: 'buildPushStage',
-        clean_workspace: false,
-        fetch_materials: true,
-        jobs: [
-          {
-            name: 'dockerJob',
-            resources: [
-              'dind',
-            ],
-            artifacts: [
-              {
-                type: 'build',
-                source: 'docker_image.txt',
-                destination: '',
-              },
-            ],
-            environment_variables:
-              [],
-            tasks: [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'set -x' +      
-                  '; docker build -t "' + docker_repo_variable + ':$GO_PIPELINE_LABEL"' +
-                  ' "g/' + docker_dir + '" && docker push "' + docker_repo_variable + ':$GO_PIPELINE_LABEL"' +
-                  ' && echo "' + docker_repo_variable + ':$GO_PIPELINE_LABEL" > docker_image.txt',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  };
 local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
 local docker_gocd_agent_pipeline = 'docker-gocd-agent-centos-8-groups';
@@ -1378,6 +1317,9 @@ local godot_cpp_pipeline = 'gdextension-cpp';
 local godot_gdextension_pipelines = [plugin_info.pipeline_name for plugin_info in all_gdextension_plugins];
 
 local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdextension_pipelines + [godot_template_groups_export] + [godot_template_groups];
+
+local templates = import 'templates.libsonnet';
+
 
 {
   'env.fire.goenvironment.json': {
@@ -1462,7 +1404,7 @@ local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_ag
   ),
   'docker_gocd_agent.gopipeline.json'
   : std.prune(
-    simple_docker_job(
+    templates.simple_docker_job(
       pipeline_name=docker_gocd_agent_pipeline,
       gocd_group='beta',
       docker_repo_variable='groupsinfra/gocd-agent-centos-8-groups',
@@ -1473,7 +1415,7 @@ local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_ag
   ),
   'docker_uro.gopipeline.json'
   : std.prune(
-    simple_docker_job(
+    templates.simple_docker_job(
       pipeline_name=docker_uro_pipeline,
       gocd_group='beta',
       docker_repo_variable='groupsinfra/uro',
