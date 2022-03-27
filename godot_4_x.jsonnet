@@ -1,6 +1,6 @@
 local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.opt.tools.64.llvm';
 
-local platform = import 'platform_dict.libsonnet';
+local platform = import 'lib/platform_dict.libsonnet';
 local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web']];
 local enabled_template_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web']];
 local enabled_gdextension_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
@@ -213,7 +213,7 @@ local enabled_groups_export_platforms = [groups_export_configurations[x] for x i
 
 local all_gdextension_plugins = [groups_gdextension_plugins[x] for x in ['godot_openvr']];
 
-local templates = import 'templates.libsonnet';
+local templates = import 'lib/templates.libsonnet';
 
 local godot_pipeline(pipeline_name='',
                      godot_status='',
