@@ -40,8 +40,7 @@
       "platform_name": "web",
       "scons_env": "source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ",
       "intermediate_godot_binary": "godot.javascript.opt.debug.threads.zip",
-      "editor_godot_binary": "godot.javascript.opt.debug.threads.zip", // Same as intermediate = build only once
-      // editor_godot_binary: 'webassembly_release.zip', # Different than intermediate = build again in export templates
+      "editor_godot_binary": "godot.javascript.opt.debug.threads.zip",
       "template_debug_binary": "webassembly_debug.zip",
       "template_release_binary": "webassembly_release.zip",
       "strip_command": null,
