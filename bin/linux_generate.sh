@@ -1,3 +1,3 @@
 rm *.json
-jsonnet -m . godot_4_x.jsonnet
+jsonnet -m . src/godot_4_x.jsonnet
 dos2unix .\*.json
