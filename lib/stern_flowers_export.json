@@ -6,7 +6,7 @@
       "gdextension_platform": "windows",
       "export_configuration": "Windows Desktop",
       "export_directory": "export_windows",
-      "export_executable": "godot.windows.double.opt.tools.64.exe",
+      "export_executable": "godot.windows.opt.tools.64.exe",
       "itchio_out": "windows-master",
       "prepare_commands": [],
       "extra_commands": []
@@ -17,7 +17,7 @@
       "gdextension_platform": "linux",
       "export_configuration": "Linux/X11",
       "export_directory": "export_linuxbsd",
-      "export_executable": "godot.linuxbsd.double.opt.tools.64.llvm",
+      "export_executable": "godot.linuxbsd.opt.tools.64.llvm",
       "itchio_out": "linux-master",
       "prepare_commands": [],
       "extra_commands": []
