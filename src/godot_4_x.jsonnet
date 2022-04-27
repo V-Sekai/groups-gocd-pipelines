@@ -85,7 +85,7 @@ local godot_pipeline(pipeline_name='',
             {
               uses: 'actions/checkout@v3',
               with: {
-                repository: "emscripten-core/emsdks",
+                repository: "emscripten-core/emsdk",
                 ref: godot_branch,
                 path: 'opt/emsdk',
               },
