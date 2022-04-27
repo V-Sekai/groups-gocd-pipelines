@@ -95,7 +95,7 @@
                         "editor_godot_binary": "godot.javascript.opt.debug.threads.zip",
                         "intermediate_godot_binary": "godot.javascript.opt.debug.threads.zip",
                         "name": "web",
-                        "scons_env": "source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ",
+                        "scons_env": "source /opt/emsdk/emsdk_env.sh && source opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ",
                         "scons_platform": "javascript",
                       },
                     ],
