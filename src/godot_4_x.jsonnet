@@ -47,7 +47,7 @@ local godot_pipeline(pipeline_name='',
       ],
       defaults: {
         run: {
-          'working-directory': '/home/go',
+          'working-directory': '/__w/groups-gocd-pipelines/groups-gocd-pipelines',
         },
       },
       jobs: {
@@ -75,7 +75,7 @@ local godot_pipeline(pipeline_name='',
               with: {
                 repository: std.strReplace(godot_git, 'https://github.com/', ''),
                 ref: godot_branch,
-                path: '/home/go/g',
+                path: '/__w/groups-gocd-pipelines/groups-gocd-pipelines/g',
               },
             },
             if godot_modules_git != '' then
@@ -85,17 +85,17 @@ local godot_pipeline(pipeline_name='',
                 with: {
                   repository: std.strReplace(godot_modules_git, 'https://github.com/', ''),
                   ref: godot_modules_branch,
-                  path: '/home/go/godot_custom_modules',
+                  path: '/__w/groups-gocd-pipelines/groups-gocd-pipelines/godot_custom_modules',
                 },
               },
             {
               run: 'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
-              'working-directory': '/home/go/g',
+              'working-directory': '/__w/groups-gocd-pipelines/groups-gocd-pipelines/g',
             },
             {
               run: '${{ matrix.platform_name.scons_env }} ' + 'scons werror=no platform=' + '${{ matrix.platform_name.scons_platform }}' + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + '${{ matrix.platform_name.scons_arguments }}' +
                    if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
-              'working-directory': '/home/go/g',
+              'working-directory': '/__w/groups-gocd-pipelines/groups-gocd-pipelines/g',
             },
             {
               run: "cp -p g/bin/' + ${{  matrix.platform_name.intermediate_godot_binary }} + ' g/bin/' + ${{ matrix.platform_name.editor_godot_binary }} ",
