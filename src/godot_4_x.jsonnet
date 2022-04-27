@@ -37,121 +37,6 @@ local godot_pipeline(pipeline_name='',
                      godot_engine_platforms=enabled_engine_platforms,
                      godot_template_platforms=enabled_template_platforms,
                      github_actions=false) =
-  if github_actions == true then
-    {
-      env: {
-        GODOT_STATUS: godot_status,
-      },
-      "concurrency": {
-        "group": "ci-${{github.actor}}-${{github.head_ref || github.run_number}}-${{github.ref}}-groups-godot-piplines"
-      },
-      on: [
-        'push',
-      ],
-      jobs: {
-        default_stage_matrix: {
-          strategy: {
-            matrix: {
-              platform_name: [
-                {
-                  "cache-name": platform_info.platform_name,
-                  name: platform_info.platform_name,
-                  scons_env: platform_info.scons_env,
-                  scons_platform: platform_info.scons_platform,
-                  editor_godot_binary: platform_info.editor_godot_binary,
-                  intermediate_godot_binary: platform_info.intermediate_godot_binary,
-                }
-                for platform_info in godot_engine_platforms
-              ],
-            },
-          },
-          "name": "${{ matrix.platform_name.name }}",
-          'runs-on': 'ubuntu-20.04',
-          container: {
-            image: 'rockylinux:8.5.20220308',
-          },
-          steps: [
-            {
-              run: "yum install -y unzip epel-release dnf-plugins-core && yum config-manager -y --set-enabled powertools && curl https://download.mono-project.com/repo/centos8-stable.repo | tee /etc/yum.repos.d/mono-stable.repo && yum update -y"
-            },
-            {
-              "working-directory": "/usr/local/bin",
-              run: "curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default && unzip butler.zip && rm butler.zip && butler -V && butler -V && cd && butler -V"
-            },
-            {
-              run: 'yum upgrade -y && yum group install -y "Development Tools" && yum group install -y "Additional Development" && yum install -y git-lfs automake autoconf libtool yasm wine mono-devel cmake python3-scons clang glibc-devel.i686 libgcc.i686 libstdc++.i686 mingw64-gcc-c++ mingw32-gcc mingw32-gcc-c++ python3-pip mingw64-winpthreads mingw32-winpthreads mingw64-winpthreads-static mingw32-winpthreads-static libstdc++-static mingw64-filesystem mingw32-filesystem bash libX11-devel libXcursor-devel libXrandr-devel libXinerama-devel libXi-devel mesa-libGL-devel alsa-lib-devel pulseaudio-libs-devel freetype-devel openssl-devel libudev-devel mesa-libGLU-devel libpng-devel xar-devel llvm-devel clang llvm-devel libxml2-devel libuuid-devel openssl-devel bash patch libstdc++-static make git bzip2 xz java-openjdk yasm xorg-x11-server-Xvfb pkgconfig mesa-dri-drivers java-1.8.0-openjdk-devel ncurses-compat-libs unzip which gcc gcc-c++ libatomic-static libatomic ccache ninja-build'
-            },
-            {
-              run: "alternatives --set ld /usr/bin/ld.gold && git lfs install && alternatives --set python /usr/bin/python3 && ln -s /usr/bin/scons-3 /usr/local/bin/scons"
-            },
-            {
-              "uses": "actions/checkout@v3",
-              with: {
-                repository: "V-Sekai/groups-gocd-pipelines",
-              },
-            },
-            {
-              "name": "Setup Godot build cache",
-              "uses": "./.github/actions/godot-cache",
-              "with": {
-                "cache-name": "${{ matrix.cache-name }}"
-              },
-              "continue-on-error": true
-            },
-            {
-              run: "mkdir -p opt/llvm-mingw && curl -L https://github.com/mstorsjo/llvm-mingw/releases/download/20220323/llvm-mingw-20220323-ucrt-ubuntu-18.04-x86_64.tar.xz | tar -Jxf - --strip 1 -C opt/llvm-mingw"
-            },
-            {
-              uses: 'actions/checkout@v3',
-              with: {
-                repository: "emscripten-core/emsdk",
-                path: 'opt/emsdk',
-              },
-            },
-            {
-              run: "opt/emsdk/emsdk install latest && opt/emsdk/emsdk activate latest && curl -L -o ispc.tgz 'https://github.com/ispc/ispc/releases/download/v1.15.0/ispc-v1.15.0-linux.tar.gz' && tar -zxf ispc.tgz ispc-v1.15.0-linux/bin/ispc && mv ispc-v1.15.0-linux/bin/ispc /usr/local/bin/ispc && rmdir -p ispc-v1.15.0-linux/bin
-# https://dl.google.com/android/repository/commandlinetools-linux-6514223_latest.zip"
-            },
-            {
-              run: "git config --global url.git@gitlab.com:.insteadOf https://gitlab.com/"
-            },
-            {
-              name: 'Checkout Godot Engine repo',
-              uses: 'actions/checkout@v3',
-              with: {
-                repository: std.strReplace(godot_git, 'https://github.com/', ''),
-                ref: godot_branch,
-                path: 'g',
-              },
-            },
-            if godot_modules_git != '' then
-              {
-                name: 'Checkout Godot Engine Custom Modules',
-                uses: 'actions/checkout@v3',
-                with: {
-                  repository: std.strReplace(godot_modules_git, 'https://github.com/', ''),
-                  ref: godot_modules_branch,
-                  path: 'godot_custom_modules',
-                },
-              },
-            {
-              run: 'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
-              'working-directory': 'g',
-            },
-            {
-              run: '${{ matrix.platform_name.scons_env }} ' + 'scons werror=no platform=' + '${{ matrix.platform_name.scons_platform }}' + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + '${{ matrix.platform_name.scons_arguments }}' +
-                   if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
-              'working-directory': 'g',
-            },
-            {
-              run: "cp -p g/bin/' + ${{  matrix.platform_name.intermediate_godot_binary }} + ' g/bin/' + ${{ matrix.platform_name.editor_godot_binary }} ",
-              'if': '${{ matrix.platform_name.editor_godot_binary }}' != '${{ matrix.platform_name.intermediate_godot_binary }}',
-            },
-          ],
-        },
-      },
-    }
-  else
     {
       name: pipeline_name,
       group: gocd_group,
@@ -785,12 +670,6 @@ local godot_editor_export(
     )),
 }
 {
-  'env.fire.goenvironment.json': {
-    name: 'itch-fire',
-    pipelines: itch_fire_template,
-    environment_variables:
-      [],
-  },
   'godot_v_sekai_editor.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_groups_editor,
