@@ -12,9 +12,9 @@
                 {
                   "platform_name":
                     [
-                      { "name": "windowsJob" },
-                      { "name": "linuxJob" },
-                      { "name": "webJob" },
+                      { "name": "windows" },
+                      { "name": "linux" },
+                      { "name": "web" },
                     ],
                 },
             },

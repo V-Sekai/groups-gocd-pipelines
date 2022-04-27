@@ -49,7 +49,7 @@ local godot_pipeline(pipeline_name='',
             matrix: {
               platform_name: [
                 {
-                  name: platform_info.platform_name + 'Job',
+                  name: platform_info.platform_name,
                 }
                 for platform_info in godot_engine_platforms
               ],
