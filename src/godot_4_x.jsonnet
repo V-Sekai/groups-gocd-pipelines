@@ -55,6 +55,7 @@ local godot_pipeline(pipeline_name='',
               ],
             },
           },
+          'runs-on': 'ubuntu-20.04',
           container: 'groupsinfra:docker-gocd-agent-centos-8-groups_84b71558.15',
           steps: [
             {

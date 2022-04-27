@@ -4,6 +4,7 @@
       "default_stage_matrix":
         {
           "container": "groupsinfra:docker-gocd-agent-centos-8-groups_84b71558.15",
+          "runs-on": "ubuntu-20.04",
           "steps": [{ "run": "ls" }],
           "strategy":
             {
