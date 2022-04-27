@@ -40,6 +40,9 @@ local godot_pipeline(pipeline_name='',
                      github_actions=false) =
   if github_actions == true then
     {
+      "env": {
+        'GODOT_STATUS': godot_status
+      },
       on: [
         'push',
       ],

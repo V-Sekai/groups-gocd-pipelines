@@ -1,4 +1,5 @@
 {
+  "env": { "GODOT_STATUS": "groups-4.0.0" },
   "jobs":
     {
       "default_stage_matrix":
