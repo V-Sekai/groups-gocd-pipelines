@@ -14,7 +14,7 @@
                 "uses": "actions/checkout@v3",
                 "with":
                   {
-                    "path": "g",
+                    "path": "/home/go/g",
                     "ref": "groups-4.x",
                     "repository": "V-Sekai/godot.git",
                   },
@@ -24,7 +24,7 @@
                 "uses": "actions/checkout@v3",
                 "with":
                   {
-                    "path": "godot_custom_modules",
+                    "path": "/home/go/godot_custom_modules",
                     "ref": "groups-modules-4.x",
                     "repository": "V-Sekai/godot-modules-groups.git",
                   },

@@ -75,7 +75,7 @@ local godot_pipeline(pipeline_name='',
               with: {
                 repository: std.strReplace(godot_git, 'https://github.com/', ''),
                 ref: godot_branch,
-                path: 'g',
+                path: '/home/go/g',
               },
             },
             if godot_modules_git != '' then
@@ -85,7 +85,7 @@ local godot_pipeline(pipeline_name='',
                 with: {
                   repository: std.strReplace(godot_modules_git, 'https://github.com/', ''),
                   ref: godot_modules_branch,
-                  path: 'godot_custom_modules',
+                  path: '/home/go/godot_custom_modules',
                 },
               },
             {
