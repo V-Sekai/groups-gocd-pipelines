@@ -45,11 +45,6 @@ local godot_pipeline(pipeline_name='',
       on: [
         'push',
       ],
-      defaults: {
-        run: {
-          'working-directory': '/home/go',
-        },
-      },
       jobs: {
         default_stage_matrix: {
           strategy: {

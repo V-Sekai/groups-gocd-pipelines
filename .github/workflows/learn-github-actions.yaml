@@ -1,5 +1,4 @@
 {
-  "defaults": { "run": { "working-directory": "/home/go" } },
   "env": { "GODOT_STATUS": "groups-4.0.0" },
   "jobs":
     {
