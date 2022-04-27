@@ -63,6 +63,12 @@
                 "working-directory": "g",
               },
               {
+                "if": false,
+                "run": "source opt/emsdk/emsdk_env.sh && EM_CACHE=/tmpscons werror=no platform=${{ matrix.platform_name.scons_platform }} target=release_debug -j`nproc` use_lto=no deprecated=no ${{ matrix.platform_name.scons_arguments }} custom_modules=../godot_custom_modules",
+                "working-directory": "g",
+              },
+              {
+                "if": true,
                 "run": "${{ matrix.platform_name.scons_env }} scons werror=no platform=${{ matrix.platform_name.scons_platform }} target=release_debug -j`nproc` use_lto=no deprecated=no ${{ matrix.platform_name.scons_arguments }} custom_modules=../godot_custom_modules",
                 "working-directory": "g",
               },
@@ -95,7 +101,7 @@
                         "editor_godot_binary": "godot.javascript.opt.debug.threads.zip",
                         "intermediate_godot_binary": "godot.javascript.opt.debug.threads.zip",
                         "name": "web",
-                        "scons_env": "source /opt/emsdk/emsdk_env.sh && source opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ",
+                        "scons_env": "source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ",
                         "scons_platform": "javascript",
                       },
                     ],

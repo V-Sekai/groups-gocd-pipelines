@@ -38,7 +38,7 @@
     },
     "web": {
       "platform_name": "web",
-      "scons_env": "source /opt/emsdk/emsdk_env.sh && source opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ",
+      "scons_env": "source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ",
       "intermediate_godot_binary": "godot.javascript.opt.debug.threads.zip",
       "editor_godot_binary": "godot.javascript.opt.debug.threads.zip",
       "template_debug_binary": "webassembly_debug.zip",

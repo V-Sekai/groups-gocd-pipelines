@@ -123,9 +123,16 @@ local godot_pipeline(pipeline_name='',
               'working-directory': 'g',
             },
             {
+              run: 'source opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp' + 'scons werror=no platform=' + '${{ matrix.platform_name.scons_platform }}' + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + '${{ matrix.platform_name.scons_arguments }}' +
+                   if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+              'working-directory': 'g',
+              'if': '${{ matrix.platform_name.platform_name }}' == 'web',
+            },
+            {
               run: '${{ matrix.platform_name.scons_env }} ' + 'scons werror=no platform=' + '${{ matrix.platform_name.scons_platform }}' + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + '${{ matrix.platform_name.scons_arguments }}' +
                    if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
               'working-directory': 'g',
+              'if': '${{ matrix.platform_name.platform_name }}' != 'web',
             },
             {
               run: "cp -p g/bin/' + ${{  matrix.platform_name.intermediate_godot_binary }} + ' g/bin/' + ${{ matrix.platform_name.editor_godot_binary }} ",

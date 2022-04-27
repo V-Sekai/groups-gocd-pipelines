@@ -119,7 +119,7 @@
             {
               "arguments": [
                 "-c",
-                "source /opt/emsdk/emsdk_env.sh && source opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp scons werror=no platform=javascript target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions' custom_modules=../godot_custom_modules"
+                "source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp scons werror=no platform=javascript target=release_debug -j`nproc` use_lto=no deprecated=no use_llvm=yes builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions' custom_modules=../godot_custom_modules"
               ],
               "command": "/bin/bash",
               "type": "exec",
