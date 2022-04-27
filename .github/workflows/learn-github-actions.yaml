@@ -1,1 +1,21 @@
-"\"jobs\":\n  \"check-bats-version\":\n    \"runs-on\": \"ubuntu-latest\"\n    \"steps\":\n      - \"uses\": \"actions/checkout@v3\"\n      - \"uses\": \"actions/setup-node@v3\"\n        \"with\":\n          \"node-version\": \"14\"\n      - \"run\": \"npm install -g bats\"\n      - \"run\": \"bats -v\"\n\"name\": \"learn-github-actions\"\n\"on\":\n  - \"push\""
+{
+  "jobs":
+    {
+      "check-bats-version":
+        {
+          "runs-on": "ubuntu-latest",
+          "steps":
+            [
+              { "uses": "actions/checkout@v3" },
+              {
+                "uses": "actions/setup-node@v3",
+                "with": { "node-version": "14" },
+              },
+              { "run": "npm install -g bats" },
+              { "run": "bats -v" },
+            ],
+        },
+    },
+  "name": "learn-github-actions",
+  "on": ["push"],
+}

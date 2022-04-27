@@ -31,9 +31,7 @@
       "export_executable": "macos.zip",
       "itchio_out": "macos",
       "prepare_commands": [],
-      "extra_commands": [
-        "cd export_macos && unzip macos.zip && rm macos.zip"
-      ]
+      "extra_commands": ["cd export_macos && unzip macos.zip && rm macos.zip"]
     },
     "web": {
       "export_name": "web",

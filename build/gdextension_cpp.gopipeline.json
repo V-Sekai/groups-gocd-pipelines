@@ -1,184 +1,175 @@
 {
-   "environment_variables": [
-      {
-         "name": "GODOT_STATUS",
-         "value": "gdextension.godot-cpp"
-      }
-   ],
-   "group": "gamma",
-   "label_template": "gdextension.godot-cpp.${godot-template-groups-4-0_pipeline_dependency}.${COUNT}",
-   "materials": [
-      {
-         "name": "godot-template-groups-4-0_pipeline_dependency",
-         "pipeline": "godot-template-groups-4-0",
-         "stage": "defaultStage",
-         "type": "dependency"
-      },
-      {
-         "branch": "master",
-         "destination": "godot-cpp",
-         "ignore_for_scheduling": false,
-         "name": "godot-cpp",
-         "shallow_clone": false,
-         "type": "git",
-         "url": "https://github.com/godotengine/godot-cpp.git"
-      },
-      {
-         "branch": "master",
-         "destination": "godot-headers",
-         "ignore_for_scheduling": false,
-         "name": "godot-headers",
-         "shallow_clone": false,
-         "type": "git",
-         "url": "https://github.com/godotengine/godot-headers.git"
-      }
-   ],
-   "name": "gdextension-cpp",
-   "stages": [
-      {
-         "jobs": [
+  "environment_variables": [
+    {
+      "name": "GODOT_STATUS",
+      "value": "gdextension.godot-cpp"
+    }
+  ],
+  "group": "gamma",
+  "label_template": "gdextension.godot-cpp.${godot-template-groups-4-0_pipeline_dependency}.${COUNT}",
+  "materials": [
+    {
+      "name": "godot-template-groups-4-0_pipeline_dependency",
+      "pipeline": "godot-template-groups-4-0",
+      "stage": "defaultStage",
+      "type": "dependency"
+    },
+    {
+      "branch": "master",
+      "destination": "godot-cpp",
+      "ignore_for_scheduling": false,
+      "name": "godot-cpp",
+      "shallow_clone": false,
+      "type": "git",
+      "url": "https://github.com/godotengine/godot-cpp.git"
+    },
+    {
+      "branch": "master",
+      "destination": "godot-headers",
+      "ignore_for_scheduling": false,
+      "name": "godot-headers",
+      "shallow_clone": false,
+      "type": "git",
+      "url": "https://github.com/godotengine/godot-headers.git"
+    }
+  ],
+  "name": "gdextension-cpp",
+  "stages": [
+    {
+      "jobs": [
+        {
+          "artifacts": [
             {
-               "artifacts": [
-                  {
-                     "destination": "",
-                     "source": "extension_api.json",
-                     "type": "build"
-                  }
-               ],
-               "name": "generateApiJsonJob",
-               "resources": [
-                  "linux",
-                  "mingw5"
-               ],
-               "tasks": [
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "",
-                     "is_source_a_file": true,
-                     "job": "linuxJob",
-                     "pipeline": "godot-template-groups-4-0",
-                     "source": "godot.linuxbsd.opt.tools.64.llvm",
-                     "stage": "defaultStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "chmod +x godot.linuxbsd.opt.tools.64.llvm && ./godot.linuxbsd.opt.tools.64.llvm --headless --dump-extension-api extension_api.json || true"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
-                  }
-               ]
+              "destination": "",
+              "source": "extension_api.json",
+              "type": "build"
             }
-         ],
-         "name": "generateApiJsonStage"
-      },
-      {
-         "jobs": [
+          ],
+          "name": "generateApiJsonJob",
+          "resources": ["linux", "mingw5"],
+          "tasks": [
             {
-               "artifacts": [
-                  {
-                     "destination": "godot-cpp",
-                     "source": "godot-cpp/include",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "",
-                     "source": "godot-headers",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "godot-cpp",
-                     "source": "godot-cpp/gen/include",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "godot-cpp",
-                     "source": "godot-cpp/bin",
-                     "type": "build"
-                  }
-               ],
-               "name": "windowsJob",
-               "resources": [
-                  "linux",
-                  "mingw5"
-               ],
-               "tasks": [
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "godot-headers",
-                     "is_source_a_file": true,
-                     "job": "generateApiJsonJob",
-                     "pipeline": "gdextension-cpp",
-                     "source": "extension_api.json",
-                     "stage": "generateApiJsonStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=debug -j`nproc` use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "godot-cpp"
-                  }
-               ]
+              "artifact_origin": "gocd",
+              "destination": "",
+              "is_source_a_file": true,
+              "job": "linuxJob",
+              "pipeline": "godot-template-groups-4-0",
+              "source": "godot.linuxbsd.opt.tools.64.llvm",
+              "stage": "defaultStage",
+              "type": "fetch"
             },
             {
-               "artifacts": [
-                  {
-                     "destination": "godot-cpp",
-                     "source": "godot-cpp/include",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "",
-                     "source": "godot-headers",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "godot-cpp",
-                     "source": "godot-cpp/gen/include",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "godot-cpp",
-                     "source": "godot-cpp/bin",
-                     "type": "build"
-                  }
-               ],
-               "name": "linuxJob",
-               "resources": [
-                  "linux",
-                  "mingw5"
-               ],
-               "tasks": [
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "godot-headers",
-                     "is_source_a_file": true,
-                     "job": "generateApiJsonJob",
-                     "pipeline": "gdextension-cpp",
-                     "source": "extension_api.json",
-                     "stage": "generateApiJsonStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "scons werror=no platform=linux target=debug -j`nproc` use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "godot-cpp"
-                  }
-               ]
+              "arguments": [
+                "-c",
+                "chmod +x godot.linuxbsd.opt.tools.64.llvm && ./godot.linuxbsd.opt.tools.64.llvm --headless --dump-extension-api extension_api.json || true"
+              ],
+              "command": "/bin/bash",
+              "type": "exec",
+              "working_directory": ""
             }
-         ],
-         "name": "godotCppStage"
-      }
-   ]
+          ]
+        }
+      ],
+      "name": "generateApiJsonStage"
+    },
+    {
+      "jobs": [
+        {
+          "artifacts": [
+            {
+              "destination": "godot-cpp",
+              "source": "godot-cpp/include",
+              "type": "build"
+            },
+            {
+              "destination": "",
+              "source": "godot-headers",
+              "type": "build"
+            },
+            {
+              "destination": "godot-cpp",
+              "source": "godot-cpp/gen/include",
+              "type": "build"
+            },
+            {
+              "destination": "godot-cpp",
+              "source": "godot-cpp/bin",
+              "type": "build"
+            }
+          ],
+          "name": "windowsJob",
+          "resources": ["linux", "mingw5"],
+          "tasks": [
+            {
+              "artifact_origin": "gocd",
+              "destination": "godot-headers",
+              "is_source_a_file": true,
+              "job": "generateApiJsonJob",
+              "pipeline": "gdextension-cpp",
+              "source": "extension_api.json",
+              "stage": "generateApiJsonStage",
+              "type": "fetch"
+            },
+            {
+              "arguments": [
+                "-c",
+                "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=debug -j`nproc` use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"
+              ],
+              "command": "/bin/bash",
+              "type": "exec",
+              "working_directory": "godot-cpp"
+            }
+          ]
+        },
+        {
+          "artifacts": [
+            {
+              "destination": "godot-cpp",
+              "source": "godot-cpp/include",
+              "type": "build"
+            },
+            {
+              "destination": "",
+              "source": "godot-headers",
+              "type": "build"
+            },
+            {
+              "destination": "godot-cpp",
+              "source": "godot-cpp/gen/include",
+              "type": "build"
+            },
+            {
+              "destination": "godot-cpp",
+              "source": "godot-cpp/bin",
+              "type": "build"
+            }
+          ],
+          "name": "linuxJob",
+          "resources": ["linux", "mingw5"],
+          "tasks": [
+            {
+              "artifact_origin": "gocd",
+              "destination": "godot-headers",
+              "is_source_a_file": true,
+              "job": "generateApiJsonJob",
+              "pipeline": "gdextension-cpp",
+              "source": "extension_api.json",
+              "stage": "generateApiJsonStage",
+              "type": "fetch"
+            },
+            {
+              "arguments": [
+                "-c",
+                "scons werror=no platform=linux target=debug -j`nproc` use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
+              ],
+              "command": "/bin/bash",
+              "type": "exec",
+              "working_directory": "godot-cpp"
+            }
+          ]
+        }
+      ],
+      "name": "godotCppStage"
+    }
+  ]
 }
