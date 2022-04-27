@@ -59,6 +59,25 @@ local godot_pipeline(pipeline_name='',
           container: 'groupsinfra/gocd-agent-centos-8-groups:docker-gocd-agent-centos-8-groups_84b71558.15',
           steps: [
             {
+              name: 'Checkout tools repo',
+              uses: 'actions/checkout@v3',
+              with: {
+                repository: godot_git,
+                ref: godot_branch,
+                path: 'g',
+              },
+            },
+            if godot_modules_git != '' then
+            {
+                name: 'Checkout Godot Custom Modules',
+                uses: 'actions/checkout@v3',
+                with: {
+                  repository: godot_modules_git,
+                  ref: godot_modules_branch,
+                  path: 'godot_custom_modules',
+                },
+            },
+            {
               run: 'ls',
             },
           ],

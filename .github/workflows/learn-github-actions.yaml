@@ -5,7 +5,30 @@
         {
           "container": "groupsinfra/gocd-agent-centos-8-groups:docker-gocd-agent-centos-8-groups_84b71558.15",
           "runs-on": "ubuntu-20.04",
-          "steps": [{ "run": "ls" }],
+          "steps":
+            [
+              {
+                "name": "Checkout tools repo",
+                "uses": "actions/checkout@v3",
+                "with":
+                  {
+                    "path": "g",
+                    "ref": "groups-4.x",
+                    "repository": "https://github.com/V-Sekai/godot.git",
+                  },
+              },
+              {
+                "name": "Checkout Godot Custom Modules",
+                "uses": "actions/checkout@v3",
+                "with":
+                  {
+                    "path": "godot_custom_modules",
+                    "ref": "groups-modules-4.x",
+                    "repository": "https://github.com/V-Sekai/godot-modules-groups.git",
+                  },
+              },
+              { "run": "ls" },
+            ],
           "strategy":
             {
               "matrix":
