@@ -71,13 +71,12 @@ local godot_pipeline(pipeline_name='',
             image: 'rockylinux:8.5.20220308',
           },
           steps: [
-
+            {
+              run: "yum install -y epel-release dnf-plugins-core && yum config-manager -y --set-enabled powertools && curl https://download.mono-project.com/repo/centos8-stable.repo | tee /etc/yum.repos.d/mono-stable.repo && yum update -y"
+            },
             {
               "working-directory": "/usr/local/bin",
               run: "curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default && unzip butler.zip && rm butler.zip && butler -V && butler -V && cd && butler -V"
-            },
-            {
-              run: "yum install -y epel-release dnf-plugins-core && yum config-manager -y --set-enabled powertools && curl https://download.mono-project.com/repo/centos8-stable.repo | tee /etc/yum.repos.d/mono-stable.repo && yum update -y"
             },
             {
               run: 'yum upgrade -y && yum group install -y "Development Tools" && yum group install -y "Additional Development" && yum install -y git-lfs automake autoconf libtool yasm wine mono-devel cmake python3-scons clang glibc-devel.i686 libgcc.i686 libstdc++.i686 mingw64-gcc-c++ mingw32-gcc mingw32-gcc-c++ python3-pip mingw64-winpthreads mingw32-winpthreads mingw64-winpthreads-static mingw32-winpthreads-static libstdc++-static mingw64-filesystem mingw32-filesystem bash libX11-devel libXcursor-devel libXrandr-devel libXinerama-devel libXi-devel mesa-libGL-devel alsa-lib-devel pulseaudio-libs-devel freetype-devel openssl-devel libudev-devel mesa-libGLU-devel libpng-devel xar-devel llvm-devel clang llvm-devel libxml2-devel libuuid-devel openssl-devel bash patch libstdc++-static make git bzip2 xz java-openjdk yasm xorg-x11-server-Xvfb pkgconfig mesa-dri-drivers java-1.8.0-openjdk-devel ncurses-compat-libs unzip which gcc gcc-c++ libatomic-static libatomic ccache ninja-build'
