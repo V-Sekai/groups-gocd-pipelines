@@ -47,7 +47,7 @@ local godot_pipeline(pipeline_name='',
       ],
       defaults: {
         run: {
-          'working-directory': '/__w/groups-gocd-pipelines/groups-gocd-pipelines',
+          'working-directory': '/home/go',
         },
       },
       jobs: {
@@ -67,7 +67,10 @@ local godot_pipeline(pipeline_name='',
             },
           },
           'runs-on': 'ubuntu-20.04',
-          container: 'groupsinfra/gocd-agent-centos-8-groups:docker-gocd-agent-centos-8-groups_84b71558.15',
+          container: {
+            image: 'groupsinfra/gocd-agent-centos-8-groups:docker-gocd-agent-centos-8-groups_84b71558.15',
+            options: '--user 1000',
+          },
           steps: [
             {
               name: 'Checkout Godot Engine repo',
@@ -75,7 +78,7 @@ local godot_pipeline(pipeline_name='',
               with: {
                 repository: std.strReplace(godot_git, 'https://github.com/', ''),
                 ref: godot_branch,
-                path: '/__w/groups-gocd-pipelines/groups-gocd-pipelines/g',
+                path: '/home/go/g',
               },
             },
             if godot_modules_git != '' then
@@ -85,17 +88,17 @@ local godot_pipeline(pipeline_name='',
                 with: {
                   repository: std.strReplace(godot_modules_git, 'https://github.com/', ''),
                   ref: godot_modules_branch,
-                  path: '/__w/groups-gocd-pipelines/groups-gocd-pipelines/godot_custom_modules',
+                  path: '/home/go/godot_custom_modules',
                 },
               },
             {
               run: 'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
-              'working-directory': '/__w/groups-gocd-pipelines/groups-gocd-pipelines/g',
+              'working-directory': '/home/go/g',
             },
             {
               run: '${{ matrix.platform_name.scons_env }} ' + 'scons werror=no platform=' + '${{ matrix.platform_name.scons_platform }}' + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + '${{ matrix.platform_name.scons_arguments }}' +
                    if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
-              'working-directory': '/__w/groups-gocd-pipelines/groups-gocd-pipelines/g',
+              'working-directory': '/home/go/g',
             },
             {
               run: "cp -p g/bin/' + ${{  matrix.platform_name.intermediate_godot_binary }} + ' g/bin/' + ${{ matrix.platform_name.editor_godot_binary }} ",

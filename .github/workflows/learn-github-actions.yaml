@@ -1,17 +1,15 @@
 {
-  "defaults":
-    {
-      "run":
-        {
-          "working-directory": "/__w/groups-gocd-pipelines/groups-gocd-pipelines",
-        },
-    },
+  "defaults": { "run": { "working-directory": "/home/go" } },
   "env": { "GODOT_STATUS": "groups-4.0.0" },
   "jobs":
     {
       "default_stage_matrix":
         {
-          "container": "groupsinfra/gocd-agent-centos-8-groups:docker-gocd-agent-centos-8-groups_84b71558.15",
+          "container":
+            {
+              "image": "groupsinfra/gocd-agent-centos-8-groups:docker-gocd-agent-centos-8-groups_84b71558.15",
+              "options": "--user 1000",
+            },
           "runs-on": "ubuntu-20.04",
           "steps":
             [
@@ -20,7 +18,7 @@
                 "uses": "actions/checkout@v3",
                 "with":
                   {
-                    "path": "/__w/groups-gocd-pipelines/groups-gocd-pipelines/g",
+                    "path": "/home/go/g",
                     "ref": "groups-4.x",
                     "repository": "V-Sekai/godot.git",
                   },
@@ -30,18 +28,18 @@
                 "uses": "actions/checkout@v3",
                 "with":
                   {
-                    "path": "/__w/groups-gocd-pipelines/groups-gocd-pipelines/godot_custom_modules",
+                    "path": "/home/go/godot_custom_modules",
                     "ref": "groups-modules-4.x",
                     "repository": "V-Sekai/godot-modules-groups.git",
                   },
               },
               {
                 "run": "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py",
-                "working-directory": "/__w/groups-gocd-pipelines/groups-gocd-pipelines/g",
+                "working-directory": "/home/go/g",
               },
               {
                 "run": "${{ matrix.platform_name.scons_env }} scons werror=no platform=${{ matrix.platform_name.scons_platform }} target=release_debug -j`nproc` use_lto=no deprecated=no ${{ matrix.platform_name.scons_arguments }} custom_modules=../godot_custom_modules",
-                "working-directory": "/__w/groups-gocd-pipelines/groups-gocd-pipelines/g",
+                "working-directory": "/home/go/g",
               },
               {
                 "if": true,
