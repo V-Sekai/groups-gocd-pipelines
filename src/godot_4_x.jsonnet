@@ -86,6 +86,9 @@ local godot_pipeline(pipeline_name='',
             },
             {
               "uses": "actions/checkout@v3"
+              with: {
+                repository: "V-Sekai/groups-gocd-pipelines",
+              },
             },
             {
               "name": "Setup Godot build cache",
