@@ -2,7 +2,7 @@
   "platform_info_dict": {
     "windows": {
       "platform_name": "windows",
-      "scons_env": "PATH=/opt/llvm-mingw/bin:$PATH ",
+      "scons_env": "PATH=/opt/llvm-mingw/bin:opt/llvm-mingw/bin:$PATH ",
       "intermediate_godot_binary": "godot.windows.opt.tools.64.exe",
       "editor_godot_binary": "godot.windows.opt.tools.64.exe",
       "template_debug_binary": "windows_64_debug.exe",
