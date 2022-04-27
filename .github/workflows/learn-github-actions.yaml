@@ -1,9 +1,9 @@
 {
   "jobs":
     {
-      "container": "groupsinfra:docker-gocd-agent-centos-8-groups_84b71558.15",
       "default_stage_matrix":
         {
+          "container": "groupsinfra:docker-gocd-agent-centos-8-groups_84b71558.15",
           "steps": [{ "run": "ls" }],
           "strategy":
             {
