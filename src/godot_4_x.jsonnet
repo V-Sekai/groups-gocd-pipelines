@@ -93,7 +93,7 @@ local godot_pipeline(pipeline_name='',
               "continue-on-error": true
             },
             {
-              run: "mkdir -p opt/llvm-mingw && curl -L https://github.com/mstorsjo/llvm-mingw/releases/download/20201020/llvm-mingw-20201020-ucrt-ubuntu-18.04.tar.xz | tar -Jxf - --strip 1 -C opt/llvm-mingw"
+              run: "mkdir -p opt/llvm-mingw && curl -L https://github.com/mstorsjo/llvm-mingw/releases/download/20220323/llvm-mingw-20220323-ucrt-ubuntu-18.04-x86_64.tar.xz | tar -Jxf - --strip 1 -C opt/llvm-mingw"
             },
             {
               uses: 'actions/checkout@v3',
