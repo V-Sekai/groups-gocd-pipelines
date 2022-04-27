@@ -44,6 +44,7 @@ local godot_pipeline(pipeline_name='',
         'push',
       ],
       jobs: {
+        container: 'groupsinfra:docker-gocd-agent-centos-8-groups_84b71558.15',
         default_stage_matrix: {
           strategy: {
             matrix: {
