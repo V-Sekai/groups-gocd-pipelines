@@ -80,7 +80,7 @@ local godot_pipeline(pipeline_name='',
               run: "alternatives --set ld /usr/bin/ld.gold && git lfs install && alternatives --set python /usr/bin/python3 && ln -s /usr/bin/scons-3 /usr/local/bin/scons"
             },
             {
-              run: "mkdir opt/llvm-mingw && curl -L https://github.com/mstorsjo/llvm-mingw/releases/download/20201020/llvm-mingw-20201020-ucrt-ubuntu-18.04.tar.xz | tar -Jxf - --strip 1 -C /opt/llvm-mingw"
+              run: "mkdir opt/llvm-mingw && curl -L https://github.com/mstorsjo/llvm-mingw/releases/download/20201020/llvm-mingw-20201020-ucrt-ubuntu-18.04.tar.xz | tar -Jxf - --strip 1 -C opt/llvm-mingw"
             },
             {
               uses: 'actions/checkout@v3',
@@ -95,7 +95,7 @@ local godot_pipeline(pipeline_name='',
 # https://dl.google.com/android/repository/commandlinetools-linux-6514223_latest.zip"
             },
             {
-              run: "curl -LO https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip && unzip sdk-tools-linux-4333796.zip -d opt/android && rm sdk-tools-linux-4333796.zip && yes | opt/android/tools/bin/sdkmanager --licenses && /opt/android/tools/bin/sdkmanager ndk-bundle 'platforms;android-23' 'build-tools;19.1.0' 'build-tools;28.0.3' 'platforms;android-28'"
+              run: "curl -LO https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip && unzip sdk-tools-linux-4333796.zip -d opt/android && rm sdk-tools-linux-4333796.zip && yes | opt/android/tools/bin/sdkmanager --licenses && opt/android/tools/bin/sdkmanager ndk-bundle 'platforms;android-23' 'build-tools;19.1.0' 'build-tools;28.0.3' 'platforms;android-28'"
             },
             {
               run: "git config --global url.git@gitlab.com:.insteadOf https://gitlab.com/"
