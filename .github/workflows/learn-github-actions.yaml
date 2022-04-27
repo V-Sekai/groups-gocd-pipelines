@@ -28,7 +28,18 @@
                     "repository": "https://github.com/V-Sekai/godot-modules-groups.git",
                   },
               },
-              { "run": "ls" },
+              {
+                "run": "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py",
+                "working-directory": "g",
+              },
+              {
+                "run": "${{ matrix.platform_name.scons_env }} scons werror=no platform=${{ matrix.platform_name.scons_platform }} target=release_debug -j`nproc` use_lto=no deprecated=no ${{ matrix.platform_name.scons_arguments }} custom_modules=../godot_custom_modules",
+                "working-directory": "g",
+              },
+              {
+                "if": true,
+                "run": "cp -p g/bin/' + ${{  matrix.platform_name.intermediate_godot_binary }} + ' g/bin/' + ${{ matrix.platform_name.editor_godot_binary }} ",
+              },
             ],
           "strategy":
             {
@@ -36,9 +47,27 @@
                 {
                   "platform_name":
                     [
-                      { "name": "windows" },
-                      { "name": "linux" },
-                      { "name": "web" },
+                      {
+                        "editor_godot_binary": "godot.windows.opt.tools.64.exe",
+                        "intermediate_godot_binary": "godot.windows.opt.tools.64.exe",
+                        "name": "windows",
+                        "scons_env": "PATH=/opt/llvm-mingw/bin:$PATH ",
+                        "scons_platform": "windows",
+                      },
+                      {
+                        "editor_godot_binary": "godot.linuxbsd.opt.tools.64.llvm",
+                        "intermediate_godot_binary": "godot.linuxbsd.opt.tools.64.llvm",
+                        "name": "linux",
+                        "scons_env": "",
+                        "scons_platform": "linuxbsd",
+                      },
+                      {
+                        "editor_godot_binary": "godot.javascript.opt.debug.threads.zip",
+                        "intermediate_godot_binary": "godot.javascript.opt.debug.threads.zip",
+                        "name": "web",
+                        "scons_env": "source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ",
+                        "scons_platform": "javascript",
+                      },
                     ],
                 },
             },

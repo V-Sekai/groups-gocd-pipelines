@@ -27,7 +27,6 @@ local godot_cpp_pipeline = 'gdextension-cpp';
 local godot_gdextension_pipelines = [plugin_info.pipeline_name for plugin_info in all_gdextension_plugins];
 local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdextension_pipelines + [godot_template_groups_export] + [godot_template_groups];
 
-
 local godot_pipeline(pipeline_name='',
                      godot_status='',
                      godot_git='',
@@ -40,8 +39,8 @@ local godot_pipeline(pipeline_name='',
                      github_actions=false) =
   if github_actions == true then
     {
-      "env": {
-        'GODOT_STATUS': godot_status
+      env: {
+        GODOT_STATUS: godot_status,
       },
       on: [
         'push',
@@ -53,6 +52,10 @@ local godot_pipeline(pipeline_name='',
               platform_name: [
                 {
                   name: platform_info.platform_name,
+                  scons_env: platform_info.scons_env,
+                  scons_platform: platform_info.scons_platform,
+                  editor_godot_binary: platform_info.editor_godot_binary,
+                  intermediate_godot_binary: platform_info.intermediate_godot_binary,
                 }
                 for platform_info in godot_engine_platforms
               ],
@@ -71,7 +74,7 @@ local godot_pipeline(pipeline_name='',
               },
             },
             if godot_modules_git != '' then
-            {
+              {
                 name: 'Checkout Godot Custom Modules',
                 uses: 'actions/checkout@v3',
                 with: {
@@ -79,9 +82,19 @@ local godot_pipeline(pipeline_name='',
                   ref: godot_modules_branch,
                   path: 'godot_custom_modules',
                 },
+              },
+            {
+              run: 'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
+              'working-directory': 'g',
             },
             {
-              run: 'ls',
+              run: '${{ matrix.platform_name.scons_env }} ' + 'scons werror=no platform=' + '${{ matrix.platform_name.scons_platform }}' + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + '${{ matrix.platform_name.scons_arguments }}' +
+                   if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+              'working-directory': 'g',
+            },
+            {
+              run: "cp -p g/bin/' + ${{  matrix.platform_name.intermediate_godot_binary }} + ' g/bin/' + ${{ matrix.platform_name.editor_godot_binary }} ",
+              'if': '${{ matrix.platform_name.editor_godot_binary }}' != '${{ matrix.platform_name.intermediate_godot_binary }}',
             },
           ],
         },
