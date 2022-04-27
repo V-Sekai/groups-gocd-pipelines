@@ -770,7 +770,7 @@ local godot_editor_export(
     ],
   };
 {
-  '../.github/workflows/learn-github-actions.yaml':
+  '../.github/workflows/godot-actions.yaml':
     std.prune(godot_pipeline(
       github_actions=true,
       pipeline_name=godot_template_groups_editor,
