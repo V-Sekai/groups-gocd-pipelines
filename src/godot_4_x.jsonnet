@@ -70,7 +70,7 @@ local godot_pipeline(pipeline_name='',
           container: 'groupsinfra/gocd-agent-centos-8-groups:docker-gocd-agent-centos-8-groups_84b71558.15',
           steps: [
             {
-              name: 'Checkout tools repo',
+              name: 'Checkout Godot Engine repo',
               uses: 'actions/checkout@v3',
               with: {
                 repository: std.strReplace(godot_git, 'https://github.com/', ''),
@@ -80,7 +80,7 @@ local godot_pipeline(pipeline_name='',
             },
             if godot_modules_git != '' then
               {
-                name: 'Checkout Godot Custom Modules',
+                name: 'Checkout Godot Engine Custom Modules',
                 uses: 'actions/checkout@v3',
                 with: {
                   repository: std.strReplace(godot_modules_git, 'https://github.com/', ''),

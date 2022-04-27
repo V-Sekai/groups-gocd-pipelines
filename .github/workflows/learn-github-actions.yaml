@@ -10,7 +10,7 @@
           "steps":
             [
               {
-                "name": "Checkout tools repo",
+                "name": "Checkout Godot Engine repo",
                 "uses": "actions/checkout@v3",
                 "with":
                   {
@@ -20,7 +20,7 @@
                   },
               },
               {
-                "name": "Checkout Godot Custom Modules",
+                "name": "Checkout Godot Engine Custom Modules",
                 "uses": "actions/checkout@v3",
                 "with":
                   {
