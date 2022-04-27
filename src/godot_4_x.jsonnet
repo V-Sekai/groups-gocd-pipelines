@@ -40,6 +40,9 @@ local godot_pipeline(pipeline_name='',
                      github_actions=false) =
   if github_actions == true then
     {
+      on: [
+        'push',
+      ],
       jobs: {
         default_stage_matrix: {
           strategy: {
@@ -54,8 +57,8 @@ local godot_pipeline(pipeline_name='',
           },
           steps: [
             {
-              "run": "ls"
-            }
+              run: 'ls',
+            },
           ],
         },
       },
