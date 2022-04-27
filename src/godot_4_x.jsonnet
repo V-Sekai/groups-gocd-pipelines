@@ -42,6 +42,9 @@ local godot_pipeline(pipeline_name='',
       env: {
         GODOT_STATUS: godot_status,
       },
+      "concurrency": {
+        "group": "ci-${{github.actor}}-${{github.head_ref || github.run_number}}-${{github.ref}}-groups-godot-piplines"
+      },
       on: [
         'push',
       ],
@@ -51,6 +54,7 @@ local godot_pipeline(pipeline_name='',
             matrix: {
               platform_name: [
                 {
+                  "cache-name": platform_info.platform_name,
                   name: platform_info.platform_name,
                   scons_env: platform_info.scons_env,
                   scons_platform: platform_info.scons_platform,
@@ -61,6 +65,7 @@ local godot_pipeline(pipeline_name='',
               ],
             },
           },
+          "name": "${{ matrix.platform_name.name }}",
           'runs-on': 'ubuntu-20.04',
           container: {
             image: 'rockylinux:8.5.20220308',
@@ -78,6 +83,14 @@ local godot_pipeline(pipeline_name='',
             },
             {
               run: "alternatives --set ld /usr/bin/ld.gold && git lfs install && alternatives --set python /usr/bin/python3 && ln -s /usr/bin/scons-3 /usr/local/bin/scons"
+            },
+            {
+              "name": "Setup Godot build cache",
+              "uses": "./.github/actions/godot-cache",
+              "with": {
+                "cache-name": "${{ matrix.cache-name }}"
+              },
+              "continue-on-error": true
             },
             {
               run: "mkdir -p opt/llvm-mingw && curl -L https://github.com/mstorsjo/llvm-mingw/releases/download/20201020/llvm-mingw-20201020-ucrt-ubuntu-18.04.tar.xz | tar -Jxf - --strip 1 -C opt/llvm-mingw"
