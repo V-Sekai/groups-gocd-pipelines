@@ -6,12 +6,12 @@ local templates = import '../lib/templates.libsonnet';
 
 local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.opt.tools.64.llvm';
 
-local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web']];
-local enabled_template_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web']];
+local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
+local enabled_template_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
 local enabled_gdextension_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
 
-local enabled_groups_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web']];
-local enabled_groups_template_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web']];
+local enabled_groups_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
+local enabled_groups_template_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
 
 local enabled_stern_flowers_export_platforms = [stern_flowers_export.stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linuxDesktop']];
@@ -123,16 +123,9 @@ local godot_pipeline(pipeline_name='',
               'working-directory': 'g',
             },
             {
-              run: 'source opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp' + 'scons werror=no platform=' + '${{ matrix.platform_name.scons_platform }}' + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + '${{ matrix.platform_name.scons_arguments }}' +
-                   if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
-              'working-directory': 'g',
-              'if': '${{ matrix.platform_name.name }}' == 'web',
-            },
-            {
               run: '${{ matrix.platform_name.scons_env }} ' + 'scons werror=no platform=' + '${{ matrix.platform_name.scons_platform }}' + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + '${{ matrix.platform_name.scons_arguments }}' +
                    if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
               'working-directory': 'g',
-              'if': '${{ matrix.platform_name.name }}' != 'web',
             },
             {
               run: "cp -p g/bin/' + ${{  matrix.platform_name.intermediate_godot_binary }} + ' g/bin/' + ${{ matrix.platform_name.editor_godot_binary }} ",
