@@ -98,7 +98,7 @@ local godot_pipeline(pipeline_name='',
               'working-directory': '/home/go/g',
             },
             {
-              run: "cp -p g/bin/' + ${{  matrix.platform_name.intermediate_godot_binary }} + ' g/bin/' + $s{{ matrix.platform_name.editor_godot_binary }} ",
+              run: "cp -p g/bin/' + ${{  matrix.platform_name.intermediate_godot_binary }} + ' g/bin/' + ${{ matrix.platform_name.editor_godot_binary }} ",
               'if': '${{ matrix.platform_name.editor_godot_binary }}' != '${{ matrix.platform_name.intermediate_godot_binary }}',
             },
           ],
