@@ -29,7 +29,6 @@
                 "with":
                   {
                     "path": "opt/emsdk",
-                    "ref": "groups-4.x",
                     "repository": "emscripten-core/emsdk",
                   },
               },
