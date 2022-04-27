@@ -1,4 +1,5 @@
 {
+  "defaults": { "run": { "working-directory": "/home/go" } },
   "env": { "GODOT_STATUS": "groups-4.0.0" },
   "jobs":
     {
@@ -30,11 +31,11 @@
               },
               {
                 "run": "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py",
-                "working-directory": "g",
+                "working-directory": "/home/go/g",
               },
               {
                 "run": "${{ matrix.platform_name.scons_env }} scons werror=no platform=${{ matrix.platform_name.scons_platform }} target=release_debug -j`nproc` use_lto=no deprecated=no ${{ matrix.platform_name.scons_arguments }} custom_modules=../godot_custom_modules",
-                "working-directory": "g",
+                "working-directory": "/home/go/g",
               },
               {
                 "if": true,

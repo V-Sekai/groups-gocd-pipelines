@@ -45,6 +45,11 @@ local godot_pipeline(pipeline_name='',
       on: [
         'push',
       ],
+      defaults: {
+        run: {
+          'working-directory': '/home/go',
+        },
+      },
       jobs: {
         default_stage_matrix: {
           strategy: {
@@ -68,7 +73,7 @@ local godot_pipeline(pipeline_name='',
               name: 'Checkout tools repo',
               uses: 'actions/checkout@v3',
               with: {
-                repository: std.strReplace(godot_git, "https://github.com/",""),
+                repository: std.strReplace(godot_git, 'https://github.com/', ''),
                 ref: godot_branch,
                 path: 'g',
               },
@@ -78,19 +83,19 @@ local godot_pipeline(pipeline_name='',
                 name: 'Checkout Godot Custom Modules',
                 uses: 'actions/checkout@v3',
                 with: {
-                  repository: std.strReplace(godot_modules_git, "https://github.com/",""),
+                  repository: std.strReplace(godot_modules_git, 'https://github.com/', ''),
                   ref: godot_modules_branch,
                   path: 'godot_custom_modules',
                 },
               },
             {
               run: 'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
-              'working-directory': 'g',
+              'working-directory': '/home/go/g',
             },
             {
               run: '${{ matrix.platform_name.scons_env }} ' + 'scons werror=no platform=' + '${{ matrix.platform_name.scons_platform }}' + ' target=release_debug -j`nproc` use_lto=no deprecated=no ' + '${{ matrix.platform_name.scons_arguments }}' +
                    if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
-              'working-directory': 'g',
+              'working-directory': '/home/go/g',
             },
             {
               run: "cp -p g/bin/' + ${{  matrix.platform_name.intermediate_godot_binary }} + ' g/bin/' + $s{{ matrix.platform_name.editor_godot_binary }} ",
