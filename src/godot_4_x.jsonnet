@@ -85,6 +85,9 @@ local godot_pipeline(pipeline_name='',
               run: "alternatives --set ld /usr/bin/ld.gold && git lfs install && alternatives --set python /usr/bin/python3 && ln -s /usr/bin/scons-3 /usr/local/bin/scons"
             },
             {
+              "uses": "actions/checkout@v3"
+            },
+            {
               "name": "Setup Godot build cache",
               "uses": "./.github/actions/godot-cache",
               "with": {
