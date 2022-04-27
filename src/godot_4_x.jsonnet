@@ -652,7 +652,38 @@ local godot_editor_export(
       },
     ],
   };
-
+{
+  '../.github/workflows/learn-github-actions.yaml':
+    std.manifestYamlDoc({
+                          name: 'learn-github-actions',
+                          on: [
+                            'push',
+                          ],
+                          jobs: {
+                            'check-bats-version': {
+                              'runs-on': 'ubuntu-latest',
+                              steps: [
+                                {
+                                  uses: 'actions/checkout@v3',
+                                },
+                                {
+                                  uses: 'actions/setup-node@v3',
+                                  with: {
+                                    'node-version': '14',
+                                  },
+                                },
+                                {
+                                  run: 'npm install -g bats',
+                                },
+                                {
+                                  run: 'bats -v',
+                                },
+                              ],
+                            },
+                          },
+                        },
+                        indent_array_in_object=true),
+}
 {
   'env.fire.goenvironment.json': {
     name: 'itch-fire',
