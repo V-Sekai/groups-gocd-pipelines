@@ -95,7 +95,7 @@
                      "editor_godot_binary": "godot.windows.opt.tools.64.exe",
                      "intermediate_godot_binary": "godot.windows.opt.tools.64.exe",
                      "name": "windows",
-                     "scons_env": "PATH=/opt/llvm-mingw/bin:opt/llvm-mingw/bin:$PATH ",
+                     "scons_env": "PATH=/opt/llvm-mingw/bin:`pwd`/opt/llvm-mingw/bin:$PATH ",
                      "scons_platform": "windows"
                   },
                   {
