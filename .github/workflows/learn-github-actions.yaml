@@ -15,7 +15,7 @@
                   {
                     "path": "g",
                     "ref": "groups-4.x",
-                    "repository": "https://github.com/V-Sekai/godot.git",
+                    "repository": "V-Sekai/godot.git",
                   },
               },
               {
@@ -25,7 +25,7 @@
                   {
                     "path": "godot_custom_modules",
                     "ref": "groups-modules-4.x",
-                    "repository": "https://github.com/V-Sekai/godot-modules-groups.git",
+                    "repository": "V-Sekai/godot-modules-groups.git",
                   },
               },
               {
@@ -38,7 +38,7 @@
               },
               {
                 "if": true,
-                "run": "cp -p g/bin/' + ${{  matrix.platform_name.intermediate_godot_binary }} + ' g/bin/' + ${{ matrix.platform_name.editor_godot_binary }} ",
+                "run": "cp -p g/bin/' + ${{  matrix.platform_name.intermediate_godot_binary }} + ' g/bin/' + $s{{ matrix.platform_name.editor_godot_binary }} ",
               },
             ],
           "strategy":
