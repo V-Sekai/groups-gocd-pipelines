@@ -6,12 +6,12 @@ local templates = import '../lib/templates.libsonnet';
 
 local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.opt.tools.64.llvm';
 
-local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web']];
-local enabled_template_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web']];
+local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
+local enabled_template_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
 local enabled_gdextension_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
 
-local enabled_groups_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web']];
-local enabled_groups_template_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web']];
+local enabled_groups_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
+local enabled_groups_template_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
 
 local enabled_stern_flowers_export_platforms = [stern_flowers_export.stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linuxDesktop']];
