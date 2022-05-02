@@ -25,8 +25,8 @@
           "extra_commands": []
         },
         "linux": {
-          "artifacts": ["addons/godot-openvr/libgdsummator.linux.debug.64.so"],
-          "output_artifacts": ["libgdsummator.linux.debug.64.so"],
+          "artifacts": [],
+          "output_artifacts": [],
           "debug_artifacts": [],
           "scons_arguments": "",
           "environment_variables": [],

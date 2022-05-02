@@ -80,59 +80,6 @@
                      "working_directory": "p"
                   }
                ]
-            },
-            {
-               "artifacts": [
-                  {
-                     "destination": "",
-                     "source": "p/addons/godot-openvr/libgdsummator.linux.debug.64.so",
-                     "type": "build"
-                  }
-               ],
-               "environment_variables": [ ],
-               "name": "linuxJob",
-               "resources": [
-                  "linux",
-                  "mingw5"
-               ],
-               "tasks": [
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "",
-                     "job": "linuxJob",
-                     "pipeline": "gdextension-cpp",
-                     "source": "godot-cpp",
-                     "stage": "godotCppStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "godot-cpp",
-                     "job": "linuxJob",
-                     "pipeline": "gdextension-cpp",
-                     "source": "godot-headers",
-                     "stage": "godotCppStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp -a godot-cpp/. p/godot-cpp"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "scons werror=no platform=linux target=debug -j`nproc` use_lto=no deprecated=no use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "p"
-                  }
-               ]
             }
          ],
          "name": "gdextensionBuildStage"
