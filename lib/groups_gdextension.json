@@ -7,31 +7,41 @@
       "git_branch": "main",
       "platforms": {
         "windows": {
-          "artifacts": [],
-          "output_artifacts": [],
-          "debug_artifacts": [],
-          "scons_arguments": " --version",
+          "artifacts": [
+            "game/summator/libgdsummator.windows.debug.64.dll",
+          ],
+          "output_artifacts": ["libgdsummator.windows.debug.64.dll"],
+          "debug_artifacts": [
+          ],
+          "scons_arguments": "",
           "environment_variables": [],
-          "prepare_commands": [],
-          "extra_commands": []
+          "prepare_commands": [
+          ],
+          "extra_commands": [
+          ]
         },
         "web": {
           "artifacts": [],
           "output_artifacts": [],
           "debug_artifacts": [],
-          "scons_arguments": " --version",
+          "scons_arguments": "",
           "environment_variables": [],
           "prepare_commands": [],
           "extra_commands": []
         },
         "linux": {
-          "artifacts": [],
-          "output_artifacts": [],
-          "debug_artifacts": [],
-          "scons_arguments": " --version",
+          "artifacts": [
+            "game/summator/libgdsummator.linux.debug.64.so",
+          ],
+          "output_artifacts": ["libgdsummator.linux.debug.64.so"],
+          "debug_artifacts": [
+          ],
+          "scons_arguments": "",
           "environment_variables": [],
-          "prepare_commands": [],
-          "extra_commands": []
+          "prepare_commands": [
+          ],
+          "extra_commands": [
+          ]
         },
         "osx": {
           "artifacts": [],
