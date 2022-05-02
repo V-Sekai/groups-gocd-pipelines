@@ -15,7 +15,7 @@ local enabled_groups_template_platforms = [platform.platform_info_dict[x] for x 
 
 local enabled_stern_flowers_export_platforms = [stern_flowers_export.stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linuxDesktop']];
-local all_gdextension_plugins = [groups_gdextension.groups_gdextension_plugins[x] for x in ['godot_openvr']];
+local all_gdextension_plugins = [groups_gdextension.groups_gdextension_plugins[x] for x in ['godot_summator']];
 
 local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
