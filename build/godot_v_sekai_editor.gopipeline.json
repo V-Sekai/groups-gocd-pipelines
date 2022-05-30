@@ -27,7 +27,7 @@
    "name": "godot-template-groups-4-0",
    "stages": [
       {
-         "approval": false,
+         "approval": true,
          "clean_workspace": true,
          "jobs": [
             {
@@ -345,6 +345,6 @@
    ],
    "timer": {
       "only_on_changes": true,
-      "spec": ""
+      "spec": "* * * * * ?"
    }
 }

@@ -19,7 +19,7 @@
    "name": "groups-editor-4-0",
    "stages": [
       {
-         "approval": false,
+         "approval": true,
          "clean_workspace": true,
          "jobs": [
             {
@@ -91,5 +91,9 @@
          ],
          "name": "uploadStage"
       }
-   ]
+   ],
+   "timer": {
+      "only_on_changes": true,
+      "spec": "* * * * * ?"
+   }
 }

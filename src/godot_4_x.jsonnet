@@ -39,11 +39,11 @@ local godot_pipeline(pipeline_name='',
                      godot_engine_platforms=enabled_engine_platforms,
                      godot_template_platforms=enabled_template_platforms,
                      first_stage_approval=true,
-                     timer_spec="",
+                     timer_spec="* * * * * ?",
   ) = {
   name: pipeline_name,
   group: gocd_group,
-  timer: { "spec": if timer_spec != null then timer_spec else "* * * * * ?", 
+  timer: { "spec": timer_spec, 
     "only_on_changes": true,
   },
   label_template: godot_status + '.${godot_sandbox[:8]}.${COUNT}',
@@ -75,7 +75,7 @@ local godot_pipeline(pipeline_name='',
     {
       name: 'defaultStage',
       clean_workspace: true,
-      "approval": if !first_stage_approval then true else false,
+      "approval": first_stage_approval,
       jobs: [
         {
           name: platform_info.platform_name + 'Job',
@@ -594,11 +594,15 @@ local godot_editor_export(
   gocd_project_folder='',
   enabled_export_platforms=[],
   first_stage_approval=true,
+  timer_spec="* * * * * ?",
   ) =
   {
     name: pipeline_name,
     group: gocd_group,
     label_template: pipeline_name + '.${COUNT}',
+    timer: { "spec": timer_spec, 
+      "only_on_changes": true,
+    },
     environment_variables:
       [{
         name: 'GODOT_STATUS',
@@ -617,7 +621,7 @@ local godot_editor_export(
       {
         name: 'uploadStage',
         clean_workspace: true,
-        "approval": if !first_stage_approval then true else false,
+        "approval": first_stage_approval,
         jobs: [
           {
             name: export_info.export_name + 'Job',
