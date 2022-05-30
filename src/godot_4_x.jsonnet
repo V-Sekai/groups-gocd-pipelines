@@ -693,6 +693,12 @@ local godot_editor_export(
     environment_variables:
       [],
   },
+  'env.stern-flowers.goenvironment.json': {
+    name: 'itch-stern-flowers',
+    pipelines: [godot_template_stern_flowers_editor, godot_template_stern_flowers_export],
+    environment_variables:
+      [],
+  },
   'godot_v_sekai_editor.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_groups_editor,
