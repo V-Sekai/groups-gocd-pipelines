@@ -38,7 +38,7 @@ local godot_pipeline(pipeline_name='',
                      godot_modules_branch='',
                      godot_engine_platforms=enabled_engine_platforms,
                      godot_template_platforms=enabled_template_platforms,
-                     first_stage_approval=true,
+                     first_stage_approval=null,
                      timer_spec="* * * * * ?",
   ) = {
   name: pipeline_name,
@@ -75,7 +75,7 @@ local godot_pipeline(pipeline_name='',
     {
       name: 'defaultStage',
       clean_workspace: true,
-      "approval": first_stage_approval,
+      approval: first_stage_approval,
       jobs: [
         {
           name: platform_info.platform_name + 'Job',
@@ -593,7 +593,7 @@ local godot_editor_export(
   godot_status='',
   gocd_project_folder='',
   enabled_export_platforms=[],
-  first_stage_approval=true,
+  first_stage_approval=null,
   timer_spec="* * * * * ?",
   ) =
   {
@@ -621,7 +621,7 @@ local godot_editor_export(
       {
         name: 'uploadStage',
         clean_workspace: true,
-        "approval": first_stage_approval,
+        approval: first_stage_approval,
         jobs: [
           {
             name: export_info.export_name + 'Job',
@@ -792,8 +792,7 @@ local godot_editor_export(
       gocd_group='delta',
       godot_status='stern-flowers-4.0',
       enabled_export_platforms=enabled_stern_flowers_export_platforms,
-      first_stage_approval=false,
-    )
+      first_stage_approval={"type": "manual", "allow_only_on_success": true},)
   ),
 } + {
   'docker_groups.gopipeline.json'

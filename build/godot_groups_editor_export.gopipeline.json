@@ -19,7 +19,6 @@
    "name": "groups-editor-4-0",
    "stages": [
       {
-         "approval": true,
          "clean_workspace": true,
          "jobs": [
             {
