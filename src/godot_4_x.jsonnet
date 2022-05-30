@@ -37,9 +37,15 @@ local godot_pipeline(pipeline_name='',
                      godot_modules_git='',
                      godot_modules_branch='',
                      godot_engine_platforms=enabled_engine_platforms,
-                     godot_template_platforms=enabled_template_platforms) = {
+                     godot_template_platforms=enabled_template_platforms,
+                     first_stage_approval=true,
+                     timer_spec="",
+  ) = {
   name: pipeline_name,
   group: gocd_group,
+  timer: { "spec": if timer_spec != null then timer_spec else "* * * * * ?", 
+    "only_on_changes": true,
+  },
   label_template: godot_status + '.${godot_sandbox[:8]}.${COUNT}',
   environment_variables:
     [{
@@ -69,6 +75,7 @@ local godot_pipeline(pipeline_name='',
     {
       name: 'defaultStage',
       clean_workspace: true,
+      "approval": if !first_stage_approval then true else false,
       jobs: [
         {
           name: platform_info.platform_name + 'Job',
@@ -587,7 +594,7 @@ local godot_editor_export(
   gocd_project_folder='',
   enabled_export_platforms=[],
   first_stage_approval=true,
-      ) =
+  ) =
   {
     name: pipeline_name,
     group: gocd_group,
@@ -768,6 +775,8 @@ local godot_editor_export(
     godot_git='https://github.com/godotengine/godot.git',
     godot_branch='master',
     gocd_group='delta',
+    first_stage_approval=false,
+    timer_spec="0 0 0/2 * * ?",
   )),
 } + {
   'godot_stern_flowers_editor_export.gopipeline.json'
@@ -779,6 +788,7 @@ local godot_editor_export(
       gocd_group='delta',
       godot_status='stern-flowers-4.0',
       enabled_export_platforms=enabled_stern_flowers_export_platforms,
+      first_stage_approval=false,
     )
   ),
 } + {

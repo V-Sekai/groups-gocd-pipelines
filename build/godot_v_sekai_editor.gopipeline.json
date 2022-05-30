@@ -27,6 +27,7 @@
    "name": "godot-template-groups-4-0",
    "stages": [
       {
+         "approval": false,
          "clean_workspace": true,
          "jobs": [
             {
@@ -341,5 +342,9 @@
          ],
          "name": "templateZipStage"
       }
-   ]
+   ],
+   "timer": {
+      "only_on_changes": true,
+      "spec": ""
+   }
 }

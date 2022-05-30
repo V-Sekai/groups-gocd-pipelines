@@ -19,7 +19,7 @@
    "name": "stern-flowers-editor-4-x",
    "stages": [
       {
-         "approval": false,
+         "approval": true,
          "clean_workspace": true,
          "jobs": [
             {

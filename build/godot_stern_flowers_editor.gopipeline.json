@@ -19,6 +19,7 @@
    "name": "godot-template-stern-flowers-4-x",
    "stages": [
       {
+         "approval": true,
          "clean_workspace": true,
          "jobs": [
             {
@@ -333,5 +334,9 @@
          ],
          "name": "templateZipStage"
       }
-   ]
+   ],
+   "timer": {
+      "only_on_changes": true,
+      "spec": "0 0 0/2 * * ?"
+   }
 }
