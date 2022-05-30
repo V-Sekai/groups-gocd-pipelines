@@ -19,10 +19,6 @@
    "name": "stern-flowers-editor-4-x",
    "stages": [
       {
-         "approval": {
-            "allow_only_on_success": true,
-            "type": "manual"
-         },
          "clean_workspace": true,
          "jobs": [
             {

@@ -19,7 +19,10 @@
    "name": "godot-template-stern-flowers-4-x",
    "stages": [
       {
-         "approval": false,
+         "approval": {
+            "allow_only_on_success": true,
+            "type": "manual"
+         },
          "clean_workspace": true,
          "jobs": [
             {
