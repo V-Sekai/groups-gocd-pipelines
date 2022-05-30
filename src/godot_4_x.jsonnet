@@ -586,6 +586,7 @@ local godot_editor_export(
   godot_status='',
   gocd_project_folder='',
   enabled_export_platforms=[],
+  first_stage_approval=true,
       ) =
   {
     name: pipeline_name,
@@ -609,6 +610,7 @@ local godot_editor_export(
       {
         name: 'uploadStage',
         clean_workspace: true,
+        "approval": if !first_stage_approval then true else false,
         jobs: [
           {
             name: export_info.export_name + 'Job',
