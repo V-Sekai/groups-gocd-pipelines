@@ -340,6 +340,6 @@
    ],
    "timer": {
       "only_on_changes": true,
-      "spec": "0 0 0/2 * * ?"
+      "spec": "0 0 0/4 * * ?"
    }
 }

@@ -780,7 +780,7 @@ local godot_editor_export(
     godot_branch='master',
     gocd_group='delta',
     first_stage_approval={"type": "manual", "allow_only_on_success": true},
-    timer_spec="0 0 0/2 * * ?",
+    timer_spec="0 0 0/4 * * ?",
   )),
 } + {
   'godot_stern_flowers_editor_export.gopipeline.json'
