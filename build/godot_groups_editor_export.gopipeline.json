@@ -10,8 +10,8 @@
    "materials": [
       {
          "ignore_for_scheduling": false,
-         "name": "godot-template-groups-4-0_pipeline_dependency",
-         "pipeline": "godot-template-groups-4-0",
+         "name": "godot-template-groups-4-0-rev-02_pipeline_dependency",
+         "pipeline": "godot-template-groups-4-0-rev-02",
          "stage": "templateZipStage",
          "type": "dependency"
       }
@@ -33,7 +33,7 @@
                      "destination": "export_windows",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-4-0",
+                     "pipeline": "godot-template-groups-4-0-rev-02",
                      "source": "godot.windows.opt.tools.64.exe",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -43,7 +43,7 @@
                      "destination": "export_windows",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-4-0",
+                     "pipeline": "godot-template-groups-4-0-rev-02",
                      "source": "godot.windows.opt.tools.64.pdb",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -71,7 +71,7 @@
                      "destination": "export_linuxbsd",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-template-groups-4-0",
+                     "pipeline": "godot-template-groups-4-0-rev-02",
                      "source": "godot.linuxbsd.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
