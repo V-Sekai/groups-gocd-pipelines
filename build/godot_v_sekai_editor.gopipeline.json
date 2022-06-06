@@ -134,7 +134,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" scons werror=no platform=osx target=release_debug -j4 use_lto=no deprecated=no osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes custom_modules=../godot_custom_modules"
+                        "OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" scons werror=no platform=osx target=release_debug -j4 use_lto=no deprecated=no ccache_bin= osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes custom_modules=../godot_custom_modules"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -377,7 +377,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" scons werror=no platform=osx target=release_debug -j4 use_lto=no deprecated=no osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes custom_modules=../godot_custom_modules"
+                        "OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" scons werror=no platform=osx target=release_debug -j4 use_lto=no deprecated=no ccache_bin= osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes custom_modules=../godot_custom_modules"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
