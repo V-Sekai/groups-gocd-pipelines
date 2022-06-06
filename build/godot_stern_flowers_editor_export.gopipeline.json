@@ -86,6 +86,34 @@
                      "working_directory": ""
                   }
                ]
+            },
+            {
+               "name": "macosJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "export_macos",
+                     "is_source_a_file": true,
+                     "job": "macosJob",
+                     "pipeline": "godot-template-stern-flowers-4-x",
+                     "source": "macos.zip",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "butler push export_macos ifiregames/stern-flowers-chibifire-com-godot-engine:macos --userversion `date +\"%Y-%m-%dT%H%M%SZ\" --utc`-$GO_PIPELINE_NAME"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  }
+               ]
             }
          ],
          "name": "uploadStage"
