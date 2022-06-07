@@ -86,34 +86,6 @@
                      "working_directory": ""
                   }
                ]
-            },
-            {
-               "name": "macosJob",
-               "resources": [
-                  "linux",
-                  "mingw5"
-               ],
-               "tasks": [
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "export_macos",
-                     "is_source_a_file": true,
-                     "job": "macosJob",
-                     "pipeline": "godot-template-groups-4-0-rev-02",
-                     "source": "macos.zip",
-                     "stage": "defaultStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "butler push export_macos ifiregames/chibifire-godot-4-custom-engine:macos --userversion `date +\"%Y-%m-%dT%H%M%SZ\" --utc`-$GO_PIPELINE_NAME"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
-                  }
-               ]
             }
          ],
          "name": "uploadStage"
