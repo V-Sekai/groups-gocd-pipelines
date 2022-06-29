@@ -734,7 +734,7 @@ local godot_editor_export(
       godot_status='gdextension.godot-cpp'
     )
   ),
-  'godot_v_sekai_staging_editor.gopipeline.json'
+  'godot_groups_staging_editor.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_groups_staging_editor,
     godot_status='groups-staging-4.0.0',
@@ -746,6 +746,21 @@ local godot_editor_export(
     godot_engine_platforms=enabled_groups_engine_platforms,
     godot_template_platforms=enabled_groups_template_platforms
   )),
+} + {
+  'godot_template_groups_staging_export.gopipeline.json'
+  : std.prune(
+    templates.godot_tools_pipeline_export(
+      pipeline_name=godot_template_groups,
+      pipeline_dependency=godot_template_groups_staging_editor,
+      itchio_login='saracenone/groups-4x',
+      project_git='git@gitlab.com:SaracenOne/groups.git',
+      project_branch='godot4',
+      gocd_group='gamma',
+      godot_status='groups-staging-4.0',
+      gocd_project_folder='groups',
+      enabled_export_platforms=enabled_groups_export_platforms,
+    )
+  ),
 } + {
   ['gdextension_' + library_info.name + '.gopipeline.json']: generate_godot_gdextension_pipeline(
     pipeline_name=library_info.pipeline_name,
