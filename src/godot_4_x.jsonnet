@@ -757,7 +757,7 @@ local godot_editor_export(
       project_git='git@gitlab.com:SaracenOne/groups.git',
       project_branch='godot4',
       gocd_group='gamma',
-      godot_status='groups-4.0',
+      godot_status='groups-staging-4.0',
       gocd_project_folder='groups',
       enabled_export_platforms=enabled_groups_export_platforms,
     )

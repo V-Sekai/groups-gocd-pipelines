@@ -2,11 +2,11 @@
    "environment_variables": [
       {
          "name": "GODOT_STATUS",
-         "value": "groups-4.0"
+         "value": "groups-staging-4.0"
       }
    ],
    "group": "gamma",
-   "label_template": "groups-4.0.${godot-template-groups-staging-4-0-rev-00_pipeline_dependency}.${COUNT}",
+   "label_template": "groups-staging-4.0.${godot-template-groups-staging-4-0-rev-00_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "branch": "godot4",
