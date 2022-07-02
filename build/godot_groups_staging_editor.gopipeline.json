@@ -2,11 +2,11 @@
    "environment_variables": [
       {
          "name": "GODOT_STATUS",
-         "value": "groups-4.0.0"
+         "value": "groups-staging-4.0.0"
       }
    ],
    "group": "gamma",
-   "label_template": "groups-4.0.0.${godot_sandbox[:8]}.${COUNT}",
+   "label_template": "groups-staging-4.0.0.${godot_sandbox[:8]}.${COUNT}",
    "materials": [
       {
          "branch": "groups-staging-4.x",
@@ -24,7 +24,7 @@
          "url": "https://github.com/V-Sekai/godot-modules-groups.git"
       }
    ],
-   "name": "godot-template-groups-staging-4-0-rev-00",
+   "name": "groups-staging-editor-4-0",
    "stages": [
       {
          "clean_workspace": true,
@@ -145,7 +145,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-staging-4-0-rev-00",
+                     "pipeline": "groups-staging-editor-4-0",
                      "source": "godot.windows.opt.tools.64.exe",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -208,7 +208,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-template-groups-staging-4-0-rev-00",
+                     "pipeline": "groups-staging-editor-4-0",
                      "source": "godot.linuxbsd.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -265,7 +265,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-staging-4-0-rev-00",
+                     "pipeline": "groups-staging-editor-4-0",
                      "source": "version.txt",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -275,7 +275,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-staging-4-0-rev-00",
+                     "pipeline": "groups-staging-editor-4-0",
                      "source": "godot.windows.opt.tools.64.pdb",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -285,7 +285,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-staging-4-0-rev-00",
+                     "pipeline": "groups-staging-editor-4-0",
                      "source": "windows_64_debug.exe",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -295,7 +295,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-staging-4-0-rev-00",
+                     "pipeline": "groups-staging-editor-4-0",
                      "source": "windows_64_release.exe",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -305,7 +305,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-template-groups-staging-4-0-rev-00",
+                     "pipeline": "groups-staging-editor-4-0",
                      "source": "linux_x11_64_debug",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -315,7 +315,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-template-groups-staging-4-0-rev-00",
+                     "pipeline": "groups-staging-editor-4-0",
                      "source": "linux_x11_64_release",
                      "stage": "templateStage",
                      "type": "fetch"
