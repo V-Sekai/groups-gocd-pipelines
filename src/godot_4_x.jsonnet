@@ -29,7 +29,7 @@ local godot_template_groups = 'groups-4-0-export';
 local godot_template_groups_staging = 'groups-staging-4-0-export';
 local godot_cpp_pipeline = 'gdextension-cpp';
 local godot_gdextension_pipelines = [plugin_info.pipeline_name for plugin_info in all_gdextension_plugins];
-local itch_fire_template = [godot_template_groups_staging_editor] + godot_template_groups_staging + [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdextension_pipelines + [godot_template_groups_export] + [godot_template_groups];
+local itch_fire_template = [godot_template_groups_staging_editor, godot_template_groups_staging] + [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdextension_pipelines + [godot_template_groups_export] + [godot_template_groups];
 
 local godot_pipeline(pipeline_name='',
                      godot_status='',
