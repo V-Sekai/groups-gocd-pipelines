@@ -87,50 +87,6 @@
           "extra_commands": []
         }
       }
-    },    
-    "godot_test": {
-      "name": "godot_test",
-      "pipeline_name": "gdextension-godot-test",
-      "git_url": "https://github.com/godotengine/godot-cpp.git",
-      "git_branch": "master",
-      "platforms": {
-        "windows": {
-          "artifacts": ["game/summator/libgdsummator.windows.debug.64.dll"],
-          "output_artifacts": ["libgdsummator.windows.debug.64.dll"],
-          "debug_artifacts": [],
-          "scons_arguments": "",
-          "environment_variables": [],
-          "prepare_commands": [],
-          "extra_commands": []
-        },
-        "web": {
-          "artifacts": [],
-          "output_artifacts": [],
-          "debug_artifacts": [],
-          "scons_arguments": "",
-          "environment_variables": [],
-          "prepare_commands": [],
-          "extra_commands": []
-        },
-        "linux": {
-          "artifacts": ["game/summator/libgdsummator.linux.debug.64.so"],
-          "output_artifacts": ["libgdsummator.linux.debug.64.so"],
-          "debug_artifacts": [],
-          "scons_arguments": "",
-          "environment_variables": [],
-          "prepare_commands": [],
-          "extra_commands": []
-        },
-        "osx": {
-          "artifacts": [],
-          "output_artifacts": [],
-          "debug_artifacts": [],
-          "scons_arguments": " --version",
-          "environment_variables": [],
-          "prepare_commands": [],
-          "extra_commands": []
-        }
-      }
     }
   }
 }
