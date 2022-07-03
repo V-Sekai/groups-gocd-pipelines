@@ -828,7 +828,7 @@ local godot_editor_export(
     templates.godot_tools_pipeline_export(
       pipeline_name=godot_template_groups_staging,
       pipeline_dependency=godot_template_groups_staging_editor,
-      itchio_login='saracenone/groups-4x',
+      itchio_login='ifiregames/groups-staging',
       project_git='git@gitlab.com:SaracenOne/groups.git',
       project_branch='godot4',
       gocd_group='gamma',
