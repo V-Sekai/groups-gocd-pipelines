@@ -107,12 +107,12 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/windows_debug_x86_64.exe",
+                     "source": "g/bin/windows_64_debug.exe",
                      "type": "build"
                   },
                   {
                      "destination": "",
-                     "source": "g/bin/windows_release_x86_64.exe",
+                     "source": "g/bin/windows_64_release.exe",
                      "type": "build"
                   },
                   {
@@ -149,7 +149,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.windows.opt.tools.64.exe bin/windows_debug_x86_64.exe && cp bin/godot.windows.opt.tools.64.exe bin/windows_release_x86_64.exe && mingw-strip --strip-debug bin/windows_release_x86_64.exe"
+                        "cp bin/godot.windows.opt.tools.64.exe bin/windows_64_debug.exe && cp bin/godot.windows.opt.tools.64.exe bin/windows_64_release.exe && mingw-strip --strip-debug bin/windows_64_release.exe"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -170,12 +170,12 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/linux_debug.x86_64",
+                     "source": "g/bin/linux_x11_64_debug",
                      "type": "build"
                   },
                   {
                      "destination": "",
-                     "source": "g/bin/linux_release.x86_64",
+                     "source": "g/bin/linux_x11_64_release",
                      "type": "build"
                   },
                   {
@@ -212,7 +212,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.linuxbsd.opt.tools.64.llvm bin/linux_debug.x86_64 && cp bin/godot.linuxbsd.opt.tools.64.llvm bin/linux_release.x86_64 && strip --strip-debug bin/linux_release.x86_64"
+                        "cp bin/godot.linuxbsd.opt.tools.64.llvm bin/linux_x11_64_debug && cp bin/godot.linuxbsd.opt.tools.64.llvm bin/linux_x11_64_release && strip --strip-debug bin/linux_x11_64_release"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -282,7 +282,7 @@
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "godot-template-stern-flowers-4-x",
-                     "source": "windows_debug_x86_64.exe",
+                     "source": "windows_64_debug.exe",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
@@ -292,7 +292,7 @@
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "godot-template-stern-flowers-4-x",
-                     "source": "windows_release_x86_64.exe",
+                     "source": "windows_64_release.exe",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
@@ -302,7 +302,7 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "godot-template-stern-flowers-4-x",
-                     "source": "linux_debug.x86_64",
+                     "source": "linux_x11_64_debug",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
@@ -312,7 +312,7 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "godot-template-stern-flowers-4-x",
-                     "source": "linux_release.x86_64",
+                     "source": "linux_x11_64_release",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
