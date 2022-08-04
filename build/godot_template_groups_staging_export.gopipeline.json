@@ -6,7 +6,7 @@
       }
    ],
    "group": "zeta",
-   "label_template": "groups-staging-4.0.${groups-staging-editor-4-0_pipeline_dependency}.${COUNT}",
+   "label_template": "groups-staging-4.0.${groups-staging-editor-4-0-rev-01_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "branch": "godot4",
@@ -17,8 +17,8 @@
       },
       {
          "ignore_for_scheduling": false,
-         "name": "groups-staging-editor-4-0_pipeline_dependency",
-         "pipeline": "groups-staging-editor-4-0",
+         "name": "groups-staging-editor-4-0-rev-01_pipeline_dependency",
+         "pipeline": "groups-staging-editor-4-0-rev-01",
          "stage": "templateZipStage",
          "type": "dependency"
       }
@@ -48,7 +48,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "defaultJob",
-                     "pipeline": "groups-staging-editor-4-0",
+                     "pipeline": "groups-staging-editor-4-0-rev-01",
                      "source": "godot.templates.tpz",
                      "stage": "templateZipStage",
                      "type": "fetch"
@@ -58,7 +58,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "groups-staging-editor-4-0",
+                     "pipeline": "groups-staging-editor-4-0-rev-01",
                      "source": "godot.linuxbsd.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -111,7 +111,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "defaultJob",
-                     "pipeline": "groups-staging-editor-4-0",
+                     "pipeline": "groups-staging-editor-4-0-rev-01",
                      "source": "godot.templates.tpz",
                      "stage": "templateZipStage",
                      "type": "fetch"
@@ -121,7 +121,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "groups-staging-editor-4-0",
+                     "pipeline": "groups-staging-editor-4-0-rev-01",
                      "source": "godot.linuxbsd.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"

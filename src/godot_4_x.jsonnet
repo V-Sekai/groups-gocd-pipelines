@@ -23,7 +23,7 @@ local docker_gocd_agent_pipeline = 'docker-gocd-agent-centos-8-groups';
 local godot_template_groups_editor = 'godot-template-groups-4-0-rev-03';
 local godot_template_groups_export = 'groups-editor-4-0';
 local godot_template_groups = 'groups-4-0-ship-to-prod';
-local godot_template_groups_staging_editor = 'groups-staging-editor-4-0';
+local godot_template_groups_staging_editor = 'groups-staging-editor-4-0-rev-01';
 local godot_template_groups_staging = 'groups-staging-4-0-ship-to-prod';
 local godot_cpp_pipeline = 'gdextension-cpp';
 local godot_gdextension_pipelines = [plugin_info.pipeline_name for plugin_info in all_gdextension_plugins];
@@ -805,7 +805,7 @@ local godot_editor_export(
   'godot_groups_staging_editor.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_groups_staging_editor,
-    godot_status='groups-staging-4.0.0',
+    godot_status='groups-staging-4-0',
     godot_git='https://github.com/V-Sekai/godot.git',
     godot_branch='groups-staging-4.x',
     gocd_group='zeta',
