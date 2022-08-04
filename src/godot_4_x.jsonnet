@@ -21,8 +21,6 @@ local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
 local docker_gocd_agent_pipeline = 'docker-gocd-agent-centos-8-groups';
 local godot_template_groups_editor = 'godot-template-groups-4-0-rev-02';
-local godot_template_stern_flowers_editor = 'godot-template-stern-flowers-4-x';
-local godot_template_stern_flowers_export = 'stern-flowers-editor-4-x';
 local godot_template_groups_export = 'groups-editor-4-0';
 local godot_template_groups = 'groups-4-0-export';
 local godot_template_groups_staging_editor = 'groups-staging-editor-4-0';
@@ -705,12 +703,6 @@ local godot_editor_export(
   'env.fire.goenvironment.json': {
     name: 'itch-fire',
     pipelines: itch_fire_template,
-    environment_variables:
-      [],
-  },
-  'env.stern-flowers.goenvironment.json': {
-    name: 'itch-stern-flowers',
-    pipelines: [godot_template_stern_flowers_editor, godot_template_stern_flowers_export],
     environment_variables:
       [],
   },
