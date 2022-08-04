@@ -1,5 +1,5 @@
 {
-   "group": "beta",
+   "group": "charlie",
    "label_template": "${groups-4-0-export_pipeline_dependency}.${COUNT}",
    "materials": [
       {

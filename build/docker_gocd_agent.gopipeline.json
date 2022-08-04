@@ -1,5 +1,5 @@
 {
-   "group": "beta",
+   "group": "charlie",
    "label_template": "docker-gocd-agent-centos-8-groups_${docker-gocd-agent-centos-8-groups_git[:8]}.${COUNT}",
    "materials": [
       {

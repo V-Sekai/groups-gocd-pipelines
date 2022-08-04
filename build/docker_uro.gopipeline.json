@@ -1,5 +1,5 @@
 {
-   "group": "beta",
+   "group": "charlie",
    "label_template": "docker-uro_${docker-uro_git[:8]}.${COUNT}",
    "materials": [
       {

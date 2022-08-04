@@ -838,7 +838,7 @@ local godot_editor_export(
       docker_groups_git='https://github.com/V-Sekai/docker-groups.git',
       docker_groups_branch='master',
       docker_groups_dir='groups_server',
-      gocd_group='beta',
+      gocd_group='charlie',
       godot_status='docker',
       docker_repo_groups_server='groupsinfra/groups-server',
       server_export_info=groups_export.groups_export_configurations.linuxDesktop,
@@ -848,7 +848,7 @@ local godot_editor_export(
   : std.prune(
     templates.simple_docker_job(
       pipeline_name=docker_gocd_agent_pipeline,
-      gocd_group='beta',
+      gocd_group='charlie',
       docker_repo_variable='groupsinfra/gocd-agent-centos-8-groups',
       docker_git='https://github.com/V-Sekai/docker-groups.git',
       docker_branch='master',
@@ -859,7 +859,7 @@ local godot_editor_export(
   : std.prune(
     templates.simple_docker_job(
       pipeline_name=docker_uro_pipeline,
-      gocd_group='beta',
+      gocd_group='charlie',
       docker_repo_variable='groupsinfra/uro',
       docker_git='https://github.com/V-Sekai/uro.git',
       docker_branch='master',
