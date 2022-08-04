@@ -23,7 +23,7 @@
          "type": "dependency"
       }
    ],
-   "name": "groups-4-0-export",
+   "name": "groups-4-0-ship-to-prod",
    "stages": [
       {
          "clean_workspace": false,
@@ -173,7 +173,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "windowsJob",
-                     "pipeline": "groups-4-0-export",
+                     "pipeline": "groups-4-0-ship-to-prod",
                      "source": "export_windows",
                      "stage": "exportStage",
                      "type": "fetch"
@@ -201,7 +201,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "linuxDesktopJob",
-                     "pipeline": "groups-4-0-export",
+                     "pipeline": "groups-4-0-ship-to-prod",
                      "source": "export_linuxbsd",
                      "stage": "exportStage",
                      "type": "fetch"
