@@ -768,7 +768,7 @@ local godot_editor_export(
   ['gdextension_' + library_info.name + '.gopipeline.json']: generate_godot_gdextension_pipeline(
     pipeline_name=library_info.pipeline_name,
     pipeline_dependency=godot_cpp_pipeline,
-    gocd_group='gamma',
+    gocd_group='echo',
     godot_status='gdextension.' + library_info.name,
     library_info=library_info,
     godot_gdextension_platforms=enabled_gdextension_platforms,

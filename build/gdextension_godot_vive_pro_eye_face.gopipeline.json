@@ -5,7 +5,7 @@
          "value": "gdextension.godot_vive_pro_eye_face"
       }
    ],
-   "group": "gamma",
+   "group": "echo",
    "label_template": "gdextension.godot_vive_pro_eye_face.${gdextension-cpp_pipeline_dependency}.${COUNT}",
    "materials": [
       {
