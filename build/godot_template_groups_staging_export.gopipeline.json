@@ -5,7 +5,7 @@
          "value": "groups-staging-4.0"
       }
    ],
-   "group": "gamma",
+   "group": "zeta",
    "label_template": "groups-staging-4.0.${groups-staging-editor-4-0_pipeline_dependency}.${COUNT}",
    "materials": [
       {
