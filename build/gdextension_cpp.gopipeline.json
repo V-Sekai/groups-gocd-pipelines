@@ -5,7 +5,7 @@
          "value": "gdextension.godot-cpp"
       }
    ],
-   "group": "gamma",
+   "group": "echo",
    "label_template": "gdextension.godot-cpp.${godot-template-groups-4-0-rev-02_pipeline_dependency}.${COUNT}",
    "materials": [
       {
