@@ -24,7 +24,7 @@
          "url": "https://github.com/V-Sekai/godot-modules-groups.git"
       }
    ],
-   "name": "godot-template-groups-4-0-rev-03",
+   "name": "godot-groups-editor",
    "stages": [
       {
          "clean_workspace": true,
@@ -145,7 +145,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-4-0-rev-03",
+                     "pipeline": "godot-groups-editor",
                      "source": "godot.windows.opt.tools.64.exe",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -208,7 +208,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-template-groups-4-0-rev-03",
+                     "pipeline": "godot-groups-editor",
                      "source": "godot.linuxbsd.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -265,7 +265,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-4-0-rev-03",
+                     "pipeline": "godot-groups-editor",
                      "source": "version.txt",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -275,7 +275,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-4-0-rev-03",
+                     "pipeline": "godot-groups-editor",
                      "source": "godot.windows.opt.tools.64.pdb",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -285,7 +285,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-4-0-rev-03",
+                     "pipeline": "godot-groups-editor",
                      "source": "windows_debug_x86_64.exe",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -295,7 +295,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windowsJob",
-                     "pipeline": "godot-template-groups-4-0-rev-03",
+                     "pipeline": "godot-groups-editor",
                      "source": "windows_release_x86_64.exe",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -305,7 +305,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-template-groups-4-0-rev-03",
+                     "pipeline": "godot-groups-editor",
                      "source": "linux_debug.x86_64",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -315,7 +315,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-template-groups-4-0-rev-03",
+                     "pipeline": "godot-groups-editor",
                      "source": "linux_release.x86_64",
                      "stage": "templateStage",
                      "type": "fetch"

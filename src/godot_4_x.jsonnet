@@ -20,14 +20,14 @@ local all_gdextension_plugins = [groups_gdextension.groups_gdextension_plugins[x
 local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
 local docker_gocd_agent_pipeline = 'docker-gocd-agent-centos-8-groups';
-local godot_template_groups_editor = 'godot-template-groups-4-0-rev-03';
-local godot_template_groups_export = 'groups-editor-4-0';
-local godot_template_groups = 'groups-4-0-ship-to-prod';
-local godot_template_groups_staging_editor = 'groups-staging-editor-4-0-rev-01';
-local godot_template_groups_staging = 'groups-staging-4-0-ship-to-prod';
+local godot_template_groups_editor = 'godot-groups-editor';
+local godot_template_groups_editor_export = 'godot-groups-editor-upload';
+local godot_template_groups = 'groups-export';
+local godot_template_groups_staging_editor = 'godot-groups-staging-editor';
+local godot_template_groups_staging = 'groups-staging-export';
 local godot_cpp_pipeline = 'gdextension-cpp';
 local godot_gdextension_pipelines = [plugin_info.pipeline_name for plugin_info in all_gdextension_plugins];
-local itch_fire_template = [godot_template_groups_staging_editor, godot_template_groups_staging] + [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdextension_pipelines + [godot_template_groups_export] + [godot_template_groups];
+local itch_fire_template = [godot_template_groups_staging_editor, godot_template_groups_staging] + [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdextension_pipelines + [godot_template_groups_editor_export] + [godot_template_groups];
 
 local godot_pipeline(pipeline_name='',
                      godot_status='',
@@ -741,7 +741,7 @@ local godot_editor_export(
   'godot_groups_editor_export.gopipeline.json'
   : std.prune(
     godot_editor_export(
-      pipeline_name=godot_template_groups_export,
+      pipeline_name=godot_template_groups_editor_export,
       pipeline_dependency=godot_template_groups_editor,
       itchio_login='ifiregames/chibifire-godot-4-custom-engine',
       gocd_group='gamma',
@@ -778,7 +778,7 @@ local godot_editor_export(
   'godot_groups_editor_export.gopipeline.json'
   : std.prune(
     godot_editor_export(
-      pipeline_name=godot_template_groups_export,
+      pipeline_name=godot_template_groups_editor_export,
       pipeline_dependency=godot_template_groups_editor,
       itchio_login='ifiregames/chibifire-godot-4-custom-engine',
       gocd_group='gamma',
