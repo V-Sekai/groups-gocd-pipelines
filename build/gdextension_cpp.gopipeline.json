@@ -6,11 +6,11 @@
       }
    ],
    "group": "echo",
-   "label_template": "gdextension.godot-cpp.${source-godot-groups_pipeline_dependency}.${COUNT}",
+   "label_template": "gdextension.godot-cpp.${godot-groups-editor_pipeline_dependency}.${COUNT}",
    "materials": [
       {
-         "name": "source-godot-groups_pipeline_dependency",
-         "pipeline": "source-godot-groups",
+         "name": "godot-groups-editor_pipeline_dependency",
+         "pipeline": "godot-groups-editor",
          "stage": "defaultStage",
          "type": "dependency"
       },
@@ -56,7 +56,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "source-godot-groups",
+                     "pipeline": "godot-groups-editor",
                      "source": "godot.linuxbsd.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -119,7 +119,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=debug use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"
+                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=debug -j4 use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -169,7 +169,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=linux target=debug use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
+                        "scons werror=no platform=linux target=debug -j4 use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

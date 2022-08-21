@@ -1,6 +1,6 @@
 {
    "group": "charlie",
-   "label_template": "${filter-groups-export_pipeline_dependency}.${COUNT}",
+   "label_template": "${groups-export_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "branch": "master",
@@ -11,8 +11,8 @@
       },
       {
          "ignore_for_scheduling": false,
-         "name": "filter-groups-export_pipeline_dependency",
-         "pipeline": "filter-groups-export",
+         "name": "groups-export_pipeline_dependency",
+         "pipeline": "groups-export",
          "stage": "exportStage",
          "type": "dependency"
       }
@@ -41,7 +41,7 @@
                      "destination": "g/groups_server",
                      "is_source_a_file": false,
                      "job": "linuxDesktopJob",
-                     "pipeline": "filter-groups-export",
+                     "pipeline": "groups-export",
                      "source": "export_linuxbsd",
                      "stage": "exportStage",
                      "type": "fetch"

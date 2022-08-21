@@ -15,16 +15,16 @@ local enabled_groups_template_platforms = [platform.platform_info_dict[x] for x 
 
 local enabled_stern_flowers_export_platforms = [stern_flowers_export.stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linuxDesktop']];
-local all_gdextension_plugins = [groups_gdextension.groups_gdextension_plugins[x] for x in ['godot_summator']];
+local all_gdextension_plugins = [groups_gdextension.groups_gdextension_plugins[x] for x in ['godot_vive_pro_eye_face']];
 
 local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
 local docker_gocd_agent_pipeline = 'docker-gocd-agent-centos-8-groups';
-local godot_template_groups_editor = 'source-godot-groups';
-local godot_template_groups_editor_export = 'sink-groups-upload';
-local godot_template_groups = 'filter-groups-export';
-local godot_template_groups_staging_editor = 'source-godot-groups-staging';
-local godot_template_groups_staging = 'sink-groups-staging-upload';
+local godot_template_groups_editor = 'godot-groups-editor';
+local godot_template_groups_editor_export = 'godot-groups-editor-upload';
+local godot_template_groups = 'groups-export';
+local godot_template_groups_staging_editor = 'godot-groups-staging-editor';
+local godot_template_groups_staging = 'groups-staging-export';
 local godot_cpp_pipeline = 'gdextension-cpp';
 local godot_gdextension_pipelines = [plugin_info.pipeline_name for plugin_info in all_gdextension_plugins];
 local itch_fire_template = [godot_template_groups_staging_editor, godot_template_groups_staging] + [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdextension_pipelines + [godot_template_groups_editor_export] + [godot_template_groups];
@@ -110,7 +110,7 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                platform_info.scons_env + 'scons werror=no platform=' + platform_info.scons_platform + ' target=release_debug suse_lto=no deprecated=no ' + platform_info.godot_scons_arguments +
+                platform_info.scons_env + 'scons werror=no platform=' + platform_info.scons_platform + ' target=release_debug -j4 use_lto=no deprecated=no ' + platform_info.godot_scons_arguments +
                 if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
               ],
               command: '/bin/bash',
@@ -192,7 +192,7 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                platform_info.scons_env + 'scons werror=no platform=' + platform_info.scons_platform + ' target=release_debug use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+                platform_info.scons_env + 'scons werror=no platform=' + platform_info.scons_platform + ' target=release_debug -j4 use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
               ],
               command: '/bin/bash',
               working_directory: 'g',
@@ -443,7 +443,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdextension_platform + ' target=debug use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers ' + platform_info.godot_scons_arguments,
+                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdextension_platform + ' target=debug -j4 use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers ' + platform_info.godot_scons_arguments,
                 ],
                 command: '/bin/bash',
                 working_directory: 'godot-cpp',
@@ -559,7 +559,7 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdextension_platform + ' target=debug use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + library_info.platforms[platform_info.gdextension_platform].scons_arguments,
+                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdextension_platform + ' target=debug -j4 use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + library_info.platforms[platform_info.gdextension_platform].scons_arguments,
                 ],
                 command: '/bin/bash',
                 working_directory: 'p',

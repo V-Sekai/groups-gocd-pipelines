@@ -6,7 +6,7 @@
       }
    ],
    "group": "gamma",
-   "label_template": "groups-4.0.${source-godot-groups_pipeline_dependency}.${COUNT}",
+   "label_template": "groups-4.0.${godot-groups-editor_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "branch": "godot4",
@@ -17,13 +17,13 @@
       },
       {
          "ignore_for_scheduling": false,
-         "name": "source-godot-groups_pipeline_dependency",
-         "pipeline": "source-godot-groups",
+         "name": "godot-groups-editor_pipeline_dependency",
+         "pipeline": "godot-groups-editor",
          "stage": "templateZipStage",
          "type": "dependency"
       }
    ],
-   "name": "filter-groups-export",
+   "name": "groups-export",
    "stages": [
       {
          "clean_workspace": false,
@@ -48,7 +48,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "defaultJob",
-                     "pipeline": "source-godot-groups",
+                     "pipeline": "godot-groups-editor",
                      "source": "godot.templates.tpz",
                      "stage": "templateZipStage",
                      "type": "fetch"
@@ -58,7 +58,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "source-godot-groups",
+                     "pipeline": "godot-groups-editor",
                      "source": "godot.linuxbsd.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -111,7 +111,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "defaultJob",
-                     "pipeline": "source-godot-groups",
+                     "pipeline": "godot-groups-editor",
                      "source": "godot.templates.tpz",
                      "stage": "templateZipStage",
                      "type": "fetch"
@@ -121,7 +121,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "source-godot-groups",
+                     "pipeline": "godot-groups-editor",
                      "source": "godot.linuxbsd.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -173,7 +173,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "windowsJob",
-                     "pipeline": "filter-groups-export",
+                     "pipeline": "groups-export",
                      "source": "export_windows",
                      "stage": "exportStage",
                      "type": "fetch"
@@ -201,7 +201,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "linuxDesktopJob",
-                     "pipeline": "filter-groups-export",
+                     "pipeline": "groups-export",
                      "source": "export_linuxbsd",
                      "stage": "exportStage",
                      "type": "fetch"
