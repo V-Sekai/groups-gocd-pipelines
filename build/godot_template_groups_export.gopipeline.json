@@ -6,7 +6,7 @@
       }
    ],
    "group": "gamma",
-   "label_template": "groups-4.0.${godot-groups-editor_pipeline_dependency}.${COUNT}",
+   "label_template": "groups-4.0.${godot-groups-source_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "branch": "godot4",
@@ -17,8 +17,8 @@
       },
       {
          "ignore_for_scheduling": false,
-         "name": "godot-groups-editor_pipeline_dependency",
-         "pipeline": "godot-groups-editor",
+         "name": "godot-groups-source_pipeline_dependency",
+         "pipeline": "godot-groups-source",
          "stage": "templateZipStage",
          "type": "dependency"
       }
@@ -48,7 +48,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "defaultJob",
-                     "pipeline": "godot-groups-editor",
+                     "pipeline": "godot-groups-source",
                      "source": "godot.templates.tpz",
                      "stage": "templateZipStage",
                      "type": "fetch"
@@ -58,7 +58,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-groups-editor",
+                     "pipeline": "godot-groups-source",
                      "source": "godot.linuxbsd.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -111,7 +111,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "defaultJob",
-                     "pipeline": "godot-groups-editor",
+                     "pipeline": "godot-groups-source",
                      "source": "godot.templates.tpz",
                      "stage": "templateZipStage",
                      "type": "fetch"
@@ -121,7 +121,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-groups-editor",
+                     "pipeline": "godot-groups-source",
                      "source": "godot.linuxbsd.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
