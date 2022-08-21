@@ -6,7 +6,7 @@
       }
    ],
    "group": "gamma",
-   "label_template": "godot-groups-source-upload.${COUNT}",
+   "label_template": "godot-groups-upload.${COUNT}",
    "materials": [
       {
          "ignore_for_scheduling": false,
@@ -16,7 +16,7 @@
          "type": "dependency"
       }
    ],
-   "name": "godot-groups-source-upload",
+   "name": "godot-groups-upload",
    "stages": [
       {
          "clean_workspace": true,
