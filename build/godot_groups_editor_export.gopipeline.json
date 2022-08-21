@@ -10,7 +10,7 @@
    "materials": [
       {
          "ignore_for_scheduling": false,
-         "name": "godot-groups-source_pipeline_dependency",
+         "name": "source-godot-groups_pipeline_dependency",
          "pipeline": "source-godot-groups",
          "stage": "templateZipStage",
          "type": "dependency"

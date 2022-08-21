@@ -6,10 +6,10 @@
       }
    ],
    "group": "echo",
-   "label_template": "gdextension.godot-cpp.${godot-groups-source_pipeline_dependency}.${COUNT}",
+   "label_template": "gdextension.godot-cpp.${source-godot-groups_pipeline_dependency}.${COUNT}",
    "materials": [
       {
-         "name": "godot-groups-source_pipeline_dependency",
+         "name": "source-godot-groups_pipeline_dependency",
          "pipeline": "source-godot-groups",
          "stage": "defaultStage",
          "type": "dependency"

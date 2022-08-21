@@ -6,7 +6,7 @@
       }
    ],
    "group": "gamma",
-   "label_template": "groups-4.0.${godot-groups-source_pipeline_dependency}.${COUNT}",
+   "label_template": "groups-4.0.${source-godot-groups_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "branch": "godot4",
@@ -17,13 +17,13 @@
       },
       {
          "ignore_for_scheduling": false,
-         "name": "godot-groups-source_pipeline_dependency",
+         "name": "source-godot-groups_pipeline_dependency",
          "pipeline": "source-godot-groups",
          "stage": "templateZipStage",
          "type": "dependency"
       }
    ],
-   "name": "groups-export",
+   "name": "filter-groups-export",
    "stages": [
       {
          "clean_workspace": false,
@@ -173,7 +173,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "windowsJob",
-                     "pipeline": "groups-export",
+                     "pipeline": "filter-groups-export",
                      "source": "export_windows",
                      "stage": "exportStage",
                      "type": "fetch"
@@ -201,7 +201,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "linuxDesktopJob",
-                     "pipeline": "groups-export",
+                     "pipeline": "filter-groups-export",
                      "source": "export_linuxbsd",
                      "stage": "exportStage",
                      "type": "fetch"

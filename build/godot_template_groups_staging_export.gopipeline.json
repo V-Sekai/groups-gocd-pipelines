@@ -6,7 +6,7 @@
       }
    ],
    "group": "zeta",
-   "label_template": "groups-staging-4.0.${godot-groups-staging-source_pipeline_dependency}.${COUNT}",
+   "label_template": "groups-staging-4.0.${source-godot-groups-staging_pipeline_dependency}.${COUNT}",
    "materials": [
       {
          "branch": "godot4",
@@ -17,7 +17,7 @@
       },
       {
          "ignore_for_scheduling": false,
-         "name": "godot-groups-staging-source_pipeline_dependency",
+         "name": "source-godot-groups-staging_pipeline_dependency",
          "pipeline": "source-godot-groups-staging",
          "stage": "templateZipStage",
          "type": "dependency"
