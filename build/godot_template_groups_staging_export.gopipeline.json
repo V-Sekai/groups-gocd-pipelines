@@ -18,12 +18,12 @@
       {
          "ignore_for_scheduling": false,
          "name": "godot-groups-staging-source_pipeline_dependency",
-         "pipeline": "godot-groups-staging-source",
+         "pipeline": "source-godot-groups-staging",
          "stage": "templateZipStage",
          "type": "dependency"
       }
    ],
-   "name": "groups-staging-upload",
+   "name": "sink-groups-staging-upload",
    "stages": [
       {
          "clean_workspace": false,
@@ -48,7 +48,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "defaultJob",
-                     "pipeline": "godot-groups-staging-source",
+                     "pipeline": "source-godot-groups-staging",
                      "source": "godot.templates.tpz",
                      "stage": "templateZipStage",
                      "type": "fetch"
@@ -58,7 +58,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-groups-staging-source",
+                     "pipeline": "source-godot-groups-staging",
                      "source": "godot.linuxbsd.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -111,7 +111,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "defaultJob",
-                     "pipeline": "godot-groups-staging-source",
+                     "pipeline": "source-godot-groups-staging",
                      "source": "godot.templates.tpz",
                      "stage": "templateZipStage",
                      "type": "fetch"
@@ -121,7 +121,7 @@
                      "destination": "",
                      "is_source_a_file": true,
                      "job": "linuxJob",
-                     "pipeline": "godot-groups-staging-source",
+                     "pipeline": "source-godot-groups-staging",
                      "source": "godot.linuxbsd.opt.tools.64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -173,7 +173,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "windowsJob",
-                     "pipeline": "groups-staging-upload",
+                     "pipeline": "sink-groups-staging-upload",
                      "source": "export_windows",
                      "stage": "exportStage",
                      "type": "fetch"
@@ -201,7 +201,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "linuxDesktopJob",
-                     "pipeline": "groups-staging-upload",
+                     "pipeline": "sink-groups-staging-upload",
                      "source": "export_linuxbsd",
                      "stage": "exportStage",
                      "type": "fetch"
