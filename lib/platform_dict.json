@@ -3,8 +3,8 @@
     "windows": {
       "platform_name": "windows",
       "scons_env": "PATH=/opt/llvm-mingw/bin:$PATH ",
-      "intermediate_godot_binary": "godot.windows.opt.tools.64.exe",
-      "editor_godot_binary": "godot.windows.opt.tools.64.exe",
+      "intermediate_godot_binary": "godot.windows.opt.tools.x86_64.exe",
+      "editor_godot_binary": "godot.windows.opt.tools.x86_64.exe",
       "template_debug_binary": "windows_debug_x86_64.exe",
       "template_release_binary": "windows_release_x86_64.exe",
       "export_directory": "export_windows",
@@ -21,8 +21,8 @@
     "linux": {
       "platform_name": "linux",
       "scons_env": "",
-      "intermediate_godot_binary": "godot.linuxbsd.opt.tools.64.llvm",
-      "editor_godot_binary": "godot.linuxbsd.opt.tools.64.llvm",
+      "intermediate_godot_binary": "godot.linuxbsd.opt.tools.x86_64.llvm",
+      "editor_godot_binary": "godot.linuxbsd.opt.tools.x86_64.llvm",
       "template_debug_binary": "linux_debug.x86_64",
       "template_release_binary": "linux_release.x86_64",
       "export_directory": "export_linuxbsd",
