@@ -86,7 +86,7 @@
                   stage: 'defaultStage',
                   job: 'linuxJob',
                   is_source_a_file: true,
-                  source: 'godot.linuxbsd.opt.tools.64.llvm',
+                  source: 'godot.linuxbsd.opt.tools.x86_64.llvm',
                   destination: '',
                 },
               ] + std.flatMap(function(library_info) [

@@ -59,7 +59,7 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "godot-groups-editor",
-                     "source": "godot.linuxbsd.opt.tools.64.llvm",
+                     "source": "godot.linuxbsd.opt.tools.x86_64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
@@ -122,7 +122,7 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "godot-groups-editor",
-                     "source": "godot.linuxbsd.opt.tools.64.llvm",
+                     "source": "godot.linuxbsd.opt.tools.x86_64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
