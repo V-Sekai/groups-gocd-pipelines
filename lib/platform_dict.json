@@ -3,8 +3,8 @@
     "windows": {
       "platform_name": "windows",
       "scons_env": "PATH=/opt/llvm-mingw/bin:$PATH ",
-      "intermediate_godot_binary": "godot.windows.opt.tools.x86_64.exe",
-      "editor_godot_binary": "godot.windows.opt.tools.x86_64.exe",
+      "intermediate_godot_binary": "godot.windows.opt.tools.x86_64.llvm.exe",
+      "editor_godot_binary": "godot.windows.opt.tools.x86_64.llvm.exe",
       "template_debug_binary": "windows_debug_x86_64.exe",
       "template_release_binary": "windows_release_x86_64.exe",
       "export_directory": "export_windows",
