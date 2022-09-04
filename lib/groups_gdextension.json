@@ -7,8 +7,8 @@
       "git_branch": "groups-4.0",
       "platforms": {
         "windows": {
-          "artifacts": ["addons/godot-openvr/libgdsummator.windows.debug.64.dll"],
-          "output_artifacts": ["libgdsummator.windows.debug.64.dll"],
+          "artifacts": ["addons/godot-openvr/libgdsummator.windows.debug.x86_64.dll"],
+          "output_artifacts": ["libgdsummator.windows.debug.x86_64.dll"],
           "debug_artifacts": [],
           "scons_arguments": "",
           "environment_variables": [],
@@ -51,8 +51,8 @@
       "git_branch": "main",
       "platforms": {
         "windows": {
-          "artifacts": ["game/summator/libgdsummator.windows.debug.64.dll"],
-          "output_artifacts": ["libgdsummator.windows.debug.64.dll"],
+          "artifacts": ["game/summator/libgdsummator.windows.debug.x86_64.dll"],
+          "output_artifacts": ["libgdsummator.windows.debug.x86_64.dll"],
           "debug_artifacts": [],
           "scons_arguments": "",
           "environment_variables": [],
@@ -69,8 +69,8 @@
           "extra_commands": []
         },
         "linux": {
-          "artifacts": ["game/summator/libgdsummator.linux.debug.64.so"],
-          "output_artifacts": ["libgdsummator.linux.debug.64.so"],
+          "artifacts": ["game/summator/libgdsummator.linux.debug.x86_64.so"],
+          "output_artifacts": ["libgdsummator.linux.debug.x86_64.so"],
           "debug_artifacts": [],
           "scons_arguments": "",
           "environment_variables": [],

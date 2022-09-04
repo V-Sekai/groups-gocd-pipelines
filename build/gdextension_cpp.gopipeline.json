@@ -57,14 +57,14 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "godot-groups-editor",
-                     "source": "godot.linuxbsd.opt.tools.64.llvm",
+                     "source": "godot.linuxbsd.opt.tools.x86_64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "chmod +x godot.linuxbsd.opt.tools.64.llvm && ./godot.linuxbsd.opt.tools.64.llvm --headless --dump-extension-api extension_api.json || true"
+                        "chmod +x godot.linuxbsd.opt.tools.x86_64.llvm && ./godot.linuxbsd.opt.tools.x86_64.llvm --headless --dump-extension-api extension_api.json || true"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

@@ -32,7 +32,7 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "p/addons/godot-openvr/libgdsummator.windows.debug.64.dll",
+                     "source": "p/addons/godot-openvr/libgdsummator.windows.debug.x86_64.dll",
                      "type": "build"
                   }
                ],

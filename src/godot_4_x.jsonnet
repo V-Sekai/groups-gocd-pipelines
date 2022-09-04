@@ -4,7 +4,7 @@ local platform = import '../lib/platform_dict.json';
 local stern_flowers_export = import '../lib/stern_flowers_export.json';
 local templates = import '../lib/templates.libsonnet';
 
-local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.opt.tools.64.llvm';
+local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.opt.tools.x86_64.llvm';
 
 local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
 local enabled_template_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
