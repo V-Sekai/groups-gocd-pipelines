@@ -34,7 +34,7 @@
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "godot-groups-editor",
-                     "source": "godot.windows.opt.tools.x86_64.exe",
+                     "source": "godot.windows.opt.tools.x86_64.llvm.exe",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },

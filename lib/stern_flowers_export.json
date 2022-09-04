@@ -6,7 +6,7 @@
       "gdextension_platform": "windows",
       "export_configuration": "Windows Desktop",
       "export_directory": "export_windows",
-      "export_executable": "godot.windows.opt.tools.x86_64.exe",
+      "export_executable": "godot.windows.opt.tools.x86_64.llvm.exe",
       "itchio_out": "windows-master",
       "prepare_commands": [],
       "extra_commands": []
