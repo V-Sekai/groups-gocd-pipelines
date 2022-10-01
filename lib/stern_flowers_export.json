@@ -6,18 +6,18 @@
       "gdextension_platform": "windows",
       "export_configuration": "Windows Desktop",
       "export_directory": "export_windows",
-      "export_executable": "godot.windows.opt.tools.x86_64.llvm.exe",
+      "export_executable": "godot.windows.editor.x86_64.llvm.exe",
       "itchio_out": "windows-master",
       "prepare_commands": [],
       "extra_commands": []
     },
     "linuxDesktop": {
       "export_name": "linuxDesktop",
-      "platform_name": "linux",
-      "gdextension_platform": "linux",
+      "platform_name": "linuxbsd",
+      "gdextension_platform": "linuxbsd",
       "export_configuration": "Linux/X11",
       "export_directory": "export_linuxbsd",
-      "export_executable": "godot.linuxbsd.opt.tools.x86_64.llvm",
+      "export_executable": "godot.linuxbsd.editor.x86_64.llvm",
       "itchio_out": "linux-master",
       "prepare_commands": [],
       "extra_commands": []
@@ -25,7 +25,7 @@
     "macos": {
       "export_name": "macos",
       "platform_name": "macos",
-      "gdextension_platform": "osx",
+      "gdextension_platform": "macos",
       "export_configuration": "Mac OSX",
       "export_directory": "export_macos",
       "export_executable": "macos.zip",

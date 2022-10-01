@@ -34,7 +34,7 @@
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "godot-groups-editor",
-                     "source": "godot.windows.opt.tools.x86_64.llvm.exe",
+                     "source": "godot.windows.editor.x86_64.llvm.exe",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
@@ -44,7 +44,7 @@
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "godot-groups-editor",
-                     "source": "godot.windows.opt.tools.x86_64.llvm.pdb",
+                     "source": "godot.windows.editor.x86_64.llvm.pdb",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
@@ -70,9 +70,9 @@
                      "artifact_origin": "gocd",
                      "destination": "export_linuxbsd",
                      "is_source_a_file": true,
-                     "job": "linuxJob",
+                     "job": "linuxbsdJob",
                      "pipeline": "godot-groups-editor",
-                     "source": "godot.linuxbsd.opt.tools.x86_64.llvm",
+                     "source": "godot.linuxbsd.editor.x86_64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
