@@ -13,7 +13,7 @@
     },
     "linuxDesktop": {
       "export_name": "linuxDesktop",
-      "platform_name": "linuxbsd",
+      "platform_name": "linux",
       "gdextension_platform": "linuxbsd",
       "export_configuration": "Linux/X11",
       "export_directory": "export_linuxbsd",

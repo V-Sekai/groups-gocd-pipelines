@@ -70,7 +70,7 @@
                      "artifact_origin": "gocd",
                      "destination": "export_linuxbsd",
                      "is_source_a_file": true,
-                     "job": "linuxbsdJob",
+                     "job": "linuxJob",
                      "pipeline": "godot-groups-editor",
                      "source": "godot.linuxbsd.editor.x86_64.llvm",
                      "stage": "defaultStage",
