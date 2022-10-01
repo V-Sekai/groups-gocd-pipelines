@@ -3,8 +3,8 @@
     "windows": {
       "platform_name": "windows",
       "scons_env": "PATH=/opt/llvm-mingw/bin:$PATH ",
-      "intermediate_godot_binary": "godot.windows.opt.tools.x86_64.llvm.exe",
-      "editor_godot_binary": "godot.windows.opt.tools.x86_64.llvm.exe",
+      "intermediate_godot_binary": "godot.windows.editor.x86_64.llvm.exe",
+      "editor_godot_binary": "godot.windows.editor.x86_64.llvm.exe",
       "template_debug_binary": "windows_debug_x86_64.exe",
       "template_release_binary": "windows_release_x86_64.exe",
       "export_directory": "export_windows",
@@ -21,8 +21,8 @@
     "linux": {
       "platform_name": "linux",
       "scons_env": "",
-      "intermediate_godot_binary": "godot.linuxbsd.opt.tools.x86_64.llvm",
-      "editor_godot_binary": "godot.linuxbsd.opt.tools.x86_64.llvm",
+      "intermediate_godot_binary": "godot.linuxbsd.editor.x86_64.llvm",
+      "editor_godot_binary": "godot.linuxbsd.editor.x86_64.llvm",
       "template_debug_binary": "linux_debug.x86_64",
       "template_release_binary": "linux_release.x86_64",
       "export_directory": "export_linuxbsd",
@@ -56,20 +56,20 @@
     "macos": {
       "platform_name": "macos",
       "scons_env": "OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" ",
-      "intermediate_godot_binary": "godot.osx.opt.tools.64",
+      "intermediate_godot_binary": "godot.macos.editor.x86_64",
       "editor_godot_binary": "Godot.app",
-      "template_debug_binary": "godot_osx_debug.64",
-      "template_release_binary": "godot_osx_release.64",
-      "scons_platform": "osx",
-      "gdextension_platform": "osx",
+      "template_debug_binary": "godot_macos_debug.x86_64",
+      "template_release_binary": "godot_macos_release.x86_64",
+      "scons_platform": "macos",
+      "gdextension_platform": "macos",
       "strip_command": "LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S",
       "godot_scons_arguments": "ccache_bin= osxcross_sdk=darwin19 arch=x86_64 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes",
       "extra_commands": [
-        "OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" scons ccache_bin= platform=osx arch=arm64 osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes",
-        "lipo -create bin/godot.osx.tools.x86_64 bin/godot.osx.tools.arm64 -output bin/godot.osx.tools.universal",
+        "OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" scons ccache_bin= platform=macos arch=arm64 osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes",
+        "lipo -create bin/godot.macos.tools.x86_64 bin/godot.macos.tools.arm64 -output bin/godot.macos.tools.universal",
         "rm -rf ./bin/Godot.app",
-        "cp -r ./misc/dist/osx_tools.app ./bin/",
-        "cp bin/godot.osx.opt.tools.universal ./bin/Godot.app/Contents/MacOS/Godot",
+        "cp -r ./misc/dist/macos_tools.app ./bin/",
+        "cp bin/godot.macos.editor.universal ./bin/Godot.app/Contents/MacOS/Godot",
         "chmod +x ./bin/Godot.app/Contents/MacOS/Godot"
       ],
       "environment_variables": [
@@ -81,7 +81,7 @@
       "template_artifacts_override": [
         {
           "type": "build",
-          "source": "g/bin/osx.zip",
+          "source": "g/bin/macos.zip",
           "destination": ""
         },
         {
@@ -95,17 +95,17 @@
           "destination": ""
         }
       ],
-      "template_output_artifacts": ["osx.zip"],
+      "template_output_artifacts": ["macos.zip"],
       "template_extra_commands": [
-        "rm -rf ./bin/osx_template.app",
-        "cp -r ./misc/dist/osx_template.app ./bin/",
-        "mkdir -p ./bin/osx_template.app/Contents/MacOS",
-        "cp ./bin/godot.osx.opt.universal osx_template.app/Contents/MacOS/godot_osx_release.64",
-        "cp ./bin/godot.osx.opt.universal osx_template.app/Contents/MacOS/godot_osx_debug.64",
-        "chmod +x osx_template.app/Contents/MacOS/godot_osx*",
-        "rm -rf bin/osx.zip",
-        "cd bin && zip -1 -r osx.zip osx_template.app/",
-        "cd .. && rm -rf Godot.app && cp -r ./g/misc/dist/osx_template.app Godot.app"
+        "rm -rf ./bin/macos_template.app",
+        "cp -r ./misc/dist/macos_template.app ./bin/",
+        "mkdir -p ./bin/macos_template.app/Contents/MacOS",
+        "cp ./bin/godot.macos.opt.universal macos_template.app/Contents/MacOS/godot_macos_release.64",
+        "cp ./bin/godot.macos.opt.universal macos_template.app/Contents/MacOS/godot_macos_debug.64",
+        "chmod +x macos_template.app/Contents/MacOS/godot_macos*",
+        "rm -rf bin/macos.zip",
+        "cd bin && zip -1 -r macos.zip macos_template.app/",
+        "cd .. && rm -rf Godot.app && cp -r ./g/misc/dist/macos_template.app Godot.app"
       ]
     }
   }
