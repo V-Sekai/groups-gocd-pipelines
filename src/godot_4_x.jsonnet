@@ -110,7 +110,7 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                platform_info.scons_env + 'scons werror=no platform=' + platform_info.scons_platform + ' target=release_debug -j4 use_lto=no deprecated=no ' + platform_info.godot_scons_arguments +
+                platform_info.scons_env + 'scons werror=no platform=' + platform_info.scons_platform + ' target=editor -j4 use_lto=no deprecated=no ' + platform_info.godot_scons_arguments +
                 if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
               ],
               command: '/bin/bash',
@@ -192,7 +192,7 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                platform_info.scons_env + 'scons werror=no platform=' + platform_info.scons_platform + ' target=release_debug -j4 use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
+                platform_info.scons_env + 'scons werror=no platform=' + platform_info.scons_platform + ' target=editor -j4 use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + if godot_modules_git != '' then ' custom_modules=../godot_custom_modules' else '',
               ],
               command: '/bin/bash',
               working_directory: 'g',
