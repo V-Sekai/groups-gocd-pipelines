@@ -714,7 +714,7 @@ local godot_editor_export(
     godot_branch='groups-4.x',
     gocd_group='gamma',
     godot_modules_git='https://github.com/V-Sekai/godot-modules-groups.git',
-    godot_modules_branch='groups-modules-4.x',
+    godot_modules_branch='main',
     godot_engine_platforms=enabled_groups_engine_platforms,
     godot_template_platforms=enabled_groups_template_platforms
   )),
@@ -756,8 +756,8 @@ local godot_editor_export(
       pipeline_name=godot_template_groups,
       pipeline_dependency=godot_template_groups_editor,
       itchio_login='saracenone/groups-4x',
-      project_git='git@gitlab.com:SaracenOne/groups.git',
-      project_branch='godot4',
+      project_git='https://github.com/V-Sekai/v-sekai-game.git',
+      project_branch='main',
       gocd_group='gamma',
       godot_status='groups-4.0',
       gocd_project_folder='groups',
@@ -793,38 +793,10 @@ local godot_editor_export(
       pipeline_name=godot_template_groups,
       pipeline_dependency=godot_template_groups_editor,
       itchio_login='saracenone/groups-4x',
-      project_git='git@gitlab.com:SaracenOne/groups.git',
-      project_branch='godot4',
+      project_git='https://github.com/V-Sekai/v-sekai-game.git',
+      project_branch='main',
       gocd_group='gamma',
       godot_status='groups-4.0',
-      gocd_project_folder='groups',
-      enabled_export_platforms=enabled_groups_export_platforms,
-    )
-  ),
-} + {  
-  'godot_groups_staging_editor.gopipeline.json'
-  : std.prune(godot_pipeline(
-    pipeline_name=godot_template_groups_staging_editor,
-    godot_status='groups-staging-4-0',
-    godot_git='https://github.com/V-Sekai/godot.git',
-    godot_branch='groups-staging-4.x',
-    gocd_group='zeta',
-    godot_modules_git='https://github.com/V-Sekai/godot-modules-groups.git',
-    godot_modules_branch='groups-modules-4.x',
-    godot_engine_platforms=enabled_groups_engine_platforms,
-    godot_template_platforms=enabled_groups_template_platforms
-  )),
-} + {
-  'godot_template_groups_staging_export.gopipeline.json'
-  : std.prune(
-    templates.godot_tools_pipeline_export(
-      pipeline_name=godot_template_groups_staging,
-      pipeline_dependency=godot_template_groups_staging_editor,
-      itchio_login='ifiregames/groups-staging',
-      project_git='git@gitlab.com:SaracenOne/groups.git',
-      project_branch='godot4',
-      gocd_group='zeta',
-      godot_status='groups-staging-4.0',
       gocd_project_folder='groups',
       enabled_export_platforms=enabled_groups_export_platforms,
     )

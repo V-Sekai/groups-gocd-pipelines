@@ -9,11 +9,11 @@
    "label_template": "groups-4.0.${godot-groups-editor_pipeline_dependency}.${COUNT}",
    "materials": [
       {
-         "branch": "godot4",
+         "branch": "main",
          "destination": "g",
          "name": "project_git_sandbox",
          "type": "git",
-         "url": "git@gitlab.com:SaracenOne/groups.git"
+         "url": "https://github.com/V-Sekai/v-sekai-game.git"
       },
       {
          "ignore_for_scheduling": false,
