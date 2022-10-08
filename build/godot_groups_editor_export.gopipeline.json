@@ -34,7 +34,7 @@
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "godot-groups-editor",
-                     "source": "godot.windows.editor.x86_64.llvm.exe",
+                     "source": "v_sekai_windows.exe",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
@@ -44,7 +44,7 @@
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "godot-groups-editor",
-                     "source": "godot.windows.editor.x86_64.llvm.pdb",
+                     "source": "v_sekai_windows.pdb",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
@@ -72,7 +72,7 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "godot-groups-editor",
-                     "source": "godot.linuxbsd.editor.x86_64.llvm",
+                     "source": "v_sekai_linuxbsd",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },

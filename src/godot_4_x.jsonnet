@@ -1,7 +1,6 @@
 local groups_export = import '../lib/groups_export.json';
 local groups_gdextension = import '../lib/groups_gdextension.json';
 local platform = import '../lib/platform_dict.json';
-local stern_flowers_export = import '../lib/stern_flowers_export.json';
 local templates = import '../lib/templates.libsonnet';
 
 local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.editor.x86_64.llvm';
@@ -13,7 +12,6 @@ local enabled_gdextension_platforms = [platform.platform_info_dict[x] for x in [
 local enabled_groups_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
 local enabled_groups_template_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
 
-local enabled_stern_flowers_export_platforms = [stern_flowers_export.stern_flowers_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linuxDesktop']];
 local all_gdextension_plugins = [groups_gdextension.groups_gdextension_plugins[x] for x in ['godot_vive_pro_eye_face']];
 
@@ -744,7 +742,7 @@ local godot_editor_export(
       itchio_login='ifiregames/chibifire-godot-4-custom-engine',
       gocd_group='gamma',
       godot_status='groups-4.0',
-      enabled_export_platforms=enabled_stern_flowers_export_platforms,
+      enabled_export_platforms=enabled_groups_export_platforms,
     )
   ),
 } + {
@@ -781,7 +779,7 @@ local godot_editor_export(
       itchio_login='ifiregames/chibifire-godot-4-custom-engine',
       gocd_group='gamma',
       godot_status='groups-4.0',
-      enabled_export_platforms=enabled_stern_flowers_export_platforms,
+      enabled_export_platforms=enabled_groups_export_platforms,
     )
   ),
 } + {
