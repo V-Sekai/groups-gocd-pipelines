@@ -3,7 +3,7 @@ local groups_gdextension = import '../lib/groups_gdextension.json';
 local platform = import '../lib/platform_dict.json';
 local templates = import '../lib/templates.libsonnet';
 
-local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.editor.x86_64.llvm';
+local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.editor.double.x86_64.llvm';
 
 local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
 local enabled_template_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
