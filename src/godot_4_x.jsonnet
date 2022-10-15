@@ -696,12 +696,6 @@ local godot_editor_export(
                         indent_array_in_object=true),
 }
 {
-  'env.fire.goenvironment.json': {
-    name: 'itch-fire',
-    pipelines: itch_fire_template,
-    environment_variables:
-      [],
-  },
   'godot_v_sekai_editor.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_groups_editor,
@@ -770,18 +764,6 @@ local godot_editor_export(
     godot_gdextension_platforms=enabled_gdextension_platforms,
   )
   for library_info in all_gdextension_plugins
-} + {
-  'godot_groups_editor_export.gopipeline.json'
-  : std.prune(
-    godot_editor_export(
-      pipeline_name=godot_template_groups_editor_export,
-      pipeline_dependency=godot_template_groups_editor,
-      itchio_login='ifiregames/chibifire-godot-4-custom-engine',
-      gocd_group='gamma',
-      godot_status='groups-4.0',
-      enabled_export_platforms=enabled_groups_export_platforms,
-    )
-  ),
 } + {
   'godot_template_groups_export.gopipeline.json'
   : std.prune(
