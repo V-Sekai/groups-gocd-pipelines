@@ -694,7 +694,13 @@ local godot_editor_export(
                         },
                         indent_array_in_object=true),
 }
-{
+{  
+  'env.fire.goenvironment.json': {
+    name: 'itch-fire',
+    pipelines: itch_fire_template,
+    environment_variables:
+      [],
+  },
   'godot_v_sekai_editor.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_groups_editor,
