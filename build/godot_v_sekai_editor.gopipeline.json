@@ -33,12 +33,12 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/godot.windows.editor.double.x86_64.llvm.exe",
+                     "source": "g/bin/godot.windows.editor.x86_64.llvm.exe",
                      "type": "build"
                   },
                   {
                      "destination": "",
-                     "source": "g/bin/godot.windows.editor.double.x86_64.llvm.pdb",
+                     "source": "g/bin/godot.windows.editor.x86_64.llvm.pdb",
                      "type": "build"
                   }
                ],
@@ -60,7 +60,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=editor -j4 use_lto=no deprecated=no float=64 use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no custom_modules=../godot_custom_modules"
+                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=editor -j4 use_lto=no deprecated=no use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no custom_modules=../godot_custom_modules"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -72,7 +72,7 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/godot.linuxbsd.editor.double.x86_64.llvm",
+                     "source": "g/bin/godot.linuxbsd.editor.x86_64.llvm",
                      "type": "build"
                   }
                ],
@@ -94,7 +94,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=linuxbsd target=editor -j4 use_lto=no deprecated=no float=64 use_static_cpp=yes use_llvm=yes builtin_freetype=yes custom_modules=../godot_custom_modules"
+                        "scons werror=no platform=linuxbsd target=editor -j4 use_lto=no deprecated=no use_static_cpp=yes use_llvm=yes builtin_freetype=yes custom_modules=../godot_custom_modules"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -146,14 +146,14 @@
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "godot-groups-editor",
-                     "source": "godot.windows.editor.double.x86_64.llvm.exe",
+                     "source": "godot.windows.editor.x86_64.llvm.exe",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.windows.editor.double.x86_64.llvm.exe bin/windows_debug_x86_64.exe && cp bin/godot.windows.editor.double.x86_64.llvm.exe bin/windows_release_x86_64.exe && mingw-strip --strip-debug bin/windows_release_x86_64.exe"
+                        "cp bin/godot.windows.editor.x86_64.llvm.exe bin/windows_debug_x86_64.exe && cp bin/godot.windows.editor.x86_64.llvm.exe bin/windows_release_x86_64.exe && mingw-strip --strip-debug bin/windows_release_x86_64.exe"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -209,14 +209,14 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "godot-groups-editor",
-                     "source": "godot.linuxbsd.editor.double.x86_64.llvm",
+                     "source": "godot.linuxbsd.editor.x86_64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.linuxbsd.editor.double.x86_64.llvm bin/linux_debug.x86_64 && cp bin/godot.linuxbsd.editor.double.x86_64.llvm bin/linux_release.x86_64 && strip --strip-debug bin/linux_release.x86_64"
+                        "cp bin/godot.linuxbsd.editor.x86_64.llvm bin/linux_debug.x86_64 && cp bin/godot.linuxbsd.editor.x86_64.llvm bin/linux_release.x86_64 && strip --strip-debug bin/linux_release.x86_64"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -276,7 +276,7 @@
                      "is_source_a_file": true,
                      "job": "windowsJob",
                      "pipeline": "godot-groups-editor",
-                     "source": "godot.windows.editor.double.x86_64.llvm.pdb",
+                     "source": "godot.windows.editor.x86_64.llvm.pdb",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
