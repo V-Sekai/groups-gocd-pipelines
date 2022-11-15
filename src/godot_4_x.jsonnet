@@ -18,6 +18,7 @@ local all_gdextension_plugins = [groups_gdextension.groups_gdextension_plugins[x
 local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
 local docker_gocd_agent_pipeline = 'docker-gocd-agent-centos-8-groups';
+local godot_template_groups_editor_export = 'godot-groups-editor-upload';
 local godot_template_groups_editor = 'godot-groups-editor';
 local godot_template_groups = 'groups-export';
 local godot_cpp_pipeline = 'gdextension-cpp';
@@ -725,6 +726,18 @@ local godot_editor_export(
     godot_gdextension_platforms=enabled_gdextension_platforms,
   )
   for library_info in all_gdextension_plugins
+} + {
+  'godot_groups_editor_export.gopipeline.json'
+  : std.prune(
+    godot_editor_export(
+      pipeline_name=godot_template_groups_editor_export,
+      pipeline_dependency=godot_template_groups_editor,
+      itchio_login='ifiregames/chibifire-godot-4-custom-engine',
+      gocd_group='gamma',
+      godot_status='groups-4.0',
+      enabled_export_platforms=enabled_groups_export_platforms,
+    )
+  ),
 } + {
   'godot_template_groups_export.gopipeline.json'
   : std.prune(
