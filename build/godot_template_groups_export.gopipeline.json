@@ -100,7 +100,7 @@
                      "type": "build"
                   }
                ],
-               "name": "linuxDesktopJob",
+               "name": "linuxJob",
                "resources": [
                   "linux",
                   "mingw5"
@@ -190,7 +190,7 @@
                ]
             },
             {
-               "name": "linuxDesktopJob",
+               "name": "linuxJob",
                "resources": [
                   "linux",
                   "mingw5"
@@ -200,7 +200,7 @@
                      "artifact_origin": "gocd",
                      "destination": "",
                      "is_source_a_file": false,
-                     "job": "linuxDesktopJob",
+                     "job": "linuxJob",
                      "pipeline": "groups-export",
                      "source": "export_linuxbsd",
                      "stage": "exportStage",

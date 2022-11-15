@@ -12,7 +12,7 @@ local enabled_gdextension_platforms = [platform.platform_info_dict[x] for x in [
 local enabled_groups_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
 local enabled_groups_template_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
 
-local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linuxDesktop']];
+local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linux']];
 local all_gdextension_plugins = [groups_gdextension.groups_gdextension_plugins[x] for x in ['godot_vive_pro_eye_face', 'godot_subdiv']];
 
 local docker_pipeline = 'docker-groups';
@@ -765,7 +765,7 @@ local godot_editor_export(
       gocd_group='charlie',
       godot_status='docker',
       docker_repo_groups_server='groupsinfra/groups-server',
-      server_export_info=groups_export.groups_export_configurations.linuxDesktop,
+      server_export_info=groups_export.groups_export_configurations.linux,
     )
   ),
   'docker_gocd_agent.gopipeline.json'

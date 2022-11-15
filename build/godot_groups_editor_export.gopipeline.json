@@ -60,7 +60,7 @@
                ]
             },
             {
-               "name": "linuxDesktopJob",
+               "name": "linuxJob",
                "resources": [
                   "linux",
                   "mingw5"

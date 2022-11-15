@@ -40,7 +40,7 @@
                      "artifact_origin": "gocd",
                      "destination": "g/groups_server",
                      "is_source_a_file": false,
-                     "job": "linuxDesktopJob",
+                     "job": "linuxJob",
                      "pipeline": "groups-export",
                      "source": "export_linuxbsd",
                      "stage": "exportStage",
