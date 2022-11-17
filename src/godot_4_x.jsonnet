@@ -555,7 +555,7 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                 type: 'exec',
                 arguments: [
                   '-c',
-                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdextension_platform + ' target=debug -j4 use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + library_info.platforms[platform_info.gdextension_platform].scons_arguments,
+                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdextension_platform + ' target=editor debug_symbols=yes -j4 use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + library_info.platforms[platform_info.gdextension_platform].scons_arguments,
                 ],
                 command: '/bin/bash',
                 working_directory: 'p',
