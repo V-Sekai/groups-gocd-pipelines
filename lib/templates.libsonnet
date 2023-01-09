@@ -151,7 +151,7 @@
                   type: 'exec',
                   arguments: [
                     '-c',
-                    'rm -rf ' + export_info.export_directory + ' && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.editor.double.x86_64.llvm' + ' && XDG_DATA_HOME=`pwd`/.local/share/ ./godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export "' + export_info.export_configuration + '" `pwd`/' + export_info.export_directory + '/' + export_info.export_executable + ' --path g && cp g/.itch.toml `pwd`/' + export_info.export_directory + '/' + ' || [ -f "`pwd`/' + export_info.export_directory + '/' + export_info.export_executable + '" ]',
+                    'rm -rf ' + export_info.export_directory + ' && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.editor.double.x86_64.llvm' + ' && XDG_DATA_HOME=`pwd`/.local/share/ ./godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-release "' + export_info.export_configuration + '" `pwd`/' + export_info.export_directory + '/' + export_info.export_executable + ' --path g && cp g/.itch.toml `pwd`/' + export_info.export_directory + '/' + ' || [ -f "`pwd`/' + export_info.export_directory + '/' + export_info.export_executable + '" ]',
                   ],
                   command: '/bin/bash',
                   working_directory: '',
