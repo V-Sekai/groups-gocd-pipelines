@@ -101,6 +101,40 @@
                      "working_directory": "g"
                   }
                ]
+            },
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "g/bin/godot.javascript.opt.debug.threads.zip",
+                     "type": "build"
+                  }
+               ],
+               "name": "webJob",
+               "resources": [
+                  "mingw5",
+                  "linux"
+               ],
+               "tasks": [
+                  {
+                     "arguments": [
+                        "-c",
+                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp scons werror=no platform=javascript target=editor -j4 use_lto=no deprecated=no optimize=speed use_llvm=yes builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions' custom_modules=../godot_custom_modules"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  }
+               ]
             }
          ],
          "name": "defaultStage"
@@ -232,6 +266,69 @@
                      "working_directory": "g"
                   }
                ]
+            },
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "g/bin/webassembly_debug.zip",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "g/bin/webassembly_release.zip",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "g/bin/version.txt",
+                     "type": "build"
+                  }
+               ],
+               "name": "webJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "arguments": [
+                        "-c",
+                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "g/bin/",
+                     "is_source_a_file": true,
+                     "job": "webJob",
+                     "pipeline": "godot-groups-editor",
+                     "source": "godot.javascript.opt.debug.threads.zip",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp bin/godot.javascript.opt.debug.threads.zip bin/webassembly_debug.zip && cp bin/godot.javascript.opt.debug.threads.zip bin/webassembly_release.zip"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  }
+               ]
             }
          ],
          "name": "templateStage"
@@ -317,6 +414,26 @@
                      "job": "linuxJob",
                      "pipeline": "godot-groups-editor",
                      "source": "linux_release.x86_64",
+                     "stage": "templateStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "templates",
+                     "is_source_a_file": true,
+                     "job": "webJob",
+                     "pipeline": "godot-groups-editor",
+                     "source": "webassembly_debug.zip",
+                     "stage": "templateStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "templates",
+                     "is_source_a_file": true,
+                     "job": "webJob",
+                     "pipeline": "godot-groups-editor",
+                     "source": "webassembly_release.zip",
                      "stage": "templateStage",
                      "type": "fetch"
                   },

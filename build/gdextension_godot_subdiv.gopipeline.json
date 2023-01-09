@@ -133,6 +133,59 @@
                      "working_directory": "p"
                   }
                ]
+            },
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "p/projects/addons/godot_subdiv/bin/libgodot_subdiv.windows.template_debug.x86_64.dll",
+                     "type": "build"
+                  }
+               ],
+               "environment_variables": [ ],
+               "name": "linuxJob",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "job": "linuxJob",
+                     "pipeline": "gdextension-cpp",
+                     "source": "godot-cpp",
+                     "stage": "godotCppStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "godot-cpp",
+                     "job": "linuxJob",
+                     "pipeline": "gdextension-cpp",
+                     "source": "godot-headers",
+                     "stage": "godotCppStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -a godot-cpp/. p/godot-cpp"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp scons werror=no platform=linux target=editor debug_symbols=yes -j4 use_lto=no deprecated=no optimize=speed use_llvm=yes builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "p"
+                  }
+               ]
             }
          ],
          "name": "gdextensionBuildStage"

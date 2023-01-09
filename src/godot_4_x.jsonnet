@@ -5,12 +5,12 @@ local templates = import '../lib/templates.libsonnet';
 
 local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.editor.double.x86_64.llvm';
 
-local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
-local enabled_template_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
-local enabled_gdextension_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
+local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web']];
+local enabled_template_platforms = enabled_engine_platforms;
+local enabled_gdextension_platforms = enabled_engine_platforms;
 
-local enabled_groups_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
-local enabled_groups_template_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
+local enabled_groups_engine_platforms = enabled_engine_platforms;
+local enabled_groups_template_platforms = enabled_engine_platforms;
 
 local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linux']];
 local all_gdextension_plugins = [groups_gdextension.groups_gdextension_plugins[x] for x in ['godot_vive_pro_eye_face', 'godot_subdiv']];
