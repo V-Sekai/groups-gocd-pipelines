@@ -86,7 +86,7 @@
                   stage: 'defaultStage',
                   job: 'linuxJob',
                   is_source_a_file: true,
-                  source: 'godot.linuxbsd.editor.x86_64.llvm',
+                  source: 'godot.linuxbsd.editor.double.x86_64.llvm',
                   destination: '',
                 },
               ] + std.flatMap(function(library_info) [
@@ -151,7 +151,7 @@
                   type: 'exec',
                   arguments: [
                     '-c',
-                    'rm -rf ' + export_info.export_directory + ' && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.editor.x86_64.llvm' + ' && XDG_DATA_HOME=`pwd`/.local/share/ ./godot.linuxbsd.editor.x86_64.llvm --headless --export-release "' + export_info.export_configuration + '" `pwd`/' + export_info.export_directory + '/' + export_info.export_executable + ' --path g && cp g/.itch.toml `pwd`/' + export_info.export_directory + '/' + ' || [ -f "`pwd`/' + export_info.export_directory + '/' + export_info.export_executable + '" ]',
+                    'rm -rf ' + export_info.export_directory + ' && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.editor.double.x86_64.llvm' + ' && XDG_DATA_HOME=`pwd`/.local/share/ ./godot.linuxbsd.editor.double.x86_64.llvm --headless --export "' + export_info.export_configuration + '" `pwd`/' + export_info.export_directory + '/' + export_info.export_executable + ' --path g && cp g/.itch.toml `pwd`/' + export_info.export_directory + '/' + ' || [ -f "`pwd`/' + export_info.export_directory + '/' + export_info.export_executable + '" ]',
                   ],
                   command: '/bin/bash',
                   working_directory: '',

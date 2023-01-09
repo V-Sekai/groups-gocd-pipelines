@@ -57,14 +57,14 @@
                      "is_source_a_file": true,
                      "job": "linuxJob",
                      "pipeline": "godot-groups-editor",
-                     "source": "godot.linuxbsd.editor.x86_64.llvm",
+                     "source": "godot.linuxbsd.editor.double.x86_64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "chmod +x godot.linuxbsd.editor.x86_64.llvm && ./godot.linuxbsd.editor.x86_64.llvm --headless --dump-extension-api extension_api.json || true"
+                        "chmod +x godot.linuxbsd.editor.double.x86_64.llvm && ./godot.linuxbsd.editor.double.x86_64.llvm --headless --dump-extension-api extension_api.json || true"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -119,7 +119,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=editor debug_symbols=yes -j4 use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers optimize=speed use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"
+                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=editor debug_symbols=yes -j4 use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers precision=double use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -169,7 +169,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=linux target=editor debug_symbols=yes -j4 use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers optimize=speed use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
+                        "scons werror=no platform=linux target=editor debug_symbols=yes -j4 use_lto=no deprecated=no generate_bindings=yes headers_dir=../godot-headers precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
