@@ -106,7 +106,7 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/godot.javascript.opt.debug.threads.zip",
+                     "source": "g/bin/godot.web.opt.debug.threads.zip",
                      "type": "build"
                   }
                ],
@@ -128,7 +128,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp scons werror=no platform=javascript target=editor -j4 use_lto=no deprecated=no optimize=speed use_llvm=yes builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions' custom_modules=../godot_custom_modules"
+                        "source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp scons werror=no platform=web target=editor -j4 use_lto=no deprecated=no optimize=speed use_llvm=yes builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions' custom_modules=../godot_custom_modules"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -306,14 +306,14 @@
                      "is_source_a_file": true,
                      "job": "webJob",
                      "pipeline": "godot-groups-editor",
-                     "source": "godot.javascript.opt.debug.threads.zip",
+                     "source": "godot.web.opt.debug.threads.zip",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.javascript.opt.debug.threads.zip bin/webassembly_debug.zip && cp bin/godot.javascript.opt.debug.threads.zip bin/webassembly_release.zip"
+                        "cp bin/godot.web.opt.debug.threads.zip bin/webassembly_debug.zip && cp bin/godot.web.opt.debug.threads.zip bin/webassembly_release.zip"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
