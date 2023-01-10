@@ -73,7 +73,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=editor debug_symbols=yes  use_lto=no deprecated=no precision=double use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"
+                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=editor debug_symbols=yes use_lto=no deprecated=no precision=double use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
