@@ -271,12 +271,12 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/godot.web.template_release.wasm32.zip",
+                     "source": "g/bin/web_template_debug.wasm32.zip",
                      "type": "build"
                   },
                   {
                      "destination": "",
-                     "source": "g/bin/godot.web.template_release.wasm32.zip",
+                     "source": "g/bin/web_template_release.wasm32.zip",
                      "type": "build"
                   },
                   {
@@ -313,7 +313,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.web.editor.wasm32.zip bin/godot.web.template_release.wasm32.zip && cp bin/godot.web.editor.wasm32.zip bin/godot.web.template_release.wasm32.zip"
+                        "cp bin/godot.web.editor.wasm32.zip bin/web_template_debug.wasm32.zip && cp bin/godot.web.editor.wasm32.zip bin/web_template_release.wasm32.zip"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -423,7 +423,7 @@
                      "is_source_a_file": true,
                      "job": "webJob",
                      "pipeline": "godot-groups-editor",
-                     "source": "godot.web.template_release.wasm32.zip",
+                     "source": "web_template_debug.wasm32.zip",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
@@ -433,7 +433,7 @@
                      "is_source_a_file": true,
                      "job": "webJob",
                      "pipeline": "godot-groups-editor",
-                     "source": "godot.web.template_release.wasm32.zip",
+                     "source": "web_template_release.wasm32.zip",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
