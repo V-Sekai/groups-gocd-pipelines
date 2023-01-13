@@ -110,7 +110,7 @@
                      "type": "build"
                   }
                ],
-               "name": "web_release_job",
+               "name": "web_job",
                "resources": [
                   "mingw5",
                   "linux"
@@ -285,7 +285,7 @@
                      "type": "build"
                   }
                ],
-               "name": "web_release_job",
+               "name": "web_job",
                "resources": [
                   "linux",
                   "mingw5"
@@ -304,7 +304,7 @@
                      "artifact_origin": "gocd",
                      "destination": "g/bin/",
                      "is_source_a_file": true,
-                     "job": "web_release_job",
+                     "job": "web_job",
                      "pipeline": "godot-groups-editor",
                      "source": "godot.web.template_release.double.wasm32.zip",
                      "stage": "defaultStage",
@@ -421,7 +421,7 @@
                      "artifact_origin": "gocd",
                      "destination": "templates",
                      "is_source_a_file": true,
-                     "job": "web_release_job",
+                     "job": "web_job",
                      "pipeline": "godot-groups-editor",
                      "source": "web_debug.wasm32.zip",
                      "stage": "templateStage",
@@ -431,7 +431,7 @@
                      "artifact_origin": "gocd",
                      "destination": "templates",
                      "is_source_a_file": true,
-                     "job": "web_release_job",
+                     "job": "web_job",
                      "pipeline": "godot-groups-editor",
                      "source": "web_release.wasm32.zip",
                      "stage": "templateStage",

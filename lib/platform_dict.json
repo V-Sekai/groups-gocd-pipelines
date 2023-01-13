@@ -39,7 +39,7 @@
       "target": "editor"
     },
     "web": {
-      "platform_name": "web_release",
+      "platform_name": "web",
       "scons_env": "source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ",
       "intermediate_godot_binary": "godot.web.template_release.double.wasm32.zip",
       "editor_godot_binary": "godot.web.template_release.double.wasm32.zip",
