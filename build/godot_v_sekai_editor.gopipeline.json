@@ -565,7 +565,7 @@
                      "artifact_origin": "gocd",
                      "destination": "templates",
                      "is_source_a_file": true,
-                     "job": "windowsJob",
+                     "job": "windows_job",
                      "pipeline": "godot-groups-editor",
                      "source": "godot.windows.editor.double.x86_64.llvm.pdb",
                      "stage": "defaultStage",

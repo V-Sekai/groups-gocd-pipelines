@@ -269,7 +269,7 @@ local godot_pipeline(pipeline_name='',
               destination: 'templates',
               pipeline: pipeline_name,
               stage: 'defaultStage',
-              job: 'windowsJob',
+              job: 'windows_job',
             },
           ] + std.flatMap(function(platform_info) [
             {
