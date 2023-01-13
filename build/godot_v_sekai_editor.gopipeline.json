@@ -140,40 +140,6 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/godot.web.template_debug.double.wasm32.zip",
-                     "type": "build"
-                  }
-               ],
-               "name": "web_debug_job",
-               "resources": [
-                  "mingw5",
-                  "linux"
-               ],
-               "tasks": [
-                  {
-                     "arguments": [
-                        "-c",
-                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp scons werror=no platform=web target=template_debug use_lto=no deprecated=no optimize=speed use_llvm=yes precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions' custom_modules=../godot_custom_modules"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  }
-               ]
-            },
-            {
-               "artifacts": [
-                  {
-                     "destination": "",
                      "source": "g/bin/godot.web.template_release.double.wasm32.zip",
                      "type": "build"
                   }
@@ -407,70 +373,7 @@
                   },
                   {
                      "destination": "",
-                     "source": "g/bin/web_debug.wasm32.zip",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "",
-                     "source": "g/bin/version.txt",
-                     "type": "build"
-                  }
-               ],
-               "name": "web_debug_job",
-               "resources": [
-                  "linux",
-                  "mingw5"
-               ],
-               "tasks": [
-                  {
-                     "arguments": [
-                        "-c",
-                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "g/bin/",
-                     "is_source_a_file": true,
-                     "job": "web_debug_job",
-                     "pipeline": "godot-groups-editor",
-                     "source": "godot.web.template_debug.double.wasm32.zip",
-                     "stage": "defaultStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp bin/godot.web.template_debug.double.wasm32.zip bin/web_debug.wasm32.zip && cp bin/godot.web.template_debug.double.wasm32.zip bin/web_debug.wasm32.zip"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  }
-               ]
-            },
-            {
-               "artifacts": [
-                  {
-                     "destination": "",
-                     "source": "g/bin/web_debug.wasm32.zip",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "",
-                     "source": "g/bin/web_debug.wasm32.zip",
+                     "source": "g/bin/web_release.wasm32.zip",
                      "type": "build"
                   },
                   {
@@ -507,7 +410,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.web.template_release.double.wasm32.zip bin/web_debug.wasm32.zip && cp bin/godot.web.template_release.double.wasm32.zip bin/web_debug.wasm32.zip"
+                        "cp bin/godot.web.template_release.double.wasm32.zip bin/web_debug.wasm32.zip && cp bin/godot.web.template_release.double.wasm32.zip bin/web_release.wasm32.zip"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -635,26 +538,6 @@
                      "artifact_origin": "gocd",
                      "destination": "templates",
                      "is_source_a_file": true,
-                     "job": "web_debug_job",
-                     "pipeline": "godot-groups-editor",
-                     "source": "web_debug.wasm32.zip",
-                     "stage": "templateStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "templates",
-                     "is_source_a_file": true,
-                     "job": "web_debug_job",
-                     "pipeline": "godot-groups-editor",
-                     "source": "web_debug.wasm32.zip",
-                     "stage": "templateStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "templates",
-                     "is_source_a_file": true,
                      "job": "web_release_job",
                      "pipeline": "godot-groups-editor",
                      "source": "web_debug.wasm32.zip",
@@ -667,7 +550,7 @@
                      "is_source_a_file": true,
                      "job": "web_release_job",
                      "pipeline": "godot-groups-editor",
-                     "source": "web_debug.wasm32.zip",
+                     "source": "web_release.wasm32.zip",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
