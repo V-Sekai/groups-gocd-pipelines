@@ -5,7 +5,7 @@ local templates = import '../lib/templates.libsonnet';
 
 local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.editor.double.x86_64.llvm';
 
-local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web']];
+local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web_debug', 'web_release']];
 local enabled_template_platforms = enabled_engine_platforms;
 local enabled_gdextension_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
 
