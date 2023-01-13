@@ -106,40 +106,6 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/godot.linuxbsd.template_release.double.x86_64.llvm",
-                     "type": "build"
-                  }
-               ],
-               "name": "linux_release_job",
-               "resources": [
-                  "mingw5",
-                  "linux"
-               ],
-               "tasks": [
-                  {
-                     "arguments": [
-                        "-c",
-                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "scons werror=no platform=linuxbsd target=template_release use_lto=no deprecated=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes custom_modules=../godot_custom_modules"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  }
-               ]
-            },
-            {
-               "artifacts": [
-                  {
-                     "destination": "",
                      "source": "g/bin/godot.web.template_release.double.wasm32.zip",
                      "type": "build"
                   }
@@ -305,69 +271,6 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/linux_template_release.x86_64",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "",
-                     "source": "g/bin/linux_template_release.x86_64",
-                     "type": "build"
-                  },
-                  {
-                     "destination": "",
-                     "source": "g/bin/version.txt",
-                     "type": "build"
-                  }
-               ],
-               "name": "linux_release_job",
-               "resources": [
-                  "linux",
-                  "mingw5"
-               ],
-               "tasks": [
-                  {
-                     "arguments": [
-                        "-c",
-                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "g/bin/",
-                     "is_source_a_file": true,
-                     "job": "linux_release_job",
-                     "pipeline": "godot-groups-editor",
-                     "source": "godot.linuxbsd.template_release.double.x86_64.llvm",
-                     "stage": "defaultStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp bin/godot.linuxbsd.template_release.double.x86_64.llvm bin/linux_template_release.x86_64 && cp bin/godot.linuxbsd.template_release.double.x86_64.llvm bin/linux_template_release.x86_64 && strip --strip-debug bin/linux_template_release.x86_64"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  }
-               ]
-            },
-            {
-               "artifacts": [
-                  {
-                     "destination": "",
                      "source": "g/bin/web_debug.wasm32.zip",
                      "type": "build"
                   },
@@ -511,26 +414,6 @@
                      "job": "linux_job",
                      "pipeline": "godot-groups-editor",
                      "source": "linux_release.x86_64",
-                     "stage": "templateStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "templates",
-                     "is_source_a_file": true,
-                     "job": "linux_release_job",
-                     "pipeline": "godot-groups-editor",
-                     "source": "linux_template_release.x86_64",
-                     "stage": "templateStage",
-                     "type": "fetch"
-                  },
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "templates",
-                     "is_source_a_file": true,
-                     "job": "linux_release_job",
-                     "pipeline": "godot-groups-editor",
-                     "source": "linux_template_release.x86_64",
                      "stage": "templateStage",
                      "type": "fetch"
                   },

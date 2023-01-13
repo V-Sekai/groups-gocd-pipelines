@@ -38,26 +38,7 @@
       "template_extra_commands": [],
       "target": "editor"
     },
-    "linux_release": {
-      "platform_name": "linux_release",
-      "scons_env": "",
-      "intermediate_godot_binary": "godot.linuxbsd.template_release.double.x86_64.llvm",
-      "editor_godot_binary": "godot.linuxbsd.template_release.double.x86_64.llvm",
-      "template_debug_binary": "linux_template_release.x86_64",
-      "template_release_binary": "linux_template_release.x86_64",
-      "export_directory": "",
-      "scons_platform": "linuxbsd",
-      "gdextension_platform": "linux",
-      "strip_command": "strip --strip-debug",
-      "godot_scons_arguments": "precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes",
-      "extra_commands": [],
-      "environment_variables": [],
-      "template_artifacts_override": null,
-      "template_output_artifacts": null,
-      "template_extra_commands": [],
-      "target": "template_release"
-    },
-    "web_release": {
+    "web": {
       "platform_name": "web_release",
       "scons_env": "source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ",
       "intermediate_godot_binary": "godot.web.template_release.double.wasm32.zip",
