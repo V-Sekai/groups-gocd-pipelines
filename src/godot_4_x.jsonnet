@@ -5,7 +5,7 @@ local templates = import '../lib/templates.libsonnet';
 
 local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.editor.double.x86_64.llvm';
 
-local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web_debug', 'web_release', 'linux_release']];
+local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'linux_release', 'web_debug', 'web_release']];
 local enabled_template_platforms = enabled_engine_platforms;
 local enabled_gdextension_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
 
@@ -373,7 +373,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
                 artifact_origin: 'gocd',
                 pipeline: pipeline_dependency,
                 stage: 'defaultStage',
-                job: 'linuxJob',
+                job: 'linux_job',
                 is_source_a_file: true,
                 source: HEADLESS_SERVER_EDITOR,
                 destination: '',

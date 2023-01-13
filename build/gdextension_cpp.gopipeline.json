@@ -55,7 +55,7 @@
                      "artifact_origin": "gocd",
                      "destination": "",
                      "is_source_a_file": true,
-                     "job": "linuxJob",
+                     "job": "linux_job",
                      "pipeline": "godot-groups-editor",
                      "source": "godot.linuxbsd.editor.double.x86_64.llvm",
                      "stage": "defaultStage",
