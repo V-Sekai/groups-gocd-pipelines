@@ -37,7 +37,7 @@
                      "type": "build"
                   }
                ],
-               "name": "windowsJob",
+               "name": "windows_job",
                "resources": [
                   "linux",
                   "mingw5"
@@ -100,7 +100,7 @@
                      "type": "build"
                   }
                ],
-               "name": "linuxJob",
+               "name": "linux_job",
                "resources": [
                   "linux",
                   "mingw5"
@@ -162,7 +162,7 @@
          "clean_workspace": false,
          "jobs": [
             {
-               "name": "windowsJob",
+               "name": "windows_job",
                "resources": [
                   "linux",
                   "mingw5"
@@ -172,7 +172,7 @@
                      "artifact_origin": "gocd",
                      "destination": "",
                      "is_source_a_file": false,
-                     "job": "windowsJob",
+                     "job": "windows_job",
                      "pipeline": "groups-export",
                      "source": "export_windows",
                      "stage": "exportStage",
@@ -190,7 +190,7 @@
                ]
             },
             {
-               "name": "linuxJob",
+               "name": "linux_job",
                "resources": [
                   "linux",
                   "mingw5"
@@ -200,7 +200,7 @@
                      "artifact_origin": "gocd",
                      "destination": "",
                      "is_source_a_file": false,
-                     "job": "linuxJob",
+                     "job": "linux_job",
                      "pipeline": "groups-export",
                      "source": "export_linuxbsd",
                      "stage": "exportStage",

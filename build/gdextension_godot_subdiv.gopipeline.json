@@ -37,7 +37,7 @@
                   }
                ],
                "environment_variables": [ ],
-               "name": "windowsJob",
+               "name": "windows_job",
                "resources": [
                   "linux",
                   "mingw5"
@@ -46,7 +46,7 @@
                   {
                      "artifact_origin": "gocd",
                      "destination": "",
-                     "job": "windowsJob",
+                     "job": "windows_job",
                      "pipeline": "gdextension-cpp",
                      "source": "godot-cpp",
                      "stage": "godotCppStage",
@@ -55,7 +55,7 @@
                   {
                      "artifact_origin": "gocd",
                      "destination": "godot-cpp",
-                     "job": "windowsJob",
+                     "job": "windows_job",
                      "pipeline": "gdextension-cpp",
                      "source": "godot-headers",
                      "stage": "godotCppStage",
@@ -90,7 +90,7 @@
                   }
                ],
                "environment_variables": [ ],
-               "name": "linuxJob",
+               "name": "linux_job",
                "resources": [
                   "linux",
                   "mingw5"
@@ -99,7 +99,7 @@
                   {
                      "artifact_origin": "gocd",
                      "destination": "",
-                     "job": "linuxJob",
+                     "job": "linux_job",
                      "pipeline": "gdextension-cpp",
                      "source": "godot-cpp",
                      "stage": "godotCppStage",
@@ -108,7 +108,7 @@
                   {
                      "artifact_origin": "gocd",
                      "destination": "godot-cpp",
-                     "job": "linuxJob",
+                     "job": "linux_job",
                      "pipeline": "gdextension-cpp",
                      "source": "godot-headers",
                      "stage": "godotCppStage",

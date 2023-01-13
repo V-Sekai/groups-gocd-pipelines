@@ -5,7 +5,7 @@ local templates = import '../lib/templates.libsonnet';
 
 local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.editor.double.x86_64.llvm';
 
-local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web_debug', 'web_release']];
+local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web_debug', 'web_release', 'linux_release']];
 local enabled_template_platforms = enabled_engine_platforms;
 local enabled_gdextension_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
 
@@ -73,7 +73,7 @@ local godot_pipeline(pipeline_name='',
       approval: first_stage_approval,
       jobs: [
         {
-          name: platform_info.platform_name + 'Job',
+          name: platform_info.platform_name + '_job',
           resources: [
             'mingw5',
             'linux',
@@ -130,7 +130,7 @@ local godot_pipeline(pipeline_name='',
       name: 'templateStage',
       jobs: [
         {
-          name: platform_info.platform_name + 'Job',
+          name: platform_info.platform_name + '_job',
           resources: [
             'linux',
             'mingw5',
@@ -179,7 +179,7 @@ local godot_pipeline(pipeline_name='',
               artifact_origin: 'gocd',
               pipeline: pipeline_name,
               stage: 'defaultStage',
-              job: platform_info.platform_name + 'Job',
+              job: platform_info.platform_name + '_job',
               is_source_a_file: true,
               source: platform_info.intermediate_godot_binary,
               destination: 'g/bin/',
@@ -259,7 +259,7 @@ local godot_pipeline(pipeline_name='',
               destination: 'templates',
               pipeline: pipeline_name,
               stage: 'templateStage',
-              job: godot_template_platforms[0].platform_name + 'Job',
+              job: godot_template_platforms[0].platform_name + '_job',
             },
             {
               type: 'fetch',
@@ -280,7 +280,7 @@ local godot_pipeline(pipeline_name='',
               destination: 'templates',
               pipeline: pipeline_name,
               stage: 'templateStage',
-              job: platform_info.platform_name + 'Job',
+              job: platform_info.platform_name + '_job',
             }
             for output_artifact in if platform_info.template_output_artifacts != null then platform_info.template_output_artifacts else [
               platform_info.template_debug_binary,
@@ -395,7 +395,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
         name: 'godotCppStage',
         jobs: [
           {
-            name: platform_info.gdextension_platform + 'Job',
+            name: platform_info.gdextension_platform + '_job',
             resources: [
               'linux',
               'mingw5',
@@ -489,7 +489,7 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
         name: 'gdextensionBuildStage',
         jobs: [
           {
-            name: platform_info.gdextension_platform + 'Job',
+            name: platform_info.gdextension_platform + '_job',
             resources: [
               'linux',
               'mingw5',
@@ -516,7 +516,7 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                 artifact_origin: 'gocd',
                 pipeline: pipeline_dependency,
                 stage: 'godotCppStage',
-                job: platform_info.gdextension_platform + 'Job',
+                job: platform_info.gdextension_platform + '_job',
                 source: 'godot-cpp',
                 destination: '',
               },
@@ -525,7 +525,7 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                 artifact_origin: 'gocd',
                 pipeline: pipeline_dependency,
                 stage: 'godotCppStage',
-                job: platform_info.gdextension_platform + 'Job',
+                job: platform_info.gdextension_platform + '_job',
                 source: 'godot-headers',
                 destination: 'godot-cpp',
               },
@@ -619,7 +619,7 @@ local godot_editor_export(
         approval: first_stage_approval,
         jobs: [
           {
-            name: export_info.export_name + 'Job',
+            name: export_info.export_name + '_job',
             resources: [
               'linux',
               'mingw5',
@@ -630,7 +630,7 @@ local godot_editor_export(
                 artifact_origin: 'gocd',
                 pipeline: pipeline_dependency,
                 stage: 'defaultStage',
-                job: export_info.platform_name + 'Job',
+                job: export_info.platform_name + '_job',
                 is_source_a_file: true,
                 source: export_info.export_executable,
                 destination: export_info.export_directory,
@@ -640,7 +640,7 @@ local godot_editor_export(
                 artifact_origin: 'gocd',
                 pipeline: pipeline_dependency,
                 stage: 'defaultStage',
-                job: export_info.platform_name + 'Job',
+                job: export_info.platform_name + '_job',
                 is_source_a_file: true,
                 source: templates.exe_to_pdb_path(export_info.export_executable),
                 destination: export_info.export_directory,

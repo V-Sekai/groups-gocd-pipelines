@@ -100,7 +100,7 @@
                      "type": "build"
                   }
                ],
-               "name": "windowsJob",
+               "name": "windows_job",
                "resources": [
                   "linux",
                   "mingw5"
@@ -150,7 +150,7 @@
                      "type": "build"
                   }
                ],
-               "name": "linuxJob",
+               "name": "linux_job",
                "resources": [
                   "linux",
                   "mingw5"

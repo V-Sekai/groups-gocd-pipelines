@@ -42,7 +42,7 @@
                      "type": "build"
                   }
                ],
-               "name": "windowsJob",
+               "name": "windows_job",
                "resources": [
                   "mingw5",
                   "linux"
@@ -76,7 +76,7 @@
                      "type": "build"
                   }
                ],
-               "name": "linuxJob",
+               "name": "linux_job",
                "resources": [
                   "mingw5",
                   "linux"
@@ -110,7 +110,7 @@
                      "type": "build"
                   }
                ],
-               "name": "web_debugJob",
+               "name": "web_debug_job",
                "resources": [
                   "mingw5",
                   "linux"
@@ -144,7 +144,7 @@
                      "type": "build"
                   }
                ],
-               "name": "web_releaseJob",
+               "name": "web_release_job",
                "resources": [
                   "mingw5",
                   "linux"
@@ -163,6 +163,40 @@
                      "arguments": [
                         "-c",
                         "source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp scons werror=no platform=web target=template_release use_lto=no deprecated=no optimize=speed use_llvm=yes precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions' custom_modules=../godot_custom_modules"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  }
+               ]
+            },
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "g/bin/godot.linuxbsd.template_release.double.x86_64.llvm",
+                     "type": "build"
+                  }
+               ],
+               "name": "linux_release_job",
+               "resources": [
+                  "mingw5",
+                  "linux"
+               ],
+               "tasks": [
+                  {
+                     "arguments": [
+                        "-c",
+                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "scons werror=no platform=linuxbsd target=template_release use_lto=no deprecated=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes custom_modules=../godot_custom_modules"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -193,7 +227,7 @@
                      "type": "build"
                   }
                ],
-               "name": "windowsJob",
+               "name": "windows_job",
                "resources": [
                   "linux",
                   "mingw5"
@@ -212,7 +246,7 @@
                      "artifact_origin": "gocd",
                      "destination": "g/bin/",
                      "is_source_a_file": true,
-                     "job": "windowsJob",
+                     "job": "windows_job",
                      "pipeline": "godot-groups-editor",
                      "source": "godot.windows.editor.double.x86_64.llvm.exe",
                      "stage": "defaultStage",
@@ -256,7 +290,7 @@
                      "type": "build"
                   }
                ],
-               "name": "linuxJob",
+               "name": "linux_job",
                "resources": [
                   "linux",
                   "mingw5"
@@ -275,7 +309,7 @@
                      "artifact_origin": "gocd",
                      "destination": "g/bin/",
                      "is_source_a_file": true,
-                     "job": "linuxJob",
+                     "job": "linux_job",
                      "pipeline": "godot-groups-editor",
                      "source": "godot.linuxbsd.editor.double.x86_64.llvm",
                      "stage": "defaultStage",
@@ -319,7 +353,7 @@
                      "type": "build"
                   }
                ],
-               "name": "web_debugJob",
+               "name": "web_debug_job",
                "resources": [
                   "linux",
                   "mingw5"
@@ -338,7 +372,7 @@
                      "artifact_origin": "gocd",
                      "destination": "g/bin/",
                      "is_source_a_file": true,
-                     "job": "web_debugJob",
+                     "job": "web_debug_job",
                      "pipeline": "godot-groups-editor",
                      "source": "godot.web.template_debug.double.wasm32.zip",
                      "stage": "defaultStage",
@@ -382,7 +416,7 @@
                      "type": "build"
                   }
                ],
-               "name": "web_releaseJob",
+               "name": "web_release_job",
                "resources": [
                   "linux",
                   "mingw5"
@@ -401,7 +435,7 @@
                      "artifact_origin": "gocd",
                      "destination": "g/bin/",
                      "is_source_a_file": true,
-                     "job": "web_releaseJob",
+                     "job": "web_release_job",
                      "pipeline": "godot-groups-editor",
                      "source": "godot.web.template_release.double.wasm32.zip",
                      "stage": "defaultStage",
@@ -411,6 +445,69 @@
                      "arguments": [
                         "-c",
                         "cp bin/godot.web.template_release.double.wasm32.zip bin/web_debug.wasm32.zip && cp bin/godot.web.template_release.double.wasm32.zip bin/"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  }
+               ]
+            },
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "g/bin/",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "g/bin/linux_template_release.x86_64",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "g/bin/version.txt",
+                     "type": "build"
+                  }
+               ],
+               "name": "linux_release_job",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "arguments": [
+                        "-c",
+                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "g/bin/",
+                     "is_source_a_file": true,
+                     "job": "linux_release_job",
+                     "pipeline": "godot-groups-editor",
+                     "source": "godot.linuxbsd.template_release.double.x86_64.llvm",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp bin/godot.linuxbsd.template_release.double.x86_64.llvm bin/ && cp bin/godot.linuxbsd.template_release.double.x86_64.llvm bin/linux_template_release.x86_64 && strip --strip-debug bin/linux_template_release.x86_64"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -458,7 +555,7 @@
                      "artifact_origin": "gocd",
                      "destination": "templates",
                      "is_source_a_file": true,
-                     "job": "windowsJob",
+                     "job": "windows_job",
                      "pipeline": "godot-groups-editor",
                      "source": "version.txt",
                      "stage": "templateStage",
@@ -478,7 +575,7 @@
                      "artifact_origin": "gocd",
                      "destination": "templates",
                      "is_source_a_file": true,
-                     "job": "windowsJob",
+                     "job": "windows_job",
                      "pipeline": "godot-groups-editor",
                      "source": "windows_debug_x86_64.exe",
                      "stage": "templateStage",
@@ -488,7 +585,7 @@
                      "artifact_origin": "gocd",
                      "destination": "templates",
                      "is_source_a_file": true,
-                     "job": "windowsJob",
+                     "job": "windows_job",
                      "pipeline": "godot-groups-editor",
                      "source": "windows_release_x86_64.exe",
                      "stage": "templateStage",
@@ -498,7 +595,7 @@
                      "artifact_origin": "gocd",
                      "destination": "templates",
                      "is_source_a_file": true,
-                     "job": "linuxJob",
+                     "job": "linux_job",
                      "pipeline": "godot-groups-editor",
                      "source": "linux_debug.x86_64",
                      "stage": "templateStage",
@@ -508,7 +605,7 @@
                      "artifact_origin": "gocd",
                      "destination": "templates",
                      "is_source_a_file": true,
-                     "job": "linuxJob",
+                     "job": "linux_job",
                      "pipeline": "godot-groups-editor",
                      "source": "linux_release.x86_64",
                      "stage": "templateStage",
@@ -518,7 +615,7 @@
                      "artifact_origin": "gocd",
                      "destination": "templates",
                      "is_source_a_file": true,
-                     "job": "web_debugJob",
+                     "job": "web_debug_job",
                      "pipeline": "godot-groups-editor",
                      "source": "web_debug.wasm32.zip",
                      "stage": "templateStage",
@@ -528,7 +625,7 @@
                      "artifact_origin": "gocd",
                      "destination": "templates",
                      "is_source_a_file": true,
-                     "job": "web_debugJob",
+                     "job": "web_debug_job",
                      "pipeline": "godot-groups-editor",
                      "source": "",
                      "stage": "templateStage",
@@ -538,7 +635,7 @@
                      "artifact_origin": "gocd",
                      "destination": "templates",
                      "is_source_a_file": true,
-                     "job": "web_releaseJob",
+                     "job": "web_release_job",
                      "pipeline": "godot-groups-editor",
                      "source": "web_debug.wasm32.zip",
                      "stage": "templateStage",
@@ -548,9 +645,29 @@
                      "artifact_origin": "gocd",
                      "destination": "templates",
                      "is_source_a_file": true,
-                     "job": "web_releaseJob",
+                     "job": "web_release_job",
                      "pipeline": "godot-groups-editor",
                      "source": "",
+                     "stage": "templateStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "templates",
+                     "is_source_a_file": true,
+                     "job": "linux_release_job",
+                     "pipeline": "godot-groups-editor",
+                     "source": "",
+                     "stage": "templateStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "templates",
+                     "is_source_a_file": true,
+                     "job": "linux_release_job",
+                     "pipeline": "godot-groups-editor",
+                     "source": "linux_template_release.x86_64",
                      "stage": "templateStage",
                      "type": "fetch"
                   },

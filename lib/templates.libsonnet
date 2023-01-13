@@ -54,7 +54,7 @@
           fetch_materials: true,
           jobs: [
             {
-              name: export_info.export_name + 'Job',
+              name: export_info.export_name + '_job',
               resources: [
                 'linux',
                 'mingw5',
@@ -95,7 +95,7 @@
                                   artifact_origin: 'gocd',
                                   pipeline: library_info.pipeline_name,
                                   stage: 'gdextensionBuildStage',
-                                  job: export_info.gdextension_platform + 'Job',
+                                  job: export_info.gdextension_platform + '_job',
                                   is_source_a_file: true,
                                   source: artifact,
                                   destination: library_info.name,
@@ -108,7 +108,7 @@
                                                                      artifact_origin: 'gocd',
                                                                      pipeline: library_info.pipeline_name,
                                                                      stage: 'gdextensionBuildStage',
-                                                                     job: export_info.gdextension_platform + 'Job',
+                                                                     job: export_info.gdextension_platform + '_job',
                                                                      is_source_a_file: true,
                                                                      source: 'debug/' + self.exe_to_pdb_path(artifact),
                                                                      destination: library_info.name,
@@ -177,7 +177,7 @@
           clean_workspace: false,
           jobs: [
             {
-              name: export_info.export_name + 'Job',
+              name: export_info.export_name + '_job',
               resources: [
                 'linux',
                 'mingw5',
@@ -188,7 +188,7 @@
                   artifact_origin: 'gocd',
                   pipeline: pipeline_name,
                   stage: 'exportStage',
-                  job: export_info.export_name + 'Job',
+                  job: export_info.export_name + '_job',
                   is_source_a_file: false,
                   source: export_info.export_directory,
                   destination: '',
@@ -269,7 +269,7 @@
                   artifact_origin: 'gocd',
                   pipeline: pipeline_dependency,
                   stage: 'exportStage',
-                  job: server_export_info.export_name + 'Job',
+                  job: server_export_info.export_name + '_job',
                   is_source_a_file: false,
                   source: server_export_info.export_directory,
                   destination: 'g/' + docker_groups_dir,
