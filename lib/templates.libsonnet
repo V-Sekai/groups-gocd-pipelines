@@ -84,7 +84,7 @@
                   artifact_origin: 'gocd',
                   pipeline: pipeline_dependency,
                   stage: 'defaultStage',
-                  job: 'linuxJob',
+                  job: 'linux_job',
                   is_source_a_file: true,
                   source: 'godot.linuxbsd.editor.double.x86_64.llvm',
                   destination: '',
