@@ -18,7 +18,7 @@ local all_gdextension_plugins = [groups_gdextension.groups_gdextension_plugins[x
 local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
 local docker_gocd_agent_pipeline = 'docker-gocd-agent-centos-8-groups';
-local godot_template_groups_editor = 'godot-groups-editor';
+local godot_template_groups_editor = 'godot-groups-editor-zeta';
 local godot_template_groups = 'groups-export';
 local godot_cpp_pipeline = 'gdextension-cpp';
 local godot_gdextension_pipelines = [plugin_info.pipeline_name for plugin_info in all_gdextension_plugins];
@@ -675,7 +675,7 @@ local godot_editor_export(
     godot_branch='groups-4.x',
     gocd_group='gamma',
     godot_modules_git='https://github.com/V-Sekai/godot-modules-groups.git',
-    godot_modules_branch='wedged',
+    godot_modules_branch='main',
     godot_engine_platforms=enabled_groups_engine_platforms,
     godot_template_platforms=enabled_groups_template_platforms
   )),

@@ -24,7 +24,7 @@
          "url": "https://github.com/V-Sekai/godot-modules-groups.git"
       }
    ],
-   "name": "godot-groups-editor",
+   "name": "godot-groups-editor-zeta",
    "stages": [
       {
          "jobs": [
@@ -178,7 +178,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "windows_job",
-                     "pipeline": "godot-groups-editor",
+                     "pipeline": "godot-groups-editor-zeta",
                      "source": "godot.windows.editor.double.x86_64.llvm.exe",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -241,7 +241,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "linux_job",
-                     "pipeline": "godot-groups-editor",
+                     "pipeline": "godot-groups-editor-zeta",
                      "source": "godot.linuxbsd.editor.double.x86_64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -304,7 +304,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "web_job",
-                     "pipeline": "godot-groups-editor",
+                     "pipeline": "godot-groups-editor-zeta",
                      "source": "godot.web.template_release.double.wasm32.zip",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -361,7 +361,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windows_job",
-                     "pipeline": "godot-groups-editor",
+                     "pipeline": "godot-groups-editor-zeta",
                      "source": "version.txt",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -371,7 +371,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windows_job",
-                     "pipeline": "godot-groups-editor",
+                     "pipeline": "godot-groups-editor-zeta",
                      "source": "godot.windows.editor.double.x86_64.llvm.pdb",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -381,7 +381,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windows_job",
-                     "pipeline": "godot-groups-editor",
+                     "pipeline": "godot-groups-editor-zeta",
                      "source": "windows_debug_x86_64.exe",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -391,7 +391,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windows_job",
-                     "pipeline": "godot-groups-editor",
+                     "pipeline": "godot-groups-editor-zeta",
                      "source": "windows_release_x86_64.exe",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -401,7 +401,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "linux_job",
-                     "pipeline": "godot-groups-editor",
+                     "pipeline": "godot-groups-editor-zeta",
                      "source": "linux_debug.x86_64",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -411,7 +411,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "linux_job",
-                     "pipeline": "godot-groups-editor",
+                     "pipeline": "godot-groups-editor-zeta",
                      "source": "linux_release.x86_64",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -421,7 +421,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "web_job",
-                     "pipeline": "godot-groups-editor",
+                     "pipeline": "godot-groups-editor-zeta",
                      "source": "web_debug.wasm32.zip",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -431,7 +431,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "web_job",
-                     "pipeline": "godot-groups-editor",
+                     "pipeline": "godot-groups-editor-zeta",
                      "source": "web_release.wasm32.zip",
                      "stage": "templateStage",
                      "type": "fetch"
