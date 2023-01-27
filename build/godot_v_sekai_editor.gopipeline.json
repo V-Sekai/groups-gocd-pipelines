@@ -27,7 +27,6 @@
    "name": "godot-groups-editor",
    "stages": [
       {
-         "clean_workspace": true,
          "jobs": [
             {
                "artifacts": [

@@ -69,7 +69,6 @@ local godot_pipeline(pipeline_name='',
   stages: [
     {
       name: 'defaultStage',
-      clean_workspace: true,
       approval: first_stage_approval,
       jobs: [
         {
@@ -615,7 +614,6 @@ local godot_editor_export(
     stages: [
       {
         name: 'uploadStage',
-        clean_workspace: true,
         approval: first_stage_approval,
         jobs: [
           {
