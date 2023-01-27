@@ -675,7 +675,7 @@ local godot_editor_export(
     godot_branch='groups-4.x',
     gocd_group='gamma',
     godot_modules_git='https://github.com/V-Sekai/godot-modules-groups.git',
-    godot_modules_branch='main',
+    godot_modules_branch='wedged',
     godot_engine_platforms=enabled_groups_engine_platforms,
     godot_template_platforms=enabled_groups_template_platforms
   )),
