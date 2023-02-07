@@ -16,7 +16,7 @@
          "url": "https://github.com/V-Sekai/godot.git"
       },
       {
-         "branch": "wedged",
+         "branch": "main",
          "destination": "godot_custom_modules",
          "name": "godot_custom_modules",
          "shallow_clone": false,
