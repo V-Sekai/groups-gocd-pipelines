@@ -16,7 +16,7 @@
          "url": "https://github.com/V-Sekai/godot.git"
       },
       {
-         "branch": "main",
+         "branch": "wedged",
          "destination": "godot_custom_modules",
          "name": "godot_custom_modules",
          "shallow_clone": false,
@@ -270,12 +270,12 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/web_debug.wasm32.zip",
+                     "source": "g/bin/web_debug.zip",
                      "type": "build"
                   },
                   {
                      "destination": "",
-                     "source": "g/bin/web_release.wasm32.zip",
+                     "source": "g/bin/web_release.zip",
                      "type": "build"
                   },
                   {
@@ -312,7 +312,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.web.template_release.double.wasm32.zip bin/web_debug.wasm32.zip && cp bin/godot.web.template_release.double.wasm32.zip bin/web_release.wasm32.zip"
+                        "cp bin/godot.web.template_release.double.wasm32.zip bin/web_debug.zip && cp bin/godot.web.template_release.double.wasm32.zip bin/web_release.zip"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -422,7 +422,7 @@
                      "is_source_a_file": true,
                      "job": "web_job",
                      "pipeline": "godot-groups-editor",
-                     "source": "web_debug.wasm32.zip",
+                     "source": "web_debug.zip",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
@@ -432,7 +432,7 @@
                      "is_source_a_file": true,
                      "job": "web_job",
                      "pipeline": "godot-groups-editor",
-                     "source": "web_release.wasm32.zip",
+                     "source": "web_release.zip",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
