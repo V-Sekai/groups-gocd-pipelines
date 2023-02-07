@@ -54,7 +54,7 @@
       "template_artifacts_override": null,
       "template_output_artifacts": null,
       "template_extra_commands": [],
-      "target": "template_release"
+      "target": "editor"
     },
     "macos": {
       "platform_name": "macos",
