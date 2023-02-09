@@ -2,7 +2,7 @@
   "platform_info_dict": {
     "windows": {
       "platform_name": "windows",
-      "scons_env": "PATH=/opt/llvm-mingw/bin:$PATH ",
+      "scons_env": "PATH=/opt/llvm-mingw/bin:$PATH SCONS_CACHE=../.cicd_cache ",
       "intermediate_godot_binary": "godot.windows.editor.double.x86_64.llvm.exe",
       "editor_godot_binary": "godot.windows.editor.double.x86_64.llvm.exe",
       "template_debug_binary": "windows_debug_x86_64.exe",
@@ -21,7 +21,7 @@
     },
     "linux": {
       "platform_name": "linux",
-      "scons_env": "",
+      "scons_env": "SCONS_CACHE=../.cicd_cache ",
       "intermediate_godot_binary": "godot.linuxbsd.editor.double.x86_64.llvm",
       "editor_godot_binary": "godot.linuxbsd.editor.double.x86_64.llvm",
       "template_debug_binary": "linux_debug.x86_64",
@@ -40,7 +40,7 @@
     },
     "web": {
       "platform_name": "web",
-      "scons_env": "source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp ",
+      "scons_env": "source /opt/emsdk/emsdk_env.sh && SCONS_CACHE=../.cicd_cache EM_CACHE=/tmp ",
       "intermediate_godot_binary": "godot.web.template_release.double.wasm32.zip",
       "editor_godot_binary": "godot.web.template_release.double.wasm32.zip",
       "template_debug_binary": "web_debug.zip",
@@ -58,7 +58,7 @@
     },
     "macos": {
       "platform_name": "macos",
-      "scons_env": "OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" ",
+      "scons_env": "SCONS_CACHE=../.cicd_cache OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" ",
       "intermediate_godot_binary": "godot.macos.editor.double.x86_64",
       "editor_godot_binary": "Godot.app",
       "template_debug_binary": "godot_macos_debug.x86_64",

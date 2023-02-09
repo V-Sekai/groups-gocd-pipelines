@@ -59,7 +59,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "PATH=/opt/llvm-mingw/bin:$PATH scons werror=no platform=windows target=editor use_lto=no deprecated=no precision=double use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no custom_modules=../godot_custom_modules"
+                        "PATH=/opt/llvm-mingw/bin:$PATH SCONS_CACHE=../.cicd_cache scons werror=no platform=windows target=editor use_lto=no deprecated=no precision=double use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no custom_modules=../godot_custom_modules"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -93,7 +93,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "scons werror=no platform=linuxbsd target=editor use_lto=no deprecated=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes custom_modules=../godot_custom_modules"
+                        "SCONS_CACHE=../.cicd_cache scons werror=no platform=linuxbsd target=editor use_lto=no deprecated=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes custom_modules=../godot_custom_modules"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -127,7 +127,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "source /opt/emsdk/emsdk_env.sh && EM_CACHE=/tmp scons werror=no platform=web target=template_release use_lto=no deprecated=no optimize=speed use_llvm=yes precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions' custom_modules=../godot_custom_modules"
+                        "source /opt/emsdk/emsdk_env.sh && SCONS_CACHE=../.cicd_cache EM_CACHE=/tmp scons werror=no platform=web target=template_release use_lto=no deprecated=no optimize=speed use_llvm=yes precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions' custom_modules=../godot_custom_modules"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
