@@ -10,7 +10,7 @@
           "artifacts": ["addons/godot-openvr/libgdsummator.windows.debug.x86_64.dll"],
           "output_artifacts": ["libgdsummator.windows.debug.x86_64.dll"],
           "debug_artifacts": [],
-          "scons_arguments": "",
+          "scons_arguments": "precision=double",
           "environment_variables": [],
           "prepare_commands": [],
           "extra_commands": []
@@ -19,7 +19,7 @@
           "artifacts": [],
           "output_artifacts": [],
           "debug_artifacts": [],
-          "scons_arguments": "",
+          "scons_arguments": "precision=double",
           "environment_variables": [],
           "prepare_commands": [],
           "extra_commands": []
@@ -28,7 +28,7 @@
           "artifacts": [],
           "output_artifacts": [],
           "debug_artifacts": [],
-          "scons_arguments": "",
+          "scons_arguments": "precision=double",
           "environment_variables": [],
           "prepare_commands": [],
           "extra_commands": []
@@ -37,7 +37,7 @@
           "artifacts": [],
           "output_artifacts": [],
           "debug_artifacts": [],
-          "scons_arguments": " --version",
+          "scons_arguments": "precision=double",
           "environment_variables": [],
           "prepare_commands": [],
           "extra_commands": []
