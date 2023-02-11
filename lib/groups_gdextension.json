@@ -43,50 +43,6 @@
           "extra_commands": []
         }
       }
-    },
-    "godot_subdiv": {
-      "name": "godot_subdiv",
-      "pipeline_name": "gdextension-godot-subdiv",
-      "git_url": "https://github.com/tefusion/godot-subdiv.git",
-      "git_branch": "main",
-      "platforms": {
-        "windows": {
-          "artifacts": ["projects/addons/godot_subdiv/bin/libgodot_subdiv.windows.template_debug.x86_64.dll"],
-          "output_artifacts": ["libgodot_subdiv.windows.template_debug.x86_64.dll"],
-          "debug_artifacts": [],
-          "scons_arguments": "",
-          "environment_variables": [],
-          "prepare_commands": [],
-          "extra_commands": []
-        },
-        "web": {
-          "artifacts": [],
-          "output_artifacts": [],
-          "debug_artifacts": [],
-          "scons_arguments": "",
-          "environment_variables": [],
-          "prepare_commands": [],
-          "extra_commands": []
-        },
-        "linux": {
-          "artifacts": ["projects/addons/godot_subdiv/bin/libgodot_subdiv.windows.template_debug.x86_64.dll"],
-          "output_artifacts": ["libgodot_subdiv.linuxbsd.template_debug.x86_64.dll"],
-          "debug_artifacts": [],
-          "scons_arguments": "",
-          "environment_variables": [],
-          "prepare_commands": [],
-          "extra_commands": []
-        },
-        "osx": {
-          "artifacts": [],
-          "output_artifacts": [],
-          "debug_artifacts": [],
-          "scons_arguments": " --version",
-          "environment_variables": [],
-          "prepare_commands": [],
-          "extra_commands": []
-        }
-      }
     }
   }
 }

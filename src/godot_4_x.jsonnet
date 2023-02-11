@@ -13,7 +13,7 @@ local enabled_groups_engine_platforms = enabled_engine_platforms;
 local enabled_groups_template_platforms = enabled_engine_platforms;
 
 local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linux']];
-local all_gdextension_plugins = [groups_gdextension.groups_gdextension_plugins[x] for x in ['godot_vive_pro_eye_face', 'godot_subdiv']];
+local all_gdextension_plugins = [groups_gdextension.groups_gdextension_plugins[x] for x in ['godot_vive_pro_eye_face']];
 
 local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
