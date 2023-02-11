@@ -431,7 +431,7 @@ local generate_godot_cpp_pipeline(pipeline_name='',
                 job: 'generateApiJsonJob',
                 is_source_a_file: true,
                 source: 'extension_api.json',
-                destination: 'godot-headers',
+                destination: 'godot-cpp/gdextension',
               },
               {
                 type: 'exec',
