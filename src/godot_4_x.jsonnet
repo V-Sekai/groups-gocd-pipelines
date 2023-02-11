@@ -526,7 +526,7 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                 stage: 'godotCppStage',
                 job: platform_info.gdextension_platform + '_job',
                 source: 'godot-headers',
-                destination: 'godot-cpp',
+                destination: 'p/godot-cpp',
               },
             ] + [
               {

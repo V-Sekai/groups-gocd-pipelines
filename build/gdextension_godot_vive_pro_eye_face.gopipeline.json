@@ -54,7 +54,7 @@
                   },
                   {
                      "artifact_origin": "gocd",
-                     "destination": "godot-cpp",
+                     "destination": "p/godot-cpp",
                      "job": "windows_job",
                      "pipeline": "gdextension-cpp",
                      "source": "godot-headers",
