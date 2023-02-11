@@ -528,15 +528,6 @@ local generate_godot_gdextension_pipeline(pipeline_name='',
                 source: 'godot-headers',
                 destination: 'godot-cpp',
               },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'cp -a godot-cpp/. p/godot-cpp',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
             ] + [
               {
                 type: 'exec',

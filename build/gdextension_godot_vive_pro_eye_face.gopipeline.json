@@ -64,15 +64,6 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -a godot-cpp/. p/godot-cpp"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
-                  },
-                  {
-                     "arguments": [
-                        "-c",
                         "mkdir -p ../.cicd_cache && PATH=/opt/llvm-mingw/bin:$PATH SCONS_CACHE=../.cicd_cache scons werror=no platform=windows target=template_debug debug_symbols=yes use_lto=no deprecated=no precision=double use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"
                      ],
                      "command": "/bin/bash",
