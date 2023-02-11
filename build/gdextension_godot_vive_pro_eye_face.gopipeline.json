@@ -15,7 +15,7 @@
          "type": "dependency"
       },
       {
-         "branch": "groups-4.0",
+         "branch": "master",
          "destination": "p",
          "ignore_for_scheduling": false,
          "name": "p",
