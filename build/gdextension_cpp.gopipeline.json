@@ -22,15 +22,6 @@
          "shallow_clone": false,
          "type": "git",
          "url": "https://github.com/godotengine/godot-cpp.git"
-      },
-      {
-         "branch": "master",
-         "destination": "godot-headers",
-         "ignore_for_scheduling": false,
-         "name": "godot-headers",
-         "shallow_clone": false,
-         "type": "git",
-         "url": "https://github.com/godotengine/godot-headers.git"
       }
    ],
    "name": "gdextension-cpp",
