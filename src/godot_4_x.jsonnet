@@ -7,22 +7,18 @@ local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.editor.double.x86_64.llvm';
 
 local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web']];
 local enabled_template_platforms = enabled_engine_platforms;
-local enabled_gdextension_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux']];
 
 local enabled_groups_engine_platforms = enabled_engine_platforms;
 local enabled_groups_template_platforms = enabled_engine_platforms;
 
 local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linux']];
-local all_gdextension_plugins = [groups_gdextension.groups_gdextension_plugins[x] for x in ['godot_vive_pro_eye_face']];
 
 local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
 local docker_gocd_agent_pipeline = 'docker-gocd-agent-centos-8-groups';
 local godot_template_groups_editor = 'godot-groups-editor';
 local godot_template_groups = 'groups-export';
-local godot_cpp_pipeline = 'gdextension-cpp';
-local godot_gdextension_pipelines = [plugin_info.pipeline_name for plugin_info in all_gdextension_plugins];
-local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor, godot_cpp_pipeline] + godot_gdextension_pipelines + [godot_template_groups];
+local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor] + [godot_template_groups];
 
 local godot_pipeline(pipeline_name='',
                      godot_status='',
@@ -309,258 +305,6 @@ local godot_pipeline(pipeline_name='',
   ],
 };
 
-
-local generate_godot_cpp_pipeline(pipeline_name='',
-                                  pipeline_dependency='',
-                                  gocd_group='',
-                                  godot_status='') =
-  {
-    name: pipeline_name,
-    group: gocd_group,
-    label_template: godot_status + '.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
-    environment_variables:
-      [{
-        name: 'GODOT_STATUS',
-        value: godot_status,
-      }],
-    materials: [
-      {
-        name: pipeline_dependency + '_pipeline_dependency',
-        type: 'dependency',
-        pipeline: pipeline_dependency,
-        stage: 'defaultStage',
-      },
-      {
-        name: 'godot-cpp',
-        url: 'https://github.com/godotengine/godot-cpp.git',
-        type: 'git',
-        branch: 'master',
-        destination: 'godot-cpp',
-        shallow_clone: false,
-        ignore_for_scheduling: false,
-      },
-    ],
-    stages: [
-      {
-        name: 'generateApiJsonStage',
-        jobs: [
-          {
-            name: 'generateApiJsonJob',
-            resources: [
-              'linux',
-              'mingw5',
-            ],
-            artifacts: [
-              {
-                type: 'build',
-                source: 'extension_api.json',
-                destination: '',
-              },
-            ],
-            tasks: [
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                pipeline: pipeline_dependency,
-                stage: 'defaultStage',
-                job: 'linux_job',
-                is_source_a_file: true,
-                source: HEADLESS_SERVER_EDITOR,
-                destination: '',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  'chmod +x ' + HEADLESS_SERVER_EDITOR + ' && ./' + HEADLESS_SERVER_EDITOR + ' --headless --dump-extension-api extension_api.json || true',
-                ],
-                command: '/bin/bash',
-                working_directory: '',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        name: 'godotCppStage',
-        jobs: [
-          {
-            name: platform_info.gdextension_platform + '_job',
-            resources: [
-              'linux',
-              'mingw5',
-            ],
-            artifacts: [
-              {
-                type: 'build',
-                source: 'godot-cpp/include',
-                destination: 'godot-cpp',
-              },
-              {
-                type: 'build',
-                source: 'godot-headers',
-                destination: '',
-              },
-              {
-                type: 'build',
-                source: 'godot-cpp/gen/include',
-                destination: 'godot-cpp',
-              },
-              {
-                type: 'build',
-                source: 'godot-cpp/bin',
-                destination: 'godot-cpp',
-              },
-            ],
-            environment_variables: platform_info.environment_variables,
-            tasks: [
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                pipeline: pipeline_name,
-                stage: 'generateApiJsonStage',
-                job: 'generateApiJsonJob',
-                is_source_a_file: true,
-                source: 'extension_api.json',
-                destination: 'godot-cpp/gdextension',
-              },
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdextension_platform + ' target=' + platform_info.gdextension_target + ' debug_symbols=yes use_lto=no deprecated=no generate_bindings=yes ' + platform_info.godot_scons_arguments,
-                ],
-                command: '/bin/bash',
-                working_directory: 'godot-cpp',
-              },
-            ],
-          }
-          for platform_info in enabled_gdextension_platforms
-        ],
-      },
-    ],
-  };
-
-
-local generate_godot_gdextension_pipeline(pipeline_name='',
-                                          pipeline_dependency='',
-                                          gocd_group='',
-                                          godot_status='',
-                                          library_info=null,
-                                          godot_gdextension_platforms=enabled_gdextension_platforms) =
-  {
-    name: pipeline_name,
-    group: gocd_group,
-    label_template: godot_status + '.${' + pipeline_dependency + '_pipeline_dependency' + '}.${COUNT}',
-    environment_variables:
-      [{
-        name: 'GODOT_STATUS',
-        value: godot_status,
-      }],
-    materials: [
-      {
-        name: pipeline_dependency + '_pipeline_dependency',
-        type: 'dependency',
-        pipeline: pipeline_dependency,
-        stage: 'godotCppStage',
-      },
-      {
-        name: 'p',
-        url: library_info.git_url,
-        type: 'git',
-        branch: library_info.git_branch,
-        destination: 'p',
-        shallow_clone: false,
-        ignore_for_scheduling: false,
-      },
-    ],
-    stages: [
-      {
-        name: 'gdextensionBuildStage',
-        jobs: [
-          {
-            name: platform_info.gdextension_platform + '_job',
-            resources: [
-              'linux',
-              'mingw5',
-            ],
-            artifacts: [
-              {
-                type: 'build',
-                source: 'p/' + artifact_path,
-                destination: '',
-              }
-              for artifact_path in library_info.platforms[platform_info.gdextension_platform].artifacts
-            ] + [
-              {
-                type: 'build',
-                source: 'p/' + artifact_path,
-                destination: 'debug',
-              }
-              for artifact_path in library_info.platforms[platform_info.gdextension_platform].debug_artifacts
-            ],
-            environment_variables: platform_info.environment_variables + library_info.platforms[platform_info.gdextension_platform].environment_variables,
-            tasks: [
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                pipeline: pipeline_dependency,
-                stage: 'godotCppStage',
-                job: platform_info.gdextension_platform + '_job',
-                source: 'godot-cpp',
-                destination: '',
-              },
-              {
-                type: 'fetch',
-                artifact_origin: 'gocd',
-                pipeline: pipeline_dependency,
-                stage: 'godotCppStage',
-                job: platform_info.gdextension_platform + '_job',
-                source: 'godot-headers',
-                destination: 'p/godot-cpp',
-              },
-            ] + [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  extra_command,
-                ],
-                command: '/bin/bash',
-                working_directory: 'p',
-              }
-              for extra_command in library_info.platforms[platform_info.gdextension_platform].prepare_commands
-            ] + [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  platform_info.scons_env + 'scons werror=no platform=' + platform_info.gdextension_platform + ' target=' + platform_info.gdextension_target + ' debug_symbols=yes use_lto=no deprecated=no ' + platform_info.godot_scons_arguments + library_info.platforms[platform_info.gdextension_platform].scons_arguments,
-                ],
-                command: '/bin/bash',
-                working_directory: 'p',
-              },
-            ] + [
-              {
-                type: 'exec',
-                arguments: [
-                  '-c',
-                  extra_command,
-                ],
-                command: '/bin/bash',
-                working_directory: 'p',
-              }
-              for extra_command in library_info.platforms[platform_info.gdextension_platform].extra_commands
-            ] + [
-            ],
-          }
-          for platform_info in godot_gdextension_platforms
-          if std.objectHas(library_info.platforms, platform_info.gdextension_platform) && std.length(library_info.platforms[platform_info.gdextension_platform].artifacts) + std.length(library_info.platforms[platform_info.gdextension_platform].debug_artifacts) > 0
-        ],
-      },
-    ],
-  };
-
 local godot_editor_export(
   pipeline_name='',
   pipeline_dependency='',
@@ -660,27 +404,7 @@ local godot_editor_export(
     godot_modules_branch='main',
     godot_engine_platforms=enabled_groups_engine_platforms,
     godot_template_platforms=enabled_groups_template_platforms
-  )),
-  'gdextension_cpp.gopipeline.json'
-  : std.prune(
-    generate_godot_cpp_pipeline(
-      pipeline_name=godot_cpp_pipeline,
-      pipeline_dependency=godot_template_groups_editor,
-      gocd_group='echo',
-      godot_status='gdextension.godot-cpp'
-    )
-  ),
-} + {
-  ['gdextension_' + library_info.name + '.gopipeline.json']: generate_godot_gdextension_pipeline(
-    pipeline_name=library_info.pipeline_name,
-    pipeline_dependency=godot_cpp_pipeline,
-    gocd_group='echo',
-    godot_status='gdextension.' + library_info.name,
-    library_info=library_info,
-    godot_gdextension_platforms=enabled_gdextension_platforms,
-  )
-  for library_info in all_gdextension_plugins
-} + {
+  )),} + {
   'godot_template_groups_export.gopipeline.json'
   : std.prune(
     templates.godot_tools_pipeline_export(
@@ -695,16 +419,6 @@ local godot_editor_export(
       enabled_export_platforms=enabled_groups_export_platforms,
     )
   ),
-} + {
-  ['gdextension_' + library_info.name + '.gopipeline.json']: generate_godot_gdextension_pipeline(
-    pipeline_name=library_info.pipeline_name,
-    pipeline_dependency=godot_cpp_pipeline,
-    gocd_group='echo',
-    godot_status='gdextension.' + library_info.name,
-    library_info=library_info,
-    godot_gdextension_platforms=enabled_gdextension_platforms,
-  )
-  for library_info in all_gdextension_plugins
 } + {
   'godot_template_groups_export.gopipeline.json'
   : std.prune(
