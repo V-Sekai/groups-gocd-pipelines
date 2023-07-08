@@ -40,7 +40,7 @@
                   },
                   {
                      "name": "PATH",
-                     "value": "/opt/llvm-mingw/bin:$PATH"
+                     "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
                   }
                ],
                "name": "windows_job",
@@ -84,7 +84,7 @@
                   },
                   {
                      "name": "PATH",
-                     "value": "/opt/llvm-mingw/bin:$PATH"
+                     "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
                   }
                ],
                "name": "linux_job",
@@ -132,7 +132,7 @@
                   },
                   {
                      "name": "PATH",
-                     "value": "/opt/llvm-mingw/bin:$PATH"
+                     "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
                   }
                ],
                "name": "web_job",
@@ -191,7 +191,7 @@
                   },
                   {
                      "name": "PATH",
-                     "value": "/opt/llvm-mingw/bin:$PATH"
+                     "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
                   }
                ],
                "name": "windows_job",
@@ -264,7 +264,7 @@
                   },
                   {
                      "name": "PATH",
-                     "value": "/opt/llvm-mingw/bin:$PATH"
+                     "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
                   }
                ],
                "name": "linux_job",
@@ -341,7 +341,7 @@
                   },
                   {
                      "name": "PATH",
-                     "value": "/opt/llvm-mingw/bin:$PATH"
+                     "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
                   }
                ],
                "name": "web_job",

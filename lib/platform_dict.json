@@ -21,7 +21,7 @@
         },
         {
           "name": "PATH",
-          "value": "/opt/llvm-mingw/bin:$PATH"
+          "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
         }
       ],
       "template_artifacts_override": null,
@@ -50,7 +50,7 @@
         },
         {
           "name": "PATH",
-          "value": "/opt/llvm-mingw/bin:$PATH"
+          "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
         }
       ],
       "template_artifacts_override": null,
@@ -82,7 +82,7 @@
         },
         {
           "name": "PATH",
-          "value": "/opt/llvm-mingw/bin:$PATH"
+          "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
         }
       ],
       "template_artifacts_override": null,
@@ -121,11 +121,7 @@
         },
         {
           "name": "PATH",
-          "value": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-        },        
-        {
-          "name": "PATH",
-          "value": "/opt/llvm-mingw/bin:$PATH"
+          "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
         }
       ],
       "template_artifacts_override": [
