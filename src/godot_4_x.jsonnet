@@ -91,7 +91,7 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                'import re; import os; with open("version.py", "r+") as f: content = f.read(); f.seek(0); f.write(re.sub(r"(?<=^status =).*", " = \\\\\\\'" + os.getenv("GODOT_STATUS") + "." + os.getenv("GO_PIPELINE_COUNTER") + "\\\\\\\'", content, flags=re.MULTILINE))',
+                'import re; import os; with open("version.py", "r+") as f: content = f.read(); f.seek(0); f.write(re.sub(r"(?<=^status =).*", " = \\\\\'" + os.getenv("GODOT_STATUS") + "." + os.getenv("GO_PIPELINE_COUNTER") + "\\\\\'", content, flags=re.MULTILINE))',
               ],
               command: 'python3',
               working_directory: 'g',
@@ -191,7 +191,7 @@ local godot_pipeline(pipeline_name='',
               "type": "exec",
               "arguments": [
                 "-c",
-                "python3 -c 'import re; import os; with open(\"version.py\", \"r+\") as f: content = f.read(); f.seek(0); f.write(re.sub(r\"(?<=^status =).*\", \" = \\\\\'\" + os.getenv(\"GODOT_STATUS\") + \".\" + os.getenv(\"GO_PIPELINE_COUNTER\") + \"\\\\\'\", content, flags=re.MULTILINE))'"
+                "python3 -c 'import re; import os; with open(\"version.py\", \"r+\") as f: content = f.read(); f.seek(0); f.write(re.sub(r\"(?<=^status =).*\", \" = \\\\'\" + os.getenv(\"GODOT_STATUS\") + \".\" + os.getenv(\"GO_PIPELINE_COUNTER\") + \"\\\\'\", content, flags=re.MULTILINE))'"
               ],
               "command": "/bin/bash",
               "working_directory": "g"
