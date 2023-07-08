@@ -191,7 +191,7 @@ local godot_pipeline(pipeline_name='',
               "type": "exec",
               "arguments": [
                 "-c",
-                "import re; import os; with open('version.py', 'r+') as f: content = f.read(); f.seek(0); f.write(re.sub(r'(?<=status =).*', ' = \'' + os.getenv('GODOT_STATUS') + '.' + os.getenv('GO_PIPELINE_COUNTER') + '\'', content, flags=re.MULTILINE))"
+                "import re; import os; status = os.getenv('GODOT_STATUS'); counter = os.getenv('GO_PIPELINE_COUNTER'); if status and counter and os.path.exists('version.py'): with open('version.py', 'r+') as f: content = f.read(); f.seek(0); f.write(re.sub(r'(status =).*', ' = \'' + status + '.' + counter + '\'', content, flags=re.MULTILINE))"
               ],
               "command": "python3",
               "working_directory": "g"
