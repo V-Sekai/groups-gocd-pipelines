@@ -2,7 +2,7 @@
   "platform_info_dict": {
     "windows": {
       "platform_name": "windows",
-      "scons_env": "mkdir -p $SCONS_CACHE && ",
+      "scons_env": "mkdir -p ../.cicd_cache && PATH=/opt/llvm-mingw/bin:$PATH SCONS_CACHE=../.cicd_cache ",
       "intermediate_godot_binary": "godot.windows.editor.double.x86_64.llvm.exe",
       "editor_godot_binary": "godot.windows.editor.double.x86_64.llvm.exe",
       "template_debug_binary": "windows_debug_x86_64.exe",
@@ -14,16 +14,7 @@
       "strip_command": "mingw-strip --strip-debug",
       "godot_scons_arguments": "precision=double use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no",
       "extra_commands": [],
-      "environment_variables": [
-        {
-          "name": "SCONS_CACHE",
-          "value": "/godata/scons_cache"
-        },
-        {
-          "name": "PATH",
-          "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-        }
-      ],
+      "environment_variables": [],
       "template_artifacts_override": null,
       "template_output_artifacts": null,
       "template_extra_commands": [],
@@ -31,7 +22,7 @@
     },
     "linux": {
       "platform_name": "linux",
-      "scons_env": "mkdir -p $SCONS_CACHE && ",
+      "scons_env": "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache ",
       "intermediate_godot_binary": "godot.linuxbsd.editor.double.x86_64.llvm",
       "editor_godot_binary": "godot.linuxbsd.editor.double.x86_64.llvm",
       "template_debug_binary": "linux_debug.x86_64",
@@ -43,16 +34,7 @@
       "strip_command": "strip --strip-debug",
       "godot_scons_arguments": "precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes",
       "extra_commands": [],
-      "environment_variables": [
-        {
-          "name": "SCONS_CACHE",
-          "value": "/godata/scons_cache"
-        },
-        {
-          "name": "PATH",
-          "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-        }
-      ],
+      "environment_variables": [],
       "template_artifacts_override": null,
       "template_output_artifacts": null,
       "template_extra_commands": [],
@@ -60,7 +42,7 @@
     },
     "web": {
       "platform_name": "web",
-      "scons_env": "source /opt/emsdk/emsdk_env.sh && mkdir -p $SCONS_CACHE && ",
+      "scons_env": "source /opt/emsdk/emsdk_env.sh && mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache EM_CACHE=/tmp ",
       "intermediate_godot_binary": "godot.web.template_release.double.wasm32.zip",
       "editor_godot_binary": "godot.web.template_release.double.wasm32.zip",
       "template_debug_binary": "web_debug.zip",
@@ -71,20 +53,7 @@
       "gdextension_target": "template_debug",
       "godot_scons_arguments": "optimize=speed use_llvm=yes precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'",
       "extra_commands": [],
-      "environment_variables": [
-        {
-          "name": "SCONS_CACHE",
-          "value": "/godata/scons_cache"
-        },
-        {
-          "name": "EM_CACHE",
-          "value": "/tmp"
-        },
-        {
-          "name": "PATH",
-          "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-        }
-      ],
+      "environment_variables": [],
       "template_artifacts_override": null,
       "template_output_artifacts": null,
       "template_extra_commands": [],
@@ -92,7 +61,7 @@
     },
     "macos": {
       "platform_name": "macos",
-      "scons_env": "mkdir -p $SCONS_CACHE && ",
+      "scons_env": "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" ",
       "intermediate_godot_binary": "godot.macos.editor.double.x86_64",
       "editor_godot_binary": "Godot.app",
       "template_debug_binary": "godot_macos_debug.x86_64",
@@ -112,16 +81,8 @@
       ],
       "environment_variables": [
         {
-          "name": "SCONS_CACHE",
-          "value": "/godata/scons_cache"
-        },
-        {
-          "name": "OSXCROSS_ROOT",
-          "value": "\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\""
-        },
-        {
           "name": "PATH",
-          "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+          "value": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
         }
       ],
       "template_artifacts_override": [

@@ -33,16 +33,6 @@
                      "type": "build"
                   }
                ],
-               "environment_variables": [
-                  {
-                     "name": "SCONS_CACHE",
-                     "value": "/godata/scons_cache"
-                  },
-                  {
-                     "name": "PATH",
-                     "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-                  }
-               ],
                "name": "windows_job",
                "resources": [
                   "mingw5",
@@ -61,7 +51,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mkdir -p $SCONS_CACHE && scons werror=no platform=windows target=editor use_lto=no deprecated=no precision=double use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"
+                        "mkdir -p ../.cicd_cache && PATH=/opt/llvm-mingw/bin:$PATH SCONS_CACHE=../.cicd_cache scons werror=no platform=windows target=editor use_lto=no deprecated=no precision=double use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -75,16 +65,6 @@
                      "destination": "",
                      "source": "g/bin/godot.linuxbsd.editor.double.x86_64.llvm",
                      "type": "build"
-                  }
-               ],
-               "environment_variables": [
-                  {
-                     "name": "SCONS_CACHE",
-                     "value": "/godata/scons_cache"
-                  },
-                  {
-                     "name": "PATH",
-                     "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
                   }
                ],
                "name": "linux_job",
@@ -105,7 +85,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mkdir -p $SCONS_CACHE && scons werror=no platform=linuxbsd target=editor use_lto=no deprecated=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
+                        "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache scons werror=no platform=linuxbsd target=editor use_lto=no deprecated=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -119,20 +99,6 @@
                      "destination": "",
                      "source": "g/bin/godot.web.template_release.double.wasm32.zip",
                      "type": "build"
-                  }
-               ],
-               "environment_variables": [
-                  {
-                     "name": "SCONS_CACHE",
-                     "value": "/godata/scons_cache"
-                  },
-                  {
-                     "name": "EM_CACHE",
-                     "value": "/tmp"
-                  },
-                  {
-                     "name": "PATH",
-                     "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
                   }
                ],
                "name": "web_job",
@@ -153,7 +119,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "source /opt/emsdk/emsdk_env.sh && mkdir -p $SCONS_CACHE && scons werror=no platform=web target=template_release use_lto=no deprecated=no optimize=speed use_llvm=yes precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'"
+                        "source /opt/emsdk/emsdk_env.sh && mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache EM_CACHE=/tmp scons werror=no platform=web target=template_release use_lto=no deprecated=no optimize=speed use_llvm=yes precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -182,16 +148,6 @@
                      "destination": "",
                      "source": "g/bin/version.txt",
                      "type": "build"
-                  }
-               ],
-               "environment_variables": [
-                  {
-                     "name": "SCONS_CACHE",
-                     "value": "/godata/scons_cache"
-                  },
-                  {
-                     "name": "PATH",
-                     "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
                   }
                ],
                "name": "windows_job",
@@ -231,7 +187,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "while IFS= read -r line; do if [[ $line == 'status ='* ]]; then new_status=\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"; line=${line/'status ='*/'status ='$new_status}; fi; echo $line; done < version.py > temp.txt && mv temp.txt version.py"
+                        "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -255,16 +211,6 @@
                      "destination": "",
                      "source": "g/bin/version.txt",
                      "type": "build"
-                  }
-               ],
-               "environment_variables": [
-                  {
-                     "name": "SCONS_CACHE",
-                     "value": "/godata/scons_cache"
-                  },
-                  {
-                     "name": "PATH",
-                     "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
                   }
                ],
                "name": "linux_job",
@@ -304,7 +250,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "while IFS= read -r line; do if [[ $line == 'status ='* ]]; then new_status=\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"; line=${line/'status ='*/'status ='$new_status}; fi; echo $line; done < version.py > temp.txt && mv temp.txt version.py"
+                        "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -328,20 +274,6 @@
                      "destination": "",
                      "source": "g/bin/version.txt",
                      "type": "build"
-                  }
-               ],
-               "environment_variables": [
-                  {
-                     "name": "SCONS_CACHE",
-                     "value": "/godata/scons_cache"
-                  },
-                  {
-                     "name": "EM_CACHE",
-                     "value": "/tmp"
-                  },
-                  {
-                     "name": "PATH",
-                     "value": "/opt/llvm-mingw/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
                   }
                ],
                "name": "web_job",
@@ -381,7 +313,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "while IFS= read -r line; do if [[ $line == 'status ='* ]]; then new_status=\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"; line=${line/'status ='*/'status ='$new_status}; fi; echo $line; done < version.py > temp.txt && mv temp.txt version.py"
+                        "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
