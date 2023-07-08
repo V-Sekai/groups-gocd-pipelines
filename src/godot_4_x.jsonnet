@@ -196,15 +196,15 @@ local godot_pipeline(pipeline_name='',
               command: '/bin/bash',
               working_directory: 'g',
             },
-            {
-              type: 'exec',
-              arguments: [
-                '-c',
-                'while IFS="=" read -r key value; do declare "${key// /}=${value// /}"; done < version.py && declare "_tmp$patch=.$patch" "_tmp0=" "_tmp=_tmp$patch" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt',
-              ],
-              command: '/bin/bash',
-              working_directory: 'g',
-            },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
+                  'while IFS= read -r line; do if [[ "$line" == "status ="* ]]; then new_status="$GODOT_STATUS.$GO_PIPELINE_COUNTER"; line=${line/=*/=$new_status}; fi; echo $line; done < version.py > temp.txt && mv temp.txt version.py',
+                ],
+                command: '/bin/bash',
+                working_directory: 'g',
+              },
           ] + [
             {
               type: 'exec',
