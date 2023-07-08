@@ -145,7 +145,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "source /opt/emsdk/emsdk_env.sh && mkdir -p ../.cicd_cache scons werror=no platform=web target=template_release use_lto=no deprecated=no optimize=speed use_llvm=yes precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'"
+                        "source /opt/emsdk/emsdk_env.sh && mkdir -p ../.cicd_cache && scons werror=no platform=web target=template_release use_lto=no deprecated=no optimize=speed use_llvm=yes precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

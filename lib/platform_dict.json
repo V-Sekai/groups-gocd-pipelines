@@ -56,7 +56,7 @@
     },
     "web": {
       "platform_name": "web",
-      "scons_env": "source /opt/emsdk/emsdk_env.sh && mkdir -p ../.cicd_cache ",
+      "scons_env": "source /opt/emsdk/emsdk_env.sh && mkdir -p ../.cicd_cache && ",
       "intermediate_godot_binary": "godot.web.template_release.double.wasm32.zip",
       "editor_godot_binary": "godot.web.template_release.double.wasm32.zip",
       "template_debug_binary": "web_debug.zip",
