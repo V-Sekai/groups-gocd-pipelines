@@ -52,16 +52,16 @@
                   {
                      "arguments": [
                         "-c",
-                        "import re; import os; with open(\"version.py\", \"r+\") as f: content = f.read(); f.seek(0); f.write(re.sub(r\"(?<=status =).*\", \" = '\" + os.getenv(\"GODOT_STATUS\") + \".\" + os.getenv(\"GO_PIPELINE_COUNTER\") + \"'\", content, flags=re.MULTILINE))"
+                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
                      ],
-                     "command": "python3",
+                     "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": "g"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "mkdir -p $SCONS_CACHE && scons werror=no platform=windows target=editor use_lto=no deprecated=no precision=double use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"
+                        "mkdir -p $SCONS_CACHE scons werror=no platform=windows target=editor use_lto=no deprecated=no precision=double use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -92,16 +92,16 @@
                   {
                      "arguments": [
                         "-c",
-                        "import re; import os; with open(\"version.py\", \"r+\") as f: content = f.read(); f.seek(0); f.write(re.sub(r\"(?<=status =).*\", \" = '\" + os.getenv(\"GODOT_STATUS\") + \".\" + os.getenv(\"GO_PIPELINE_COUNTER\") + \"'\", content, flags=re.MULTILINE))"
+                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
                      ],
-                     "command": "python3",
+                     "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": "g"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "mkdir -p $SCONS_CACHE && scons werror=no platform=linuxbsd target=editor use_lto=no deprecated=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
+                        "mkdir -p $SCONS_CACHE scons werror=no platform=linuxbsd target=editor use_lto=no deprecated=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -136,16 +136,16 @@
                   {
                      "arguments": [
                         "-c",
-                        "import re; import os; with open(\"version.py\", \"r+\") as f: content = f.read(); f.seek(0); f.write(re.sub(r\"(?<=status =).*\", \" = '\" + os.getenv(\"GODOT_STATUS\") + \".\" + os.getenv(\"GO_PIPELINE_COUNTER\") + \"'\", content, flags=re.MULTILINE))"
+                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
                      ],
-                     "command": "python3",
+                     "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": "g"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "source /opt/emsdk/emsdk_env.sh && mkdir -p ../.cicd_cache && scons werror=no platform=web target=template_release use_lto=no deprecated=no optimize=speed use_llvm=yes precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'"
+                        "source /opt/emsdk/emsdk_env.sh && mkdir -p ../.cicd_cache scons werror=no platform=web target=template_release use_lto=no deprecated=no optimize=speed use_llvm=yes precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -195,7 +195,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "python3 -c \"import os, re; [print(re.sub(r'status =.*', f'status = \\\\\"{os.getenv(\\\\\"GODOT_STATUS\\\\\")}.{os.getenv(\\\\\"GO_PIPELINE_COUNTER\\\\\")}\\\\\"', line) if line.startswith('status =') else line, end='') for line in open('version.py')]\""
+                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -214,16 +214,16 @@
                   {
                      "arguments": [
                         "-c",
-                        "import re; import os; status = os.getenv('GODOT_STATUS'); counter = os.getenv('GO_PIPELINE_COUNTER'); if status and counter and os.path.exists('version.py'): with open('version.py', 'r+') as f: content = f.read(); f.seek(0); f.write(re.sub(r'(status =).*', ' = '' + status + '.' + counter + ''', content, flags=re.MULTILINE))"
+                        "cp bin/godot.windows.editor.double.x86_64.llvm.exe bin/windows_debug_x86_64.exe && cp bin/godot.windows.editor.double.x86_64.llvm.exe bin/windows_release_x86_64.exe && mingw-strip --strip-debug bin/windows_release_x86_64.exe"
                      ],
-                     "command": "python3",
+                     "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": "g"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "python3 -c \"import version; patch = '.' + str(version.patch) if hasattr(version, 'patch') else ''; print(f'{version.major}.{version.minor}{patch}.{version.GODOT_STATUS}.{version.GO_PIPELINE_COUNTER}')\" > bin/version.txt"
+                        "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -264,7 +264,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "python3 -c \"import os, re; [print(re.sub(r'status =.*', f'status = \\\\\"{os.getenv(\\\\\"GODOT_STATUS\\\\\")}.{os.getenv(\\\\\"GO_PIPELINE_COUNTER\\\\\")}\\\\\"', line) if line.startswith('status =') else line, end='') for line in open('version.py')]\""
+                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -283,16 +283,16 @@
                   {
                      "arguments": [
                         "-c",
-                        "import re; import os; status = os.getenv('GODOT_STATUS'); counter = os.getenv('GO_PIPELINE_COUNTER'); if status and counter and os.path.exists('version.py'): with open('version.py', 'r+') as f: content = f.read(); f.seek(0); f.write(re.sub(r'(status =).*', ' = '' + status + '.' + counter + ''', content, flags=re.MULTILINE))"
+                        "cp bin/godot.linuxbsd.editor.double.x86_64.llvm bin/linux_debug.x86_64 && cp bin/godot.linuxbsd.editor.double.x86_64.llvm bin/linux_release.x86_64 && strip --strip-debug bin/linux_release.x86_64"
                      ],
-                     "command": "python3",
+                     "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": "g"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "python3 -c \"import version; patch = '.' + str(version.patch) if hasattr(version, 'patch') else ''; print(f'{version.major}.{version.minor}{patch}.{version.GODOT_STATUS}.{version.GO_PIPELINE_COUNTER}')\" > bin/version.txt"
+                        "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -337,7 +337,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "python3 -c \"import os, re; [print(re.sub(r'status =.*', f'status = \\\\\"{os.getenv(\\\\\"GODOT_STATUS\\\\\")}.{os.getenv(\\\\\"GO_PIPELINE_COUNTER\\\\\")}\\\\\"', line) if line.startswith('status =') else line, end='') for line in open('version.py')]\""
+                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -356,16 +356,16 @@
                   {
                      "arguments": [
                         "-c",
-                        "import re; import os; status = os.getenv('GODOT_STATUS'); counter = os.getenv('GO_PIPELINE_COUNTER'); if status and counter and os.path.exists('version.py'): with open('version.py', 'r+') as f: content = f.read(); f.seek(0); f.write(re.sub(r'(status =).*', ' = '' + status + '.' + counter + ''', content, flags=re.MULTILINE))"
+                        "cp bin/godot.web.template_release.double.wasm32.zip bin/web_debug.zip && cp bin/godot.web.template_release.double.wasm32.zip bin/web_release.zip"
                      ],
-                     "command": "python3",
+                     "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": "g"
                   },
                   {
                      "arguments": [
                         "-c",
-                        "python3 -c \"import version; patch = '.' + str(version.patch) if hasattr(version, 'patch') else ''; print(f'{version.major}.{version.minor}{patch}.{version.GODOT_STATUS}.{version.GO_PIPELINE_COUNTER}')\" > bin/version.txt"
+                        "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
