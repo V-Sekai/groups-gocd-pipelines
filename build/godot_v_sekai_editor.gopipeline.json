@@ -81,6 +81,10 @@
                   {
                      "name": "SCONS_CACHE",
                      "value": "/godata/scons_cache"
+                  },
+                  {
+                     "name": "PATH",
+                     "value": "/opt/llvm-mingw/bin:$PATH"
                   }
                ],
                "name": "linux_job",
@@ -125,6 +129,10 @@
                   {
                      "name": "EM_CACHE",
                      "value": "/tmp"
+                  },
+                  {
+                     "name": "PATH",
+                     "value": "/opt/llvm-mingw/bin:$PATH"
                   }
                ],
                "name": "web_job",
@@ -253,6 +261,10 @@
                   {
                      "name": "SCONS_CACHE",
                      "value": "/godata/scons_cache"
+                  },
+                  {
+                     "name": "PATH",
+                     "value": "/opt/llvm-mingw/bin:$PATH"
                   }
                ],
                "name": "linux_job",
@@ -326,6 +338,10 @@
                   {
                      "name": "EM_CACHE",
                      "value": "/tmp"
+                  },
+                  {
+                     "name": "PATH",
+                     "value": "/opt/llvm-mingw/bin:$PATH"
                   }
                ],
                "name": "web_job",

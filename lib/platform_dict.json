@@ -47,6 +47,10 @@
         {
           "name": "SCONS_CACHE",
           "value": "/godata/scons_cache"
+        },
+        {
+          "name": "PATH",
+          "value": "/opt/llvm-mingw/bin:$PATH"
         }
       ],
       "template_artifacts_override": null,
@@ -75,6 +79,10 @@
         {
           "name": "EM_CACHE",
           "value": "/tmp"
+        },
+        {
+          "name": "PATH",
+          "value": "/opt/llvm-mingw/bin:$PATH"
         }
       ],
       "template_artifacts_override": null,
@@ -114,6 +122,10 @@
         {
           "name": "PATH",
           "value": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+        },        
+        {
+          "name": "PATH",
+          "value": "/opt/llvm-mingw/bin:$PATH"
         }
       ],
       "template_artifacts_override": [
