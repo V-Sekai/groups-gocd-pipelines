@@ -91,7 +91,7 @@ local godot_pipeline(pipeline_name='',
               "type": "exec",
               "arguments": [
                 "-c",
-                "while IFS= read -r line; do if [[ $line == status =* ]]; then new_status=\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"; line=${line/status =*/status =$new_status}; fi; echo $line; done < version.py > temp.txt && mv temp.txt version.py"
+                "while IFS= read -r line; do if [[ $line == 'status ='* ]]; then new_status=\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"; line=${line/'status ='*/'status ='$new_status}; fi; echo $line; done < version.py > temp.txt && mv temp.txt version.py"
               ],
               "command": "/bin/bash",
               "working_directory": "g"
@@ -200,11 +200,11 @@ local godot_pipeline(pipeline_name='',
               "type": "exec",
               "arguments": [
                 "-c",
-                "while IFS= read -r line; do if [[ $line == status =* ]]; then new_status=\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"; line=${line/status =*/status =$new_status}; fi; echo $line; done < version.py > temp.txt && mv temp.txt version.py"
+                "while IFS= read -r line; do if [[ $line == 'status ='* ]]; then new_status=\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"; line=${line/'status ='*/'status ='$new_status}; fi; echo $line; done < version.py > temp.txt && mv temp.txt version.py"
               ],
               "command": "/bin/bash",
               "working_directory": "g"
-            },
+            }
           ] + [
             {
               type: 'exec',
