@@ -88,13 +88,16 @@ local godot_pipeline(pipeline_name='',
           environment_variables: platform_info.environment_variables,
           tasks: [
             {
-              type: 'exec',
-              arguments: [
+              "type": 'exec',
+              "arguments": [
                 '-c',
-                'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
+                "python -c " +
+                "\nimport re\n" +
+                "\nwith open('version.py', 'r') as f:\n  lines = f.readlines()\n" +
+                "\nwith open('version.py', 'w') as f:\n  for line in lines:\n    if line.startswith('status ='):\n      f.write(f'status = \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"\n')\n    else:\n      f.write(line)\n",
               ],
-              command: '/bin/bash',
-              working_directory: 'g',
+              "command": '/bin/bash',
+              "working_directory": 'g',
             },
             {
               type: 'exec',
@@ -164,7 +167,7 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
+                'python -c "import re; import os; f = open(\'version.py\', \'r+\'); text = f.read(); text = re.sub(r\'(?<=^status =).*\', \' = \\"\' + os.environ[\'GODOT_STATUS\'] + \'.\' + os.environ[\'GO_PIPELINE_COUNTER\'] + \'\\\"\', text); f.seek(0); f.write(text); f.truncate(); f.close()"',
               ],
               command: '/bin/bash',
               working_directory: 'g',
@@ -197,13 +200,13 @@ local godot_pipeline(pipeline_name='',
               working_directory: 'g',
             },
             {
-              type: 'exec',
-              arguments: [
+              "type": 'exec',
+              "arguments": [
                 '-c',
-                'eval `sed -e "s/ = /=/" version.py` && declare "_tmp$patch=.$patch" "_tmp0=" "_tmp=_tmp$patch" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt',
+                "python -c \"\nimport re\nfrom pathlib import Path\n\nversion_file = Path('version.py').read_text()\nversion_dict = dict(re.findall(r'(\\w+)\\s*=\\s*(\\S+)', version_file))\n\nfor key, value in version_dict.items():\n  print(f'{key}={value}')\n\" > temp.sh\nsource temp.sh\nrm temp.sh\n\ndeclare \"_tmp%(patch)s=.$(patch)\" \"_tmp0=\" \"_tmp=_tmp%(patch)s\"\necho $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt",
               ],
-              command: '/bin/bash',
-              working_directory: 'g',
+              "command": '/bin/bash',
+              "working_directory": 'g',
             },
           ] + [
             {
