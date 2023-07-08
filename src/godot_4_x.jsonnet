@@ -88,13 +88,13 @@ local godot_pipeline(pipeline_name='',
           environment_variables: platform_info.environment_variables,
           tasks: [
             {
-              type: 'exec',
-              arguments: [
-                '-c',
-                'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
+              "type": "exec",
+              "arguments": [
+                "-c",
+                "eval \"sed -i '/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/' version.py\""
               ],
-              command: '/bin/bash',
-              working_directory: 'g',
+              "command": "/bin/bash",
+              "working_directory": "g"
             },
             {
               type: 'exec',
@@ -164,7 +164,7 @@ local godot_pipeline(pipeline_name='',
               type: 'exec',
               arguments: [
                 '-c',
-                'sed -i "/^status =/s/=.*/= \\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\"/" version.py',
+                'exec "sed -i \\"/^status =/s/=.*/= \\\\\\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\\\\\"/\\" version.py"',
               ],
               command: '/bin/bash',
               working_directory: 'g',
