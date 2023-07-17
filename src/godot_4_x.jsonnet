@@ -20,22 +20,24 @@ local godot_template_groups_editor = 'godot-groups-editor';
 local godot_template_groups = 'groups-export';
 local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor] + [godot_template_groups];
 
-local godot_pipeline(pipeline_name='',
-                     godot_status='',
-                     godot_git='',
-                     godot_branch='',
-                     gocd_group='',
-                     godot_modules_git='',
-                     godot_modules_branch='',
-                     godot_engine_platforms=enabled_engine_platforms,
-                     godot_template_platforms=enabled_template_platforms,
-                     first_stage_approval=null,
-                     timer_spec="* * * * * ?",
-  ) = {
+local godot_pipeline(
+  pipeline_name='',
+  godot_status='',
+  godot_git='',
+  godot_branch='',
+  gocd_group='',
+  godot_modules_git='',
+  godot_modules_branch='',
+  godot_engine_platforms=enabled_engine_platforms,
+  godot_template_platforms=enabled_template_platforms,
+  first_stage_approval=null,
+  timer_spec='* * * * * ?',
+      ) = {
   name: pipeline_name,
   group: gocd_group,
-  timer: { "spec": timer_spec, 
-    "only_on_changes": true,
+  timer: {
+    spec: timer_spec,
+    only_on_changes: true,
   },
   label_template: godot_status + '.${godot_sandbox[:8]}.${COUNT}',
   environment_variables:
@@ -314,14 +316,15 @@ local godot_editor_export(
   gocd_project_folder='',
   enabled_export_platforms=[],
   first_stage_approval=null,
-  timer_spec="* * * * * ?",
-  ) =
+  timer_spec='* * * * * ?',
+      ) =
   {
     name: pipeline_name,
     group: gocd_group,
     label_template: pipeline_name + '.${COUNT}',
-    timer: { "spec": timer_spec, 
-      "only_on_changes": true,
+    timer: {
+      spec: timer_spec,
+      only_on_changes: true,
     },
     environment_variables:
       [{
@@ -386,7 +389,7 @@ local godot_editor_export(
       },
     ],
   };
-{  
+{
   'env.fire.goenvironment.json': {
     name: 'itch-fire',
     pipelines: itch_fire_template,
@@ -396,15 +399,16 @@ local godot_editor_export(
   'godot_v_sekai_editor.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_groups_editor,
-    godot_status='groups-4.0.0',
+    godot_status='groups-4.1.0',
     godot_git='https://github.com/V-Sekai/godot.git',
-    godot_branch='groups-4.x',
+    godot_branch='groups-4.1',
     gocd_group='gamma',
     godot_modules_git='',
     godot_modules_branch='main',
     godot_engine_platforms=enabled_groups_engine_platforms,
     godot_template_platforms=enabled_groups_template_platforms
-  )),} + {
+  )),
+} + {
   'godot_template_groups_export.gopipeline.json'
   : std.prune(
     templates.godot_tools_pipeline_export(
@@ -414,7 +418,7 @@ local godot_editor_export(
       project_git='https://github.com/V-Sekai/v-sekai-game.git',
       project_branch='main',
       gocd_group='gamma',
-      godot_status='groups-4.0',
+      godot_status='groups-4.1',
       gocd_project_folder='groups',
       enabled_export_platforms=enabled_groups_export_platforms,
     )
@@ -429,7 +433,7 @@ local godot_editor_export(
       project_git='https://github.com/V-Sekai/v-sekai-game.git',
       project_branch='main',
       gocd_group='gamma',
-      godot_status='groups-4.0',
+      godot_status='groups-4.1',
       gocd_project_folder='groups',
       enabled_export_platforms=enabled_groups_export_platforms,
     )
