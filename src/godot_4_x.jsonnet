@@ -317,8 +317,7 @@ local godot_editor_export(
   enabled_export_platforms=[],
   first_stage_approval=null,
   timer_spec='* * * * * ?',
-      ) =
-  {
+) = {
     name: pipeline_name,
     group: gocd_group,
     label_template: pipeline_name + '.${COUNT}',
@@ -399,9 +398,9 @@ local godot_editor_export(
   'godot_v_sekai_editor.gopipeline.json'
   : std.prune(godot_pipeline(
     pipeline_name=godot_template_groups_editor,
-    godot_status='groups-4.1.0',
+    godot_status='groups-4.2.0',
     godot_git='https://github.com/V-Sekai/godot.git',
-    godot_branch='groups-4.1',
+    godot_branch='groups-4.2',
     gocd_group='gamma',
     godot_modules_git='',
     godot_modules_branch='main',
@@ -410,20 +409,18 @@ local godot_editor_export(
   )),
 } + {
   'godot_template_groups_export.gopipeline.json'
-  : std.prune(
-    templates.godot_tools_pipeline_export(
+    : std.prine(templates.godot_tools_pipeline_export(
       pipeline_name=godot_template_groups,
       pipeline_dependency=godot_template_groups_editor,
       itchio_login='saracenone/groups-4x',
       project_git='https://github.com/V-Sekai/v-sekai-game.git',
       project_branch='main',
       gocd_group='gamma',
-      godot_status='groups-4.1',
+      godot_status='groups-4.2',
       gocd_project_folder='groups',
       enabled_export_platforms=enabled_groups_export_platforms,
-    )
-  ),
-} + {
+    )),
+  } + {
   'godot_template_groups_export.gopipeline.json'
   : std.prune(
     templates.godot_tools_pipeline_export(
@@ -433,7 +430,7 @@ local godot_editor_export(
       project_git='https://github.com/V-Sekai/v-sekai-game.git',
       project_branch='main',
       gocd_group='gamma',
-      godot_status='groups-4.1',
+      godot_status='groups-4.2',
       gocd_project_folder='groups',
       enabled_export_platforms=enabled_groups_export_platforms,
     )
