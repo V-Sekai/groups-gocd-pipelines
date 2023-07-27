@@ -11,7 +11,7 @@ local enabled_template_platforms = enabled_engine_platforms;
 local enabled_groups_engine_platforms = enabled_engine_platforms;
 local enabled_groups_template_platforms = enabled_engine_platforms;
 
-local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['linux']];
+local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linux']];
 
 local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
