@@ -10,7 +10,8 @@ local enabled_groups_export_platforms = [groups_export.groups_export_configurati
 
 local groups_gdextension = import '../lib/groups_gdextension.json';
 local templates = import '../lib/templates.libsonnet';
-local functions = import '../lib/functions.libsonnet';
+local godot_editor_export = import '../lib/godot_editor_export.libsonnet';
+local godot_pipeline = import '../lib/godot_pipeline.libsonnet';
 
 local HEADLESS_SERVER_EDITOR = 'godot.linuxbsd.editor.double.x86_64.llvm';
 
@@ -22,7 +23,7 @@ local godot_template_groups = 'groups-export';
 local godot_template_groups_editor_staging = 'godot-groups-staging-editor';
 local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor] + [godot_template_groups] + [godot_template_groups_editor_staging];
 
-local generatePipeline = function(pipeline_name, godot_status, godot_branch) std.prune(functions.godot_pipeline(
+local generatePipeline = function(pipeline_name, godot_status, godot_branch) std.prune(godot_pipeline.godot_pipeline(
   pipeline_name=pipeline_name,
   godot_status=godot_status,
   godot_git='https://github.com/V-Sekai/godot.git',
