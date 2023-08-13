@@ -19,7 +19,8 @@ local docker_uro_pipeline = 'docker-uro';
 local docker_gocd_agent_pipeline = 'docker-gocd-agent-centos-8-groups';
 local godot_template_groups_editor = 'godot-groups-editor';
 local godot_template_groups = 'groups-export';
-local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor] + [godot_template_groups];
+local godot_template_groups_editor_staging = 'godot-groups-staging-editor';
+local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor] + [godot_template_groups] + [godot_template_groups_editor_staging];
 
 {
   'env.fire.goenvironment.json': {
@@ -105,4 +106,15 @@ local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_ag
       docker_dir='.',
     )
   ),
+} + {
+  'godot_v_sekai_staging_editor.gopipeline.json'
+  : std.prune(functions.godot_pipeline(
+    pipeline_name=godot_template_groups_editor_staging,
+    godot_status='groups-4.2-staging',
+    godot_git='https://github.com/V-Sekai/godot.git',
+    godot_branch='groups-4.2-staging',
+    gocd_group='gamma',
+    godot_engine_platforms=enabled_groups_engine_platforms,
+    godot_template_platforms=enabled_groups_template_platforms
+  )),
 }
