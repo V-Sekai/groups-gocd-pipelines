@@ -2,14 +2,14 @@
    "environment_variables": [
       {
          "name": "GODOT_STATUS",
-         "value": "groups-4.2-staging"
+         "value": "groups-staging-4.2"
       }
    ],
    "group": "gamma",
-   "label_template": "groups-4.2-staging.${godot_sandbox[:8]}.${COUNT}",
+   "label_template": "groups-staging-4.2.${godot_sandbox[:8]}.${COUNT}",
    "materials": [
       {
-         "branch": "groups-4.2-staging",
+         "branch": "groups-staging-4.2",
          "destination": "g",
          "name": "godot_sandbox",
          "type": "git",
