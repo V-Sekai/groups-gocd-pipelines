@@ -22,34 +22,19 @@ local godot_template_groups = 'groups-export';
 local godot_template_groups_editor_staging = 'godot-groups-staging-editor';
 local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor] + [godot_template_groups] + [godot_template_groups_editor_staging];
 
+local generatePipeline = function(pipeline_name, godot_status, godot_branch) std.prune(functions.godot_pipeline(
+  pipeline_name=pipeline_name,
+  godot_status=godot_status,
+  godot_git='https://github.com/V-Sekai/godot.git',
+  godot_branch=godot_branch,
+  gocd_group='gamma',
+  godot_engine_platforms=enabled_groups_engine_platforms,
+  godot_template_platforms=enabled_groups_template_platforms
+));
+
 {
-  'env.fire.goenvironment.json': {
-    name: 'itch-fire',
-    pipelines: itch_fire_template,
-    environment_variables:
-      [],
-  },
-  'godot_v_sekai_editor.gopipeline.json'
-  : std.prune(functions.godot_pipeline(
-    pipeline_name=godot_template_groups_editor,
-    godot_status='groups-4.2.0',
-    godot_git='https://github.com/V-Sekai/godot.git',
-    godot_branch='groups-4.2',
-    gocd_group='gamma',
-    godot_engine_platforms=enabled_groups_engine_platforms,
-    godot_template_platforms=enabled_groups_template_platforms
-  )),
-} + {
-  'godot_v_sekai_staging_editor.gopipeline.json'
-  : std.prune(functions.godot_pipeline(
-    pipeline_name=godot_template_groups_editor_staging,
-    godot_status='groups-staging-4.2',
-    godot_git='https://github.com/V-Sekai/godot.git',
-    godot_branch='groups-staging-4.2',
-    gocd_group='gamma',
-    godot_engine_platforms=enabled_groups_engine_platforms,
-    godot_template_platforms=enabled_groups_template_platforms
-  )),
+  'godot_v_sekai_editor.gopipeline.json': generatePipeline(godot_template_groups_editor, 'groups-4.2.0', 'groups-4.2'),
+  'godot_v_sekai_staging_editor.gopipeline.json': generatePipeline(godot_template_groups_editor_staging, 'groups-staging-4.2', 'groups-staging-4.2'),
 } + {
   'godot_template_groups_export.gopipeline.json'
     : std.prine(templates.godot_tools_pipeline_export(
@@ -115,4 +100,8 @@ local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_ag
       docker_dir='.',
     )
   ),
-} 
+} + {
+'env.fire.goenvironment.json': std.prune({
+    name: 'itch-fire',
+    pipelines: itch_fire_template,
+})}
