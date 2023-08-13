@@ -36,8 +36,17 @@ local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_ag
     godot_git='https://github.com/V-Sekai/godot.git',
     godot_branch='groups-4.2',
     gocd_group='gamma',
-    godot_modules_git='',
-    godot_modules_branch='main',
+    godot_engine_platforms=enabled_groups_engine_platforms,
+    godot_template_platforms=enabled_groups_template_platforms
+  )),
+} + {
+  'godot_v_sekai_staging_editor.gopipeline.json'
+  : std.prune(functions.godot_pipeline(
+    pipeline_name=godot_template_groups_editor_staging,
+    godot_status='groups-staging-4.2',
+    godot_git='https://github.com/V-Sekai/godot.git',
+    godot_branch='groups-staging-4.2',
+    gocd_group='gamma',
     godot_engine_platforms=enabled_groups_engine_platforms,
     godot_template_platforms=enabled_groups_template_platforms
   )),
@@ -106,15 +115,4 @@ local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_ag
       docker_dir='.',
     )
   ),
-} + {
-  'godot_v_sekai_staging_editor.gopipeline.json'
-  : std.prune(functions.godot_pipeline(
-    pipeline_name=godot_template_groups_editor_staging,
-    godot_status='groups-staging-4.2',
-    godot_git='https://github.com/V-Sekai/godot.git',
-    godot_branch='groups-staging-4.2',
-    gocd_group='gamma',
-    godot_engine_platforms=enabled_groups_engine_platforms,
-    godot_template_platforms=enabled_groups_template_platforms
-  )),
-}
+} 
