@@ -5,7 +5,7 @@
          "value": "groups-4.2"
       }
    ],
-   "group": "gamma",
+   "group": "charlie",
    "label_template": "groups-4.2.${godot-groups-editor_pipeline_dependency}.${COUNT}",
    "materials": [
       {
