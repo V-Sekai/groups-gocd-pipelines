@@ -9,7 +9,7 @@ local enabled_groups_template_platforms = enabled_engine_platforms;
 local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linux']];
 
 local groups_gdextension = import '../lib/groups_gdextension.json';
-local templates = import '../lib/templates.libsonnet';
+local templates = import '../lib/godot_templates.libsonnet';
 local godot_editor_export = import '../lib/godot_editor_export.libsonnet';
 local godot_pipeline = import '../lib/godot_pipeline.libsonnet';
 
