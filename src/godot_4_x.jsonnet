@@ -22,12 +22,17 @@ local godot_template_groups_editor = 'godot-groups-editor';
 local godot_template_groups = 'groups-export';
 local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor] + [godot_template_groups];
 
-local generatePipeline = function(pipeline_name, godot_status, godot_branch) std.prune(godot_pipeline.godot_pipeline(
+local generate_gocd_group = function(pipeline_name) 
+  if pipeline_name == docker_pipeline then 'charlie'
+  else if pipeline_name == godot_template_groups_editor || pipeline_name == godot_template_groups then 'gamma'
+  else 'default';
+
+local generate_pipeline = function(pipeline_name, godot_status, godot_branch) std.prune(godot_pipeline.godot_pipeline(
   pipeline_name=pipeline_name,
   godot_status=godot_status,
   godot_git='https://github.com/V-Sekai/godot.git',
   godot_branch=godot_branch,
-  gocd_group='gamma',
+  gocd_group=generate_gocd_group(pipeline_name),
   godot_engine_platforms=enabled_groups_engine_platforms,
   godot_template_platforms=enabled_groups_template_platforms
 ));
@@ -35,7 +40,7 @@ local generatePipeline = function(pipeline_name, godot_status, godot_branch) std
 local generateFileName = function(name) name + '.gopipeline.json';
 
 {
-  [generateFileName('godot_v_sekai_editor')]: generatePipeline(godot_template_groups_editor, 'groups-4.2.0', 'groups-4.2'),
+  [generateFileName('godot_v_sekai_editor')]: generate_pipeline(godot_template_groups_editor, 'groups-4.2.0', 'groups-4.2'),
 } + {
   [generateFileName('godot_template_groups_export')]
     : std.prune(templates.godot_tools_pipeline_export(
