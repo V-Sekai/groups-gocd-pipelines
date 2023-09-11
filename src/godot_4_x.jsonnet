@@ -37,7 +37,6 @@ local generateFileName = function(name) name + '.gopipeline.json';
 
 {
   [generateFileName('godot_v_sekai_editor')]: generatePipeline(godot_template_groups_editor, 'groups-4.2.0', 'groups-4.2'),
-  [generateFileName('godot_v_sekai_staging_editor')]: generatePipeline(godot_template_groups_editor_staging, 'groups-staging-4.2', 'groups-staging-4.2'),
 } + {
   [generateFileName('godot_template_groups_export')]
     : std.prune(templates.godot_tools_pipeline_export(
