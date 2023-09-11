@@ -5,7 +5,6 @@
       "docker-uro",
       "docker-gocd-agent-centos-8-groups",
       "godot-groups-editor",
-      "groups-export",
-      "godot-groups-staging-editor"
+      "groups-export"
    ]
 }
