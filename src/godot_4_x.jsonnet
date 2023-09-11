@@ -33,12 +33,14 @@ local generatePipeline = function(pipeline_name, godot_status, godot_branch) std
   godot_template_platforms=enabled_groups_template_platforms
 ));
 
+local generateFileName = function(name) name + '.gopipeline.json';
+
 {
-  'godot_v_sekai_editor.gopipeline.json': generatePipeline(godot_template_groups_editor, 'groups-4.2.0', 'groups-4.2'),
-  'godot_v_sekai_staging_editor.gopipeline.json': generatePipeline(godot_template_groups_editor_staging, 'groups-staging-4.2', 'groups-staging-4.2'),
+  [generateFileName('godot_v_sekai_editor')]: generatePipeline(godot_template_groups_editor, 'groups-4.2.0', 'groups-4.2'),
+  [generateFileName('godot_v_sekai_staging_editor')]: generatePipeline(godot_template_groups_editor_staging, 'groups-staging-4.2', 'groups-staging-4.2'),
 } + {
-  'godot_template_groups_export.gopipeline.json'
-    : std.prine(templates.godot_tools_pipeline_export(
+  [generateFileName('godot_template_groups_export')]
+    : std.prune(templates.godot_tools_pipeline_export(
       pipeline_name=godot_template_groups,
       pipeline_dependency=godot_template_groups_editor,
       itchio_login='saracenone/groups-4x',
@@ -50,22 +52,7 @@ local generatePipeline = function(pipeline_name, godot_status, godot_branch) std
       enabled_export_platforms=enabled_groups_export_platforms,
     )),
   } + {
-  'godot_template_groups_export.gopipeline.json'
-  : std.prune(
-    templates.godot_tools_pipeline_export(
-      pipeline_name=godot_template_groups,
-      pipeline_dependency=godot_template_groups_editor,
-      itchio_login='saracenone/groups-4x',
-      project_git='https://github.com/V-Sekai/v-sekai-game.git',
-      project_branch='main',
-      gocd_group='gamma',
-      godot_status='groups-4.2',
-      gocd_project_folder='groups',
-      enabled_export_platforms=enabled_groups_export_platforms,
-    )
-  ),
-} + {
-  'docker_groups.gopipeline.json'
+  [generateFileName('docker_groups')]
   : std.prune(
     templates.build_docker_server(
       pipeline_name=docker_pipeline,
@@ -79,7 +66,7 @@ local generatePipeline = function(pipeline_name, godot_status, godot_branch) std
       server_export_info=groups_export.groups_export_configurations.linux,
     )
   ),
-  'docker_gocd_agent.gopipeline.json'
+  [generateFileName('docker_gocd_agent')]
   : std.prune(
     templates.simple_docker_job(
       pipeline_name=docker_gocd_agent_pipeline,
@@ -90,7 +77,7 @@ local generatePipeline = function(pipeline_name, godot_status, godot_branch) std
       docker_dir='gocd-agent-centos-8-groups',
     )
   ),
-  'docker_uro.gopipeline.json'
+  [generateFileName('docker_uro')]
   : std.prune(
     templates.simple_docker_job(
       pipeline_name=docker_uro_pipeline,
@@ -102,7 +89,8 @@ local generatePipeline = function(pipeline_name, godot_status, godot_branch) std
     )
   ),
 } + {
-'env.fire.goenvironment.json': std.prune({
+[generateFileName('env_fire')]: std.prune({
     name: 'itch-fire',
     pipelines: itch_fire_template,
-})}
+}),
+}
