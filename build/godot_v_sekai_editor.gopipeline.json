@@ -2,26 +2,18 @@
    "environment_variables": [
       {
          "name": "GODOT_STATUS",
-         "value": "groups-4.0.0"
+         "value": "groups-4.2.0"
       }
    ],
    "group": "gamma",
-   "label_template": "groups-4.0.0.${godot_sandbox[:8]}.${COUNT}",
+   "label_template": "groups-4.2.0.${godot_sandbox[:8]}.${COUNT}",
    "materials": [
       {
-         "branch": "groups-4.x",
+         "branch": "groups-4.2",
          "destination": "g",
          "name": "godot_sandbox",
          "type": "git",
          "url": "https://github.com/V-Sekai/godot.git"
-      },
-      {
-         "branch": "main",
-         "destination": "godot_custom_modules",
-         "name": "godot_custom_modules",
-         "shallow_clone": false,
-         "type": "git",
-         "url": "https://github.com/V-Sekai/godot-modules-groups.git"
       }
    ],
    "name": "godot-groups-editor",
@@ -59,7 +51,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mkdir -p ../.cicd_cache && PATH=/opt/llvm-mingw/bin:$PATH SCONS_CACHE=../.cicd_cache scons werror=no platform=windows target=editor use_lto=no deprecated=no precision=double use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no custom_modules=../godot_custom_modules"
+                        "mkdir -p ../.cicd_cache && PATH=/opt/llvm-mingw/bin:$PATH SCONS_CACHE=../.cicd_cache scons werror=no platform=windows target=editor use_lto=no deprecated=no precision=double use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -93,7 +85,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache scons werror=no platform=linuxbsd target=editor use_lto=no deprecated=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes custom_modules=../godot_custom_modules"
+                        "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache scons werror=no platform=linuxbsd target=editor use_lto=no deprecated=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -127,7 +119,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "source /opt/emsdk/emsdk_env.sh && mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache EM_CACHE=/tmp scons werror=no platform=web target=template_release use_lto=no deprecated=no optimize=speed use_llvm=yes precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions' custom_modules=../godot_custom_modules"
+                        "source /opt/emsdk/emsdk_env.sh && mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache EM_CACHE=/tmp scons werror=no platform=web target=template_release use_lto=no deprecated=no optimize=speed use_llvm=yes precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

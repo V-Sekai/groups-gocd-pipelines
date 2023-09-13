@@ -1,13 +1,10 @@
 {
-   "environment_variables": [ ],
    "name": "itch-fire",
    "pipelines": [
       "docker-groups",
       "docker-uro",
       "docker-gocd-agent-centos-8-groups",
       "godot-groups-editor",
-      "gdextension-cpp",
-      "gdextension-godot-vive-pro-eye-face",
       "groups-export"
    ]
 }
