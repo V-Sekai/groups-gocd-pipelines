@@ -84,7 +84,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_windows && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir export_windows && chmod +x godot.linuxbsd.editor.double.x86_64.llvm && XDG_DATA_HOME=`pwd`/.local/share/ ./godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-release \"Windows Desktop\" `pwd`/export_windows/v_sekai_windows.exe --path g && cp g/.itch.toml `pwd`/export_windows/ || [ -f \"`pwd`/export_windows/v_sekai_windows.exe\" ]"
+                        "rm -rf export_windows && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir export_windows && chmod +x godot.linuxbsd.editor.double.x86_64.llvm && XDG_DATA_HOME=`pwd`/.local/share/ ./godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-release \"Windows Desktop\" `pwd`/export_windows/v_sekai_windows.exe || [ -f \"`pwd`/export_windows/v_sekai_windows.exe\" ]"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -147,7 +147,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf export_linuxbsd && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir export_linuxbsd && chmod +x godot.linuxbsd.editor.double.x86_64.llvm && XDG_DATA_HOME=`pwd`/.local/share/ ./godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-release \"Linux/X11\" `pwd`/export_linuxbsd/v_sekai_linuxbsd --path g && cp g/.itch.toml `pwd`/export_linuxbsd/ || [ -f \"`pwd`/export_linuxbsd/v_sekai_linuxbsd\" ]"
+                        "rm -rf export_linuxbsd && mkdir -p g/.godot/editor && mkdir -p g/.godot/imported && mkdir export_linuxbsd && chmod +x godot.linuxbsd.editor.double.x86_64.llvm && XDG_DATA_HOME=`pwd`/.local/share/ ./godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-release \"Linux/X11\" `pwd`/export_linuxbsd/v_sekai_linuxbsd || [ -f \"`pwd`/export_linuxbsd/v_sekai_linuxbsd\" ]"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
