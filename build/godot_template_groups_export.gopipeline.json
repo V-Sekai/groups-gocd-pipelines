@@ -121,7 +121,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "ls"
+                        "ls templates"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -248,7 +248,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "ls"
+                        "ls templates"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

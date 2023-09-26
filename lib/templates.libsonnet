@@ -190,7 +190,7 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',
-                    'ls'
+                    'ls templates'
                   ],
                   command: '/bin/bash',
                   working_directory: '',
