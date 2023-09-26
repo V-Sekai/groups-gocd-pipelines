@@ -111,11 +111,20 @@
                   {
                      "arguments": [
                         "-c",
-                        "./godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-release \"Windows Desktop\" `pwd`/export_windows/v_sekai_windows.exe"
+                        "cp godot.linuxbsd.editor.double.x86_64.llvm v_sekai_windows.exe"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "../godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-pack \"Windows Desktop\" `pwd`/../export_windows/v_sekai_windows.exe.pck"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
                   },
                   {
                      "arguments": [
@@ -210,11 +219,20 @@
                   {
                      "arguments": [
                         "-c",
-                        "./godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-release \"Linux/X11\" `pwd`/export_linuxbsd/v_sekai_linuxbsd"
+                        "cp godot.linuxbsd.editor.double.x86_64.llvm v_sekai_linuxbsd"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "../godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-pack \"Linux/X11\" `pwd`/../export_linuxbsd/v_sekai_linuxbsd.pck"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
                   },
                   {
                      "arguments": [
