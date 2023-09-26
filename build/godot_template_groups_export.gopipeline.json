@@ -111,7 +111,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp godot.linuxbsd.editor.double.x86_64.llvm export_windows/v_sekai_windows.exe"
+                        "cp v_sekai_windows.exe export_windows/v_sekai_windows.exe"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -219,7 +219,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp godot.linuxbsd.editor.double.x86_64.llvm export_linuxbsd/v_sekai_linuxbsd"
+                        "cp v_sekai_linuxbsd export_linuxbsd/v_sekai_linuxbsd"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

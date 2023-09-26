@@ -178,7 +178,7 @@
                   type: 'exec',
                   arguments: [
                     '-c',
-                    'cp godot.linuxbsd.editor.double.x86_64.llvm ' + export_info.export_directory + '/' + export_info.export_executable
+                    'cp ' + export_info.export_executable + ' ' + export_info.export_directory + '/' + export_info.export_executable
                   ],
                   command: '/bin/bash',
                   working_directory: '',
