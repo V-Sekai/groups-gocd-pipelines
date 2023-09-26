@@ -130,7 +130,16 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp windows_release_x86_64.exe export_windows/v_sekai_windows.exe"
+                        "unzip godot.templates.tpz"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp templates/windows_release_x86_64.exe export_windows/v_sekai_windows.exe"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -257,7 +266,16 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp linux_release.x86_64 export_linuxbsd/v_sekai_linuxbsd"
+                        "unzip godot.templates.tpz"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": ""
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp templates/linux_release.x86_64 export_linuxbsd/v_sekai_linuxbsd"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

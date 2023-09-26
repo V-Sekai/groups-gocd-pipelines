@@ -199,7 +199,16 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',
-                    'cp ' + export_info.template_release_binary + ' ' + export_info.export_directory + '/' + export_info.export_executable
+                    'unzip godot.templates.tpz'
+                  ],
+                  command: '/bin/bash',
+                  working_directory: '',
+                },
+                {
+                  type: 'exec',
+                  arguments: [
+                    '-c',
+                    'cp templates/' + export_info.template_release_binary + ' ' + export_info.export_directory + '/' + export_info.export_executable
                   ],
                   command: '/bin/bash',
                   working_directory: '',
