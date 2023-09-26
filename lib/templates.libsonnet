@@ -187,7 +187,7 @@
                   type: 'exec',
                   arguments: [
                     '-c',
-                    'ls',
+                    'ls ' + export_info.export_directory,
                   ],
                   command: '/bin/bash',
                   working_directory: '',

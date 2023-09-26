@@ -120,7 +120,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "ls"
+                        "ls export_windows"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -219,7 +219,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "ls"
+                        "ls export_linuxbsd"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
