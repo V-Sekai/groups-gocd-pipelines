@@ -1,3 +1,5 @@
+local platform = import 'platform_dict.json';
+
 {
   exe_to_pdb_path(binary):: (std.substr(binary, 0, std.length(binary) - 4) + '.pdb'),
   godot_tools_pipeline_export(
@@ -77,6 +79,16 @@
                   job: 'defaultJob',
                   is_source_a_file: true,
                   source: 'godot.templates.tpz',
+                  destination: '',
+                },
+                {
+                  type: 'fetch',
+                  artifact_origin: 'gocd',
+                  pipeline: pipeline_dependency,
+                  stage: 'defaultStage',
+                  job: 'linux_job',
+                  is_source_a_file: true,
+                  source: 'godot.linuxbsd.editor.double.x86_64.llvm',
                   destination: '',
                 },
                 {
@@ -178,7 +190,7 @@
                   type: 'exec',
                   arguments: [
                     '-c',
-                    'cp ' + export_info.export_executable + ' ' + export_info.export_directory + '/' + export_info.export_executable
+                    'cp templates/' + export_info.editor_godot_binary + ' ' + export_info.export_directory + '/' + export_info.export_executable
                   ],
                   command: '/bin/bash',
                   working_directory: '',
