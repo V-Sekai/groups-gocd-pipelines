@@ -178,7 +178,7 @@
                   type: 'exec',
                   arguments: [
                     '-c',
-                    './godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-release ' + export_info.export_configuration + export_info.export_directory + '/' + export_info.export_executable,
+                    './godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-release "export_info.export_configuration" ' + export_info.export_directory + '/' + export_info.export_executable,
                   ],
                   command: '/bin/bash',
                   working_directory: '',
