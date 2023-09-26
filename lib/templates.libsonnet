@@ -213,16 +213,6 @@ local platform = import 'platform_dict.json';
                   command: '/bin/bash',
                   working_directory: '',
                 },
-                if export_info.editor_godot_binary_debug != "" then
-                  {
-                    type: 'exec',
-                    arguments: [
-                      '-c',
-                      'cp templates/' + export_info.editor_godot_binary_debug + ' ' + export_info.export_directory + '/' + export_info.editor_godot_binary_debug
-                    ],
-                    command: '/bin/bash',
-                    working_directory: 'g',
-                  } else null,
                 {
                   type: 'exec',
                   arguments: [
