@@ -50,7 +50,7 @@
       stages: [
         {
           name: 'exportStage',
-          clean_workspace: false,
+          clean_workspace: true,
           fetch_materials: true,
           jobs: [
             {

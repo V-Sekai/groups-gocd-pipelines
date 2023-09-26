@@ -26,7 +26,7 @@
    "name": "groups-export",
    "stages": [
       {
-         "clean_workspace": false,
+         "clean_workspace": true,
          "fetch_materials": true,
          "jobs": [
             {
