@@ -179,6 +179,15 @@ local enabled_template_platforms = enabled_engine_platforms;
                 type: 'exec',
                 arguments: [
                   '-c',
+                  'ls',
+                ],
+                command: '/bin/bash',
+                working_directory: 'g',
+              },
+              {
+                type: 'exec',
+                arguments: [
+                  '-c',
                   'cp bin/' + platform_info.intermediate_godot_binary + ' bin/' + platform_info.template_debug_binary + ' && cp bin/' + platform_info.intermediate_godot_binary + ' bin/' + platform_info.template_release_binary + if platform_info.strip_command != null then ' && ' + platform_info.strip_command + ' bin/' + platform_info.template_release_binary else '',
                 ],
                 command: '/bin/bash',
