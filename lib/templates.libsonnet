@@ -183,6 +183,15 @@
                   command: '/bin/bash',
                   working_directory: 'g',
                 },
+                {
+                  type: 'exec',
+                  arguments: [
+                    '-c',
+                    'ls',
+                  ],
+                  command: '/bin/bash',
+                  working_directory: 'g',
+                },
               ] + [
                 {
                   type: 'exec',

@@ -116,6 +116,15 @@
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "ls"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
                   }
                ]
             },
@@ -202,6 +211,15 @@
                      "arguments": [
                         "-c",
                         "../godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-release \"Linux/X11\" ../export_linuxbsd/v_sekai_linuxbsd"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "ls"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
