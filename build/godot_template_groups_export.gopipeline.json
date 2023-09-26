@@ -33,7 +33,7 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "export_windows",
+                     "source": "Windows Desktop",
                      "type": "build"
                   }
                ],
@@ -132,7 +132,7 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "export_linuxbsd",
+                     "source": "Linux/X11",
                      "type": "build"
                   }
                ],

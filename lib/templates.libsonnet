@@ -62,7 +62,7 @@
               artifacts: [
                 {
                   type: 'build',
-                  source: export_info.export_directory,
+                  source: export_info.export_configuration,
                   destination: '',
                 },
               ],
