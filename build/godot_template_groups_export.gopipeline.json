@@ -148,7 +148,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp templates/godot.windows.editor.double.x86_64.llvm.pdb export_windows/v_sekai_windows.pdb"
+                        "cp templates/godot.windows.editor.double.x86_64.llvm.pdb export_windows/godot.windows.editor.double.x86_64.llvm.pdb"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
