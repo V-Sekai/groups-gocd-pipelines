@@ -178,6 +178,15 @@
                   {
                      "arguments": [
                         "-c",
+                        "ls"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
                         "cp bin/godot.windows.editor.double.x86_64.llvm.exe bin/windows_debug_x86_64.exe && cp bin/godot.windows.editor.double.x86_64.llvm.exe bin/windows_release_x86_64.exe && mingw-strip --strip-debug bin/windows_release_x86_64.exe"
                      ],
                      "command": "/bin/bash",
@@ -241,6 +250,15 @@
                   {
                      "arguments": [
                         "-c",
+                        "ls"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
                         "cp bin/godot.linuxbsd.editor.double.x86_64.llvm bin/linux_debug.x86_64 && cp bin/godot.linuxbsd.editor.double.x86_64.llvm bin/linux_release.x86_64 && strip --strip-debug bin/linux_release.x86_64"
                      ],
                      "command": "/bin/bash",
@@ -300,6 +318,15 @@
                      "source": "godot.web.template_release.double.wasm32.zip",
                      "stage": "defaultStage",
                      "type": "fetch"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "ls"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
                   },
                   {
                      "arguments": [
