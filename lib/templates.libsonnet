@@ -151,7 +151,43 @@
                   type: 'exec',
                   arguments: [
                     '-c',
-                    'rm -rf ' + export_info.export_directory + ' && mkdir ' + export_info.export_directory + ' && chmod +x ' + 'godot.linuxbsd.editor.double.x86_64.llvm' + ' && ./godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-release "' + export_info.export_configuration + '" `pwd`/' + export_info.export_directory + '/' + export_info.export_executable + ' || [ -f "`pwd`/' + export_info.export_directory + '/' + export_info.export_executable + '" ]',
+                    'rm -rf ' + export_info.export_directory,
+                  ],
+                  command: '/bin/bash',
+                  working_directory: '',
+                },
+                {
+                  type: 'exec',
+                  arguments: [
+                    '-c',
+                    'mkdir ' + export_info.export_directory,
+                  ],
+                  command: '/bin/bash',
+                  working_directory: '',
+                },
+                {
+                  type: 'exec',
+                  arguments: [
+                    '-c',
+                    'chmod +x godot.linuxbsd.editor.double.x86_64.llvm'
+                  ],
+                  command: '/bin/bash',
+                  working_directory: '',
+                },
+                {
+                  type: 'exec',
+                  arguments: [
+                    '-c',
+                    './godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-release "' + export_info.export_configuration + '" `pwd`/' + export_info.export_directory + '/' + export_info.export_executable,
+                  ],
+                  command: '/bin/bash',
+                  working_directory: '',
+                },
+                {
+                  type: 'exec',
+                  arguments: [
+                    '-c',
+                    '[ -f "`pwd`/' + export_info.export_directory + '/' + export_info.export_executable + '" ]',
                   ],
                   command: '/bin/bash',
                   working_directory: '',
