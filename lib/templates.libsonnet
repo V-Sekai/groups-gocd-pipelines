@@ -319,7 +319,7 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',        
-                    'mv ' + export_info.export_directory + '/' + export_info.export_executable + ' export/' +  export_info.export_editor,
+                    'mv ' + export_info.export_directory + '/' + export_info.export_executable + ' export/editor/' +  export_info.export_editor,
                   ],
                   command: '/bin/bash',
                   working_directory: '',
