@@ -9,6 +9,7 @@
       "export_configuration": "Windows Desktop",
       "export_directory": "export_windows",
       "export_executable": "v_sekai_windows.exe",
+      "export_editor": "v_sekai_windows_editor.exe",
       "export_executable_debug": "v_sekai_windows.pdb",
       "template_release_binary": "windows_release_x86_64.exe",
       "itchio_out": "windows-master",
@@ -26,6 +27,7 @@
       "export_configuration": "Linux/X11",
       "export_directory": "export_linuxbsd",
       "export_executable": "v_sekai_linuxbsd",
+      "export_editor": "v_sekai_linuxbsd_editor",
       "itchio_out": "linux-master",
       "prepare_commands": [],
       "extra_commands": []

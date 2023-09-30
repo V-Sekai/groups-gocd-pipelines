@@ -382,7 +382,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mv export_windows/* export/editor"
+                        "mv export_windows/v_sekai_windows.exe export/v_sekai_windows_editor.exe"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -465,7 +465,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mv export_linuxbsd/* export/editor"
+                        "mv export_linuxbsd/v_sekai_linuxbsd export/v_sekai_linuxbsd_editor"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
