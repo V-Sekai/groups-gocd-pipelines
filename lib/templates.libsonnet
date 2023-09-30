@@ -281,7 +281,7 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',        
-                    'mkdir -p game',
+                    'mkdir -p export/game',
                   ],
                   command: '/bin/bash',
                   working_directory: '',
@@ -290,7 +290,7 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',        
-                    'mkdir -p editor',
+                    'mkdir -p export/editor',
                   ],
                   command: '/bin/bash',
                   working_directory: '',
@@ -299,7 +299,7 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',        
-                    'mv ' + export_info.export_directory + '/*' + ' game',
+                    'mv ' + export_info.export_directory + '/*' + ' export/game',
                   ],
                   command: '/bin/bash',
                   working_directory: '',
@@ -319,7 +319,7 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',        
-                    'mv ' + export_info.export_directory + '/*' + ' editor',
+                    'mv ' + export_info.export_directory + '/*' + ' export/editor',
                   ],
                   command: '/bin/bash',
                   working_directory: '',
@@ -337,7 +337,7 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',
-                    'butler push game ' + itchio_login + ':' + export_info.itchio_out + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
+                    'butler push export ' + itchio_login + ':' + export_info.itchio_out + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
                   ],
                   command: '/bin/bash',
                   working_directory: '',

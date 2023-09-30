@@ -345,7 +345,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mkdir -p game"
+                        "mkdir -p export/game"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -354,7 +354,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mkdir -p editor"
+                        "mkdir -p export/editor"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -363,7 +363,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mv export_windows/* game"
+                        "mv export_windows/* export/game"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -382,7 +382,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mv export_windows/* editor"
+                        "mv export_windows/* export/editor"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -400,7 +400,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "butler push game saracenone/groups-4x:windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
+                        "butler push export saracenone/groups-4x:windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -428,7 +428,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mkdir -p game"
+                        "mkdir -p export/game"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -437,7 +437,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mkdir -p editor"
+                        "mkdir -p export/editor"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -446,7 +446,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mv export_linuxbsd/* game"
+                        "mv export_linuxbsd/* export/game"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -465,7 +465,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mv export_linuxbsd/* editor"
+                        "mv export_linuxbsd/* export/editor"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -483,7 +483,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "butler push game saracenone/groups-4x:linux-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
+                        "butler push export saracenone/groups-4x:linux-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
