@@ -299,16 +299,27 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',        
-                    'cp -rf ' + export_info.export_directory + ' game/',
+                    'mv ' + export_info.export_directory + ' game',
                   ],
                   command: '/bin/bash',
                   working_directory: '',
+                },
+                
+                {
+                  type: 'fetch',
+                  artifact_origin: 'gocd',
+                  pipeline: pipeline_name,
+                  stage: 'exportStage',
+                  job: export_info.export_name + '_job',
+                  is_source_a_file: false,
+                  source: export_info.export_directory,
+                  destination: '',
                 },
                 {
                   type: 'exec',
                   arguments: [
                     '-c',        
-                    'cp -rf ' + export_info.export_directory + ' editor/',
+                    'mv ' + export_info.export_directory + ' editor',
                   ],
                   command: '/bin/bash',
                   working_directory: '',

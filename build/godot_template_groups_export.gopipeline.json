@@ -363,16 +363,26 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -rf export_windows game/"
+                        "mv export_windows game"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": ""
                   },
                   {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "is_source_a_file": false,
+                     "job": "windows_job",
+                     "pipeline": "groups-export",
+                     "source": "export_windows",
+                     "stage": "exportStage",
+                     "type": "fetch"
+                  },
+                  {
                      "arguments": [
                         "-c",
-                        "cp -rf export_windows editor/"
+                        "mv export_windows editor"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -436,16 +446,26 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -rf export_linuxbsd game/"
+                        "mv export_linuxbsd game"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": ""
                   },
                   {
+                     "artifact_origin": "gocd",
+                     "destination": "",
+                     "is_source_a_file": false,
+                     "job": "linux_job",
+                     "pipeline": "groups-export",
+                     "source": "export_linuxbsd",
+                     "stage": "exportStage",
+                     "type": "fetch"
+                  },
+                  {
                      "arguments": [
                         "-c",
-                        "cp -rf export_linuxbsd editor/"
+                        "mv export_linuxbsd editor"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
