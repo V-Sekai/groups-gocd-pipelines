@@ -299,7 +299,7 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',        
-                    'mv ' + export_info.export_directory + ' game/',
+                    'cp -rf ' + export_info.export_directory + ' game/',
                   ],
                   command: '/bin/bash',
                   working_directory: '',
@@ -308,7 +308,7 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',        
-                    'mv ' + export_info.export_directory + ' editor/',
+                    'cp -rf ' + export_info.export_directory + ' editor/',
                   ],
                   command: '/bin/bash',
                   working_directory: '',

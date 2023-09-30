@@ -363,7 +363,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mv export_windows game/"
+                        "cp -rf export_windows game/"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -372,7 +372,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mv export_windows editor/"
+                        "cp -rf export_windows editor/"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -436,7 +436,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mv export_linuxbsd game/"
+                        "cp -rf export_linuxbsd game/"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -445,7 +445,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mv export_linuxbsd editor/"
+                        "cp -rf export_linuxbsd editor/"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
