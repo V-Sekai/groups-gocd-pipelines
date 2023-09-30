@@ -391,15 +391,6 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm export/editor/*.pck"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
-                  },
-                  {
-                     "arguments": [
-                        "-c",
                         "butler push export saracenone/groups-4x:windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
                      ],
                      "command": "/bin/bash",
@@ -466,15 +457,6 @@
                      "arguments": [
                         "-c",
                         "mv export_linuxbsd/v_sekai_linuxbsd export/editor/v_sekai_linuxbsd_editor"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": ""
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "rm export/editor/*.pck"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

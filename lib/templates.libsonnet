@@ -327,15 +327,6 @@ local platform = import 'platform_dict.json';
                 {
                   type: 'exec',
                   arguments: [
-                    '-c',        
-                    'rm export/editor/*.pck',
-                  ],
-                  command: '/bin/bash',
-                  working_directory: '',
-                },
-                {
-                  type: 'exec',
-                  arguments: [
                     '-c',
                     'butler push export ' + itchio_login + ':' + export_info.itchio_out + ' --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`',
                   ],
