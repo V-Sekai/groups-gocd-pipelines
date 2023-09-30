@@ -328,7 +328,7 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',        
-                    'rm editor/*.pck',
+                    'rm export/editor/*.pck',
                   ],
                   command: '/bin/bash',
                   working_directory: '',

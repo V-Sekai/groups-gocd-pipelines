@@ -391,7 +391,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm editor/*.pck"
+                        "rm export/editor/*.pck"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -474,7 +474,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm editor/*.pck"
+                        "rm export/editor/*.pck"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
