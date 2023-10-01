@@ -23,7 +23,7 @@
          "type": "dependency"
       }
    ],
-   "name": "groups-export",
+   "name": "model-explorer-export",
    "stages": [
       {
          "clean_workspace": true,
@@ -337,7 +337,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "windows_job",
-                     "pipeline": "groups-export",
+                     "pipeline": "model-explorer-export",
                      "source": "export_windows",
                      "stage": "exportStage",
                      "type": "fetch"
@@ -374,7 +374,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "windows_job",
-                     "pipeline": "groups-export",
+                     "pipeline": "model-explorer-export",
                      "source": "export_windows",
                      "stage": "exportStage",
                      "type": "fetch"
@@ -411,7 +411,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "linux_job",
-                     "pipeline": "groups-export",
+                     "pipeline": "model-explorer-export",
                      "source": "export_linuxbsd",
                      "stage": "exportStage",
                      "type": "fetch"
@@ -448,7 +448,7 @@
                      "destination": "",
                      "is_source_a_file": false,
                      "job": "linux_job",
-                     "pipeline": "groups-export",
+                     "pipeline": "model-explorer-export",
                      "source": "export_linuxbsd",
                      "stage": "exportStage",
                      "type": "fetch"

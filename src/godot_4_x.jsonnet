@@ -20,8 +20,9 @@ local docker_uro_pipeline = 'docker-uro';
 local docker_gocd_agent_pipeline = 'docker-gocd-agent-centos-8-groups';
 local godot_template_groups_editor = 'godot-groups-editor';
 local godot_template_groups = 'groups-export';
+local godot_template_model_explorer = 'model-explorer-export';
 local godot_template_groups_editor_staging = 'godot-groups-staging-editor';
-local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor] + [godot_template_groups] + [godot_template_groups_editor_staging];
+local itch_fire_template = [docker_pipeline, docker_uro_pipeline, docker_gocd_agent_pipeline] + [godot_template_groups_editor] + [godot_template_groups] + [godot_template_groups_editor_staging] + [godot_template_model_explorer];
 
 local generatePipeline = function(pipeline_name, godot_status, godot_branch) std.prune(godot_pipeline.godot_pipeline(
   pipeline_name=pipeline_name,
@@ -68,7 +69,7 @@ local generatePipeline = function(pipeline_name, godot_status, godot_branch) std
   'godot_template_model_explorer_export.gopipeline.json'
   : std.prune(
     templates.godot_tools_pipeline_export(
-      pipeline_name=godot_template_groups,
+      pipeline_name=godot_template_model_explorer,
       pipeline_dependency=godot_template_groups_editor,
       itchio_login='ifiregames/model-explorer-42',
       project_git='https://github.com/V-Sekai/TOOL_model_explorer.git',
