@@ -65,6 +65,21 @@ local generatePipeline = function(pipeline_name, godot_status, godot_branch) std
     )
   ),
 } + {
+  'godot_template_model_explorer_export.gopipeline.json'
+  : std.prune(
+    templates.godot_tools_pipeline_export(
+      pipeline_name=godot_template_groups,
+      pipeline_dependency=godot_template_groups_editor,
+      itchio_login='ifiregames/model-explorer-42',
+      project_git='https://github.com/V-Sekai/TOOL_model_explorer.git',
+      project_branch='main',
+      gocd_group='gamma',
+      godot_status='model_explorer-4.2',
+      gocd_project_folder='model_explorer',
+      enabled_export_platforms=enabled_groups_export_platforms,
+    )
+  ),
+} + {
   'docker_groups.gopipeline.json'
   : std.prune(
     templates.build_docker_server(
