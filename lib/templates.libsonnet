@@ -328,7 +328,7 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',
-                    'cat > export/itch.toml <<EOF
+                    'cat > export/.itch.toml <<EOF
 [[actions]]
 name = "Play Linux"
 path = "game/v_sekai_linuxbsd"
