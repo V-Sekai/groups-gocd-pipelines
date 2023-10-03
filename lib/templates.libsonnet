@@ -330,28 +330,32 @@ local platform = import 'platform_dict.json';
                     '-c',
                     'cat > export/.itch.toml <<EOF
 [[actions]]
-name = "Play Linux"
+name = "play"
 path = "game/v_sekai_linuxbsd"
 platform = "linux"
 
 [[actions]]
-name = "Play Editor Linux"
+name = "editor"
 path = "editor/v_sekai_linuxbsd_editor"
 platform = "linux"
 
 [[actions]]
-name = "Play Windows"
+name = "play"
 path = "game/v_sekai_windows.exe"
 platform = "windows"
 
 [[actions]]
-name = "Play Editor Windows"
+name = "editor"
 path = "editor/v_sekai_windows_editor.exe"
 platform = "windows"
 
 [[actions]]
-name = "V-Sekai Github project"
-path = "https://github.com/V-Sekai/v-sekai-game"
+name = "forums"
+path = "https://discord.gg/7BQDHesck8"
+
+[[actions]]
+name = "manuals"
+path = "https://v-sekai.github.io/manuals/"
 EOF',
                   ],
                   command: '/bin/bash',
