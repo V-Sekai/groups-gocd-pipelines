@@ -336,7 +336,7 @@ platform = "linux"
 
 [[actions]]
 name = "Play Desktop"
-path = "game/v_sekai_linuxbsd"
+path = "game/../game/v_sekai_linuxbsd"
 platform = "linux"
 args = ["--xr-mode off"]
 
