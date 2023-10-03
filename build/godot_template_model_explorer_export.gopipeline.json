@@ -391,7 +391,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cat > export/.itch.toml <<EOF\n[[actions]]\nname = \"play\"\npath = \"game/v_sekai_linuxbsd\"\nplatform = \"linux\"\n\n[[actions]]\nname = \"Play Desktop\"\npath = \"game/../game/v_sekai_linuxbsd\"\nplatform = \"linux\"\nargs = [\"--xr-mode off\"]\n\n[[actions]]\nname = \"editor\"\npath = \"editor/v_sekai_linuxbsd_editor\"\nplatform = \"linux\"\n\n[[actions]]\nname = \"play\"\npath = \"game/v_sekai_windows.exe\"\nplatform = \"windows\"\n\n[[actions]]\nname = \"Play Desktop\"\npath = \"game/v_sekai_windows.EXE\"\nplatform = \"windows\"\nargs = [\"--xr-mode off\"]\n\n[[actions]]\nname = \"editor\"\npath = \"editor/v_sekai_windows_editor.exe\"\nplatform = \"windows\"\n\n[[actions]]\nname = \"forums\"\npath = \"https://discord.gg/7BQDHesck8\"\n\n[[actions]]\nname = \"manuals\"\npath = \"https://v-sekai.github.io/manuals/\"\nEOF"
+                        "cat > export/.itch.toml <<EOF\n[[actions]]\nname = \"play\"\npath = \"game/v_sekai_linuxbsd\"\nplatform = \"linux\"\n\n[[actions]]\nname = \"editor\"\npath = \"editor/v_sekai_linuxbsd_editor\"\nplatform = \"linux\"\n\n[[actions]]\nname = \"play\"\npath = \"game/v_sekai_windows.exe\"\nplatform = \"windows\"\n\n[[actions]]\nname = \"editor\"\npath = \"editor/v_sekai_windows_editor.exe\"\nplatform = \"windows\"\n\n[[actions]]\nname = \"forums\"\npath = \"https://discord.gg/7BQDHesck8\"\n\n[[actions]]\nname = \"manuals\"\npath = \"https://v-sekai.github.io/manuals/\"\nEOF"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -474,7 +474,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cat > export/.itch.toml <<EOF\n[[actions]]\nname = \"play\"\npath = \"game/v_sekai_linuxbsd\"\nplatform = \"linux\"\n\n[[actions]]\nname = \"Play Desktop\"\npath = \"game/../game/v_sekai_linuxbsd\"\nplatform = \"linux\"\nargs = [\"--xr-mode off\"]\n\n[[actions]]\nname = \"editor\"\npath = \"editor/v_sekai_linuxbsd_editor\"\nplatform = \"linux\"\n\n[[actions]]\nname = \"play\"\npath = \"game/v_sekai_windows.exe\"\nplatform = \"windows\"\n\n[[actions]]\nname = \"Play Desktop\"\npath = \"game/v_sekai_windows.EXE\"\nplatform = \"windows\"\nargs = [\"--xr-mode off\"]\n\n[[actions]]\nname = \"editor\"\npath = \"editor/v_sekai_windows_editor.exe\"\nplatform = \"windows\"\n\n[[actions]]\nname = \"forums\"\npath = \"https://discord.gg/7BQDHesck8\"\n\n[[actions]]\nname = \"manuals\"\npath = \"https://v-sekai.github.io/manuals/\"\nEOF"
+                        "cat > export/.itch.toml <<EOF\n[[actions]]\nname = \"play\"\npath = \"game/v_sekai_linuxbsd\"\nplatform = \"linux\"\n\n[[actions]]\nname = \"editor\"\npath = \"editor/v_sekai_linuxbsd_editor\"\nplatform = \"linux\"\n\n[[actions]]\nname = \"play\"\npath = \"game/v_sekai_windows.exe\"\nplatform = \"windows\"\n\n[[actions]]\nname = \"editor\"\npath = \"editor/v_sekai_windows_editor.exe\"\nplatform = \"windows\"\n\n[[actions]]\nname = \"forums\"\npath = \"https://discord.gg/7BQDHesck8\"\n\n[[actions]]\nname = \"manuals\"\npath = \"https://v-sekai.github.io/manuals/\"\nEOF"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
