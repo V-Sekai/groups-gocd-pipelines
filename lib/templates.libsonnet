@@ -330,39 +330,39 @@ local platform = import 'platform_dict.json';
                     '-c',
                     'cat > export/itch.toml <<EOF
 [[actions]]
-name = "Play"
+name = "Play Linux"
 path = "game/v_sekai_linuxbsd"
 platform = "linux"
 
 [[actions]]
-name = "Play Desktop"
+name = "Play Desktop Linux"
 path = "game/v_sekai_linuxbsd"
 platform = "linux"
 args = ["--xr-mode off"]
 
 [[actions]]
-name = "Play Editor"
+name = "Play Editor Linux"
 path = "editor/v_sekai_linuxbsd_editor"
 platform = "linux"
 
 [[actions]]
-name = "Play"
+name = "Play Windows"
 path = "game/v_sekai_windows.exe"
 platform = "windows"
 
 [[actions]]
-name = "Play Desktop"
+name = "Play Desktop Windows"
 path = "game/v_sekai_windows.exe"
 platform = "windows"
 args = ["--xr-mode off"]
 
 [[actions]]
-name = "Play Editor"
+name = "Play Editor Windows"
 path = "editor/v_sekai_windows_editor.exe"
 platform = "windows"
 
 [[actions]]
-name = "Play in Desktop"
+name = "Play in Desktop Windows"
 path = "game/v_sekai_windows.exe"
 platform = "windows"
 args = ["--xr-mode off"]
