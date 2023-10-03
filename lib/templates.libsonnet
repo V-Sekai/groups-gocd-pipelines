@@ -329,49 +329,49 @@ local platform = import 'platform_dict.json';
                   arguments: [
                     '-c',
                     'cat > export/itch.toml <<EOF
-                    [[actions]]
-                    name = "Play"
-                    path = "game/v_sekai_linuxbsd"
-                    platform = "linux"
+[[actions]]
+name = "Play"
+path = "game/v_sekai_linuxbsd"
+platform = "linux"
 
-                    [[actions]]
-                    name = "Play Desktop"
-                    path = "game/v_sekai_linuxbsd"
-                    platform = "linux"
-                    args = ["--xr-mode off"]
+[[actions]]
+name = "Play Desktop"
+path = "game/v_sekai_linuxbsd"
+platform = "linux"
+args = ["--xr-mode off"]
 
-                    [[actions]]
-                    name = "Play Editor"
-                    path = "editor/v_sekai_linuxbsd_editor"
-                    platform = "linux"
-                    
-                    [[actions]]
-                    name = "Play"
-                    path = "game/v_sekai_windows.exe"
-                    platform = "windows"
+[[actions]]
+name = "Play Editor"
+path = "editor/v_sekai_linuxbsd_editor"
+platform = "linux"
 
-                    [[actions]]
-                    name = "Play Desktop"
-                    path = "game/v_sekai_windows.exe"
-                    platform = "windows"
-                    args = ["--xr-mode off"]
+[[actions]]
+name = "Play"
+path = "game/v_sekai_windows.exe"
+platform = "windows"
 
-                    [[actions]]
-                    name = "Play Editor"
-                    path = "editor/v_sekai_windows_editor.exe"
-                    platform = "windows"
+[[actions]]
+name = "Play Desktop"
+path = "game/v_sekai_windows.exe"
+platform = "windows"
+args = ["--xr-mode off"]
 
-                    [[actions]]
-                    name = "Play in Desktop"
-                    path = "v_sekai_windows.exe"
-                    platform = "windows"
-                    args = ["--xr-mode off"]
+[[actions]]
+name = "Play Editor"
+path = "editor/v_sekai_windows_editor.exe"
+platform = "windows"
 
-                    [[actions]]
-                    name = "V-Sekai Github project"
-                    platform = "windows"
-                    path = "https://github.com/V-Sekai/v-sekai-game"
-                    EOF',
+[[actions]]
+name = "Play in Desktop"
+path = "v_sekai_windows.exe"
+platform = "windows"
+args = ["--xr-mode off"]
+
+[[actions]]
+name = "V-Sekai Github project"
+platform = "windows"
+path = "https://github.com/V-Sekai/v-sekai-game"
+EOF',
                   ],
                   command: '/bin/bash',
                   working_directory: '',
