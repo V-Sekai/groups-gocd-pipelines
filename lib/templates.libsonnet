@@ -363,13 +363,12 @@ platform = "windows"
 
 [[actions]]
 name = "Play in Desktop"
-path = "v_sekai_windows.exe"
+path = "game/v_sekai_windows.exe"
 platform = "windows"
 args = ["--xr-mode off"]
 
 [[actions]]
 name = "V-Sekai Github project"
-platform = "windows"
 path = "https://github.com/V-Sekai/v-sekai-game"
 EOF',
                   ],
