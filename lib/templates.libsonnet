@@ -335,6 +335,12 @@ path = "game/v_sekai_linuxbsd"
 platform = "linux"
 
 [[actions]]
+name = "play desktop"
+path = "game/v_sekai_linuxbsd"
+platform = "linux"
+args = ["--xr-mode off"]
+
+[[actions]]
 name = "editor"
 path = "editor/v_sekai_linuxbsd_editor"
 platform = "linux"
@@ -343,6 +349,12 @@ platform = "linux"
 name = "play"
 path = "game/v_sekai_windows.exe"
 platform = "windows"
+
+[[actions]]
+name = "play desktop"
+path = "game/v_sekai_windows.exe"
+platform = "windows"
+args = ["--xr-mode off"]
 
 [[actions]]
 name = "editor"
