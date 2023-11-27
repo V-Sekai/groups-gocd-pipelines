@@ -354,7 +354,7 @@ name = "forums"
 path = "https://discord.gg/7BQDHesck8"
 
 [[actions]]
-name = "manuals"
+name = "Manuals"
 path = "https://v-sekai.github.io/manuals/"
 EOF',
                   ],
