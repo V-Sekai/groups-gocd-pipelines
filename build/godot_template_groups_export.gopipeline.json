@@ -157,7 +157,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "../godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-pack \"Windows Desktop\" `pwd`/../export_windows/v_sekai_windows.exe.pck"
+                        "../godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-pack \"Windows\" `pwd`/../export_windows/v_sekai_windows.exe.pck"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -302,7 +302,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "../godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-pack \"Linux/X11\" `pwd`/../export_linuxbsd/v_sekai_linuxbsd.pck"
+                        "../godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-pack \"Linux\" `pwd`/../export_linuxbsd/v_sekai_linuxbsd.pck"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
