@@ -2,7 +2,7 @@ local groups_export = import 'groups_export.json';
 local platform = import 'platform_dict.json';
 local templates = import 'templates.libsonnet';
 
-local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web']];
+local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web', 'macos']];
 local enabled_template_platforms = enabled_engine_platforms;
 
 {
