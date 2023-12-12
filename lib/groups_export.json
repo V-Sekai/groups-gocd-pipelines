@@ -35,12 +35,16 @@
     "macos": {
       "export_name": "macos",
       "platform_name": "macos",
-      "editor_godot_binary": "Godot.app",
       "gdextension_platform": "osx",
+      "editor_godot_binary": "godot.osx.editor.double.x86_64",
+      "editor_godot_binary_debug": "godot.osx.editor.double.x86_64.dSYM",
       "export_configuration": "Mac OSX",
       "export_directory": "export_macos",
-      "export_executable": "macos.zip",
-      "itchio_out": "macos",
+      "export_executable": "v_sekai_macos.app",
+      "export_editor": "v_sekai_macos_editor.app",
+      "export_executable_debug": "v_sekai_macos.dSYM",
+      "template_release_binary": "osx_release.x86_64.zip",
+      "itchio_out": "macos-master",
       "prepare_commands": [],
       "extra_commands": [
         "cd export_macos && unzip macos.zip && rm macos.zip"
