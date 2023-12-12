@@ -6,7 +6,7 @@ local enabled_template_platforms = enabled_engine_platforms;
 
 local enabled_groups_engine_platforms = enabled_engine_platforms;
 local enabled_groups_template_platforms = enabled_engine_platforms;
-local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linux', 'macos']];
+local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linux']];
 
 local templates = import '../lib/templates.libsonnet';
 local godot_editor_export = import '../lib/godot_editor_export.libsonnet';
