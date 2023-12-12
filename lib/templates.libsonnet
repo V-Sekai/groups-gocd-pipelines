@@ -181,7 +181,7 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',
-                    'chmod +x godot.linuxbsd.editor.double.x86_64.llvm'
+                    'chmod +x godot.linuxbsd.editor.double.x86_64.llvm',
                   ],
                   command: '/bin/bash',
                   working_directory: '',
@@ -190,7 +190,7 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',
-                    'ls templates'
+                    'ls templates',
                   ],
                   command: '/bin/bash',
                   working_directory: '',
@@ -199,7 +199,7 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',
-                    'unzip godot.templates.tpz'
+                    'unzip godot.templates.tpz',
                   ],
                   command: '/bin/bash',
                   working_directory: '',
@@ -208,7 +208,7 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',
-                    'cp templates/' + export_info.template_release_binary + ' ' + export_info.export_directory + '/' + export_info.export_executable
+                    'cp templates/' + export_info.template_release_binary + ' ' + export_info.export_directory + '/' + export_info.export_executable,
                   ],
                   command: '/bin/bash',
                   working_directory: '',
@@ -217,7 +217,7 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',
-                    'cp templates/' + export_info.template_release_binary + ' ' + export_info.export_directory + '/' + export_info.export_executable
+                    'cp templates/' + export_info.template_release_binary + ' ' + export_info.export_directory + '/' + export_info.export_executable,
                   ],
                   command: '/bin/bash',
                   working_directory: '',
@@ -226,11 +226,11 @@ local platform = import 'platform_dict.json';
                   type: 'exec',
                   arguments: [
                     '-c',
-                    '../godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-pack "' + export_info.export_configuration + '" `pwd`/../' + export_info.export_directory + '/' + export_info.export_executable + ".pck",
+                    '../godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-pack "' + export_info.export_configuration + '" `pwd`/../' + export_info.export_directory + '/' + export_info.export_executable + '.pck',
                   ],
                   command: '/bin/bash',
                   working_directory: 'g',
-                },  
+                },
                 {
                   type: 'exec',
                   arguments: [
@@ -280,7 +280,7 @@ local platform = import 'platform_dict.json';
                 {
                   type: 'exec',
                   arguments: [
-                    '-c',        
+                    '-c',
                     'mkdir -p export/game',
                   ],
                   command: '/bin/bash',
@@ -289,7 +289,7 @@ local platform = import 'platform_dict.json';
                 {
                   type: 'exec',
                   arguments: [
-                    '-c',        
+                    '-c',
                     'mkdir -p export/editor',
                   ],
                   command: '/bin/bash',
@@ -298,13 +298,13 @@ local platform = import 'platform_dict.json';
                 {
                   type: 'exec',
                   arguments: [
-                    '-c',        
+                    '-c',
                     'mv ' + export_info.export_directory + '/*' + ' export/game',
                   ],
                   command: '/bin/bash',
                   working_directory: '',
                 },
-                
+
                 {
                   type: 'fetch',
                   artifact_origin: 'gocd',
@@ -318,45 +318,17 @@ local platform = import 'platform_dict.json';
                 {
                   type: 'exec',
                   arguments: [
-                    '-c',        
-                    'mv ' + export_info.export_directory + '/' + export_info.export_executable + ' export/editor/' +  export_info.export_editor,
+                    '-c',
+                    'mv ' + export_info.export_directory + '/' + export_info.export_executable + ' export/editor/' + export_info.export_editor,
                   ],
                   command: '/bin/bash',
                   working_directory: '',
-                },               
+                },
                 {
                   type: 'exec',
                   arguments: [
                     '-c',
-                    'cat > export/.itch.toml <<EOF
-[[actions]]
-name = "play"
-path = "game/v_sekai_linuxbsd"
-platform = "linux"
-
-[[actions]]
-name = "editor"
-path = "editor/v_sekai_linuxbsd_editor"
-platform = "linux"
-
-[[actions]]
-name = "play"
-path = "game/v_sekai_windows.exe"
-platform = "windows"
-
-[[actions]]
-name = "editor"
-path = "editor/v_sekai_windows_editor.exe"
-platform = "windows"
-
-[[actions]]
-name = "forums"
-path = "https://discord.gg/7BQDHesck8"
-
-[[actions]]
-name = "Manuals"
-path = "https://v-sekai.github.io/manuals/"
-EOF',
+                    'cat > export/.itch.toml <<EOF\n[[actions]]\nname = "play"\npath = "game/v_sekai_linuxbsd"\nplatform = "linux"\n\n[[actions]]\nname = "editor"\npath = "editor/v_sekai_linuxbsd_editor"\nplatform = "linux"\n\n[[actions]]\nname = "play"\npath = "game/v_sekai_windows.exe"\nplatform = "windows"\n\n[[actions]]\nname = "editor"\npath = "editor/v_sekai_windows_editor.exe"\nplatform = "windows"\n\n[[actions]]\nname = "forums"\npath = "https://discord.gg/7BQDHesck8"\n\n[[actions]]\nname = "Manuals"\npath = "https://v-sekai.github.io/manuals/"\nEOF',
                   ],
                   command: '/bin/bash',
                   working_directory: '',

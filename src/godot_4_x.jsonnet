@@ -1,5 +1,5 @@
-local platform = import '../lib/platform_dict.json';
 local groups_export = import '../lib/groups_export.json';
+local platform = import '../lib/platform_dict.json';
 
 local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web']];
 local enabled_template_platforms = enabled_engine_platforms;
@@ -8,7 +8,6 @@ local enabled_groups_engine_platforms = enabled_engine_platforms;
 local enabled_groups_template_platforms = enabled_engine_platforms;
 local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linux']];
 
-local groups_gdextension = import '../lib/groups_gdextension.json';
 local templates = import '../lib/templates.libsonnet';
 local godot_editor_export = import '../lib/godot_editor_export.libsonnet';
 local godot_pipeline = import '../lib/godot_pipeline.libsonnet';
@@ -39,18 +38,18 @@ local generatePipeline = function(pipeline_name, godot_status, godot_branch) std
   'godot_v_sekai_staging_editor.gopipeline.json': generatePipeline(godot_template_groups_editor_staging, 'groups-staging-4.2', 'groups-staging-4.2'),
 } + {
   'godot_template_groups_export.gopipeline.json'
-    : std.prine(templates.godot_tools_pipeline_export(
-      pipeline_name=godot_template_groups,
-      pipeline_dependency=godot_template_groups_editor,
-      itchio_login='saracenone/groups-4x',
-      project_git='https://github.com/V-Sekai/v-sekai-game.git',
-      project_branch='main',
-      gocd_group='gamma',
-      godot_status='groups-4.2',
-      gocd_project_folder='groups',
-      enabled_export_platforms=enabled_groups_export_platforms,
-    )),
-  } + {
+  : std.prine(templates.godot_tools_pipeline_export(
+    pipeline_name=godot_template_groups,
+    pipeline_dependency=godot_template_groups_editor,
+    itchio_login='saracenone/groups-4x',
+    project_git='https://github.com/V-Sekai/v-sekai-game.git',
+    project_branch='main',
+    gocd_group='gamma',
+    godot_status='groups-4.2',
+    gocd_project_folder='groups',
+    enabled_export_platforms=enabled_groups_export_platforms,
+  )),
+} + {
   'godot_template_groups_export.gopipeline.json'
   : std.prune(
     templates.godot_tools_pipeline_export(
@@ -118,7 +117,8 @@ local generatePipeline = function(pipeline_name, godot_status, godot_branch) std
     )
   ),
 } + {
-'env.fire.goenvironment.json': std.prune({
+  'env.fire.goenvironment.json': std.prune({
     name: 'itch-fire',
     pipelines: itch_fire_template,
-})}
+  }),
+}
