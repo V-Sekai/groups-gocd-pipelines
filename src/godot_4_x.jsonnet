@@ -1,7 +1,7 @@
 local groups_export = import '../lib/groups_export.json';
 local platform = import '../lib/platform_dict.json';
 
-local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web', 'macos']];
+local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web']];
 local enabled_template_platforms = enabled_engine_platforms;
 
 local enabled_groups_engine_platforms = enabled_engine_platforms;
