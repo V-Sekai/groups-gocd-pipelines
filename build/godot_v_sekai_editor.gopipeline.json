@@ -9,7 +9,7 @@
    "label_template": "groups-4.2.0.${godot_sandbox[:8]}.${COUNT}",
    "materials": [
       {
-         "branch": "groups-4.2",
+         "branch": "groups-4.3",
          "destination": "g",
          "name": "godot_sandbox",
          "type": "git",
