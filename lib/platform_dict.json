@@ -51,7 +51,7 @@
       "scons_platform": "web",
       "gdextension_platform": "linux",
       "gdextension_target": "template_debug",
-      "godot_scons_arguments": "optimize=speed use_llvm=yes precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'",
+      "godot_scons_arguments": "optimize=speed use_llvm=yes use_threads=yes precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'",
       "extra_commands": [],
       "environment_variables": [],
       "template_artifacts_override": null,
