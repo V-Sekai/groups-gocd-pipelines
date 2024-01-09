@@ -34,8 +34,8 @@ local generatePipeline = function(pipeline_name, godot_status, godot_branch) std
 ));
 
 {
-  'godot_v_sekai_editor.gopipeline.json': generatePipeline(godot_template_groups_editor, 'groups-4.2.0', 'groups-4.3'),
-  'godot_v_sekai_staging_editor.gopipeline.json': generatePipeline(godot_template_groups_editor_staging, 'groups-staging-4.2', 'groups-staging-4.2'),
+  'godot_v_sekai_editor.gopipeline.json': generatePipeline(godot_template_groups_editor, 'groups-4.3.0', 'groups-4.3'),
+  'godot_v_sekai_staging_editor.gopipeline.json': generatePipeline(godot_template_groups_editor_staging, 'groups-staging-4.3', 'groups-staging-4.3'),
 } + {
   'godot_template_groups_export.gopipeline.json'
   : std.prine(templates.godot_tools_pipeline_export(
@@ -74,7 +74,7 @@ local generatePipeline = function(pipeline_name, godot_status, godot_branch) std
       project_git='https://github.com/V-Sekai/TOOL_model_explorer.git',
       project_branch='main',
       gocd_group='gamma',
-      godot_status='model_explorer-4.2',
+      godot_status='model_explorer-4.3',
       gocd_project_folder='model_explorer',
       enabled_export_platforms=enabled_groups_export_platforms,
     )
