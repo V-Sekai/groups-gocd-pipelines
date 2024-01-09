@@ -119,7 +119,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "source /opt/emsdk/emsdk_env.sh && mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache EM_CACHE=/tmp scons werror=no platform=web target=template_release use_lto=no optimize=speed use_llvm=yes use_threads=yes precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'"
+                        "source /opt/emsdk/emsdk_env.sh && mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache EM_CACHE=/tmp scons werror=no platform=web target=template_release use_lto=no optimize=speed use_llvm=yes use_threads=no precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -280,12 +280,12 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/web_debug.zip",
+                     "source": "g/bin/web_nothreads_debug.zip",
                      "type": "build"
                   },
                   {
                      "destination": "",
-                     "source": "g/bin/web_release.zip",
+                     "source": "g/bin/web_nothreads_release.zip",
                      "type": "build"
                   },
                   {
@@ -331,7 +331,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.web.template_release.double.wasm32.zip bin/web_debug.zip && cp bin/godot.web.template_release.double.wasm32.zip bin/web_release.zip"
+                        "cp bin/godot.web.template_release.double.wasm32.zip bin/web_nothreads_debug.zip && cp bin/godot.web.template_release.double.wasm32.zip bin/web_nothreads_release.zip"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -441,7 +441,7 @@
                      "is_source_a_file": true,
                      "job": "web_job",
                      "pipeline": "godot-groups-editor",
-                     "source": "web_debug.zip",
+                     "source": "web_nothreads_debug.zip",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
@@ -451,7 +451,7 @@
                      "is_source_a_file": true,
                      "job": "web_job",
                      "pipeline": "godot-groups-editor",
-                     "source": "web_release.zip",
+                     "source": "web_nothreads_release.zip",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
