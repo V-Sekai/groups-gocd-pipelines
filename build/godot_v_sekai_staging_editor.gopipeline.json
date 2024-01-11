@@ -97,7 +97,7 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/godot.web.template_release.double.wasm32.zip",
+                     "source": "g/bin/godot.web.template_release.double.wasm32.nothreads.zip",
                      "type": "build"
                   }
                ],
@@ -315,7 +315,7 @@
                      "is_source_a_file": true,
                      "job": "web_job",
                      "pipeline": "godot-groups-staging-editor",
-                     "source": "godot.web.template_release.double.wasm32.zip",
+                     "source": "godot.web.template_release.double.wasm32.nothreads.zip",
                      "stage": "defaultStage",
                      "type": "fetch"
                   },
@@ -331,7 +331,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.web.template_release.double.wasm32.zip bin/web_nothreads_debug.zip && cp bin/godot.web.template_release.double.wasm32.zip bin/web_nothreads_release.zip"
+                        "cp bin/godot.web.template_release.double.wasm32.nothreads.zip bin/web_nothreads_debug.zip && cp bin/godot.web.template_release.double.wasm32.nothreads.zip bin/web_nothreads_release.zip"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
