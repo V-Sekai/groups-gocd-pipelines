@@ -47,6 +47,11 @@ local templates = import 'templates.libsonnet';
             destination: '',
             type: 'build',
           },
+          if platform_info.editor_godot_binary_secondary != '' then {
+            source: 'g/bin/' + platform_info.editor_godot_binary_secondary,
+            destination: '',
+            type: 'build',
+          } else null,
           if std.endsWith(platform_info.editor_godot_binary, '.exe') then {
             source: 'g/bin/' + templates.exe_to_pdb_path(platform_info.editor_godot_binary),
             destination: '',

@@ -36,6 +36,7 @@
       "export_name": "macos",
       "platform_name": "macos",
       "editor_godot_binary": "Godot.app",
+      "editor_godot_binary_secondary": "godot.linuxbsd.editor.double.arm64",
       "gdextension_platform": "osx",
       "export_configuration": "Mac OSX",
       "export_directory": "export_macos",

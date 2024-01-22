@@ -133,6 +133,11 @@
                      "destination": "",
                      "source": "g/bin/godot.macos.editor.double.x86_64",
                      "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "g/bin/godot.macos.editor.double.arm64",
+                     "type": "build"
                   }
                ],
                "environment_variables": [

@@ -65,6 +65,11 @@ local itch_fire_template = [
             destination: '',
             type: 'build',
           },
+          if platform_info.editor_godot_binary_secondary != '' then {
+            source: 'g/bin/' + platform_info.editor_godot_binary_secondary,
+            destination: '',
+            type: 'build',
+          },
           if std.endsWith(platform_info.editor_godot_binary, '.exe') then {
             source: 'g/bin/' + templates.exe_to_pdb_path(platform_info.editor_godot_binary),
             destination: '',
