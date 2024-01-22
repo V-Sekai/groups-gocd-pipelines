@@ -225,7 +225,7 @@ local templates = import 'templates.libsonnet';
             source: 'version.txt',
             destination: 'templates',
             pipeline: pipeline_name,
-            stage: 'templateStage',
+            stage: 'template-stage-' + godot_template_platforms[0].platform_name,
             job: godot_template_platforms[0].platform_name + '_job',
           },
           {

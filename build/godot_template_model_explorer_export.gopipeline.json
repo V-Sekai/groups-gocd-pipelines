@@ -19,7 +19,7 @@
          "ignore_for_scheduling": false,
          "name": "godot-groups-editor_pipeline_dependency",
          "pipeline": "godot-groups-editor",
-         "stage": "templateZipStage",
+         "stage": "template-zip-stage-godot-groups-editor",
          "type": "dependency"
       }
    ],
@@ -50,7 +50,7 @@
                      "job": "defaultJob",
                      "pipeline": "godot-groups-editor",
                      "source": "godot.templates.tpz",
-                     "stage": "templateZipStage",
+                     "stage": "template-zip-stage-windows",
                      "type": "fetch"
                   },
                   {
@@ -195,7 +195,7 @@
                      "job": "defaultJob",
                      "pipeline": "godot-groups-editor",
                      "source": "godot.templates.tpz",
-                     "stage": "templateZipStage",
+                     "stage": "template-zip-stage-linux",
                      "type": "fetch"
                   },
                   {
@@ -339,7 +339,7 @@
                      "job": "windows_job",
                      "pipeline": "model-explorer-export",
                      "source": "export_windows",
-                     "stage": "exportStage",
+                     "stage": "export-stage-windows",
                      "type": "fetch"
                   },
                   {
@@ -376,7 +376,7 @@
                      "job": "windows_job",
                      "pipeline": "model-explorer-export",
                      "source": "export_windows",
-                     "stage": "exportStage",
+                     "stage": "export-stage-windows",
                      "type": "fetch"
                   },
                   {
@@ -422,7 +422,7 @@
                      "job": "linux_job",
                      "pipeline": "model-explorer-export",
                      "source": "export_linuxbsd",
-                     "stage": "exportStage",
+                     "stage": "export-stage-linux",
                      "type": "fetch"
                   },
                   {
@@ -459,7 +459,7 @@
                      "job": "linux_job",
                      "pipeline": "model-explorer-export",
                      "source": "export_linuxbsd",
-                     "stage": "exportStage",
+                     "stage": "export-stage-linux",
                      "type": "fetch"
                   },
                   {

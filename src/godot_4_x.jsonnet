@@ -60,8 +60,8 @@ local itch_fire_template = [
     else null,
   ],
 
-  local create_default_stage(godot_engine_platforms, first_stage_approval) = {
-    name: 'default-stage-',
+  local create_default_stage(godot_engine_platforms, first_stage_approval, pipeline_name) = {
+    name: 'default-stage-' + pipeline_name,
     approval: first_stage_approval,
     jobs: [
       {
@@ -154,7 +154,7 @@ local itch_fire_template = [
             type: 'fetch',
             artifact_origin: 'gocd',
             pipeline: pipeline_name,
-            stage: 'default-stage-' + platform_info.scons_platform,
+            stage: 'default-stage-' + platform_info.platform_name,
             job: platform_info.platform_name + '_job',
             is_source_a_file: true,
             source: platform_info.intermediate_godot_binary,
@@ -246,7 +246,7 @@ local itch_fire_template = [
             source: 'version.txt',
             destination: 'templates',
             pipeline: pipeline_name,
-            stage: 'templateStage' + godot_template_platforms[0].platform_name,
+            stage: 'template-stage-' + godot_template_platforms[0].platform_name,
             job: godot_template_platforms[0].platform_name + '_job',
           },
           {
@@ -330,12 +330,9 @@ local itch_fire_template = [
       else null,
     ],
     stages: [
-      create_default_stage(macos_engine_platforms, first_stage_approval),
-      create_default_stage(non_macos_engine_platforms, first_stage_approval),
-      create_template_stage(macos_template_platforms, godot_modules_git, pipeline_name),
-      create_template_stage(non_macos_template_platforms, godot_modules_git, pipeline_name),
-      create_template_zip_stage(macos_template_platforms, templates, pipeline_name),
-      create_template_zip_stage(non_macos_template_platforms, templates, pipeline_name),
+      create_default_stage(enabled_engine_template_platforms, first_stage_approval, pipeline_name),
+      create_template_stage(enabled_engine_template_platforms, godot_modules_git, pipeline_name),
+      create_template_zip_stage(enabled_engine_template_platforms, templates, pipeline_name),
     ],
   },
   local generatePipeline(pipeline_name, godot_status, godot_branch) = std.prune(

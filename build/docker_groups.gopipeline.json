@@ -13,7 +13,7 @@
          "ignore_for_scheduling": false,
          "name": "groups-export_pipeline_dependency",
          "pipeline": "groups-export",
-         "stage": "exportStage",
+         "stage": "export-stage-groups-export",
          "type": "dependency"
       }
    ],
@@ -43,7 +43,7 @@
                      "job": "linux_job",
                      "pipeline": "groups-export",
                      "source": "export_linuxbsd",
-                     "stage": "exportStage",
+                     "stage": "export-stage-groups-export",
                      "type": "fetch"
                   },
                   {

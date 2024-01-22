@@ -19,7 +19,7 @@ local godot_editor_export(pipeline_name, pipeline_dependency, itchio_login, gocd
       name: pipeline_dependency + '_pipeline_dependency',
       type: 'dependency',
       pipeline: pipeline_dependency,
-      stage: 'templateZipStage',
+      stage: 'template-zip-stage-'+ pipeline_dependency,
       ignore_for_scheduling: false,
     },
   ],
