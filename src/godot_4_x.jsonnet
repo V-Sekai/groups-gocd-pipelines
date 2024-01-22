@@ -138,6 +138,16 @@ local itch_fire_template = [
           }
           for extra_command in platform_info.extra_commands
         ] + [
+          if platform_info.editor_godot_binary_secondary != "" then {
+            type: 'fetch',
+            artifact_origin: 'gocd',
+            pipeline: pipeline_name,
+            stage: 'defaultStage',
+            job: platform_info.editor_godot_binary_secondary + '_job',
+            is_source_a_file: true,
+            source: platform_info.editor_godot_binary_secondary,
+            destination: 'g/bin/',
+          } else null,
           {
             type: 'exec',
             arguments: [

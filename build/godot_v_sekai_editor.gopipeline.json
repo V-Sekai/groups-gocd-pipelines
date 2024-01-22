@@ -489,6 +489,16 @@
                      "working_directory": "g"
                   },
                   {
+                     "artifact_origin": "gocd",
+                     "destination": "g/bin/",
+                     "is_source_a_file": true,
+                     "job": "godot.macos.editor.double.arm64_job",
+                     "pipeline": "godot-groups-editor",
+                     "source": "godot.macos.editor.double.arm64",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
                      "arguments": [
                         "-c",
                         "sed -i \"/^status =/s/=.*/= \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"/\" version.py"
