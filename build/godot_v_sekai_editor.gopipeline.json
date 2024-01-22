@@ -126,6 +126,54 @@
                      "working_directory": "g"
                   }
                ]
+            },
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "g/bin/Godot.app",
+                     "type": "build"
+                  }
+               ],
+               "environment_variables": [
+                  {
+                     "name": "PATH",
+                     "value": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+                  }
+               ],
+               "name": "macos_job",
+               "resources": [
+                  "mingw5",
+                  "linux"
+               ],
+               "tasks": [
+                  {
+                     "arguments": [
+                        "-c",
+                        "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" scons werror=no platform=macos target=editor use_lto=no precision=double ccache_bin= osxcross_sdk=darwin19 arch=x86_64 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -p g/bin/godot.macos.editor.double.x86_64 g/bin/Godot.app"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec"
+                  }
+               ]
             }
          ],
          "name": "defaultStage"
@@ -347,6 +395,218 @@
                      "working_directory": "g"
                   }
                ]
+            },
+            {
+               "artifacts": [
+                  {
+                     "destination": "",
+                     "source": "g/bin/macos.zip",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "Godot.app",
+                     "type": "build"
+                  },
+                  {
+                     "destination": "",
+                     "source": "g/bin/version.txt",
+                     "type": "build"
+                  }
+               ],
+               "environment_variables": [
+                  {
+                     "name": "PATH",
+                     "value": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+                  }
+               ],
+               "name": "macos_job",
+               "resources": [
+                  "linux",
+                  "mingw5"
+               ],
+               "tasks": [
+                  {
+                     "arguments": [
+                        "-c",
+                        "OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" scons ccache_bin= platform=macos arch=arm64 osxcross_sdk=darwin19 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "lipo -create bin/godot.macos.editor.double.x86_64 bin/godot.macos.editor.double.arm64 -output bin/godot.macos.editor.double.universal"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "rm -rf ./bin/Godot.app"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -r ./misc/dist/macos_tools.app ./bin/"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp bin/godot.macos.editor.double.universal ./bin/Godot.app/Contents/MacOS/Godot"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "chmod +x ./bin/Godot.app/Contents/MacOS/Godot"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "sed -i \"/^status =/s/=.*/= \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"/\" version.py"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache OSXCROSS_ROOT=\"LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross\" scons werror=no platform=macos target=editor use_lto=no precision=double ccache_bin= osxcross_sdk=darwin19 arch=x86_64 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "ls"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp bin/godot.macos.editor.double.x86_64 bin/godot_macos_debug.x86_64 && cp bin/godot.macos.editor.double.x86_64 bin/godot_macos_release.x86_64 && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin19-strip -S bin/godot_macos_release.x86_64"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "rm -rf ./bin/macos_template.app"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -r ./misc/dist/macos_template.app ./bin/"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "mkdir -p ./bin/macos_template.app/Contents/MacOS"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp ./bin/godot.macos.editor.double.universal macos_template.app/Contents/MacOS/godot_macos_release.64"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp ./bin/godot.macos.editor.double.universal macos_template.app/Contents/MacOS/godot_macos_debug.64"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "chmod +x macos_template.app/Contents/MacOS/godot_macos*"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "rm -rf bin/macos.zip"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cd bin && zip -1 -r macos.zip macos_template.app/"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cd .. && rm -rf Godot.app && cp -r ./g/misc/dist/macos_template.app Godot.app"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  }
+               ]
             }
          ],
          "name": "templateStage"
@@ -452,6 +712,16 @@
                      "job": "web_job",
                      "pipeline": "godot-groups-editor",
                      "source": "web_nothreads_release.zip",
+                     "stage": "templateStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "templates",
+                     "is_source_a_file": true,
+                     "job": "macos_job",
+                     "pipeline": "godot-groups-editor",
+                     "source": "macos.zip",
                      "stage": "templateStage",
                      "type": "fetch"
                   },

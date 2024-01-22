@@ -23,11 +23,6 @@ local itch_fire_template = [
 ];
 
 {
-  local macos_engine_platforms = std.filter(function(platform_info) platform_info.platform_name == 'macos', enabled_engine_template_platforms),
-  local non_macos_engine_platforms = std.filter(function(platform_info) platform_info.platform_name != 'macos', enabled_engine_template_platforms),
-  local macos_template_platforms = std.filter(function(platform_info) platform_info.platform_name == 'macos', enabled_template_platforms),
-  local non_macos_template_platforms = std.filter(function(platform_info) platform_info.platform_name != 'macos', enabled_template_platforms),
-
   local create_timer(timer_spec) = {
     spec: timer_spec,
     only_on_changes: true,
@@ -328,9 +323,9 @@ local itch_fire_template = [
       else null,
     ],
     stages: [
-      create_default_stage(non_macos_engine_platforms, first_stage_approval),
-      create_template_stage(non_macos_template_platforms, godot_modules_git, pipeline_name),
-      create_template_zip_stage(non_macos_template_platforms, templates, pipeline_name),
+      create_default_stage(enabled_template_platforms, first_stage_approval),
+      create_template_stage(enabled_template_platforms, godot_modules_git, pipeline_name),
+      create_template_zip_stage(enabled_template_platforms, templates, pipeline_name),
     ],
   },
   local generatePipeline(pipeline_name, godot_status, godot_branch) = std.prune(
