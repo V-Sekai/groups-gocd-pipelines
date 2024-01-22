@@ -160,7 +160,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache LD_LIBRARY_PATH=/opt/osxcross/target/bin OSXCROSS_ROOT=/opt/osxcross PATH=\"/opt/osxcross/target/bin:$PATH\" scons werror=no platform=macos target=editor use_lto=no precision=double osxcross_sdk=darwin23 arch=x86_64 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_volk=yes vulkan_sdk_path=/opt/vulkan_sdk/MoltenVK"
+                        "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache LD_LIBRARY_PATH=/opt/osxcross/target/bin OSXCROSS_ROOT=/opt/osxcross PATH=\"/opt/osxcross/target/bin:$PATH\"  scons werror=no platform=macos target=editor use_lto=no precision=double osxcross_sdk=darwin23 arch=x86_64 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_volk=yes vulkan_sdk_path=/opt/vulkan_sdk/MoltenVK && mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache LD_LIBRARY_PATH=/opt/osxcross/target/bin OSXCROSS_ROOT=/opt/osxcross PATH=\"/opt/osxcross/target/bin:$PATH\" PATH=\"/opt/osxcross/target/bin:$PATH\" scons platform=macos arch=arm64 osxcross_sdk=darwin23 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_volk=yes vulkan_sdk_path=/opt/vulkan_sdk/MoltenVK"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -420,15 +420,6 @@
                   "gpu"
                ],
                "tasks": [
-                  {
-                     "arguments": [
-                        "-c",
-                        "PATH=\"/opt/osxcross/target/bin:$PATH\" LD_LIBRARY_PATH=/opt/osxcross/target/bin OSXCROSS_ROOT=/opt/osxcross scons platform=macos arch=arm64 osxcross_sdk=darwin23 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_volk=yes vulkan_sdk_path=/opt/vulkan_sdk/MoltenVK"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
                   {
                      "arguments": [
                         "-c",
