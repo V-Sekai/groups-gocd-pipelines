@@ -330,11 +330,8 @@ local itch_fire_template = [
       else null,
     ],
     stages: [
-      create_default_stage(macos_engine_platforms, first_stage_approval),
       create_default_stage(non_macos_engine_platforms, first_stage_approval),
-      create_template_stage(macos_template_platforms, godot_modules_git, pipeline_name),
       create_template_stage(non_macos_template_platforms, godot_modules_git, pipeline_name),
-      create_template_zip_stage(macos_template_platforms, templates, pipeline_name),
       create_template_zip_stage(non_macos_template_platforms, templates, pipeline_name),
     ],
   },
