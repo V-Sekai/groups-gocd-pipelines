@@ -70,9 +70,9 @@
       "gdextension_platform": "macos",
       "gdextension_target": "template_debug",
       "strip_command": "LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin23-strip -S",
-      "godot_scons_arguments": "LINK=x86_64-apple-darwin23-clang precision=double osxcross_sdk=darwin23 arch=x86_64 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes vulkan_sdk_path=/opt/vulkan_sdk/MoltenVK",
+      "godot_scons_arguments": "precision=double osxcross_sdk=darwin23 arch=x86_64 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes vulkan_sdk_path=/opt/vulkan_sdk/MoltenVK",
       "extra_commands": [
-        "PATH=\"/opt/osxcross/target/bin:$PATH\" LD_LIBRARY_PATH=/opt/osxcross/target/bin OSXCROSS_ROOT=/opt/osxcross scons LINK=arm64e-apple-darwin23-clang ccache_bin= platform=macos arch=arm64 osxcross_sdk=darwin23 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes",
+        "PATH=\"/opt/osxcross/target/bin:$PATH\" LD_LIBRARY_PATH=/opt/osxcross/target/bin OSXCROSS_ROOT=/opt/osxcross scons ccache_bin= platform=macos arch=arm64 osxcross_sdk=darwin23 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes",
         "lipo -create bin/godot.macos.editor.double.x86_64 bin/godot.macos.editor.double.arm64 -output bin/godot.macos.editor.double.universal",
         "rm -rf ./bin/Godot.app",
         "cp -r ./misc/dist/macos_tools.app ./bin/",
