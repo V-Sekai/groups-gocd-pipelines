@@ -351,7 +351,7 @@ local itch_fire_template = [
   ),
   local generatePipelineMac(pipeline_name, godot_status, godot_branch) = std.prune(
     godot_pipeline(
-      pipeline_name=pipeline_name,
+      pipeline_name=pipeline_name + "-macos",
       godot_status=godot_status,
       godot_git='https://github.com/V-Sekai/godot.git',
       godot_branch=godot_branch,
