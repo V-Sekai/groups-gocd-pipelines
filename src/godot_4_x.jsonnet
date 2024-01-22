@@ -58,7 +58,7 @@ local itch_fire_template = [
     jobs: [
       {
         name: platform_info.platform_name + '_job',
-        resources: ['mingw5', 'linux'],
+        resources: if platform_info.platform_name == "macos" then ['mingw5', 'linux', 'gpu'] else ['mingw5', 'linux'],
         artifacts: [
           {
             source: 'g/bin/' + platform_info.editor_godot_binary,
@@ -105,7 +105,7 @@ local itch_fire_template = [
     jobs: [
       {
         name: platform_info.platform_name + '_job',
-        resources: ['linux', 'mingw5'],
+        resources: if platform_info.platform_name == "macos" then ['mingw5', 'linux', 'gpu'] else ['mingw5', 'linux'],
         artifacts: if platform_info.template_artifacts_override != null then platform_info.template_artifacts_override else [
           {
             type: 'build',

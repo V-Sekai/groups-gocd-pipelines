@@ -144,7 +144,8 @@
                "name": "macos_job",
                "resources": [
                   "mingw5",
-                  "linux"
+                  "linux",
+                  "gpu"
                ],
                "tasks": [
                   {
@@ -200,8 +201,8 @@
                ],
                "name": "windows_job",
                "resources": [
-                  "linux",
-                  "mingw5"
+                  "mingw5",
+                  "linux"
                ],
                "tasks": [
                   {
@@ -272,8 +273,8 @@
                ],
                "name": "linux_job",
                "resources": [
-                  "linux",
-                  "mingw5"
+                  "mingw5",
+                  "linux"
                ],
                "tasks": [
                   {
@@ -344,8 +345,8 @@
                ],
                "name": "web_job",
                "resources": [
-                  "linux",
-                  "mingw5"
+                  "mingw5",
+                  "linux"
                ],
                "tasks": [
                   {
@@ -422,8 +423,9 @@
                ],
                "name": "macos_job",
                "resources": [
+                  "mingw5",
                   "linux",
-                  "mingw5"
+                  "gpu"
                ],
                "tasks": [
                   {
