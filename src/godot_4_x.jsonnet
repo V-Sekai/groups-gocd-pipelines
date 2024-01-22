@@ -10,7 +10,6 @@ local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
 local docker_gocd_agent_pipeline = 'docker-gocd-agent-centos-8-groups';
 local godot_template_groups_editor = 'godot-groups-editor';
-local godot_template_groups_editor_macos = 'godot-groups-editor-macos';
 local godot_template_groups = 'groups-export';
 local godot_template_model_explorer = 'model-explorer-export';
 
@@ -19,7 +18,6 @@ local itch_fire_template = [
   docker_uro_pipeline,
   docker_gocd_agent_pipeline,
   godot_template_groups_editor,
-  godot_template_groups_editor_macos,
   godot_template_groups,
   godot_template_model_explorer,
 ];
