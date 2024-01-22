@@ -160,7 +160,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache LD_LIBRARY_PATH=/opt/osxcross/target/bin OSXCROSS_ROOT=/opt/osxcross PATH=\"/opt/osxcross/target/bin:$PATH\" scons werror=no platform=macos target=editor use_lto=no precision=double osxcross_sdk=darwin23 arch=x86_64 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes vulkan_sdk_path=/opt/vulkan_sdk/MoltenVK"
+                        "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache LD_LIBRARY_PATH=/opt/osxcross/target/bin OSXCROSS_ROOT=/opt/osxcross PATH=\"/opt/osxcross/target/bin:$PATH\" scons werror=no platform=macos target=editor use_lto=no precision=double osxcross_sdk=darwin23 arch=x86_64 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_volk=yes vulkan_sdk_path=/opt/vulkan_sdk/MoltenVK"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -423,7 +423,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "PATH=\"/opt/osxcross/target/bin:$PATH\" LD_LIBRARY_PATH=/opt/osxcross/target/bin OSXCROSS_ROOT=/opt/osxcross scons platform=macos arch=arm64 osxcross_sdk=darwin23 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes vulkan_sdk_path=/opt/vulkan_sdk/MoltenVK"
+                        "PATH=\"/opt/osxcross/target/bin:$PATH\" LD_LIBRARY_PATH=/opt/osxcross/target/bin OSXCROSS_ROOT=/opt/osxcross scons platform=macos arch=arm64 osxcross_sdk=darwin23 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_volk=yes vulkan_sdk_path=/opt/vulkan_sdk/MoltenVK"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -450,7 +450,16 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -r ./misc/dist/macos_tools.app ./bin/"
+                        "cp -r ./misc/dist/macos_tools.app ./bin/Godot.app"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "mkdir -p Godot.app/Contents/Frameworks"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -460,6 +469,15 @@
                      "arguments": [
                         "-c",
                         "cp bin/godot.macos.editor.double.universal ./bin/Godot.app/Contents/MacOS/Godot"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp /opt/vulkan_sdk/MoltenVK/MoltenVK/dylib/macOS/libMoltenVK.dylib ./bin/Godot.app/Contents/Frameworks/libMoltenVK.dylib"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
