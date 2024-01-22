@@ -160,7 +160,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache LD_LIBRARY_PATH=/opt/osxcross/target/bin OSXCROSS_ROOT=\"/opt/osxcross\" scons werror=no platform=macos target=editor use_lto=no LINK= precision=double ccache_bin= osxcross_sdk=darwin23 arch=x86_64 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes vulkan_sdk_path=/opt/vulkan_sdk/MoltenVK"
+                        "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache LD_LIBRARY_PATH=/opt/osxcross/target/bin OSXCROSS_ROOT=/opt/osxcross scons werror=no platform=macos target=editor use_lto=no LINK=clang precision=double osxcross_sdk=darwin23 arch=x86_64 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes vulkan_sdk_path=/opt/vulkan_sdk/MoltenVK"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -423,7 +423,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "LD_LIBRARY_PATH=/opt/osxcross/target/bin OSXCROSS_ROOT=\"/opt/osxcross\" scons LINK= ccache_bin= platform=macos arch=arm64 osxcross_sdk=darwin23 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes"
+                        "LD_LIBRARY_PATH=/opt/osxcross/target/bin OSXCROSS_ROOT=/opt/osxcross scons LINK=clang ccache_bin= platform=macos arch=arm64 osxcross_sdk=darwin23 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_static_mvk=yes"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
