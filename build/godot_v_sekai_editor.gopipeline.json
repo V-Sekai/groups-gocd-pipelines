@@ -505,7 +505,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.macos.editor.double.x86_64 bin/godot_macos_debug.x86_64 && cp bin/godot.macos.editor.double.x86_64 bin/godot_macos_release.x86_64 && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin23-strip -S bin/godot_macos_release.x86_64"
+                        "cp bin/godot.macos.editor.double.x86_64 bin/godot.macos.editor.double.x86_64 && cp bin/godot.macos.editor.double.x86_64 bin/godot.macos.editor.double.x86_64 && LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin23-strip -S bin/godot.macos.editor.double.x86_64"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
