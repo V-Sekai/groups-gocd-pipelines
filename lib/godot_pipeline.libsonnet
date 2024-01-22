@@ -195,7 +195,7 @@ local templates = import 'templates.libsonnet';
   },
 
   local create_template_zip_stage(godot_template_platforms, templates, pipeline_name) = {
-    name: 'templateZipStage_' + platform_info.platform_name,
+    name: 'templateZipStage',
     jobs: [
       {
         name: 'defaultJob',
