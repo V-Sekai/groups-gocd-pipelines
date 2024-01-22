@@ -432,7 +432,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "lipo -create ./bin/godot.macos.editor.double.x86_64 ./bin/godot.macos.editor.double.arm64 -output ./bin/godot.macos.editor.double.universal"
+                        "PATH=\"/opt/osxcross/target/bin:$PATH\" lipo -create ./bin/godot.macos.editor.double.x86_64 ./bin/godot.macos.editor.double.arm64 -output ./bin/godot.macos.editor.double.universal"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
