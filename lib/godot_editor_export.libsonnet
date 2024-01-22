@@ -2,7 +2,7 @@ local groups_export = import 'groups_export.json';
 local platform = import 'platform_dict.json';
 
 local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web', 'macos']];
-local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linux']];
+local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linux', 'macos']];
 
 local godot_editor_export(pipeline_name, pipeline_dependency, itchio_login, gocd_group, godot_status, gocd_project_folder, enabled_export_platforms) = {
   name: pipeline_name,
