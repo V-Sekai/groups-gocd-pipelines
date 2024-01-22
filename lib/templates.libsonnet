@@ -51,7 +51,7 @@ local platform = import 'platform_dict.json';
       ],
       stages: [
         {
-          name: 'exportStage',
+          name:  pipeline_name + '-export-stage',
           clean_workspace: true,
           fetch_materials: true,
           jobs: [
@@ -257,7 +257,7 @@ local platform = import 'platform_dict.json';
           ],
         },
         {
-          name: 'uploadStage',
+          name: pipeline_name + '-upload-stage',
           clean_workspace: false,
           jobs: [
             {

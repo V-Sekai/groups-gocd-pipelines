@@ -320,7 +320,7 @@
                ]
             }
          ],
-         "name": "exportStage"
+         "name": "groups-export-export-stage"
       },
       {
          "clean_workspace": false,
@@ -492,7 +492,7 @@
                ]
             }
          ],
-         "name": "uploadStage"
+         "name": "groups-export-upload-stage"
       }
    ]
 }
