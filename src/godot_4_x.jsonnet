@@ -10,6 +10,7 @@ local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
 local docker_gocd_agent_pipeline = 'docker-gocd-agent-centos-8-groups';
 local godot_template_groups_editor = 'godot-groups-editor';
+local godot_template_groups_editor_mac = 'godot-groups-editor-mac';
 local godot_template_groups = 'groups-export';
 local godot_template_model_explorer = 'model-explorer-export';
 
@@ -18,6 +19,7 @@ local itch_fire_template = [
   docker_uro_pipeline,
   docker_gocd_agent_pipeline,
   godot_template_groups_editor,
+  godot_template_groups_editor_mac,
   godot_template_groups,
   godot_template_model_explorer,
 ];
@@ -350,7 +352,7 @@ local itch_fire_template = [
       godot_template_platforms=['macos'],
     ),
   ),
-  'godot_v_sekai_editor_mac.gopipeline.json': generatePipelineMac(godot_template_groups_editor, 'groups-4.3.0', 'groups-4.3'),
+  'godot_v_sekai_editor_mac.gopipeline.json': generatePipelineMac(godot_template_groups_editor_mac, 'groups-4.3.0', 'groups-4.3'),
   'godot_v_sekai_editor.gopipeline.json': generatePipeline(godot_template_groups_editor, 'groups-4.3.0', 'groups-4.3'),
   'godot_template_groups_export.gopipeline.json': std.prune(
     templates.godot_tools_pipeline_export(

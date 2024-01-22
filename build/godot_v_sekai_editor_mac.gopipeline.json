@@ -16,7 +16,7 @@
          "url": "https://github.com/V-Sekai/godot.git"
       }
    ],
-   "name": "godot-groups-editor-macos",
+   "name": "godot-groups-editor-mac-macos",
    "stages": [
       {
          "jobs": [
@@ -218,7 +218,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "windows_job",
-                     "pipeline": "godot-groups-editor-macos",
+                     "pipeline": "godot-groups-editor-mac-macos",
                      "source": "godot.windows.editor.double.x86_64.llvm.exe",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -290,7 +290,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "linux_job",
-                     "pipeline": "godot-groups-editor-macos",
+                     "pipeline": "godot-groups-editor-mac-macos",
                      "source": "godot.linuxbsd.editor.double.x86_64.llvm",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -362,7 +362,7 @@
                      "destination": "g/bin/",
                      "is_source_a_file": true,
                      "job": "web_job",
-                     "pipeline": "godot-groups-editor-macos",
+                     "pipeline": "godot-groups-editor-mac-macos",
                      "source": "godot.web.template_release.double.wasm32.nothreads.zip",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -640,7 +640,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windows_job",
-                     "pipeline": "godot-groups-editor-macos",
+                     "pipeline": "godot-groups-editor-mac-macos",
                      "source": "version.txt",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -650,7 +650,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windows_job",
-                     "pipeline": "godot-groups-editor-macos",
+                     "pipeline": "godot-groups-editor-mac-macos",
                      "source": "godot.windows.editor.double.x86_64.llvm.pdb",
                      "stage": "defaultStage",
                      "type": "fetch"
@@ -660,7 +660,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windows_job",
-                     "pipeline": "godot-groups-editor-macos",
+                     "pipeline": "godot-groups-editor-mac-macos",
                      "source": "windows_debug_x86_64.exe",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -670,7 +670,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "windows_job",
-                     "pipeline": "godot-groups-editor-macos",
+                     "pipeline": "godot-groups-editor-mac-macos",
                      "source": "windows_release_x86_64.exe",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -680,7 +680,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "linux_job",
-                     "pipeline": "godot-groups-editor-macos",
+                     "pipeline": "godot-groups-editor-mac-macos",
                      "source": "linux_debug.x86_64",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -690,7 +690,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "linux_job",
-                     "pipeline": "godot-groups-editor-macos",
+                     "pipeline": "godot-groups-editor-mac-macos",
                      "source": "linux_release.x86_64",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -700,7 +700,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "web_job",
-                     "pipeline": "godot-groups-editor-macos",
+                     "pipeline": "godot-groups-editor-mac-macos",
                      "source": "web_nothreads_debug.zip",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -710,7 +710,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "web_job",
-                     "pipeline": "godot-groups-editor-macos",
+                     "pipeline": "godot-groups-editor-mac-macos",
                      "source": "web_nothreads_release.zip",
                      "stage": "templateStage",
                      "type": "fetch"
@@ -720,7 +720,7 @@
                      "destination": "templates",
                      "is_source_a_file": true,
                      "job": "macos_job",
-                     "pipeline": "godot-groups-editor-macos",
+                     "pipeline": "godot-groups-editor-mac-macos",
                      "source": "macos.zip",
                      "stage": "templateStage",
                      "type": "fetch"
