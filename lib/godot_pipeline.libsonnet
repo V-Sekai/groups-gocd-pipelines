@@ -4,11 +4,6 @@ local templates = import 'templates.libsonnet';
 {
   local enabled_engine_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web', 'macos']],
   local enabled_template_platforms = enabled_engine_platforms,
-  local macos_engine_platforms = std.filter(function(platform_info) platform_info.platform_name == 'macos', enabled_template_platforms),
-  local non_macos_engine_platforms = std.filter(function(platform_info) platform_info.platform_name != 'macos', enabled_template_platforms),
-  local macos_template_platforms = std.filter(function(platform_info) platform_info.platform_name == 'macos', enabled_template_platforms),
-  local non_macos_template_platforms = std.filter(function(platform_info) platform_info.platform_name != 'macos', enabled_template_platforms),
-
   local create_timer(timer_spec) = {
     spec: timer_spec,
     only_on_changes: true,
