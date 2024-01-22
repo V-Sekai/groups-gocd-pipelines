@@ -60,8 +60,8 @@ local itch_fire_template = [
     else null,
   ],
 
-  local create_default_stage(godot_engine_platforms, first_stage_approval, pipeline_name) = {
-    name: 'default-stage-' + pipeline_name,
+  local create_default_stage(godot_engine_platforms, first_stage_approval) = {
+    name: 'defaultStage',
     approval: first_stage_approval,
     jobs: [
       {
@@ -109,7 +109,7 @@ local itch_fire_template = [
     ],
   },
   local create_template_stage(godot_template_platforms, godot_modules_git, pipeline_name) = {
-    name: 'template-stage-' + pipeline_name,
+    name: 'templateStage',
     jobs: [
       {
         name: platform_info.platform_name + '_job',
@@ -154,7 +154,7 @@ local itch_fire_template = [
             type: 'fetch',
             artifact_origin: 'gocd',
             pipeline: pipeline_name,
-            stage: 'default-stage-' + platform_info.platform_name,
+            stage: 'defaultStage',
             job: platform_info.platform_name + '_job',
             is_source_a_file: true,
             source: platform_info.intermediate_godot_binary,
@@ -221,7 +221,7 @@ local itch_fire_template = [
   },
 
   local create_template_zip_stage(godot_template_platforms, templates, pipeline_name) = {
-    name: 'template-zip-stage-' + pipeline_name,
+    name: 'templateZipStage',
     jobs: [
       {
         name: 'defaultJob',
@@ -246,7 +246,7 @@ local itch_fire_template = [
             source: 'version.txt',
             destination: 'templates',
             pipeline: pipeline_name,
-            stage: 'template-stage-' + godot_template_platforms[0].platform_name,
+            stage: 'templateStage',
             job: godot_template_platforms[0].platform_name + '_job',
           },
           {
@@ -256,7 +256,7 @@ local itch_fire_template = [
             source: templates.exe_to_pdb_path(platform.platform_info_dict.windows.editor_godot_binary),
             destination: 'templates',
             pipeline: pipeline_name,
-            stage: 'default-stage-' + godot_template_platforms[0].platform_name,
+            stage: 'defaultStage',
             job: 'windows_job',
           },
         ] + std.flatMap(function(platform_info) [
@@ -267,7 +267,7 @@ local itch_fire_template = [
             source: output_artifact,
             destination: 'templates',
             pipeline: pipeline_name,
-            stage: 'template-stage-' + godot_template_platforms[0].platform_name,
+            stage: 'templateStage',
             job: platform_info.platform_name + '_job',
           }
           for output_artifact in if platform_info.template_output_artifacts != null then platform_info.template_output_artifacts else [
@@ -330,9 +330,12 @@ local itch_fire_template = [
       else null,
     ],
     stages: [
-      create_default_stage(enabled_engine_template_platforms, first_stage_approval, pipeline_name),
-      create_template_stage(enabled_engine_template_platforms, godot_modules_git, pipeline_name),
-      create_template_zip_stage(enabled_engine_template_platforms, templates, pipeline_name),
+      create_default_stage(macos_engine_platforms, first_stage_approval),
+      create_default_stage(non_macos_engine_platforms, first_stage_approval),
+      create_template_stage(macos_template_platforms, godot_modules_git, pipeline_name),
+      create_template_stage(non_macos_template_platforms, godot_modules_git, pipeline_name),
+      create_template_zip_stage(macos_template_platforms, templates, pipeline_name),
+      create_template_zip_stage(non_macos_template_platforms, templates, pipeline_name),
     ],
   },
   local generatePipeline(pipeline_name, godot_status, godot_branch) = std.prune(

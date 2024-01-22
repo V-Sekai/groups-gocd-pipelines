@@ -40,7 +40,7 @@ local templates = import 'templates.libsonnet';
   ],
 
   local create_default_stage(godot_engine_platforms, first_stage_approval) = {
-    name: 'default-stage-' + godot_engine_platforms.platform_name,
+    name: 'defaultStage' + godot_engine_platforms.platform_name,
     approval: first_stage_approval,
     jobs: [
       {
@@ -133,7 +133,7 @@ local templates = import 'templates.libsonnet';
             type: 'fetch',
             artifact_origin: 'gocd',
             pipeline: pipeline_name,
-            stage: 'default-stage-' + platform_info.platform_name,
+            stage: 'defaultStage',
             job: platform_info.platform_name + '_job',
             is_source_a_file: true,
             source: platform_info.intermediate_godot_binary,
@@ -225,7 +225,7 @@ local templates = import 'templates.libsonnet';
             source: 'version.txt',
             destination: 'templates',
             pipeline: pipeline_name,
-            stage: 'template-stage-' + godot_template_platforms[0].platform_name,
+            stage: 'templateStage',
             job: godot_template_platforms[0].platform_name + '_job',
           },
           {
@@ -235,7 +235,7 @@ local templates = import 'templates.libsonnet';
             source: templates.exe_to_pdb_path(platform.platform_info_dict.windows.editor_godot_binary),
             destination: 'templates',
             pipeline: pipeline_name,
-            stage: 'default-stage-' + godot_template_platforms[0].platform_name,
+            stage: 'defaultStage',
             job: 'windows_job',
           },
         ] + std.flatMap(function(platform_info) [
@@ -246,7 +246,7 @@ local templates = import 'templates.libsonnet';
             source: output_artifact,
             destination: 'templates',
             pipeline: pipeline_name,
-            stage: 'templateStage' + godot_template_platforms[0].platform_name,
+            stage: 'templateStage',
             job: platform_info.platform_name + '_job',
           }
           for output_artifact in if platform_info.template_output_artifacts != null then platform_info.template_output_artifacts else [

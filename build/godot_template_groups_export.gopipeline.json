@@ -19,7 +19,7 @@
          "ignore_for_scheduling": false,
          "name": "godot-groups-editor_pipeline_dependency",
          "pipeline": "godot-groups-editor",
-         "stage": "template-zip-stage-godot-groups-editor",
+         "stage": "templateZipStage",
          "type": "dependency"
       }
    ],
@@ -50,7 +50,7 @@
                      "job": "defaultJob",
                      "pipeline": "godot-groups-editor",
                      "source": "godot.templates.tpz",
-                     "stage": "template-zip-stage-windows",
+                     "stage": "templateZipStage",
                      "type": "fetch"
                   },
                   {
@@ -60,7 +60,7 @@
                      "job": "linux_job",
                      "pipeline": "godot-groups-editor",
                      "source": "godot.linuxbsd.editor.double.x86_64.llvm",
-                     "stage": "default-stage-windows",
+                     "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
@@ -70,7 +70,7 @@
                      "job": "linux_job",
                      "pipeline": "godot-groups-editor",
                      "source": "godot.linuxbsd.editor.double.x86_64.llvm",
-                     "stage": "default-stage-windows",
+                     "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
@@ -195,7 +195,7 @@
                      "job": "defaultJob",
                      "pipeline": "godot-groups-editor",
                      "source": "godot.templates.tpz",
-                     "stage": "template-zip-stage-linux",
+                     "stage": "templateZipStage",
                      "type": "fetch"
                   },
                   {
@@ -205,7 +205,7 @@
                      "job": "linux_job",
                      "pipeline": "godot-groups-editor",
                      "source": "godot.linuxbsd.editor.double.x86_64.llvm",
-                     "stage": "default-stage-linux",
+                     "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
@@ -215,7 +215,7 @@
                      "job": "linux_job",
                      "pipeline": "godot-groups-editor",
                      "source": "godot.linuxbsd.editor.double.x86_64.llvm",
-                     "stage": "default-stage-linux",
+                     "stage": "defaultStage",
                      "type": "fetch"
                   },
                   {
@@ -320,7 +320,7 @@
                ]
             }
          ],
-         "name": "groups-export-export-stage"
+         "name": "exportStage"
       },
       {
          "clean_workspace": false,
@@ -339,7 +339,7 @@
                      "job": "windows_job",
                      "pipeline": "groups-export",
                      "source": "export_windows",
-                     "stage": "export-stage-windows",
+                     "stage": "exportStage",
                      "type": "fetch"
                   },
                   {
@@ -376,7 +376,7 @@
                      "job": "windows_job",
                      "pipeline": "groups-export",
                      "source": "export_windows",
-                     "stage": "export-stage-windows",
+                     "stage": "exportStage",
                      "type": "fetch"
                   },
                   {
@@ -422,7 +422,7 @@
                      "job": "linux_job",
                      "pipeline": "groups-export",
                      "source": "export_linuxbsd",
-                     "stage": "export-stage-linux",
+                     "stage": "exportStage",
                      "type": "fetch"
                   },
                   {
@@ -459,7 +459,7 @@
                      "job": "linux_job",
                      "pipeline": "groups-export",
                      "source": "export_linuxbsd",
-                     "stage": "export-stage-linux",
+                     "stage": "exportStage",
                      "type": "fetch"
                   },
                   {
@@ -492,7 +492,7 @@
                ]
             }
          ],
-         "name": "groups-export-upload-stage"
+         "name": "uploadStage"
       }
    ]
 }
