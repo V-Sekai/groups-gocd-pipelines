@@ -423,8 +423,6 @@
                ],
                "name": "macos_job",
                "resources": [
-                  "mingw5",
-                  "linux",
                   "gpu"
                ],
                "tasks": [
