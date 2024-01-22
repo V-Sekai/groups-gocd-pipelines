@@ -40,7 +40,7 @@ local templates = import 'templates.libsonnet';
   ],
 
   local create_default_stage(godot_engine_platforms, first_stage_approval) = {
-    name: 'defaultStage',
+    name: 'defaultStage' + godot_engine_platforms.platform_name,
     approval: first_stage_approval,
     jobs: [
       {
@@ -88,7 +88,7 @@ local templates = import 'templates.libsonnet';
     ],
   },
   local create_template_stage(godot_template_platforms, godot_modules_git, pipeline_name) = {
-    name: 'templateStage',
+    name: 'templateStage_' + godot_template_platforms.platform_name,
     jobs: [
       {
         name: platform_info.platform_name + '_job',
@@ -200,7 +200,7 @@ local templates = import 'templates.libsonnet';
   },
 
   local create_template_zip_stage(godot_template_platforms, templates, pipeline_name) = {
-    name: 'templateZipStage',
+    name: 'templateZipStage_' + platform_info.platform_name,
     jobs: [
       {
         name: 'defaultJob',
@@ -309,12 +309,9 @@ local templates = import 'templates.libsonnet';
       else null,
     ],
     stages: [
-      create_default_stage(macos_engine_platforms, first_stage_approval),
-      create_default_stage(non_macos_engine_platforms, first_stage_approval),
-      create_template_stage(macos_template_platforms, godot_modules_git, pipeline_name),
-      create_template_stage(non_macos_template_platforms, godot_modules_git, pipeline_name),
-      create_template_zip_stage(macos_template_platforms, templates, pipeline_name),
-      create_template_zip_stage(non_macos_template_platforms, templates, pipeline_name),
+      create_default_stage(enabled_engine_platforms, first_stage_approval),
+      create_template_stage(enabled_template_platforms, godot_modules_git, pipeline_name),
+      create_template_zip_stage(enabled_template_platforms, templates, pipeline_name),
     ],
   },
 }

@@ -347,8 +347,20 @@ local itch_fire_template = [
       gocd_group='gamma',
       godot_engine_platforms=enabled_engine_template_platforms,
       godot_template_platforms=enabled_engine_template_platforms,
-    )
+    ),
   ),
+  local generatePipelineMac(pipeline_name, godot_status, godot_branch) = std.prune(
+    godot_pipeline(
+      pipeline_name=pipeline_name,
+      godot_status=godot_status,
+      godot_git='https://github.com/V-Sekai/godot.git',
+      godot_branch=godot_branch,
+      gocd_group='gamma',
+      godot_engine_platforms='macos',
+      godot_template_platforms='macos',
+    ),
+  ),
+  'godot_v_sekai_editor_mac.gopipeline.json': generatePipelineMac(godot_template_groups_editor, 'groups-4.3.0', 'groups-4.3'),
   'godot_v_sekai_editor.gopipeline.json': generatePipeline(godot_template_groups_editor, 'groups-4.3.0', 'groups-4.3'),
   'godot_v_sekai_staging_editor.gopipeline.json': generatePipeline(godot_template_groups_editor_staging, 'groups-staging-4.3', 'groups-staging-4.3'),
   'godot_template_groups_export.gopipeline.json': std.prune(
