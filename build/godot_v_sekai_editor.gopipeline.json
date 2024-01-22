@@ -432,7 +432,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "lipo -create bin/godot.macos.editor.double.x86_64 bin/godot.macos.editor.double.arm64 -output bin/godot.macos.editor.double.universal"
+                        "lipo -create ./bin/godot.macos.editor.double.x86_64 ./bin/godot.macos.editor.double.arm64 -output ./bin/godot.macos.editor.double.universal"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -459,7 +459,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "mkdir -p Godot.app/Contents/Frameworks"
+                        "mkdir -p ./bin/Godot.app/Contents/Frameworks"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -468,7 +468,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp bin/godot.macos.editor.double.universal ./bin/Godot.app/Contents/MacOS/Godot"
+                        "cp ./bin/godot.macos.editor.double.universal ./bin/Godot.app/Contents/MacOS/Godot"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

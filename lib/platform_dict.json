@@ -73,11 +73,11 @@
       "godot_scons_arguments": "precision=double osxcross_sdk=darwin23 arch=x86_64 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_volk=yes vulkan_sdk_path=/opt/vulkan_sdk/MoltenVK",
       "extra_commands": [
         "PATH=\"/opt/osxcross/target/bin:$PATH\" LD_LIBRARY_PATH=/opt/osxcross/target/bin OSXCROSS_ROOT=/opt/osxcross scons platform=macos arch=arm64 osxcross_sdk=darwin23 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_volk=yes vulkan_sdk_path=/opt/vulkan_sdk/MoltenVK",
-        "lipo -create bin/godot.macos.editor.double.x86_64 bin/godot.macos.editor.double.arm64 -output bin/godot.macos.editor.double.universal",
+        "lipo -create ./bin/godot.macos.editor.double.x86_64 ./bin/godot.macos.editor.double.arm64 -output ./bin/godot.macos.editor.double.universal",
         "rm -rf ./bin/Godot.app",
         "cp -r ./misc/dist/macos_tools.app ./bin/Godot.app",
-        "mkdir -p Godot.app/Contents/Frameworks",
-        "cp bin/godot.macos.editor.double.universal ./bin/Godot.app/Contents/MacOS/Godot",
+        "mkdir -p ./bin/Godot.app/Contents/Frameworks",
+        "cp ./bin/godot.macos.editor.double.universal ./bin/Godot.app/Contents/MacOS/Godot",
         "cp /opt/vulkan_sdk/MoltenVK/MoltenVK/dylib/macOS/libMoltenVK.dylib ./bin/Godot.app/Contents/Frameworks/libMoltenVK.dylib",
         "chmod +x ./bin/Godot.app/Contents/MacOS/Godot"
       ],
