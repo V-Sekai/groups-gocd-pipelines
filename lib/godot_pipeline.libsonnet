@@ -309,9 +309,9 @@ local templates = import 'templates.libsonnet';
       else null,
     ],
     stages: [
-      create_default_stage(enabled_engine_platforms, first_stage_approval),
-      create_template_stage(enabled_template_platforms, godot_modules_git, pipeline_name),
-      create_template_zip_stage(enabled_template_platforms, templates, pipeline_name),
+      create_default_stage(godot_engine_platforms, first_stage_approval),
+      create_template_stage(godot_engine_platforms, godot_modules_git, pipeline_name),
+      create_template_zip_stage(godot_engine_platforms, templates, pipeline_name),
     ],
   },
 }
