@@ -13,7 +13,6 @@ local godot_template_groups_editor = 'godot-groups-editor';
 local godot_template_groups_editor_macos = 'godot-groups-editor-macos';
 local godot_template_groups = 'groups-export';
 local godot_template_model_explorer = 'model-explorer-export';
-local godot_template_groups_editor_staging = 'godot-groups-staging-editor';
 
 local itch_fire_template = [
   docker_pipeline,
@@ -22,7 +21,6 @@ local itch_fire_template = [
   godot_template_groups_editor,
   godot_template_groups_editor_macos,
   godot_template_groups,
-  godot_template_groups_editor_staging,
   godot_template_model_explorer,
 ];
 
@@ -361,7 +359,6 @@ local itch_fire_template = [
   ),
   'godot_v_sekai_editor_mac.gopipeline.json': generatePipelineMac(godot_template_groups_editor, 'groups-4.3.0', 'groups-4.3'),
   'godot_v_sekai_editor.gopipeline.json': generatePipeline(godot_template_groups_editor, 'groups-4.3.0', 'groups-4.3'),
-  'godot_v_sekai_staging_editor.gopipeline.json': generatePipeline(godot_template_groups_editor_staging, 'groups-staging-4.3', 'groups-staging-4.3'),
   'godot_template_groups_export.gopipeline.json': std.prune(
     templates.godot_tools_pipeline_export(
       pipeline_name=godot_template_groups,
