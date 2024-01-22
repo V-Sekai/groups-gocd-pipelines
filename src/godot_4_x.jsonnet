@@ -3,8 +3,6 @@ local platform = import '../lib/platform_dict.json';
 local templates = import '../lib/templates.libsonnet';
 
 local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linux']];
-local enabled_engine_template_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web', 'macos']];
-local enabled_template_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web', 'macos']];
 
 local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
@@ -292,8 +290,8 @@ local itch_fire_template = [
     gocd_group='',
     godot_modules_git='',
     godot_modules_branch='',
-    godot_engine_platforms=enabled_engine_template_platforms,
-    godot_template_platforms=enabled_engine_template_platforms,
+    godot_engine_platforms=[],
+    godot_template_platforms=[],
     first_stage_approval=null,
     timer_spec='* * * * * ?'
   ) = {
@@ -325,9 +323,9 @@ local itch_fire_template = [
       else null,
     ],
     stages: [
-      create_default_stage(enabled_template_platforms, first_stage_approval),
-      create_template_stage(enabled_template_platforms, godot_modules_git, pipeline_name),
-      create_template_zip_stage(enabled_template_platforms, templates, pipeline_name),
+      create_default_stage(godot_engine_platforms, first_stage_approval),
+      create_template_stage(godot_template_platforms, godot_modules_git, pipeline_name),
+      create_template_zip_stage(godot_template_platforms, templates, pipeline_name),
     ],
   },
   local generatePipeline(pipeline_name, godot_status, godot_branch) = std.prune(
@@ -337,8 +335,8 @@ local itch_fire_template = [
       godot_git='https://github.com/V-Sekai/godot.git',
       godot_branch=godot_branch,
       gocd_group='gamma',
-      godot_engine_platforms=enabled_engine_template_platforms,
-      godot_template_platforms=enabled_engine_template_platforms,
+      godot_engine_platforms=[platform.platform_info_dict[x] for x in ['windows', 'linux', 'web', 'macos']],
+      godot_template_platforms=[platform.platform_info_dict[x] for x in ['windows', 'linux', 'web', 'macos']],
     ),
   ),
   local generatePipelineMac(pipeline_name, godot_status, godot_branch) = std.prune(
@@ -348,8 +346,8 @@ local itch_fire_template = [
       godot_git='https://github.com/V-Sekai/godot.git',
       godot_branch=godot_branch,
       gocd_group='gamma',
-      godot_engine_platforms=['macos'],
-      godot_template_platforms=['macos'],
+      godot_engine_platforms=[platform.platform_info_dict[x] for x in ['macos']],
+      godot_template_platforms=[platform.platform_info_dict[x] for x in ['macos']],
     ),
   ),
   'godot_v_sekai_editor_mac.gopipeline.json': generatePipelineMac(godot_template_groups_editor_mac, 'groups-4.3.0', 'groups-4.3'),
