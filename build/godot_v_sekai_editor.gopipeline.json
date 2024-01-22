@@ -203,6 +203,16 @@
                ],
                "tasks": [
                   {
+                     "artifact_origin": "gocd",
+                     "destination": "g/bin/",
+                     "is_source_a_file": true,
+                     "job": "godot.windows.editor.double.x86_64.llvm.exe_job",
+                     "pipeline": "godot-groups-editor",
+                     "source": "godot.windows.editor.double.x86_64.llvm.exe",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
                      "arguments": [
                         "-c",
                         "sed -i \"/^status =/s/=.*/= \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"/\" version.py"
@@ -275,6 +285,16 @@
                ],
                "tasks": [
                   {
+                     "artifact_origin": "gocd",
+                     "destination": "g/bin/",
+                     "is_source_a_file": true,
+                     "job": "godot.linuxbsd.editor.double.x86_64.llvm_job",
+                     "pipeline": "godot-groups-editor",
+                     "source": "godot.linuxbsd.editor.double.x86_64.llvm",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
                      "arguments": [
                         "-c",
                         "sed -i \"/^status =/s/=.*/= \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"/\" version.py"
@@ -346,6 +366,16 @@
                   "linux"
                ],
                "tasks": [
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "g/bin/",
+                     "is_source_a_file": true,
+                     "job": "godot.web.template_release.double.wasm32.nothreads.zip_job",
+                     "pipeline": "godot-groups-editor",
+                     "source": "godot.web.template_release.double.wasm32.nothreads.zip",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
                   {
                      "arguments": [
                         "-c",
@@ -426,6 +456,26 @@
                ],
                "tasks": [
                   {
+                     "artifact_origin": "gocd",
+                     "destination": "g/bin/",
+                     "is_source_a_file": true,
+                     "job": "godot.macos.editor.double.x86_64_job",
+                     "pipeline": "godot-groups-editor",
+                     "source": "godot.macos.editor.double.x86_64",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
+                     "artifact_origin": "gocd",
+                     "destination": "g/bin/",
+                     "is_source_a_file": true,
+                     "job": "godot.macos.editor.double.arm64_job",
+                     "pipeline": "godot-groups-editor",
+                     "source": "godot.macos.editor.double.arm64",
+                     "stage": "defaultStage",
+                     "type": "fetch"
+                  },
+                  {
                      "arguments": [
                         "-c",
                         "PATH=\"/opt/osxcross/target/bin:$PATH\" lipo -create ./bin/godot.macos.editor.double.x86_64 ./bin/godot.macos.editor.double.arm64 -output ./bin/godot.macos.editor.double.universal"
@@ -487,16 +537,6 @@
                      "command": "/bin/bash",
                      "type": "exec",
                      "working_directory": "g"
-                  },
-                  {
-                     "artifact_origin": "gocd",
-                     "destination": "g/bin/",
-                     "is_source_a_file": true,
-                     "job": "godot.macos.editor.double.arm64_job",
-                     "pipeline": "godot-groups-editor",
-                     "source": "godot.macos.editor.double.arm64",
-                     "stage": "defaultStage",
-                     "type": "fetch"
                   },
                   {
                      "arguments": [

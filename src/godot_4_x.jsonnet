@@ -130,14 +130,16 @@ local itch_fire_template = [
         ],
         environment_variables: platform_info.environment_variables,
         tasks: [
-          {
-            type: 'exec',
-            arguments: ['-c', extra_command],
-            command: '/bin/bash',
-            working_directory: 'g',
-          }
-          for extra_command in platform_info.extra_commands
-        ] + [
+          if platform_info.editor_godot_binary != "" then {
+            type: 'fetch',
+            artifact_origin: 'gocd',
+            pipeline: pipeline_name,
+            stage: 'defaultStage',
+            job: platform_info.editor_godot_binary + '_job',
+            is_source_a_file: true,
+            source: platform_info.editor_godot_binary,
+            destination: 'g/bin/',
+          } else null,] + [
           if platform_info.editor_godot_binary_secondary != "" then {
             type: 'fetch',
             artifact_origin: 'gocd',
@@ -147,7 +149,15 @@ local itch_fire_template = [
             is_source_a_file: true,
             source: platform_info.editor_godot_binary_secondary,
             destination: 'g/bin/',
-          } else null,
+          } else null] + [
+          {
+            type: 'exec',
+            arguments: ['-c', extra_command],
+            command: '/bin/bash',
+            working_directory: 'g',
+          }
+          for extra_command in platform_info.extra_commands
+        ] + [
           {
             type: 'exec',
             arguments: [
