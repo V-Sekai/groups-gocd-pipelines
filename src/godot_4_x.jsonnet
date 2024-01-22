@@ -61,7 +61,7 @@ local itch_fire_template = [
   ],
 
   local create_default_stage(godot_engine_platforms, first_stage_approval) = {
-    name: 'defaultStage',
+    name: 'default-stage-',
     approval: first_stage_approval,
     jobs: [
       {
@@ -109,7 +109,7 @@ local itch_fire_template = [
     ],
   },
   local create_template_stage(godot_template_platforms, godot_modules_git, pipeline_name) = {
-    name: 'templateStage',
+    name: 'template-stage-' + pipeline_name,
     jobs: [
       {
         name: platform_info.platform_name + '_job',
@@ -154,7 +154,7 @@ local itch_fire_template = [
             type: 'fetch',
             artifact_origin: 'gocd',
             pipeline: pipeline_name,
-            stage: 'defaultStage',
+            stage: 'default-stage-' + platform_info.scons_platform,
             job: platform_info.platform_name + '_job',
             is_source_a_file: true,
             source: platform_info.intermediate_godot_binary,
@@ -221,7 +221,7 @@ local itch_fire_template = [
   },
 
   local create_template_zip_stage(godot_template_platforms, templates, pipeline_name) = {
-    name: 'templateZipStage',
+    name: 'template-zip-stage-' + pipeline_name,
     jobs: [
       {
         name: 'defaultJob',
@@ -246,7 +246,7 @@ local itch_fire_template = [
             source: 'version.txt',
             destination: 'templates',
             pipeline: pipeline_name,
-            stage: 'templateStage',
+            stage: 'templateStage' + godot_template_platforms[0].platform_name,
             job: godot_template_platforms[0].platform_name + '_job',
           },
           {
@@ -256,7 +256,7 @@ local itch_fire_template = [
             source: templates.exe_to_pdb_path(platform.platform_info_dict.windows.editor_godot_binary),
             destination: 'templates',
             pipeline: pipeline_name,
-            stage: 'defaultStage',
+            stage: 'default-stage-' + godot_template_platforms[0].platform_name,
             job: 'windows_job',
           },
         ] + std.flatMap(function(platform_info) [
@@ -267,7 +267,7 @@ local itch_fire_template = [
             source: output_artifact,
             destination: 'templates',
             pipeline: pipeline_name,
-            stage: 'templateStage',
+            stage: 'template-stage-' + godot_template_platforms[0].platform_name,
             job: platform_info.platform_name + '_job',
           }
           for output_artifact in if platform_info.template_output_artifacts != null then platform_info.template_output_artifacts else [
