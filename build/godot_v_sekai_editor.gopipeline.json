@@ -596,7 +596,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf ./macos_template.app"
+                        "rm -rf ./Godot.app"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -605,7 +605,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp -r ./misc/dist/macos_template.app ./"
+                        "cp -r misc/dist/macos_tools.app ./Godot.app"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -623,7 +623,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp ./bin/godot.macos.editor.double.universal ./macos_template.app/Contents/MacOS/godot_macos_release.64"
+                        "cp ./bin/godot.macos.editor.double.universal ./Godot.app/Contents/MacOS/Godot"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -632,16 +632,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cp ./bin/godot.macos.editor.double.universal ./macos_template.app/Contents/MacOS/godot_macos_debug.64"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "chmod +x ./macos_template.app/Contents/MacOS/godot_macos*"
+                        "chmod +x ./Godot.app/Contents/MacOS/godot_macos*"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -659,25 +650,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "zip -1 -r macos.zip ./macos_template.app/"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "rm -rf ./Godot.app"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp -r ./macos_template.app ./Godot.app"
+                        "zip -1 -r macos.zip ./Godot.app/"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
