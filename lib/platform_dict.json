@@ -80,6 +80,7 @@
         "rm -rf ./bin/Godot.app",
         "cp -r ./misc/dist/macos_tools.app ./bin/Godot.app",
         "mkdir -p ./bin/Godot.app/Contents/Frameworks",
+        "mkdir -p ./bin/Godot.app/Contents/MacOS/Godot",
         "cp ./bin/godot.macos.editor.double.universal ./bin/Godot.app/Contents/MacOS/Godot",
         "cp /opt/vulkan_sdk/MoltenVK/MoltenVK/dylib/macOS/libMoltenVK.dylib ./bin/Godot.app/Contents/Frameworks/libMoltenVK.dylib",
         "chmod +x ./bin/Godot.app/Contents/MacOS/Godot"
