@@ -659,7 +659,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cd ./bin && zip -1 -r macos.zip macos_template.app/"
+                        "zip -1 -r macos.zip ./bin/macos_template.app/"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -668,7 +668,16 @@
                   {
                      "arguments": [
                         "-c",
-                        "rm -rf ./Godot.app && cp -r ./bin/macos_template.app Godot.app"
+                        "rm -rf ./bin/Godot.app"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp -r ./bin/macos_template.app ./bin/Godot.app"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -789,7 +798,7 @@
                      "is_source_a_file": true,
                      "job": "macos_job",
                      "pipeline": "godot-groups-editor",
-                     "source": "Godot.app",
+                     "source": "./bin/macos.zip",
                      "stage": "templateStage",
                      "type": "fetch"
                   },
