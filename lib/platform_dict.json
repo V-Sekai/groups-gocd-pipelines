@@ -117,7 +117,7 @@
         "cp ./bin/godot.macos.editor.double.universal ./bin/macos_template.app/Contents/MacOS/godot_macos_debug.64",
         "chmod +x ./bin/macos_template.app/Contents/MacOS/godot_macos*",
         "rm -rf ./bin/macos.zip",
-        "zip -1 -r macos.zip ./bin/macos_template.app/",
+        "zip -1 -r ./bin/macos.zip ./bin/macos_template.app/",
         "rm -rf ./bin/Godot.app",
         "cp -r ./bin/macos_template.app ./bin/Godot.app"
       ],

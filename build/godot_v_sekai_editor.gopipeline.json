@@ -659,7 +659,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "zip -1 -r macos.zip ./bin/macos_template.app/"
+                        "zip -1 -r ./bin/macos.zip ./bin/macos_template.app/"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
