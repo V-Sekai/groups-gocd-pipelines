@@ -110,16 +110,16 @@
       ],
       "template_output_artifacts": ["macos.zip"],
       "template_extra_commands": [
-        "rm -rf ./bin/macos_template.app",
-        "cp -r ./misc/dist/macos_template.app ./bin/",
-        "mkdir -p ./bin/macos_template.app/Contents/MacOS",
-        "cp ./bin/godot.macos.editor.double.universal ./bin/macos_template.app/Contents/MacOS/godot_macos_release.64",
-        "cp ./bin/godot.macos.editor.double.universal ./bin/macos_template.app/Contents/MacOS/godot_macos_debug.64",
-        "chmod +x ./bin/macos_template.app/Contents/MacOS/godot_macos*",
-        "rm -rf ./bin/macos.zip",
-        "zip -1 -r macos.zip ./bin/macos_template.app/",
-        "rm -rf ./bin/Godot.app",
-        "cp -r ./bin/macos_template.app ./bin/Godot.app"
+        "rm -rf ./macos_template.app",
+        "cp -r ./misc/dist/macos_template.app ./",
+        "mkdir -p ./macos_template.app/Contents/MacOS",
+        "cp ./bin/godot.macos.editor.double.universal ./macos_template.app/Contents/MacOS/godot_macos_release.64",
+        "cp ./bin/godot.macos.editor.double.universal ./macos_template.app/Contents/MacOS/godot_macos_debug.64",
+        "chmod +x ./macos_template.app/Contents/MacOS/godot_macos*",
+        "rm -rf ./macos.zip",
+        "zip -1 -r macos.zip ./macos_template.app/",
+        "rm -rf ./Godot.app",
+        "cp -r ./macos_template.app ./Godot.app"
       ],
       "target": "editor"
     }
