@@ -118,7 +118,7 @@
         "chmod +x ./bin/macos_template.app/Contents/MacOS/godot_macos*",
         "rm -rf ./bin/macos.zip",
         "cd ./bin && zip -1 -r macos.zip macos_template.app/",
-        "cd .. && rm -rf Godot.app && cp -r ./bin/macos_template.app Godot.app"
+        "rm -rf ./Godot.app && cp -r ./bin/macos_template.app Godot.app"
       ],
       "target": "editor"
     }

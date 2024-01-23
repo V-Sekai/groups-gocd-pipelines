@@ -668,7 +668,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "cd .. && rm -rf Godot.app && cp -r ./bin/macos_template.app Godot.app"
+                        "rm -rf ./Godot.app && cp -r ./bin/macos_template.app Godot.app"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
