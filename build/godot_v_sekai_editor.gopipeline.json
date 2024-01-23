@@ -428,12 +428,12 @@
                "artifacts": [
                   {
                      "destination": "",
-                     "source": "g/bin/macos.zip",
+                     "source": "g/macos.zip",
                      "type": "build"
                   },
                   {
                      "destination": "",
-                     "source": "Godot.app",
+                     "source": "g/Godot.app",
                      "type": "build"
                   },
                   {
@@ -659,7 +659,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "zip -1 -r ./bin/macos.zip ./bin/macos_template.app/"
+                        "zip -1 -r macos.zip ./bin/macos_template.app/"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
@@ -798,7 +798,7 @@
                      "is_source_a_file": true,
                      "job": "macos_job",
                      "pipeline": "godot-groups-editor",
-                     "source": "./bin/macos.zip",
+                     "source": "macos.zip",
                      "stage": "templateStage",
                      "type": "fetch"
                   },

@@ -94,12 +94,12 @@
       "template_artifacts_override": [
         {
           "type": "build",
-          "source": "g/bin/macos.zip",
+          "source": "g/macos.zip",
           "destination": ""
         },
         {
           "type": "build",
-          "source": "Godot.app",
+          "source": "g/Godot.app",
           "destination": ""
         },
         {
@@ -108,7 +108,7 @@
           "destination": ""
         }
       ],
-      "template_output_artifacts": ["./bin/macos.zip"],
+      "template_output_artifacts": ["macos.zip"],
       "template_extra_commands": [
         "rm -rf ./bin/macos_template.app",
         "cp -r ./misc/dist/macos_template.app ./bin/",
@@ -117,7 +117,7 @@
         "cp ./bin/godot.macos.editor.double.universal ./bin/macos_template.app/Contents/MacOS/godot_macos_debug.64",
         "chmod +x ./bin/macos_template.app/Contents/MacOS/godot_macos*",
         "rm -rf ./bin/macos.zip",
-        "zip -1 -r ./bin/macos.zip ./bin/macos_template.app/",
+        "zip -1 -r macos.zip ./bin/macos_template.app/",
         "rm -rf ./bin/Godot.app",
         "cp -r ./bin/macos_template.app ./bin/Godot.app"
       ],
