@@ -789,7 +789,7 @@
                      "is_source_a_file": true,
                      "job": "macos_job",
                      "pipeline": "godot-groups-editor",
-                     "source": "macos.zip",
+                     "source": "Godot.app",
                      "stage": "templateStage",
                      "type": "fetch"
                   },

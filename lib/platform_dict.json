@@ -108,7 +108,7 @@
           "destination": ""
         }
       ],
-      "template_output_artifacts": ["macos.zip"],
+      "template_output_artifacts": ["Godot.app"],
       "template_extra_commands": [
         "rm -rf ./bin/macos_template.app",
         "cp -r ./misc/dist/macos_template.app ./bin/",
