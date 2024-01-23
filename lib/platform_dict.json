@@ -76,14 +76,6 @@
       "strip_command": "LD_LIBRARY_PATH=/opt/osxcross/target/bin /opt/osxcross/target/bin/x86_64-apple-darwin23-strip -S",
       "godot_scons_arguments": "precision=double osxcross_sdk=darwin23 arch=x86_64 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_volk=yes vulkan_sdk_path=/opt/vulkan_sdk/MoltenVK && mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache LD_LIBRARY_PATH=/opt/osxcross/target/bin OSXCROSS_ROOT=/opt/osxcross PATH=\"/opt/osxcross/target/bin:$PATH\" PATH=\"/opt/osxcross/target/bin:$PATH\" scons platform=macos precision=double osxcross_sdk=darwin23 arch=arm64 CXXFLAGS=\"-Wno-deprecated-declarations -Wno-error \" builtin_freetype=yes use_volk=yes vulkan_sdk_path=/opt/vulkan_sdk/MoltenVK ",
       "extra_commands": [
-        "PATH=\"/opt/osxcross/target/bin:$PATH\" lipo -create ./bin/godot.macos.editor.double.x86_64 ./bin/godot.macos.editor.double.arm64 -output ./bin/godot.macos.editor.double.universal",
-        "rm -rf ./bin/Godot.app",
-        "cp -r ./misc/dist/macos_tools.app ./bin/Godot.app",
-        "mkdir -p ./bin/Godot.app/Contents/Frameworks",
-        "mkdir -p ./bin/Godot.app/Contents/MacOS/Godot",
-        "cp ./bin/godot.macos.editor.double.universal ./bin/Godot.app/Contents/MacOS/Godot",
-        "cp /opt/vulkan_sdk/MoltenVK/MoltenVK/dylib/macOS/libMoltenVK.dylib ./bin/Godot.app/Contents/Frameworks/libMoltenVK.dylib",
-        "chmod +x ./bin/Godot.app/Contents/MacOS/Godot"
       ],
       "environment_variables": [
         {
@@ -110,10 +102,13 @@
       ],
       "template_output_artifacts": ["macos.zip"],
       "template_extra_commands": [
+        "PATH=\"/opt/osxcross/target/bin:$PATH\" lipo -create ./bin/godot.macos.editor.double.x86_64 ./bin/godot.macos.editor.double.arm64 -output ./bin/godot.macos.editor.double.universal",
         "rm -rf ./Godot.app",
         "cp -r misc/dist/macos_tools.app ./Godot.app",
         "mkdir -p ./macos_template.app/Contents/MacOS",
         "cp ./bin/godot.macos.editor.double.universal ./Godot.app/Contents/MacOS/Godot",
+        "mkdir -p ./bin/Godot.app/Contents/Frameworks",
+        "cp /opt/vulkan_sdk/MoltenVK/MoltenVK/dylib/macOS/libMoltenVK.dylib ./bin/Godot.app/Contents/Frameworks/libMoltenVK.dylib",
         "chmod +x ./Godot.app/Contents/MacOS/godot_macos*",
         "rm -rf ./macos.zip",
         "zip -1 -r macos.zip ./Godot.app/"

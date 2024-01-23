@@ -478,78 +478,6 @@
                   {
                      "arguments": [
                         "-c",
-                        "PATH=\"/opt/osxcross/target/bin:$PATH\" lipo -create ./bin/godot.macos.editor.double.x86_64 ./bin/godot.macos.editor.double.arm64 -output ./bin/godot.macos.editor.double.universal"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "rm -rf ./bin/Godot.app"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp -r ./misc/dist/macos_tools.app ./bin/Godot.app"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "mkdir -p ./bin/Godot.app/Contents/Frameworks"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "mkdir -p ./bin/Godot.app/Contents/MacOS/Godot"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp ./bin/godot.macos.editor.double.universal ./bin/Godot.app/Contents/MacOS/Godot"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "cp /opt/vulkan_sdk/MoltenVK/MoltenVK/dylib/macOS/libMoltenVK.dylib ./bin/Godot.app/Contents/Frameworks/libMoltenVK.dylib"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
-                        "chmod +x ./bin/Godot.app/Contents/MacOS/Godot"
-                     ],
-                     "command": "/bin/bash",
-                     "type": "exec",
-                     "working_directory": "g"
-                  },
-                  {
-                     "arguments": [
-                        "-c",
                         "sed -i \"/^status =/s/=.*/= \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"/\" version.py"
                      ],
                      "command": "/bin/bash",
@@ -596,6 +524,15 @@
                   {
                      "arguments": [
                         "-c",
+                        "PATH=\"/opt/osxcross/target/bin:$PATH\" lipo -create ./bin/godot.macos.editor.double.x86_64 ./bin/godot.macos.editor.double.arm64 -output ./bin/godot.macos.editor.double.universal"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
                         "rm -rf ./Godot.app"
                      ],
                      "command": "/bin/bash",
@@ -624,6 +561,24 @@
                      "arguments": [
                         "-c",
                         "cp ./bin/godot.macos.editor.double.universal ./Godot.app/Contents/MacOS/Godot"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "mkdir -p ./bin/Godot.app/Contents/Frameworks"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
+                        "cp /opt/vulkan_sdk/MoltenVK/MoltenVK/dylib/macOS/libMoltenVK.dylib ./bin/Godot.app/Contents/Frameworks/libMoltenVK.dylib"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",
