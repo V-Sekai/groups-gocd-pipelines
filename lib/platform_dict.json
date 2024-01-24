@@ -106,6 +106,7 @@
         "rm -rf ./Godot.app",
         "cp -r misc/dist/macos_tools.app ./Godot.app",
         "mkdir -p ./macos_template.app/Contents/MacOS",
+        "mkdir -p ./Godot.app/Contents/MacOS",
         "cp ./bin/godot.macos.editor.double.universal ./Godot.app/Contents/MacOS/Godot",
         "mkdir -p ./bin/Godot.app/Contents/Frameworks",
         "cp /opt/vulkan_sdk/MoltenVK/MoltenVK/dylib/macOS/libMoltenVK.dylib ./bin/Godot.app/Contents/Frameworks/libMoltenVK.dylib",

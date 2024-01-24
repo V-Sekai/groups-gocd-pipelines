@@ -560,6 +560,15 @@
                   {
                      "arguments": [
                         "-c",
+                        "mkdir -p ./Godot.app/Contents/MacOS"
+                     ],
+                     "command": "/bin/bash",
+                     "type": "exec",
+                     "working_directory": "g"
+                  },
+                  {
+                     "arguments": [
+                        "-c",
                         "cp ./bin/godot.macos.editor.double.universal ./Godot.app/Contents/MacOS/Godot"
                      ],
                      "command": "/bin/bash",
