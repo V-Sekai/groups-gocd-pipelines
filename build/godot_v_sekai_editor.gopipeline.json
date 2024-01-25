@@ -596,7 +596,7 @@
                   {
                      "arguments": [
                         "-c",
-                        "chmod +x ./Godot.app/Contents/MacOS/godot_macos*"
+                        "chmod +x ./Godot.app/Contents/MacOS/Godot"
                      ],
                      "command": "/bin/bash",
                      "type": "exec",

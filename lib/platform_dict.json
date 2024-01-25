@@ -110,7 +110,7 @@
         "cp ./bin/godot.macos.editor.double.universal ./Godot.app/Contents/MacOS/Godot",
         "mkdir -p ./bin/Godot.app/Contents/Frameworks",
         "cp /opt/vulkan_sdk/MoltenVK/MoltenVK/dylib/macOS/libMoltenVK.dylib ./bin/Godot.app/Contents/Frameworks/libMoltenVK.dylib",
-        "chmod +x ./Godot.app/Contents/MacOS/godot_macos*",
+        "chmod +x ./Godot.app/Contents/MacOS/Godot",
         "rm -rf ./macos.zip",
         "zip -1 -r macos.zip ./Godot.app/"
       ],
