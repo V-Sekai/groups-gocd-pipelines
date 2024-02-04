@@ -3,7 +3,7 @@ local platform = import '../lib/platform_dict.json';
 local templates = import '../lib/templates.libsonnet';
 
 local enabled_groups_export_platforms = [groups_export.groups_export_configurations[x] for x in ['windows', 'linux']];
-local enabled_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web', 'macos']];
+local enabled_platforms = [platform.platform_info_dict[x] for x in ['windows', 'linux', 'web']];
 
 local docker_pipeline = 'docker-groups';
 local docker_uro_pipeline = 'docker-uro';
