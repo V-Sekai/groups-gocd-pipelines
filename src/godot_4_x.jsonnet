@@ -1,3 +1,8 @@
+local GODOT_GIT = 'https://github.com/V-Sekai/godot.git';
+local DOCKER_GROUPS_GIT = 'https://github.com/V-Sekai/docker-groups.git';
+local PROJECT_GIT = 'https://github.com/V-Sekai/v-sekai-game.git';
+local MODEL_EXPLORER_GIT = 'https://github.com/V-Sekai/TOOL_model_explorer.git';
+local URO_GIT = 'https://github.com/V-Sekai/uro.git';
 
 local editor_export = import '../lib/godot_editor_export.libsonnet';
 local groups_export = import '../lib/groups_export.json';
@@ -344,24 +349,26 @@ local godot_template_model_explorer = 'model-explorer-export';
       create_template_zip_stage(godot_template_platforms, templates, pipeline_name),
     ],
   },
+
   local generatePipeline(pipeline_name, godot_status, godot_branch) = std.prune(
     godot_pipeline(
       pipeline_name=pipeline_name,
       godot_status=godot_status,
-      godot_git='https://github.com/V-Sekai/godot.git',
+      godot_git=GODOT_GIT,
       godot_branch=godot_branch,
       gocd_group='gamma',
       godot_engine_platforms=enabled_platforms,
       godot_template_platforms=enabled_platforms,
-    ),
+    )
   ),
+
   'godot_v_sekai_editor.gopipeline.json': generatePipeline(godot_template_groups_editor, 'groups-4.3.0', 'groups-4.3'),
   'godot_template_groups_export.gopipeline.json': std.prune(
     templates.godot_tools_pipeline_export(
       pipeline_name=godot_template_groups,
       pipeline_dependency=godot_template_groups_editor,
       itchio_login='saracenone/groups-4x',
-      project_git='https://github.com/V-Sekai/v-sekai-game.git',
+      project_git=PROJECT_GIT,
       project_branch='main',
       gocd_group='gamma',
       godot_status='groups-4.3',
@@ -374,7 +381,7 @@ local godot_template_model_explorer = 'model-explorer-export';
       pipeline_name=godot_template_model_explorer,
       pipeline_dependency=godot_template_groups_editor,
       itchio_login='ifiregames/model-explorer-42',
-      project_git='https://github.com/V-Sekai/TOOL_model_explorer.git',
+      project_git=MODEL_EXPLORER_GIT,
       project_branch='main',
       gocd_group='gamma',
       godot_status='model_explorer-4.3',
@@ -386,7 +393,7 @@ local godot_template_model_explorer = 'model-explorer-export';
     templates.build_docker_server(
       pipeline_name=docker_pipeline,
       pipeline_dependency=godot_template_groups,
-      docker_groups_git='https://github.com/V-Sekai/docker-groups.git',
+      docker_groups_git=DOCKER_GROUPS_GIT,
       docker_groups_branch='master',
       docker_groups_dir='groups_server',
       gocd_group='charlie',
@@ -400,7 +407,7 @@ local godot_template_model_explorer = 'model-explorer-export';
       pipeline_name=docker_gocd_agent_pipeline,
       gocd_group='charlie',
       docker_repo_variable='groupsinfra/gocd-agent-centos-8-groups',
-      docker_git='https://github.com/V-Sekai/docker-groups.git',
+      docker_git=DOCKER_GROUPS_GIT,
       docker_branch='master',
       docker_dir='gocd-agent-centos-8-groups',
     )
@@ -410,7 +417,7 @@ local godot_template_model_explorer = 'model-explorer-export';
       pipeline_name=docker_uro_pipeline,
       gocd_group='charlie',
       docker_repo_variable='groupsinfra/uro',
-      docker_git='https://github.com/V-Sekai/uro.git',
+      docker_git=URO_GIT,
       docker_branch='master',
       docker_dir='.',
     )
@@ -425,6 +432,6 @@ local godot_template_model_explorer = 'model-explorer-export';
     docker_gocd_agent_pipeline,
     godot_template_groups_editor,
     godot_template_groups,
-    godot_template_model_explorer
+    godot_template_model_explorer,
   ],
 }
