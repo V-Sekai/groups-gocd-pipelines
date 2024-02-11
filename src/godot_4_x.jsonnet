@@ -1,3 +1,4 @@
+local editor_export = import '../lib/godot_editor_export.libsonnet';
 local groups_export = import '../lib/groups_export.json';
 local platform = import '../lib/platform_dict.json';
 local templates = import '../lib/templates.libsonnet';
@@ -11,6 +12,7 @@ local docker_gocd_agent_pipeline = 'docker-gocd-agent-centos-8-groups';
 local godot_template_groups_editor = 'godot-groups-editor';
 local godot_template_groups = 'groups-export';
 local godot_template_model_explorer = 'model-explorer-export';
+local godot_groups_editor = 'groups-editor-export';
 
 local itch_fire_template = [
   docker_pipeline,
@@ -19,6 +21,7 @@ local itch_fire_template = [
   godot_template_groups_editor,
   godot_template_groups,
   godot_template_model_explorer,
+  godot_groups_editor,
 ];
 
 {
@@ -58,7 +61,7 @@ local itch_fire_template = [
     jobs: [
       {
         name: platform_info.platform_name + '_job',
-        resources: if platform_info.platform_name == "macos" then ['mingw5', 'linux', 'gpu'] else ['mingw5', 'linux'],
+        resources: if platform_info.platform_name == 'macos' then ['mingw5', 'linux', 'gpu'] else ['mingw5', 'linux'],
         artifacts: [
           {
             source: 'g/bin/' + platform_info.editor_godot_binary,
@@ -110,7 +113,7 @@ local itch_fire_template = [
     jobs: [
       {
         name: platform_info.platform_name + '_job',
-        resources: if platform_info.platform_name == "macos" then ['mingw5', 'linux', 'gpu'] else ['mingw5', 'linux'],
+        resources: if platform_info.platform_name == 'macos' then ['mingw5', 'linux', 'gpu'] else ['mingw5', 'linux'],
         artifacts: if platform_info.template_artifacts_override != null then platform_info.template_artifacts_override else [
           {
             type: 'build',
@@ -130,7 +133,7 @@ local itch_fire_template = [
         ],
         environment_variables: platform_info.environment_variables,
         tasks: [
-          if platform_info.editor_godot_binary != "" then {
+          if platform_info.editor_godot_binary != '' then {
             type: 'fetch',
             artifact_origin: 'gocd',
             pipeline: pipeline_name,
@@ -139,8 +142,9 @@ local itch_fire_template = [
             is_source_a_file: true,
             source: platform_info.editor_godot_binary,
             destination: 'g/bin/',
-          } else null,] + [
-          if platform_info.editor_godot_binary_secondary != "" then {
+          } else null,
+        ] + [
+          if platform_info.editor_godot_binary_secondary != '' then {
             type: 'fetch',
             artifact_origin: 'gocd',
             pipeline: pipeline_name,
@@ -149,7 +153,8 @@ local itch_fire_template = [
             is_source_a_file: true,
             source: platform_info.editor_godot_binary_secondary,
             destination: 'g/bin/',
-          } else null] + [
+          } else null,
+        ] + [
           {
             type: 'exec',
             arguments: ['-c', extra_command],
@@ -363,6 +368,14 @@ local itch_fire_template = [
       godot_template_platforms=enabled_platforms,
     ),
   ),
+  // 'godot_v_sekai_editor_export.gopipeline.json': editor_export.godot_editor_export(pipeline_name=godot_groups_editor,
+  //                                                                                  pipeline_dependency='groups-4.3.0',
+  //                                                                                  itchio_login='ifiregames/v-sekai-editor',
+  //                                                                                  gocd_group='beta',
+  //                                                                                  godot_status='groups-4.3',
+  //                                                                                  gocd_project_folder='v-sekai',
+  //                                                                                  enabled_export_platforms=enabled_groups_export_platforms)
+  // ,
   'godot_v_sekai_editor.gopipeline.json': generatePipeline(godot_template_groups_editor, 'groups-4.3.0', 'groups-4.3'),
   'godot_template_groups_export.gopipeline.json': std.prune(
     templates.godot_tools_pipeline_export(
