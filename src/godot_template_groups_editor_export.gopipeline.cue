@@ -173,7 +173,7 @@ stages: [{
 			destination:      ""
 			is_source_a_file: false
 			job:              "windows_job"
-			pipeline:         "groups-export"
+			pipeline:         "groups-editor-export"
 			source:           "export_windows"
 			stage:            "exportStage"
 			type:             "fetch"
@@ -188,7 +188,7 @@ stages: [{
 			destination:      ""
 			is_source_a_file: false
 			job:              "windows_job"
-			pipeline:         "groups-export"
+			pipeline:         "groups-editor-export"
 			source:           "export_windows"
 			stage:            "exportStage"
 			type:             "fetch"
@@ -227,7 +227,7 @@ stages: [{
 			destination:      ""
 			is_source_a_file: false
 			job:              "linux_job"
-			pipeline:         "groups-export"
+			pipeline:         "groups-editor-export"
 			source:           "export_linuxbsd"
 			stage:            "exportStage"
 			type:             "fetch"
@@ -242,7 +242,7 @@ stages: [{
 			destination:      ""
 			is_source_a_file: false
 			job:              "linux_job"
-			pipeline:         "groups-export"
+			pipeline:         "groups-editor-export"
 			source:           "export_linuxbsd"
 			stage:            "exportStage"
 			type:             "fetch"
