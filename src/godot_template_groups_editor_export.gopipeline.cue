@@ -78,7 +78,7 @@ stages: [{
 		}, taskTemplate & {
 			arguments: ["-c", "unzip godot.templates.tpz"]
 		}, taskTemplate & {
-			arguments: ["-c", "cp templates/windows_release_x86_64.exe export_windows/v_sekai_windows.exe"]
+			arguments: ["-c", "cp templates/windows_release_x86_64.pdb export_windows/v_sekai_windows.pdb"]
 		}, taskTemplate & {
 			arguments: ["-c", "cp templates/windows_release_x86_64.exe export_windows/v_sekai_windows.exe"]
 		}, taskTemplate & {
@@ -153,10 +153,6 @@ stages: [{
 				working_directory: ""
 			},
 			taskTemplate & {
-				arguments: ["-c", "cp templates/linux_release.x86_64 export_linuxbsd/v_sekai_linuxbsd"]
-				working_directory: ""
-			},
-			taskTemplate & {
 				arguments: ["-c", "ls export_linuxbsd"]
 				working_directory: ""
 			}
@@ -194,6 +190,8 @@ stages: [{
 			type:             "fetch"
 		}, taskTemplate & {
 			arguments: ["-c", "mv export_windows/v_sekai_windows.exe export/editor/v_sekai_windows_editor.exe"]
+		}, taskTemplate & {
+			arguments: ["-c", "mv export_windows/v_sekai_windows.pdb export/editor/v_sekai_windows_editor.pdb"]
 		}, taskTemplate & {
 			arguments: ["-c", """
 			cat > export/.itch.toml <<EOF
