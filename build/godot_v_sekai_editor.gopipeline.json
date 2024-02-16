@@ -146,6 +146,16 @@
                         },
                         {
                             "destination": "",
+                            "source": "g/bin/windows_debug_x86_64.pdb",
+                            "type": "build"
+                        },
+                        {
+                            "destination": "",
+                            "source": "g/bin/windows_release_x86_64.pdb",
+                            "type": "build"
+                        },
+                        {
+                            "destination": "",
                             "source": "g/bin/version.txt",
                             "type": "build"
                         }
@@ -197,7 +207,7 @@
                         {
                             "arguments": [
                                 "-c",
-                                "cp bin/godot.windows.editor.double.x86_64.llvm.exe bin/windows_debug_x86_64.exe && cp bin/godot.windows.editor.double.x86_64.llvm.exe bin/windows_release_x86_64.exe && mingw-strip --strip-debug bin/windows_release_x86_64.exe"
+                                "cp bin/godot.windows.editor.double.x86_64.llvm.exe bin/windows_debug_x86_64.exe && cp bin/godot.windows.editor.double.x86_64.llvm.pdb bin/windows_debug_x86_64.pdb && cp bin/godot.windows.editor.double.x86_64.llvm.exe bin/windows_release_x86_64.exe && cp bin/godot.windows.editor.double.x86_64.llvm.pdb bin/windows_release_x86_64.pdb && mingw-strip --strip-debug bin/windows_release_x86_64.exe"
                             ],
                             "command": "/bin/bash",
                             "type": "exec",
