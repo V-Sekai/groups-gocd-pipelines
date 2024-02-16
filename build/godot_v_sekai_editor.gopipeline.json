@@ -146,6 +146,16 @@
                         },
                         {
                             "destination": "",
+                            "source": "g/bin/windows_debug_x86_64.pdb",
+                            "type": "build"
+                        },
+                        {
+                            "destination": "",
+                            "source": "g/bin/windows_release_x86_64.pdb",
+                            "type": "build"
+                        },
+                        {
+                            "destination": "",
                             "source": "g/bin/version.txt",
                             "type": "build"
                         }
