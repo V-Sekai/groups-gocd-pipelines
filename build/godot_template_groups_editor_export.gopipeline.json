@@ -146,14 +146,6 @@
                         {
                             "arguments": [
                                 "-c",
-                                "cp templates/windows_release_x86_64.exe export_windows/v_sekai_windows.exe"
-                            ],
-                            "command": "/bin/bash",
-                            "type": "exec"
-                        },
-                        {
-                            "arguments": [
-                                "-c",
                                 "ls export_windows"
                             ],
                             "command": "/bin/bash",

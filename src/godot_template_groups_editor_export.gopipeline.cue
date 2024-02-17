@@ -80,8 +80,6 @@ stages: [{
 		}, taskTemplate & {
 			arguments: ["-c", "cp templates/windows_release_x86_64.exe export_windows/v_sekai_windows.exe"]
 		}, taskTemplate & {
-			arguments: ["-c", "cp templates/windows_release_x86_64.exe export_windows/v_sekai_windows.exe"]
-		}, taskTemplate & {
 			arguments: ["-c", "ls export_windows"]
 		}]
 	}, {

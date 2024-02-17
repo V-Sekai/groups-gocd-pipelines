@@ -97,11 +97,6 @@ stages: [{
 			type:              "exec"
 			working_directory: ""
 		}, {
-			arguments: ["-c", "cp templates/windows_release_x86_64.exe export_windows/v_sekai_windows.exe"]
-			command:           "/bin/bash"
-			type:              "exec"
-			working_directory: ""
-		}, {
 			arguments: ["-c", "../godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-pack \"Windows\" `pwd`/../export_windows/v_sekai_windows.exe.pck"]
 			command:           "/bin/bash"
 			type:              "exec"
@@ -179,11 +174,6 @@ stages: [{
 			working_directory: ""
 		}, {
 			arguments: ["-c", "unzip godot.templates.tpz"]
-			command:           "/bin/bash"
-			type:              "exec"
-			working_directory: ""
-		}, {
-			arguments: ["-c", "cp templates/linux_release.x86_64 export_linuxbsd/v_sekai_linuxbsd"]
 			command:           "/bin/bash"
 			type:              "exec"
 			working_directory: ""
