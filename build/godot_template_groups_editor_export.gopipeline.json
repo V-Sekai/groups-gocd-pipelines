@@ -1,19 +1,24 @@
 {
+    "taskTemplate": {
+        "arguments": [],
+        "command": "/bin/bash",
+        "type": "exec"
+    },
     "environment_variables": [
         {
             "name": "GODOT_STATUS",
-            "value": "model_explorer-4.3"
+            "value": "groups-4.3"
         }
     ],
     "group": "gamma",
-    "label_template": "model_explorer-4.3.${godot-groups-editor_pipeline_dependency}.${COUNT}",
+    "label_template": "groups-4.3.${godot-groups-editor_pipeline_dependency}.${COUNT}",
     "materials": [
         {
             "branch": "main",
             "destination": "g",
             "name": "project_git_sandbox",
             "type": "git",
-            "url": "https://github.com/V-Sekai/TOOL_model_explorer.git"
+            "url": "https://github.com/V-Sekai/v-sekai-game.git"
         },
         {
             "ignore_for_scheduling": false,
@@ -23,7 +28,7 @@
             "type": "dependency"
         }
     ],
-    "name": "model-explorer-export",
+    "name": "groups-editor-export",
     "stages": [
         {
             "clean_workspace": true,
@@ -79,8 +84,7 @@
                                 "rm -rf templates && unzip \"godot.templates.tpz\" && mkdir pdbs && mv templates/*.pdb pdbs && export VERSION=\"`cat templates/version.txt`\" && export TEMPLATEDIR=\".local/share/godot/export_templates/$VERSION/\" && export HOME=\"`pwd`\" && export BASEDIR=\"`pwd`\" && rm -rf \"$TEMPLATEDIR\" && mkdir -p \"$TEMPLATEDIR\" && cd \"$TEMPLATEDIR\" && mv \"$BASEDIR\"/templates/* ."
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         },
                         {
                             "arguments": [
@@ -97,8 +101,7 @@
                                 "rm -rf export_windows"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         },
                         {
                             "arguments": [
@@ -106,8 +109,7 @@
                                 "mkdir export_windows"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         },
                         {
                             "arguments": [
@@ -115,8 +117,7 @@
                                 "chmod +x godot.linuxbsd.editor.double.x86_64.llvm"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         },
                         {
                             "arguments": [
@@ -124,8 +125,7 @@
                                 "ls templates"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         },
                         {
                             "arguments": [
@@ -133,8 +133,7 @@
                                 "unzip godot.templates.tpz"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         },
                         {
                             "arguments": [
@@ -142,17 +141,7 @@
                                 "cp templates/windows_release_x86_64.exe export_windows/v_sekai_windows.exe"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
-                        },
-                        {
-                            "arguments": [
-                                "-c",
-                                "../godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-pack \"Windows\" `pwd`/../export_windows/v_sekai_windows.exe.pck"
-                            ],
-                            "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": "g"
+                            "type": "exec"
                         },
                         {
                             "arguments": [
@@ -160,8 +149,7 @@
                                 "ls export_windows"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         }
                     ]
                 },
@@ -284,11 +272,11 @@
                         {
                             "arguments": [
                                 "-c",
-                                "../godot.linuxbsd.editor.double.x86_64.llvm --headless --xr-mode off --export-pack \"Linux\" `pwd`/../export_linuxbsd/v_sekai_linuxbsd.pck"
+                                "cp templates/linux_release.x86_64 export_linuxbsd/v_sekai_linuxbsd"
                             ],
                             "command": "/bin/bash",
                             "type": "exec",
-                            "working_directory": "g"
+                            "working_directory": ""
                         },
                         {
                             "arguments": [
@@ -319,7 +307,7 @@
                             "destination": "",
                             "is_source_a_file": false,
                             "job": "windows_job",
-                            "pipeline": "model-explorer-export",
+                            "pipeline": "groups-editor-export",
                             "source": "export_windows",
                             "stage": "exportStage",
                             "type": "fetch"
@@ -330,8 +318,7 @@
                                 "mkdir -p export/game"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         },
                         {
                             "arguments": [
@@ -339,8 +326,7 @@
                                 "mkdir -p export/editor"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         },
                         {
                             "arguments": [
@@ -348,15 +334,14 @@
                                 "mv export_windows/* export/game"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         },
                         {
                             "artifact_origin": "gocd",
                             "destination": "",
                             "is_source_a_file": false,
                             "job": "windows_job",
-                            "pipeline": "model-explorer-export",
+                            "pipeline": "groups-editor-export",
                             "source": "export_windows",
                             "stage": "exportStage",
                             "type": "fetch"
@@ -367,26 +352,23 @@
                                 "mv export_windows/v_sekai_windows.exe export/editor/v_sekai_windows_editor.exe"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         },
                         {
                             "arguments": [
                                 "-c",
-                                "cat > export/.itch.toml <<EOF\n[[actions]]\nname = \"play\"\npath = \"game/v_sekai_linuxbsd\"\nplatform = \"linux\"\n\n[[actions]]\nname = \"editor\"\npath = \"editor/v_sekai_linuxbsd_editor\"\nplatform = \"linux\"\n\n[[actions]]\nname = \"play\"\npath = \"game/v_sekai_windows.exe\"\nplatform = \"windows\"\n\n[[actions]]\nname = \"editor\"\npath = \"editor/v_sekai_windows_editor.exe\"\nplatform = \"windows\"\n\n[[actions]]\nname = \"forums\"\npath = \"https://discord.gg/7BQDHesck8\"\n\n[[actions]]\nname = \"Manuals\"\npath = \"https://v-sekai.github.io/manuals/\"\nEOF"
+                                "cat > export/.itch.toml <<EOF\n[[actions]]\nname = \"editor\"\npath = \"editor/v_sekai_linuxbsd_editor\"\nplatform = \"linux\"\n\n[[actions]]\nname = \"editor\"\npath = \"editor/v_sekai_windows_editor.exe\"\nplatform = \"windows\"\n\n[[actions]]\nname = \"forums\"\npath = \"https://discord.gg/7BQDHesck8\"\n\n[[actions]]\nname = \"Manuals\"\npath = \"https://v-sekai.github.io/manuals/\"\nEOF"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         },
                         {
                             "arguments": [
                                 "-c",
-                                "butler push export ifiregames/model-explorer-42:windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
+                                "butler push export ifiregames/v-sekai-editor:windows-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         }
                     ]
                 },
@@ -402,7 +384,7 @@
                             "destination": "",
                             "is_source_a_file": false,
                             "job": "linux_job",
-                            "pipeline": "model-explorer-export",
+                            "pipeline": "groups-editor-export",
                             "source": "export_linuxbsd",
                             "stage": "exportStage",
                             "type": "fetch"
@@ -413,8 +395,7 @@
                                 "mkdir -p export/game"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         },
                         {
                             "arguments": [
@@ -422,8 +403,7 @@
                                 "mkdir -p export/editor"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         },
                         {
                             "arguments": [
@@ -431,15 +411,14 @@
                                 "mv export_linuxbsd/* export/game"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         },
                         {
                             "artifact_origin": "gocd",
                             "destination": "",
                             "is_source_a_file": false,
                             "job": "linux_job",
-                            "pipeline": "model-explorer-export",
+                            "pipeline": "groups-editor-export",
                             "source": "export_linuxbsd",
                             "stage": "exportStage",
                             "type": "fetch"
@@ -450,26 +429,23 @@
                                 "mv export_linuxbsd/v_sekai_linuxbsd export/editor/v_sekai_linuxbsd_editor"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         },
                         {
                             "arguments": [
                                 "-c",
-                                "cat > export/.itch.toml <<EOF\n[[actions]]\nname = \"play\"\npath = \"game/v_sekai_linuxbsd\"\nplatform = \"linux\"\n\n[[actions]]\nname = \"editor\"\npath = \"editor/v_sekai_linuxbsd_editor\"\nplatform = \"linux\"\n\n[[actions]]\nname = \"play\"\npath = \"game/v_sekai_windows.exe\"\nplatform = \"windows\"\n\n[[actions]]\nname = \"editor\"\npath = \"editor/v_sekai_windows_editor.exe\"\nplatform = \"windows\"\n\n[[actions]]\nname = \"forums\"\npath = \"https://discord.gg/7BQDHesck8\"\n\n[[actions]]\nname = \"Manuals\"\npath = \"https://v-sekai.github.io/manuals/\"\nEOF"
+                                "cat > export/.itch.toml <<EOF\n[[actions]]\nname = \"editor\"\npath = \"editor/v_sekai_linuxbsd_editor\"\nplatform = \"linux\"\n\n[[actions]]\nname = \"editor\"\npath = \"editor/v_sekai_windows_editor.exe\"\nplatform = \"windows\"\n\n[[actions]]\nname = \"forums\"\npath = \"https://discord.gg/7BQDHesck8\"\n\n[[actions]]\nname = \"Manuals\"\npath = \"https://v-sekai.github.io/manuals/\"\nEOF"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         },
                         {
                             "arguments": [
                                 "-c",
-                                "butler push export ifiregames/model-explorer-42:linux-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
+                                "butler push export ifiregames/v-sekai-editor:linux-master --userversion $GO_PIPELINE_LABEL-`date --iso=seconds --utc`"
                             ],
                             "command": "/bin/bash",
-                            "type": "exec",
-                            "working_directory": ""
+                            "type": "exec"
                         }
                     ]
                 }
