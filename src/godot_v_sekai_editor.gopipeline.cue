@@ -18,10 +18,6 @@ stages: [{
 			destination: ""
 			source:      "g/bin/godot.windows.editor.double.x86_64.llvm.exe"
 			type:        "build"
-		}, {
-			destination: ""
-			source:      "g/bin/godot.windows.editor.double.x86_64.llvm.pdb"
-			type:        "build"
 		}]
 		name: "windows_job"
 		resources: ["mingw5", "linux"]
@@ -265,15 +261,6 @@ stages: [{
 			pipeline:         "godot-groups-editor"
 			source:           "version.txt"
 			stage:            "templateStage"
-			type:             "fetch"
-		}, {
-			artifact_origin:  "gocd"
-			destination:      "templates"
-			is_source_a_file: true
-			job:              "windows_job"
-			pipeline:         "godot-groups-editor"
-			source:           "godot.windows.editor.double.x86_64.llvm.pdb"
-			stage:            "defaultStage"
 			type:             "fetch"
 		}, {
 			artifact_origin:  "gocd"
