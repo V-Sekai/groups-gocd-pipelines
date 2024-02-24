@@ -57,7 +57,7 @@ stages: [{
 			stage:            "defaultStage"
 			type:             "fetch"
 		}, {
-			arguments: ["-c", "rm -rf templates && unzip \"godot.templates.tpz\" && mkdir pdbs && mv templates/*.pdb pdbs && export VERSION=\"`cat templates/version.txt`\" && export TEMPLATEDIR=\".local/share/godot/export_templates/$VERSION/\" && export HOME=\"`pwd`\" && export BASEDIR=\"`pwd`\" && rm -rf \"$TEMPLATEDIR\" && mkdir -p \"$TEMPLATEDIR\" && cd \"$TEMPLATEDIR\" && mv \"$BASEDIR\"/templates/* ."]
+			arguments: ["-c", "rm -rf templates && unzip \"godot.templates.tpz\" && export VERSION=\"`cat templates/version.txt`\" && export TEMPLATEDIR=\".local/share/godot/export_templates/$VERSION/\" && export HOME=\"`pwd`\" && export BASEDIR=\"`pwd`\" && rm -rf \"$TEMPLATEDIR\" && mkdir -p \"$TEMPLATEDIR\" && cd \"$TEMPLATEDIR\" && mv \"$BASEDIR\"/templates/* ."]
 			command:           "/bin/bash"
 			type:              "exec"
 			working_directory: ""
@@ -143,7 +143,7 @@ stages: [{
 			stage:            "defaultStage"
 			type:             "fetch"
 		}, {
-			arguments: ["-c", "rm -rf templates && unzip \"godot.templates.tpz\" && mkdir pdbs && mv templates/*.pdb pdbs && export VERSION=\"`cat templates/version.txt`\" && export TEMPLATEDIR=\".local/share/godot/export_templates/$VERSION/\" && export HOME=\"`pwd`\" && export BASEDIR=\"`pwd`\" && rm -rf \"$TEMPLATEDIR\" && mkdir -p \"$TEMPLATEDIR\" && cd \"$TEMPLATEDIR\" && mv \"$BASEDIR\"/templates/* ."]
+			arguments: ["-c", "rm -rf templates && unzip \"godot.templates.tpz\" && export VERSION=\"`cat templates/version.txt`\" && export TEMPLATEDIR=\".local/share/godot/export_templates/$VERSION/\" && export HOME=\"`pwd`\" && export BASEDIR=\"`pwd`\" && rm -rf \"$TEMPLATEDIR\" && mkdir -p \"$TEMPLATEDIR\" && cd \"$TEMPLATEDIR\" && mv \"$BASEDIR\"/templates/* ."]
 			command:           "/bin/bash"
 			type:              "exec"
 			working_directory: ""
