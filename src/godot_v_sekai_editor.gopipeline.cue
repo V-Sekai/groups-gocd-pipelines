@@ -160,7 +160,7 @@ stages: [{
 			type:        "build"
 		}],
 		name: "android_job",
-		resources: ["android"],
+		resources: ["mingw5", "linux"]
 		tasks: [{
 			artifact_origin:  "gocd",
 			destination:      "g/bin/",
