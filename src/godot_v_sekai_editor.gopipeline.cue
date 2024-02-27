@@ -71,26 +71,7 @@ stages: [{
 			type:              "exec"
 			working_directory: "g"
 		}]
-	}, {
-            artifacts: [{
-                destination: "",
-                source:      "g/bin/android_editor_builds/android_editor-release.apk",
-                type:        "build"
-            }],
-            name: "android_job",
-			resources: ["mingw5", "linux"]
-            tasks: [{
-                arguments: ["-c", "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"],
-                command:           "/bin/bash",
-                type:              "exec",
-                working_directory: "g"
-            }, {
-                arguments: ["-c", "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache scons platform=android arch=arm32 production=yes precision=double target=editor && scons platform=android arch=arm64 production=yes precision=double target=editor && scons platform=android arch=x86_32 production=yes precision=double target=editor && scons platform=android arch=x86_64 production=yes precision=double target=editor && cd platform/android/java && ./gradlew generateGodotEditor"],
-                command:           "/bin/bash",
-                type:              "exec",
-                working_directory: "g"
-            }]
-        }
+	}
 	]
 	name: "defaultStage"
 }, {
@@ -149,58 +130,7 @@ stages: [{
 			type:              "exec"
 			working_directory: "g"
 		}]
-	},  {
-		artifacts: [{
-			destination: "",
-			source:      "g/bin/godot.android.editor.double.apk",
-			type:        "build"
-		}, {
-			destination: "",
-			source:      "g/bin/version.txt",
-			type:        "build"
-		}],
-		name: "android_job",
-		resources: ["mingw5", "linux"]
-		tasks: [{
-			artifact_origin:  "gocd",
-			destination:      "g/bin/",
-			is_source_a_file: true,
-			job:              "android_job",
-			pipeline:         "godot-groups-editor",
-			source:           "android_editor-release.apk",
-			stage:            "defaultStage",
-			type:             "fetch"
-		}, {
-			arguments: ["-c", "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"],
-			command:           "/bin/bash",
-			type:              "exec",
-			working_directory: "g"
-		}, {
-			artifact_origin:  "gocd",
-			destination:      "g/bin/",
-			is_source_a_file: true,
-			job:              "android_job",
-			pipeline:         "godot-groups-editor",
-			source:           "android_editor-release.apk",
-			stage:            "defaultStage",
-			type:             "fetch"
-		}, {
-			arguments: ["-c", "ls"],
-			command:           "/bin/bash",
-			type:              "exec",
-			working_directory: "g"
-		}, {
-			arguments: ["-c", "mv bin/android_editor-release.apk bin/godot.android.editor.double.apk"],
-			command:           "/bin/bash",
-			type:              "exec",
-			working_directory: "g"
-		}, {
-			arguments: ["-c", "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"],
-			command:           "/bin/bash",
-			type:              "exec",
-			working_directory: "g"
-		}]
-	},	{
+	}, {
 		artifacts: [{
 			destination: ""
 			source:      "g/bin/linux_debug.x86_64"
