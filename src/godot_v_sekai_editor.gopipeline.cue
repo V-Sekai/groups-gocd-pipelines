@@ -78,7 +78,7 @@ stages: [{
                 type:        "build"
             }],
             name: "android_job",
-            resources: ["android"],
+			resources: ["mingw5", "linux"]
             tasks: [{
                 arguments: ["-c", "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"],
                 command:           "/bin/bash",

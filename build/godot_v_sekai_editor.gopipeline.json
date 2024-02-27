@@ -132,7 +132,8 @@
                     ],
                     "name": "android_job",
                     "resources": [
-                        "android"
+                        "mingw5",
+                        "linux"
                     ],
                     "tasks": [
                         {
