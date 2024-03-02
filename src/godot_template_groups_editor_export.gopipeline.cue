@@ -196,6 +196,10 @@ stages: [{
 			arguments: ["-c", """
 			cat > export/.itch.toml <<EOF
 			[[actions]]
+			name = "play"
+			path = "game/v_sekai_windows.exe"
+
+			[[actions]]
 			name = "Desktop"
 			path = "game/v_sekai_windows.exe"
 			args = ["--xr-mode", "off"]
@@ -249,6 +253,10 @@ stages: [{
 		}, taskTemplate & {
 			arguments: ["-c", """
 				cat > export/.itch.toml <<EOF
+				[[actions]]
+				name = "play"
+				path = "game/v_sekai_linuxbsd"
+
 				[[actions]]
 				name = "Desktop"
 				path = "game/v_sekai_linuxbsd"
