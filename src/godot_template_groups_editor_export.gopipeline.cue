@@ -196,9 +196,9 @@ stages: [{
 			arguments: ["-c", """
 			cat > export/.itch.toml <<EOF
 			[[actions]]
-			name = "editor"
-			path = "editor/v_sekai_linuxbsd_editor"
-			platform = "linux"
+			name = "Desktop"
+			path = "game/v_sekai_windows.exe"
+			args = ["--xr-mode", "off"]
 
 			[[actions]]
 			name = "editor"
@@ -250,17 +250,17 @@ stages: [{
 			arguments: ["-c", """
 				cat > export/.itch.toml <<EOF
 				[[actions]]
+				name = "Desktop"
+				path = "game/v_sekai_linuxbsd"
+				args = ["--xr-mode", "off"]
+
+				[[actions]]
 				name = "editor"
 				path = "editor/v_sekai_linuxbsd_editor"
 				platform = "linux"
 
 				[[actions]]
-				name = "editor"
-				path = "editor/v_sekai_windows_editor.exe"
-				platform = "windows"
-
-				[[actions]]
-				name = "forums"
+				name = "Forums"
 				path = "https://discord.gg/7BQDHesck8"
 
 				[[actions]]
