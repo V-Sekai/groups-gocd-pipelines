@@ -61,7 +61,7 @@ stages: [{
 		}, {
 			artifacts: [{
 				destination: ""
-				source:      "g/bin/godot.macos.editor.double.arm64.llvm"
+				source:      "g/bin/godot.macos.editor.double.arm64e.llvm"
 				type:        "build"
 			},
 				{
@@ -88,7 +88,7 @@ stages: [{
 					type:              "exec"
 					working_directory: "g"
 				}, {
-					arguments: ["-c", "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\".\" SCONS_CACHE=../.cicd_cache scons module_mvsqlite_enabled=off use_volk=yes osxcross_sdk=darwin23.6 arch=arm64 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"]
+					arguments: ["-c", "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\".\" SCONS_CACHE=../.cicd_cache scons module_mvsqlite_enabled=off use_volk=yes osxcross_sdk=darwin23.6 arch=arm64e werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"]
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "g"
@@ -216,7 +216,7 @@ stages: [{
 				is_source_a_file: true
 				job:              "linux_job"
 				pipeline:         "godot-groups"
-				source:           "godot.macos.editor.double.arm64.llvm"
+				source:           "godot.macos.editor.double.arm64e.llvm"
 				stage:            "defaultStage"
 				type:             "fetch"
 			},
@@ -238,7 +238,7 @@ stages: [{
 					is_source_a_file: true
 					job:              "linux_job"
 					pipeline:         "godot-groups"
-					source:           "godot.macos.editor.double.arm64.llvm"
+					source:           "godot.macos.editor.double.arm64e.llvm"
 					stage:            "defaultStage"
 					type:             "fetch"
 				}, {
@@ -247,7 +247,7 @@ stages: [{
 					type:              "exec"
 					working_directory: "g"
 				}, {
-					arguments: ["-c", "cp bin/godot.macos.editor.double.arm64.llvm bin/macos_debug.arm64 && cp bin/godot.macos.editor.double.arm64.llvm bin/macos_release.arm64 && strip --strip-debug bin/macos_release.arm64"]
+					arguments: ["-c", "cp bin/godot.macos.editor.double.arm64e.llvm bin/macos_debug.arm64e && cp bin/godot.macos.editor.double.arm64e.llvm bin/macos_release.arm64e && strip --strip-debug bin/macos_release.arm64e"]
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "g"
