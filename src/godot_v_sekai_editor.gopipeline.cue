@@ -82,7 +82,14 @@ stages: [{
 					source:           "bin"
 					stage:            "defaultStage"
 					type:             "fetch"
-				}, {
+				},
+				{
+					arguments: ["-c", "tree g/target/bin/"]
+					command:           "/bin/bash"
+					type:              "exec"
+					working_directory: "g"
+				},
+				{
 					arguments: ["-c", "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"]
 					command:           "/bin/bash"
 					type:              "exec"
