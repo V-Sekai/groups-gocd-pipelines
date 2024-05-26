@@ -50,7 +50,7 @@
                         {
                             "arguments": [
                                 "-c",
-                                "./build_compiler_rt.sh"
+                                "DISABLE_PARALLEL_ARCH_BUILD=1 ./build_compiler_rt.sh"
                             ],
                             "command": "/bin/bash",
                             "type": "exec",
