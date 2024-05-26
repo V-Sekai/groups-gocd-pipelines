@@ -43,7 +43,7 @@
                         {
                             "arguments": [
                                 "-c",
-                                "./build.sh"
+                                "UNATTENDED=1 ./build.sh"
                             ],
                             "command": "/bin/bash",
                             "type": "exec",
