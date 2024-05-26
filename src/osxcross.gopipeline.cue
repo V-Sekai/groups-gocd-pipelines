@@ -33,7 +33,7 @@ stages: [{
 					working_directory: "o"
 				},
 				{
-					arguments: ["-c", "DISABLE_PARALLEL_ARCH_BUILD=1 ./build_compiler_rt.sh"]
+					arguments: ["-c", "ENABLE_COMPILER_RT_INSTALL=1 DISABLE_PARALLEL_ARCH_BUILD=1 ./build_compiler_rt.sh"]
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "o"
