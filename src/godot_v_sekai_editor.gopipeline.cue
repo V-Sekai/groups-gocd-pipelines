@@ -61,7 +61,7 @@ stages: [{
 		}, {
 			artifacts: [{
 				destination: ""
-				source:      "g/bin/godot.macos.editor.double.x86_64.llvm"
+				source:      "g/bin/godot.macos.editor.double.arm64"
 				type:        "build"
 			},
 				{
@@ -101,7 +101,7 @@ stages: [{
 					type:              "exec"
 					working_directory: "g"
 				}, {
-					arguments: ["-c", "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\".\" SCONS_CACHE=../.cicd_cache scons module_mvsqlite_enabled=off use_volk=yes osxcross_sdk=darwin23.6 arch=x86_64 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"]
+					arguments: ["-c", "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\".\" SCONS_CACHE=../.cicd_cache scons module_mvsqlite_enabled=off use_volk=yes osxcross_sdk=darwin23.6 arch=arm64 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"]
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "g"
@@ -205,11 +205,11 @@ stages: [{
 		{
 			artifacts: [{
 				destination: ""
-				source:      "g/bin/macos_debug.x86_64"
+				source:      "g/bin/macos_debug.arm64"
 				type:        "build"
 			}, {
 				destination: ""
-				source:      "g/bin/macos_release.x86_64"
+				source:      "g/bin/macos_release.arm64"
 				type:        "build"
 			}, {
 				destination: ""
@@ -229,7 +229,7 @@ stages: [{
 				is_source_a_file: true
 				job:              "linux_job"
 				pipeline:         "godot-groups"
-				source:           "godot.macos.editor.double.x86_64.llvm"
+				source:           "godot.macos.editor.double.arm64"
 				stage:            "defaultStage"
 				type:             "fetch"
 			},
@@ -251,7 +251,7 @@ stages: [{
 					is_source_a_file: true
 					job:              "linux_job"
 					pipeline:         "godot-groups"
-					source:           "godot.macos.editor.double.x86_64.llvm"
+					source:           "godot.macos.editor.double.arm64"
 					stage:            "defaultStage"
 					type:             "fetch"
 				}, {
@@ -260,7 +260,7 @@ stages: [{
 					type:              "exec"
 					working_directory: "g"
 				}, {
-					arguments: ["-c", "cp bin/godot.macos.editor.double.x86_64.llvm bin/macos_debug.x86_64 && cp bin/godot.macos.editor.double.x86_64.llvm bin/macos_release.x86_64 && strip --strip-debug bin/macos_release.x86_64"]
+					arguments: ["-c", "cp bin/godot.macos.editor.double.arm64arm64 bin/macos_debug.arm64 && cp bin/godot.macos.editor.double.arm64 bin/macos_release.arm64 && strip --strip-debug bin/macos_release.arm64"]
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "g"
