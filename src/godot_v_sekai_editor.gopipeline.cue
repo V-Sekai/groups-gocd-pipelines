@@ -101,7 +101,7 @@ stages: [{
 					type:              "exec"
 					working_directory: "g"
 				}, {
-					arguments: ["-c", "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\".\" SCONS_CACHE=../.cicd_cache scons use_volk=yes osxcross_sdk=darwin23.6 arch=arm64 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes builtin_freetype=yes"]
+					arguments: ["-c", "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\".\" SCONS_CACHE=../.cicd_cache scons module_mvsqlite_enabled=off use_volk=yes osxcross_sdk=darwin23.6 arch=arm64 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes builtin_freetype=yes"]
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "g"
