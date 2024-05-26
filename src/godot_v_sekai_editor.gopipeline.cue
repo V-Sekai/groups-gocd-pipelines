@@ -10,7 +10,7 @@ materials: [{
 	name:        "godot_sandbox"
 	type:        "git"
 	url:         "https://github.com/V-Sekai/godot.git"
-},{
+}, {
 	ignore_for_scheduling: false
 	name:                  "osxcross-editor_pipeline_dependency"
 	pipeline:              "osxcross"
@@ -66,26 +66,27 @@ stages: [{
 			}]
 			name: "macos_job"
 			resources: ["mingw5", "linux"]
-			tasks: [{
-				artifact_origin:  "gocd"
-				destination:      "bin"
-				is_source_a_file: false
-				job:              "linux_job"
-				pipeline:         "osxcross"
-				source:           "bin"
-				stage:            "defaultStage"
-				type:             "fetch"
-			},{
-				arguments: ["-c", "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"]
-				command:           "/bin/bash"
-				type:              "exec"
-				working_directory: "g"
-			}, {
-				arguments: ["-c", "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\"../bin\" SCONS_CACHE=../.cicd_cache scons osxcross_sdk=darwin23.6 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"]
-				command:           "/bin/bash"
-				type:              "exec"
-				working_directory: "g"
-			}]
+			tasks: [
+				{
+					artifact_origin:  "gocd"
+					destination:      "bin"
+					is_source_a_file: false
+					job:              "linux_job"
+					pipeline:         "osxcross"
+					source:           "bin"
+					stage:            "defaultStage"
+					type:             "fetch"
+				}, {
+					arguments: ["-c", "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"]
+					command:           "/bin/bash"
+					type:              "exec"
+					working_directory: "g"
+				}, {
+					arguments: ["-c", "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\"../bin\" SCONS_CACHE=../.cicd_cache scons use_volk=yes osxcross_sdk=darwin23.6 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"]
+					command:           "/bin/bash"
+					type:              "exec"
+					working_directory: "g"
+				}]
 		}, {
 			artifacts: [{
 				destination: ""
