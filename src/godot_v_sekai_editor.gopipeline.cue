@@ -61,7 +61,7 @@ stages: [{
 			name: "macos_job"
 			resources: ["mingw5", "linux"]
 			tasks: [{
-				artifact_origin:  "osxcross"
+				artifact_origin:  "gocd"
 				destination:      "bin"
 				is_source_a_file: true
 				job:              "linux_job"
