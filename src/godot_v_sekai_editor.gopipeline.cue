@@ -64,11 +64,6 @@ stages: [{
 				source:      "g/bin/godot.macos.editor.double.arm64"
 				type:        "build"
 			},
-				{
-					destination: ""
-					source:      "g/bin/libMoltenVK.dylib"
-					type:        "build"
-				},
 			]
 			name: "macos_job"
 			resources: ["mingw5", "linux"]
@@ -102,11 +97,6 @@ stages: [{
 					working_directory: "g"
 				}, {
 					arguments: ["-c", "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\".\" SCONS_CACHE=../.cicd_cache scons module_mvsqlite_enabled=off use_volk=yes osxcross_sdk=darwin23.3 arch=arm64 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes builtin_freetype=yes"]
-					command:           "/bin/bash"
-					type:              "exec"
-					working_directory: "g"
-				}, {
-					arguments: ["-c", "curl -L \"https://github.com/V-Sekai-fire/osxcross/releases/download/v20240525/libMoltenVK.dylib\" -o bin/libMoltenVK.dylib"]
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "g"
@@ -213,10 +203,6 @@ stages: [{
 				type:        "build"
 			}, {
 				destination: ""
-				source:      "g/bin/libMoltenVK.dylib"
-				type:        "build"
-			}, {
-				destination: ""
 				source:      "g/bin/version.txt"
 				type:        "build"
 			}]
@@ -233,13 +219,6 @@ stages: [{
 				stage:            "defaultStage"
 				type:             "fetch"
 			},
-				{
-					arguments: ["-c", "curl -L \"https://github.com/V-Sekai-fire/osxcross/releases/download/v20240525/libMoltenVK.dylib\" -o bin/libMoltenVK.dylib"]
-					command:           "/bin/bash"
-					type:              "exec"
-					working_directory: "g"
-				},
-
 				{
 					arguments: ["-c", "sed -i \"/^status =/s/=.*/= \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"/\" version.py"]
 					command:           "/bin/bash"
