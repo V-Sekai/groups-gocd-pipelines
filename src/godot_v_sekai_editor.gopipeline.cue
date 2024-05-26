@@ -28,7 +28,7 @@ stages: [{
 				type:              "exec"
 				working_directory: "g"
 			}, {
-				arguments: ["-c", "mkdir -p ../.cicd_cache && PATH=/opt/llvm-mingw/bin:$PATH SCONS_CACHE=../.cicd_cache scons werror=no module_mvsqlite_enabled=off module_desync_enabled=off platform=windows target=editor use_lto=no precision=double use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"]
+				arguments: ["-c", "mkdir -p ../.cicd_cache && PATH=/opt/llvm-mingw/bin:$PATH SCONS_CACHE=../.cicd_cache scons werror=no platform=windows target=editor use_lto=no precision=double use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"]
 				command:           "/bin/bash"
 				type:              "exec"
 				working_directory: "g"
@@ -47,7 +47,35 @@ stages: [{
 				type:              "exec"
 				working_directory: "g"
 			}, {
-				arguments: ["-c", "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache module_mvsqlite_enabled=off module_desync_enabled=off scons werror=no platform=linuxbsd target=editor use_lto=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"]
+				arguments: ["-c", "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache scons werror=no platform=linuxbsd target=editor use_lto=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"]
+				command:           "/bin/bash"
+				type:              "exec"
+				working_directory: "g"
+			}]
+		}, {
+			artifacts: [{
+				destination: ""
+				source:      "g/bin/godot.linuxbsd.editor.double.x86_64.llvm"
+				type:        "build"
+			}]
+			name: "macos_job"
+			resources: ["mingw5", "linux"]
+			tasks: [{
+				artifact_origin:  "osxcross"
+				destination:      "bin"
+				is_source_a_file: true
+				job:              "linux_job"
+				pipeline:         "osxcross"
+				source:           "bin"
+				stage:            "defaultStage"
+				type:             "fetch"
+			},{
+				arguments: ["-c", "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"]
+				command:           "/bin/bash"
+				type:              "exec"
+				working_directory: "g"
+			}, {
+				arguments: ["-c", "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\"../bin\" SCONS_CACHE=../.cicd_cache scons osxcross_sdk=darwin23.6 werror=no platform=linuxbsd target=editor use_lto=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"]
 				command:           "/bin/bash"
 				type:              "exec"
 				working_directory: "g"
@@ -66,7 +94,7 @@ stages: [{
 				type:              "exec"
 				working_directory: "g"
 			}, {
-				arguments: ["-c", "source /opt/emsdk/emsdk_env.sh && mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache EM_CACHE=/tmp scons module_mvsqlite_enabled=off module_desync_enabled=off werror=no platform=web target=template_release use_lto=no optimize=speed use_llvm=yes threads=no precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'"]
+				arguments: ["-c", "source /opt/emsdk/emsdk_env.sh && mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache EM_CACHE=/tmp scons werror=no platform=web target=template_release use_lto=no optimize=speed use_llvm=yes threads=no precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'"]
 				command:           "/bin/bash"
 				type:              "exec"
 				working_directory: "g"
