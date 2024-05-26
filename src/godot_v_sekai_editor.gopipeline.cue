@@ -34,7 +34,7 @@ stages: [{
 				type:              "exec"
 				working_directory: "g"
 			}, {
-				arguments: ["-c", "mkdir -p ../.cicd_cache && PATH=/opt/llvm-mingw/bin:$PATH SCONS_CACHE=../.cicd_cache scons werror=no platform=windows target=editor use_lto=no precision=double use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"]
+				arguments: ["-c", "mkdir -p ../.cicd_cache && PATH=/opt/llvm-mingw/bin:$PATH SCONS_CACHE=../.cicd_cache scons werror=no platform=windows target=editor precision=double use_mingw=yes use_llvm=yes use_thinlto=no warnings=no LINKFLAGS=-Wl,-pdb= CCFLAGS='-Wall -Wno-tautological-compare -g -gcodeview' debug_symbols=no"]
 				command:           "/bin/bash"
 				type:              "exec"
 				working_directory: "g"
@@ -53,7 +53,7 @@ stages: [{
 				type:              "exec"
 				working_directory: "g"
 			}, {
-				arguments: ["-c", "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache scons werror=no platform=linuxbsd target=editor use_lto=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"]
+				arguments: ["-c", "mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache scons werror=no platform=linuxbsd target=editor precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"]
 				command:           "/bin/bash"
 				type:              "exec"
 				working_directory: "g"
@@ -101,7 +101,7 @@ stages: [{
 					type:              "exec"
 					working_directory: "g"
 				}, {
-					arguments: ["-c", "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\".\" SCONS_CACHE=../.cicd_cache LD=target/bin/arm64-apple-darwin23.3-ld scons module_mvsqlite_enabled=off linkflag=\"-B target/bin/arm64-apple-darwin23.3-ld\" vulkan=no metal=yes generate_bundle=yes osxcross_sdk=darwin23.3 arch=arm64 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes builtin_freetype=yes"]
+					arguments: ["-c", "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\".\" SCONS_CACHE=../.cicd_cache scons verbose=yes module_mvsqlite_enabled=off vulkan=no metal=yes generate_bundle=yes osxcross_sdk=darwin23.3 arch=arm64 werror=no platform=macos target=editor precision=double use_static_cpp=yes builtin_freetype=yes"]
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "g"
@@ -127,7 +127,7 @@ stages: [{
 				type:              "exec"
 				working_directory: "g"
 			}, {
-				arguments: ["-c", "source /opt/emsdk/emsdk_env.sh && mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache EM_CACHE=/tmp scons werror=no platform=web target=template_release use_lto=no optimize=speed use_llvm=yes threads=no precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'"]
+				arguments: ["-c", "source /opt/emsdk/emsdk_env.sh && mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache EM_CACHE=/tmp scons werror=no platform=web target=template_release optimize=speed use_llvm=yes threads=no precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'"]
 				command:           "/bin/bash"
 				type:              "exec"
 				working_directory: "g"
