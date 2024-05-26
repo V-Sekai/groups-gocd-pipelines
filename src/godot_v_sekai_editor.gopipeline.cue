@@ -61,7 +61,7 @@ stages: [{
 		}, {
 			artifacts: [{
 				destination: ""
-				source:      "g/bin/godot.macos.editor.double.arm64e.llvm"
+				source:      "g/bin/godot.macos.editor.double.x86_64.llvm"
 				type:        "build"
 			},
 				{
@@ -216,7 +216,7 @@ stages: [{
 				is_source_a_file: true
 				job:              "linux_job"
 				pipeline:         "godot-groups"
-				source:           "godot.macos.editor.double.arm64e.llvm"
+				source:           "godot.macos.editor.double.x86_64.llvm"
 				stage:            "defaultStage"
 				type:             "fetch"
 			},
@@ -238,7 +238,7 @@ stages: [{
 					is_source_a_file: true
 					job:              "linux_job"
 					pipeline:         "godot-groups"
-					source:           "godot.macos.editor.double.arm64e.llvm"
+					source:           "godot.macos.editor.double.x86_64.llvm"
 					stage:            "defaultStage"
 					type:             "fetch"
 				}, {
@@ -247,7 +247,7 @@ stages: [{
 					type:              "exec"
 					working_directory: "g"
 				}, {
-					arguments: ["-c", "cp bin/godot.macos.editor.double.arm64e.llvm bin/macos_debug.arm64e && cp bin/godot.macos.editor.double.arm64e.llvm bin/macos_release.arm64e && strip --strip-debug bin/macos_release.arm64e"]
+					arguments: ["-c", "cp bin/godot.macos.editor.double.x86_64.llvm bin/macos_debug.x86_64 && cp bin/godot.macos.editor.double.x86_64.llvm bin/macos_release.x86_64 && strip --strip-debug bin/macos_release.x86_64"]
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "g"
