@@ -10,6 +10,12 @@ materials: [{
 	name:        "godot_sandbox"
 	type:        "git"
 	url:         "https://github.com/V-Sekai/godot.git"
+},{
+	ignore_for_scheduling: false
+	name:                  "osxcross-editor_pipeline_dependency"
+	pipeline:              "osxcross"
+	stage:                 "defaultStage"
+	type:                  "dependency"
 }]
 name: "godot-groups"
 stages: [{
