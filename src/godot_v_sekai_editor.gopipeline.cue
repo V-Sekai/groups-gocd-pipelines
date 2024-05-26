@@ -75,7 +75,7 @@ stages: [{
 			tasks: [
 				{
 					artifact_origin:  "gocd"
-					destination:      "g/target/bin/"
+					destination:      "g/target"
 					is_source_a_file: false
 					job:              "linux_job"
 					pipeline:         "osxcross"
