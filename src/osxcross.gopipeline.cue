@@ -27,6 +27,12 @@ stages: [{
 					working_directory: "o"
 				},
 				{
+					arguments: ["-c", "./build_compiler_rt.sh"]
+					command:           "/bin/bash"
+					type:              "exec"
+					working_directory: "o"
+				},
+				{
 					arguments: ["-c", "UNATTENDED=1 ./build.sh"]
 					command:           "/bin/bash"
 					type:              "exec"
@@ -36,3 +42,4 @@ stages: [{
 		},
 	]
 }]
+
