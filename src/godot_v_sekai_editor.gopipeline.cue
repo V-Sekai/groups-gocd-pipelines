@@ -61,7 +61,7 @@ stages: [{
 		}, {
 			artifacts: [{
 				destination: ""
-				source:      "g/bin/godot.linuxbsd.editor.double.x86_64.llvm"
+				source:      "g/bin/godot.macos.editor.double.arm64.llvm"
 				type:        "build"
 			},
 				{
@@ -88,7 +88,7 @@ stages: [{
 					type:              "exec"
 					working_directory: "g"
 				}, {
-					arguments: ["-c", "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\"../bin\" SCONS_CACHE=../.cicd_cache scons use_volk=yes osxcross_sdk=darwin23.6 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"]
+					arguments: ["-c", "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\"../bin\" SCONS_CACHE=../.cicd_cache scons use_volk=yes osxcross_sdk=darwin23.6 arch=arm64 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"]
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "g"
@@ -188,117 +188,187 @@ stages: [{
 				type:              "exec"
 				working_directory: "g"
 			}]
-	}, {
-		artifacts: [{
-			destination: ""
-			source:      "g/bin/linux_debug.x86_64"
-			type:        "build"
+	},
+		{
+			artifacts: [{
+				destination: ""
+				source:      "g/bin/macos_debug.x86_64"
+				type:        "build"
+			}, {
+				destination: ""
+				source:      "g/bin/macos_release.x86_64"
+				type:        "build"
+			}, {
+				destination: ""
+				source:      "g/bin/libMoltenVK.dylib"
+				type:        "build"
+			}, {
+				destination: ""
+				source:      "g/bin/version.txt"
+				type:        "build"
+			}]
+			name: "macos_job"
+			resources: ["mingw5", "linux"]
+
+			tasks: [{
+				artifact_origin:  "gocd"
+				destination:      "g/bin/"
+				is_source_a_file: true
+				job:              "linux_job"
+				pipeline:         "godot-groups"
+				source:           "godot.macos.editor.double.arm64.llvm"
+				stage:            "defaultStage"
+				type:             "fetch"
+			},
+				{
+					arguments: ["-c", "curl -L \"https://github.com/V-Sekai-fire/osxcross/releases/download/v20240525/libMoltenVK.dylib\" -o bin/libMoltenVK.dylib"]
+					command:           "/bin/bash"
+					type:              "exec"
+					working_directory: "g"
+				},
+
+				{
+					arguments: ["-c", "sed -i \"/^status =/s/=.*/= \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"/\" version.py"]
+					command:           "/bin/bash"
+					type:              "exec"
+					working_directory: "g"
+				}, {
+					artifact_origin:  "gocd"
+					destination:      "g/bin/"
+					is_source_a_file: true
+					job:              "linux_job"
+					pipeline:         "godot-groups"
+					source:           "godot.macos.editor.double.arm64.llvm"
+					stage:            "defaultStage"
+					type:             "fetch"
+				}, {
+					arguments: ["-c", "ls"]
+					command:           "/bin/bash"
+					type:              "exec"
+					working_directory: "g"
+				}, {
+					arguments: ["-c", "cp bin/godot.macos.editor.double.arm64.llvm bin/macos_debug.arm64 && cp bin/godot.macos.editor.double.arm64.llvm bin/macos_release.arm64 && strip --strip-debug bin/macos_release.arm64"]
+					command:           "/bin/bash"
+					type:              "exec"
+					working_directory: "g"
+				}, {
+					arguments: ["-c", "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"]
+					command:           "/bin/bash"
+					type:              "exec"
+					working_directory: "g"
+				}]
+		},
+		{
+			artifacts: [{
+				destination: ""
+				source:      "g/bin/linux_debug.x86_64"
+				type:        "build"
+			}, {
+				destination: ""
+				source:      "g/bin/linux_release.x86_64"
+				type:        "build"
+			}, {
+				destination: ""
+				source:      "g/bin/version.txt"
+				type:        "build"
+			}]
+			name: "linux_job"
+			resources: ["mingw5", "linux"]
+			tasks: [{
+				artifact_origin:  "gocd"
+				destination:      "g/bin/"
+				is_source_a_file: true
+				job:              "linux_job"
+				pipeline:         "godot-groups"
+				source:           "godot.linuxbsd.editor.double.x86_64.llvm"
+				stage:            "defaultStage"
+				type:             "fetch"
+			}, {
+				arguments: ["-c", "sed -i \"/^status =/s/=.*/= \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"/\" version.py"]
+				command:           "/bin/bash"
+				type:              "exec"
+				working_directory: "g"
+			}, {
+				artifact_origin:  "gocd"
+				destination:      "g/bin/"
+				is_source_a_file: true
+				job:              "linux_job"
+				pipeline:         "godot-groups"
+				source:           "godot.linuxbsd.editor.double.x86_64.llvm"
+				stage:            "defaultStage"
+				type:             "fetch"
+			}, {
+				arguments: ["-c", "ls"]
+				command:           "/bin/bash"
+				type:              "exec"
+				working_directory: "g"
+			}, {
+				arguments: ["-c", "cp bin/godot.linuxbsd.editor.double.x86_64.llvm bin/linux_debug.x86_64 && cp bin/godot.linuxbsd.editor.double.x86_64.llvm bin/linux_release.x86_64 && strip --strip-debug bin/linux_release.x86_64"]
+				command:           "/bin/bash"
+				type:              "exec"
+				working_directory: "g"
+			}, {
+				arguments: ["-c", "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"]
+				command:           "/bin/bash"
+				type:              "exec"
+				working_directory: "g"
+			}]
 		}, {
-			destination: ""
-			source:      "g/bin/linux_release.x86_64"
-			type:        "build"
-		}, {
-			destination: ""
-			source:      "g/bin/version.txt"
-			type:        "build"
+			artifacts: [{
+				destination: ""
+				source:      "g/bin/web_nothreads_debug.zip"
+				type:        "build"
+			}, {
+				destination: ""
+				source:      "g/bin/web_nothreads_release.zip"
+				type:        "build"
+			}, {
+				destination: ""
+				source:      "g/bin/version.txt"
+				type:        "build"
+			}]
+			name: "web_job"
+			resources: ["mingw5", "linux"]
+			tasks: [{
+				artifact_origin:  "gocd"
+				destination:      "g/bin/"
+				is_source_a_file: true
+				job:              "web_job"
+				pipeline:         "godot-groups"
+				source:           "godot.web.template_release.double.wasm32.nothreads.zip"
+				stage:            "defaultStage"
+				type:             "fetch"
+			}, {
+				arguments: ["-c", "sed -i \"/^status =/s/=.*/= \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"/\" version.py"]
+				command:           "/bin/bash"
+				type:              "exec"
+				working_directory: "g"
+			}, {
+				artifact_origin:  "gocd"
+				destination:      "g/bin/"
+				is_source_a_file: true
+				job:              "web_job"
+				pipeline:         "godot-groups"
+				source:           "godot.web.template_release.double.wasm32.nothreads.zip"
+				stage:            "defaultStage"
+				type:             "fetch"
+			}, {
+				arguments: ["-c", "ls"]
+				command:           "/bin/bash"
+				type:              "exec"
+				working_directory: "g"
+			}, {
+				arguments: ["-c", "cp bin/godot.web.template_release.double.wasm32.nothreads.zip bin/web_nothreads_debug.zip && cp bin/godot.web.template_release.double.wasm32.nothreads.zip bin/web_nothreads_release.zip"]
+				command:           "/bin/bash"
+				type:              "exec"
+				working_directory: "g"
+			}, {
+				arguments: ["-c", "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"]
+				command:           "/bin/bash"
+				type:              "exec"
+				working_directory: "g"
+			}]
 		}]
-		name: "linux_job"
-		resources: ["mingw5", "linux"]
-		tasks: [{
-			artifact_origin:  "gocd"
-			destination:      "g/bin/"
-			is_source_a_file: true
-			job:              "linux_job"
-			pipeline:         "godot-groups"
-			source:           "godot.linuxbsd.editor.double.x86_64.llvm"
-			stage:            "defaultStage"
-			type:             "fetch"
-		}, {
-			arguments: ["-c", "sed -i \"/^status =/s/=.*/= \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"/\" version.py"]
-			command:           "/bin/bash"
-			type:              "exec"
-			working_directory: "g"
-		}, {
-			artifact_origin:  "gocd"
-			destination:      "g/bin/"
-			is_source_a_file: true
-			job:              "linux_job"
-			pipeline:         "godot-groups"
-			source:           "godot.linuxbsd.editor.double.x86_64.llvm"
-			stage:            "defaultStage"
-			type:             "fetch"
-		}, {
-			arguments: ["-c", "ls"]
-			command:           "/bin/bash"
-			type:              "exec"
-			working_directory: "g"
-		}, {
-			arguments: ["-c", "cp bin/godot.linuxbsd.editor.double.x86_64.llvm bin/linux_debug.x86_64 && cp bin/godot.linuxbsd.editor.double.x86_64.llvm bin/linux_release.x86_64 && strip --strip-debug bin/linux_release.x86_64"]
-			command:           "/bin/bash"
-			type:              "exec"
-			working_directory: "g"
-		}, {
-			arguments: ["-c", "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"]
-			command:           "/bin/bash"
-			type:              "exec"
-			working_directory: "g"
-		}]
-	}, {
-		artifacts: [{
-			destination: ""
-			source:      "g/bin/web_nothreads_debug.zip"
-			type:        "build"
-		}, {
-			destination: ""
-			source:      "g/bin/web_nothreads_release.zip"
-			type:        "build"
-		}, {
-			destination: ""
-			source:      "g/bin/version.txt"
-			type:        "build"
-		}]
-		name: "web_job"
-		resources: ["mingw5", "linux"]
-		tasks: [{
-			artifact_origin:  "gocd"
-			destination:      "g/bin/"
-			is_source_a_file: true
-			job:              "web_job"
-			pipeline:         "godot-groups"
-			source:           "godot.web.template_release.double.wasm32.nothreads.zip"
-			stage:            "defaultStage"
-			type:             "fetch"
-		}, {
-			arguments: ["-c", "sed -i \"/^status =/s/=.*/= \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"/\" version.py"]
-			command:           "/bin/bash"
-			type:              "exec"
-			working_directory: "g"
-		}, {
-			artifact_origin:  "gocd"
-			destination:      "g/bin/"
-			is_source_a_file: true
-			job:              "web_job"
-			pipeline:         "godot-groups"
-			source:           "godot.web.template_release.double.wasm32.nothreads.zip"
-			stage:            "defaultStage"
-			type:             "fetch"
-		}, {
-			arguments: ["-c", "ls"]
-			command:           "/bin/bash"
-			type:              "exec"
-			working_directory: "g"
-		}, {
-			arguments: ["-c", "cp bin/godot.web.template_release.double.wasm32.nothreads.zip bin/web_nothreads_debug.zip && cp bin/godot.web.template_release.double.wasm32.nothreads.zip bin/web_nothreads_release.zip"]
-			command:           "/bin/bash"
-			type:              "exec"
-			working_directory: "g"
-		}, {
-			arguments: ["-c", "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"]
-			command:           "/bin/bash"
-			type:              "exec"
-			working_directory: "g"
-		}]
-	}]
 	name: "templateStage"
 }, {
 	jobs: [{
