@@ -63,7 +63,13 @@ stages: [{
 				destination: ""
 				source:      "g/bin/godot.linuxbsd.editor.double.x86_64.llvm"
 				type:        "build"
-			}]
+			},
+				{
+					destination: ""
+					source:      "g/bin/libMoltenVK.dylib"
+					type:        "build"
+				},
+			]
 			name: "macos_job"
 			resources: ["mingw5", "linux"]
 			tasks: [
@@ -86,7 +92,13 @@ stages: [{
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "g"
-				}]
+				}, {
+					arguments: ["-c", "curl -L \"https://github.com/V-Sekai-fire/osxcross/releases/download/v20240525/libMoltenVK.dylib\" -o bin/libMoltenVK.dylib"]
+					command:           "/bin/bash"
+					type:              "exec"
+					working_directory: "g"
+				},
+			]
 		}, {
 			artifacts: [{
 				destination: ""

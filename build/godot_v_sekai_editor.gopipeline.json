@@ -101,6 +101,11 @@
                             "destination": "",
                             "source": "g/bin/godot.linuxbsd.editor.double.x86_64.llvm",
                             "type": "build"
+                        },
+                        {
+                            "destination": "",
+                            "source": "g/bin/libMoltenVK.dylib",
+                            "type": "build"
                         }
                     ],
                     "name": "macos_job",
@@ -132,6 +137,15 @@
                             "arguments": [
                                 "-c",
                                 "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\"../bin\" SCONS_CACHE=../.cicd_cache scons use_volk=yes osxcross_sdk=darwin23.6 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
+                            ],
+                            "command": "/bin/bash",
+                            "type": "exec",
+                            "working_directory": "g"
+                        },
+                        {
+                            "arguments": [
+                                "-c",
+                                "curl -L \"https://github.com/V-Sekai-fire/osxcross/releases/download/v20240525/libMoltenVK.dylib\" -o bin/libMoltenVK.dylib"
                             ],
                             "command": "/bin/bash",
                             "type": "exec",
