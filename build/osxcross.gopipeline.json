@@ -41,7 +41,7 @@
                         {
                             "arguments": [
                                 "-c",
-                                "./build_compiler_rt.sh"
+                                "UNATTENDED=1 ./build.sh"
                             ],
                             "command": "/bin/bash",
                             "type": "exec",
@@ -50,7 +50,7 @@
                         {
                             "arguments": [
                                 "-c",
-                                "UNATTENDED=1 ./build.sh"
+                                "./build_compiler_rt.sh"
                             ],
                             "command": "/bin/bash",
                             "type": "exec",
