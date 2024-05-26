@@ -162,6 +162,16 @@
                             "type": "fetch"
                         },
                         {
+                            "artifact_origin": "osxcross",
+                            "destination": "",
+                            "is_source_a_file": false,
+                            "job": "linux_job",
+                            "pipeline": "godot-groups",
+                            "source": "bin",
+                            "stage": "defaultStage",
+                            "type": "fetch"
+                        },
+                        {
                             "arguments": [
                                 "-c",
                                 "sed -i \"/^status =/s/=.*/= \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"/\" version.py"

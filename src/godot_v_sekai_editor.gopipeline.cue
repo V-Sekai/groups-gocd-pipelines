@@ -100,36 +100,47 @@ stages: [{
 			source:           "godot.windows.editor.double.x86_64.llvm.exe"
 			stage:            "defaultStage"
 			type:             "fetch"
-		}, {
-			arguments: ["-c", "sed -i \"/^status =/s/=.*/= \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"/\" version.py"]
-			command:           "/bin/bash"
-			type:              "exec"
-			working_directory: "g"
-		}, {
-			artifact_origin:  "gocd"
-			destination:      "g/bin/"
-			is_source_a_file: true
-			job:              "windows_job"
-			pipeline:         "godot-groups"
-			source:           "godot.windows.editor.double.x86_64.llvm.exe"
-			stage:            "defaultStage"
-			type:             "fetch"
-		}, {
-			arguments: ["-c", "ls"]
-			command:           "/bin/bash"
-			type:              "exec"
-			working_directory: "g"
-		}, {
-			arguments: ["-c", "cp bin/godot.windows.editor.double.x86_64.llvm.exe bin/windows_debug_x86_64.exe && cp bin/godot.windows.editor.double.x86_64.llvm.exe bin/windows_release_x86_64.exe && mingw-strip --strip-debug bin/windows_release_x86_64.exe"]
-			command:           "/bin/bash"
-			type:              "exec"
-			working_directory: "g"
-		}, {
-			arguments: ["-c", "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"]
-			command:           "/bin/bash"
-			type:              "exec"
-			working_directory: "g"
-		}]
+		},
+			{
+				artifact_origin:  "osxcross"
+				destination:      ""
+				is_source_a_file: false
+				job:              "linux_job"
+				pipeline:         "godot-groups"
+				source:           "bin"
+				stage:            "defaultStage"
+				type:             "fetch"
+			},
+			{
+				arguments: ["-c", "sed -i \"/^status =/s/=.*/= \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"/\" version.py"]
+				command:           "/bin/bash"
+				type:              "exec"
+				working_directory: "g"
+			}, {
+				artifact_origin:  "gocd"
+				destination:      "g/bin/"
+				is_source_a_file: true
+				job:              "windows_job"
+				pipeline:         "godot-groups"
+				source:           "godot.windows.editor.double.x86_64.llvm.exe"
+				stage:            "defaultStage"
+				type:             "fetch"
+			}, {
+				arguments: ["-c", "ls"]
+				command:           "/bin/bash"
+				type:              "exec"
+				working_directory: "g"
+			}, {
+				arguments: ["-c", "cp bin/godot.windows.editor.double.x86_64.llvm.exe bin/windows_debug_x86_64.exe && cp bin/godot.windows.editor.double.x86_64.llvm.exe bin/windows_release_x86_64.exe && mingw-strip --strip-debug bin/windows_release_x86_64.exe"]
+				command:           "/bin/bash"
+				type:              "exec"
+				working_directory: "g"
+			}, {
+				arguments: ["-c", "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"]
+				command:           "/bin/bash"
+				type:              "exec"
+				working_directory: "g"
+			}]
 	}, {
 		artifacts: [{
 			destination: ""
