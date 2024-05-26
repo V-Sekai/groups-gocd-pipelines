@@ -90,7 +90,7 @@ stages: [{
 					working_directory: "g"
 				},
 				{
-					arguments: ["-c", "chmod +x target*"]
+					arguments: ["-c", "chmod +x target/bin/*"]
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "g"

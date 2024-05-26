@@ -136,7 +136,7 @@
                         {
                             "arguments": [
                                 "-c",
-                                "chmod +x target*"
+                                "chmod +x target/bin/*"
                             ],
                             "command": "/bin/bash",
                             "type": "exec",
