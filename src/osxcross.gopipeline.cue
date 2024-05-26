@@ -27,7 +27,7 @@ stages: [{
 					working_directory: "o"
 				},
 				{
-					arguments: ["-c", "CLANG_VERSION=16.0.0 ./build_apple_clang.sh && UNATTENDED=1 ./build.sh && ./build_compiler_rt.sh"]
+					arguments: ["-c", "UNATTENDED=1 ./build.sh"]
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "o"
