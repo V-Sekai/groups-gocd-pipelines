@@ -75,7 +75,7 @@ stages: [{
 			tasks: [
 				{
 					artifact_origin:  "gocd"
-					destination:      "bin"
+					destination:      "target/bin/"
 					is_source_a_file: false
 					job:              "linux_job"
 					pipeline:         "osxcross"
@@ -88,7 +88,7 @@ stages: [{
 					type:              "exec"
 					working_directory: "g"
 				}, {
-					arguments: ["-c", "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\"../bin\" SCONS_CACHE=../.cicd_cache scons use_volk=yes osxcross_sdk=darwin23.6 arch=arm64 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"]
+					arguments: ["-c", "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\"..\" SCONS_CACHE=../.cicd_cache scons use_volk=yes osxcross_sdk=darwin23.6 arch=arm64 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"]
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "g"
