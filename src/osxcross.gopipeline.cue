@@ -14,7 +14,7 @@ stages: [{
 		{
 			artifacts: [{
 				destination: ""
-				source:      "o/target/bin"
+				source:      "o/target"
 				type:        "build"
 			}]
 			name: "linux_job"

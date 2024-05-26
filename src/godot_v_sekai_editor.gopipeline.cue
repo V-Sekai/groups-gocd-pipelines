@@ -75,22 +75,22 @@ stages: [{
 			tasks: [
 				{
 					artifact_origin:  "gocd"
-					destination:      "g/target"
+					destination:      "g"
 					is_source_a_file: false
 					job:              "linux_job"
 					pipeline:         "osxcross"
-					source:           "bin"
+					source:           "target"
 					stage:            "defaultStage"
 					type:             "fetch"
 				},
 				{
-					arguments: ["-c", "ls -1 target/bin/"]
+					arguments: ["-c", "ls -1 target"]
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "g"
 				},
 				{
-					arguments: ["-c", "chmod +x target/bin/*"]
+					arguments: ["-c", "chmod +x target*"]
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "g"
