@@ -116,7 +116,7 @@
                     "tasks": [
                         {
                             "artifact_origin": "gocd",
-                            "destination": "target/bin/",
+                            "destination": "g/target/bin/",
                             "is_source_a_file": false,
                             "job": "linux_job",
                             "pipeline": "osxcross",
@@ -136,7 +136,7 @@
                         {
                             "arguments": [
                                 "-c",
-                                "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\"..\" SCONS_CACHE=../.cicd_cache scons module_mvsqlite_enabled=off use_volk=yes osxcross_sdk=darwin23.6 arch=arm64 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
+                                "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\".\" SCONS_CACHE=../.cicd_cache scons module_mvsqlite_enabled=off use_volk=yes osxcross_sdk=darwin23.6 arch=arm64 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes use_llvm=yes builtin_freetype=yes"
                             ],
                             "command": "/bin/bash",
                             "type": "exec",
