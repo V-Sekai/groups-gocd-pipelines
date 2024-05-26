@@ -134,7 +134,7 @@ stages: [{
 				destination:      ""
 				is_source_a_file: false
 				job:              "linux_job"
-				pipeline:         "godot-groups"
+				pipeline:         "osxcross"
 				source:           "bin"
 				stage:            "defaultStage"
 				type:             "fetch"
