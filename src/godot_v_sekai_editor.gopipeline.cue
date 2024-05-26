@@ -84,7 +84,7 @@ stages: [{
 					type:             "fetch"
 				},
 				{
-					arguments: ["-c", "ls -1 g/target/bin/"]
+					arguments: ["-c", "ls -1 target/bin/"]
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "g"

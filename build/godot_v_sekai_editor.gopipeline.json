@@ -127,7 +127,7 @@
                         {
                             "arguments": [
                                 "-c",
-                                "ls -1 g/target/bin/"
+                                "ls -1 target/bin/"
                             ],
                             "command": "/bin/bash",
                             "type": "exec",
