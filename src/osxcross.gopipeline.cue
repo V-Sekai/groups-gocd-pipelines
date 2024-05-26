@@ -29,7 +29,7 @@ stages: [{
 				{
 					"arguments": [
 						"-c",
-						"curl -LO https://github.com/tpoechtrager/osxcross/pull/415.patch && git apply 415.patch && export UNATTENDED=1 && CLANG_VERSION=16.0.0 ./build_apple_clang.sh && ./build.sh && ./build_compiler_rt.sh"
+						"export UNATTENDED=1 && CLANG_VERSION=16.0.0 ./build_apple_clang.sh && ./build.sh && ./build_compiler_rt.sh"
 					],
 					"command": "/bin/bash",
 					"type": "exec",
