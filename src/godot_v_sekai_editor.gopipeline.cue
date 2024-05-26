@@ -130,7 +130,7 @@ stages: [{
 			type:             "fetch"
 		},
 			{
-				artifact_origin:  "osxcross"
+				artifact_origin:  "gocd"
 				destination:      ""
 				is_source_a_file: false
 				job:              "linux_job"
