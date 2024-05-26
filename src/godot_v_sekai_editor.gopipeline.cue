@@ -105,8 +105,9 @@ stages: [{
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "g"
-				}, {
-					arguments: ["-c", "curl -L \"https://github.com/V-Sekai-fire/osxcross/releases/download/v20240525/libMoltenVK.dylib\" -o bin/libMoltenVK.dylib"]
+				}, 
+				{
+					arguments: ["-c", "ls -1 bin/"]
 					command:           "/bin/bash"
 					type:              "exec"
 					working_directory: "g"
