@@ -99,7 +99,7 @@
                     "artifacts": [
                         {
                             "destination": "",
-                            "source": "g/bin/godot.macos.editor.double.arm64",
+                            "source": "g/bin/godot.macos.editor.double.x86_64",
                             "type": "build"
                         },
                         {
@@ -154,7 +154,7 @@
                         {
                             "arguments": [
                                 "-c",
-                                "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\".\" SCONS_CACHE=../.cicd_cache scons module_mvsqlite_enabled=off vulkan=no metal=yes osxcross_sdk=darwin23.3 arch=arm64 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes builtin_freetype=yes"
+                                "mkdir -p ../.cicd_cache && OSXCROSS_ROOT=\".\" SCONS_CACHE=../.cicd_cache scons module_mvsqlite_enabled=off vulkan=no metal=yes osxcross_sdk=darwin23.3 werror=no platform=macos target=editor use_lto=no precision=double use_static_cpp=yes builtin_freetype=yes"
                             ],
                             "command": "/bin/bash",
                             "type": "exec",
@@ -306,12 +306,12 @@
                     "artifacts": [
                         {
                             "destination": "",
-                            "source": "g/bin/macos_debug.arm64",
+                            "source": "g/bin/macos_debug.x86_64",
                             "type": "build"
                         },
                         {
                             "destination": "",
-                            "source": "g/bin/macos_release.arm64",
+                            "source": "g/bin/macos_release.x86_64",
                             "type": "build"
                         },
                         {
@@ -337,7 +337,7 @@
                             "is_source_a_file": true,
                             "job": "linux_job",
                             "pipeline": "godot-groups",
-                            "source": "godot.macos.editor.double.arm64",
+                            "source": "godot.macos.editor.double.x86_64",
                             "stage": "defaultStage",
                             "type": "fetch"
                         },
@@ -365,7 +365,7 @@
                             "is_source_a_file": true,
                             "job": "linux_job",
                             "pipeline": "godot-groups",
-                            "source": "godot.macos.editor.double.arm64",
+                            "source": "godot.macos.editor.double.x86_64",
                             "stage": "defaultStage",
                             "type": "fetch"
                         },
@@ -381,7 +381,7 @@
                         {
                             "arguments": [
                                 "-c",
-                                "cp bin/godot.macos.editor.double.arm64arm64 bin/macos_debug.arm64 && cp bin/godot.macos.editor.double.arm64 bin/macos_release.arm64 && strip --strip-debug bin/macos_release.arm64"
+                                "cp bin/godot.macos.editor.double.x86_64arm64 bin/macos_debug.x86_64 && cp bin/godot.macos.editor.double.x86_64 bin/macos_release.x86_64 && strip --strip-debug bin/macos_release.x86_64"
                             ],
                             "command": "/bin/bash",
                             "type": "exec",
