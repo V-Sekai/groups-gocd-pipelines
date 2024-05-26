@@ -12,6 +12,11 @@ stages: [{
 	name: "defaultStage"
 	jobs: [
 		{
+			artifacts: [{
+				destination: ""
+				source:      "o/target/bin"
+				type:        "build"
+			}]
 			name: "linux_job"
 			resources: ["mingw5", "linux"]
 			tasks: [
