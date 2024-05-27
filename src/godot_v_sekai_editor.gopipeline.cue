@@ -10,12 +10,6 @@ materials: [{
 	name:        "godot_sandbox"
 	type:        "git"
 	url:         "https://github.com/V-Sekai/godot.git"
-}, {
-	ignore_for_scheduling: false
-	name:                  "osxcross-editor_pipeline_dependency"
-	pipeline:              "osxcross"
-	stage:                 "defaultStage"
-	type:                  "dependency"
 }]
 name: "godot-groups"
 stages: [{
@@ -58,61 +52,6 @@ stages: [{
 				type:              "exec"
 				working_directory: "g"
 			}]
-		}, {
-			artifacts: [{
-				destination: ""
-				source:      "g/bin/godot.macos.editor.double.arm64"
-				type:        "build"
-			},
-				{
-					destination: ""
-					source:      "g/bin/libMoltenVK.dylib"
-					type:        "build"
-				},
-			]
-			name: "macos_job"
-			resources: ["mingw5", "linux"]
-			tasks: [
-				{
-					artifact_origin:  "gocd"
-					destination:      "g"
-					is_source_a_file: false
-					job:              "linux_job"
-					pipeline:         "osxcross"
-					source:           "target"
-					stage:            "defaultStage"
-					type:             "fetch"
-				},
-				{
-					arguments: ["-c", "ls -1 target/bin/"]
-					command:           "/bin/bash"
-					type:              "exec"
-					working_directory: "g"
-				},
-				{
-					arguments: ["-c", "chmod +x target/bin/*"]
-					command:           "/bin/bash"
-					type:              "exec"
-					working_directory: "g"
-				},
-				{
-					arguments: ["-c", "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"]
-					command:           "/bin/bash"
-					type:              "exec"
-					working_directory: "g"
-				}, {
-					arguments: ["-c", "mkdir -p ../.cicd_cache && export PATH=target/bin:$PATH && export OSXCROSS_ROOT=\".\" && export SCONS_CACHE=../.cicd_cache && scons module_mvsqlite_enabled=off vulkan=no metal=yes linker=lld generate_bundle=yes osxcross_sdk=darwin23.3 arch=arm64 werror=no platform=macos target=editor precision=double use_static_cpp=yes builtin_freetype=yes"]
-					command:           "/bin/bash"
-					type:              "exec"
-					working_directory: "g"
-				}, 
-				{
-					arguments: ["-c", "ls -1 bin/"]
-					command:           "/bin/bash"
-					type:              "exec"
-					working_directory: "g"
-				},
-			]
 		}, {
 			artifacts: [{
 				destination: ""
@@ -163,16 +102,6 @@ stages: [{
 			type:             "fetch"
 		},
 			{
-				artifact_origin:  "gocd"
-				destination:      ""
-				is_source_a_file: false
-				job:              "linux_job"
-				pipeline:         "osxcross"
-				source:           "bin"
-				stage:            "defaultStage"
-				type:             "fetch"
-			},
-			{
 				arguments: ["-c", "sed -i \"/^status =/s/=.*/= \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"/\" version.py"]
 				command:           "/bin/bash"
 				type:              "exec"
@@ -203,75 +132,6 @@ stages: [{
 				working_directory: "g"
 			}]
 	},
-		{
-			artifacts: [{
-				destination: ""
-				source:      "g/bin/macos_debug.arm64"
-				type:        "build"
-			}, {
-				destination: ""
-				source:      "g/bin/macos_release.arm64"
-				type:        "build"
-			}, {
-				destination: ""
-				source:      "g/bin/libMoltenVK.dylib"
-				type:        "build"
-			}, {
-				destination: ""
-				source:      "g/bin/version.txt"
-				type:        "build"
-			}]
-			name: "macos_job"
-			resources: ["mingw5", "linux"]
-
-			tasks: [{
-				artifact_origin:  "gocd"
-				destination:      "g/bin/"
-				is_source_a_file: true
-				job:              "linux_job"
-				pipeline:         "godot-groups"
-				source:           "godot.macos.editor.double.arm64"
-				stage:            "defaultStage"
-				type:             "fetch"
-			},
-				{
-					arguments: ["-c", "curl -L \"https://github.com/V-Sekai-fire/osxcross/releases/download/v20240525/libMoltenVK.dylib\" -o bin/libMoltenVK.dylib"]
-					command:           "/bin/bash"
-					type:              "exec"
-					working_directory: "g"
-				},
-
-				{
-					arguments: ["-c", "sed -i \"/^status =/s/=.*/= \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"/\" version.py"]
-					command:           "/bin/bash"
-					type:              "exec"
-					working_directory: "g"
-				}, {
-					artifact_origin:  "gocd"
-					destination:      "g/bin/"
-					is_source_a_file: true
-					job:              "linux_job"
-					pipeline:         "godot-groups"
-					source:           "godot.macos.editor.double.arm64"
-					stage:            "defaultStage"
-					type:             "fetch"
-				}, {
-					arguments: ["-c", "ls"]
-					command:           "/bin/bash"
-					type:              "exec"
-					working_directory: "g"
-				}, {
-					arguments: ["-c", "cp bin/godot.macos.editor.double.arm64arm64 bin/macos_debug.arm64 && cp bin/godot.macos.editor.double.arm64 bin/macos_release.arm64 && strip --strip-debug bin/macos_release.arm64"]
-					command:           "/bin/bash"
-					type:              "exec"
-					working_directory: "g"
-				}, {
-					arguments: ["-c", "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"]
-					command:           "/bin/bash"
-					type:              "exec"
-					working_directory: "g"
-				}]
-		},
 		{
 			artifacts: [{
 				destination: ""
