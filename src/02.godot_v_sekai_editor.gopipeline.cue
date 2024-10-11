@@ -52,25 +52,6 @@ stages: [{
 				type:              "exec"
 				working_directory: "g"
 			}]
-		}, {
-			artifacts: [{
-				destination: ""
-				source:      "g/bin/godot.web.template_release.double.wasm32.nothreads.zip"
-				type:        "build"
-			}]
-			name: "web_job"
-			resources: ["mingw5", "linux"]
-			tasks: [{
-				arguments: ["-c", "sed -i \"/^status =/s/=.*/= \\\"$GODOT_STATUS.$GO_PIPELINE_COUNTER\\\"/\" version.py"]
-				command:           "/bin/bash"
-				type:              "exec"
-				working_directory: "g"
-			}, {
-				arguments: ["-c", "source /opt/emsdk/emsdk_env.sh && mkdir -p ../.cicd_cache && SCONS_CACHE=../.cicd_cache EM_CACHE=/tmp scons werror=no platform=web target=template_release optimize=speed use_llvm=yes threads=no precision=double builtin_freetype=yes initial_memory=256 CCFLAGS='-fno-stack-protector -fno-exceptions'"]
-				command:           "/bin/bash"
-				type:              "exec"
-				working_directory: "g"
-			}]
 		},
 	]
 	name: "defaultStage"
@@ -187,62 +168,7 @@ stages: [{
 				type:              "exec"
 				working_directory: "g"
 			}]
-		}, {
-			artifacts: [{
-				destination: ""
-				source:      "g/bin/web_nothreads_debug.zip"
-				type:        "build"
-			}, {
-				destination: ""
-				source:      "g/bin/web_nothreads_release.zip"
-				type:        "build"
-			}, {
-				destination: ""
-				source:      "g/bin/version.txt"
-				type:        "build"
-			}]
-			name: "web_job"
-			resources: ["mingw5", "linux"]
-			tasks: [{
-				artifact_origin:  "gocd"
-				destination:      "g/bin/"
-				is_source_a_file: true
-				job:              "web_job"
-				pipeline:         "godot-groups"
-				source:           "godot.web.template_release.double.wasm32.nothreads.zip"
-				stage:            "defaultStage"
-				type:             "fetch"
-			}, {
-				arguments: ["-c", "sed -i \"/^status =/s/=.*/= \"$GODOT_STATUS.$GO_PIPELINE_COUNTER\"/\" version.py"]
-				command:           "/bin/bash"
-				type:              "exec"
-				working_directory: "g"
-			}, {
-				artifact_origin:  "gocd"
-				destination:      "g/bin/"
-				is_source_a_file: true
-				job:              "web_job"
-				pipeline:         "godot-groups"
-				source:           "godot.web.template_release.double.wasm32.nothreads.zip"
-				stage:            "defaultStage"
-				type:             "fetch"
-			}, {
-				arguments: ["-c", "ls"]
-				command:           "/bin/bash"
-				type:              "exec"
-				working_directory: "g"
-			}, {
-				arguments: ["-c", "cp bin/godot.web.template_release.double.wasm32.nothreads.zip bin/web_nothreads_debug.zip && cp bin/godot.web.template_release.double.wasm32.nothreads.zip bin/web_nothreads_release.zip"]
-				command:           "/bin/bash"
-				type:              "exec"
-				working_directory: "g"
-			}, {
-				arguments: ["-c", "eval `sed -e \"s/ = /=/\" version.py` && declare \"_tmp$patch=.$patch\" \"_tmp0=\" \"_tmp=_tmp$patch\" && echo $major.$minor${!_tmp}.$GODOT_STATUS.$GO_PIPELINE_COUNTER > bin/version.txt"]
-				command:           "/bin/bash"
-				type:              "exec"
-				working_directory: "g"
-			}]
-		}]
+		},]
 	name: "templateStage"
 }, {
 	jobs: [{
@@ -300,24 +226,6 @@ stages: [{
 			job:              "linux_job"
 			pipeline:         "godot-groups"
 			source:           "linux_release.x86_64"
-			stage:            "templateStage"
-			type:             "fetch"
-		}, {
-			artifact_origin:  "gocd"
-			destination:      "templates"
-			is_source_a_file: true
-			job:              "web_job"
-			pipeline:         "godot-groups"
-			source:           "web_nothreads_debug.zip"
-			stage:            "templateStage"
-			type:             "fetch"
-		}, {
-			artifact_origin:  "gocd"
-			destination:      "templates"
-			is_source_a_file: true
-			job:              "web_job"
-			pipeline:         "godot-groups"
-			source:           "web_nothreads_release.zip"
 			stage:            "templateStage"
 			type:             "fetch"
 		}, {
