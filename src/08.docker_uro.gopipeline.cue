@@ -33,7 +33,7 @@ stages: [{
 			working_directory: ""
 		},
 		{
-			arguments: ["-c", "set -x; docker build --build-arg \"uro_image=groupsinfra/uro:$GO_PIPELINE_LABEL\" -t \"groupsinfra/uro_frontend:$GO_PIPELINE_LABEL\" \"g/.\" frontend && docker push \"groupsinfra/uro_frontend:$GO_PIPELINE_LABEL\" && echo \"groupsinfra/uro_frontend:$GO_PIPELINE_LABEL\" > docker_image_frontend.txt"]
+			arguments: ["-c", "set -x; docker build --build-arg \"uro_image=groupsinfra/uro:$GO_PIPELINE_LABEL\" -t \"groupsinfra/uro_frontend:$GO_PIPELINE_LABEL\" \"g/frontend\" && docker push \"groupsinfra/uro_frontend:$GO_PIPELINE_LABEL\" && echo \"groupsinfra/uro_frontend:$GO_PIPELINE_LABEL\" > docker_image_frontend.txt"]
 			command:           "/bin/bash"
 			type:              "exec"
 			working_directory: ""
